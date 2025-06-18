@@ -1,1 +1,70 @@
-/* You can add global styles to this file, and also import other style files */
+//#region fonts
+/* inter-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/inter-v19-latin-regular.woff2') format('woff2'); 
+}
+/* inter-500 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../fonts/inter-v19-latin-500.woff2') format('woff2'); 
+}
+/* inter-700 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/inter-v19-latin-700.woff2') format('woff2');
+}
+
+.inter400 {
+    font-family: 'Inter';
+    font-weight: 400;
+}
+
+.inter500 {
+    font-family: 'Inter';
+    font-weight: 500;
+}
+
+.inter700 {
+    font-family: 'Inter';
+    font-weight: 700;
+}
+//#endregion
+
+//#region custom properties
+:root {
+  // Farben
+  --accent-primary-color: #29abe2; //Kleine Highlights & Hover-Farben
+  --text-color-main: #000000;
+  --text-color-light: #ffffff;
+  --text-color-medium: #b9babc;
+  --text-color-dark: #2a3647;
+  --background-main: #f6f7f8;
+  --background-dark: #2a3647;
+  --background-light: #ffffff;
+  --background-default-light: #e7e7e7; //defaults für leere Felder (Tickets, Kontaktformular)
+  --background-default-dark: #d1d1d1;
+}
+//#endregion
+
+//#region global default styles
+* {
+  margin: 0;
+  padding: 0;
+  a {
+    text-decoration: none;
+  }
+  button, input, textarea {
+    border: unset;
+  }
+}
+//#endregion
