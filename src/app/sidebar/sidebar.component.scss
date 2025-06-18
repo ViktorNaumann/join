@@ -31,8 +31,10 @@
   .navigation {
     display: flex;
     justify-content: center;
+    width: 100%;
 
     ul {
+        width: 100%;
       list-style: none;
       padding: 0;
       margin: 0;
@@ -41,16 +43,16 @@
       gap: 16px;
     }
 
-    li {
+       li {
       display: flex;
       align-items: center;
       gap: 16px;
-      padding: 10px 24px;
-      border-radius: 8px;
+      padding: 12px 24px;
       cursor: pointer;
       transition: background-color 0.2s ease;
       width: 100%;
-
+      box-sizing: border-box;
+      
       img {
         width: 24px;
         height: 24px;
@@ -62,9 +64,8 @@
         font-family: 'Inter', sans-serif;
       }
 
-      &.active,
       &:hover {
-        background-color: #091931;
+        background-color: #2A3D59;
 
         span {
           color: white;
