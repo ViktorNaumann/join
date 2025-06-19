@@ -1,0 +1,84 @@
+@import "./../../styles.scss";
+
+.contact-detail-section {
+  width: 100%;
+  height: 300px;
+  background-color: rgba(128, 128, 128, 0.2);
+}
+
+.user-profile {
+  width: 94px;
+  height: 94px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid white;
+  border-radius: 50%;
+  background-color: orange;
+
+  p {
+    font-family: var(--font-primary);
+    font-size: 30px;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+  }
+}
+
+.user-name {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  > p {
+    font-family: var(--font-primary);
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0;
+  }
+}
+
+.user-options {
+  display: flex;
+  gap: 20px;
+
+  .option-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 5px;
+
+    .hover-icon {
+      display: none;
+    }
+
+    &:hover {
+      p {
+        color: blue;
+        font-size: 15px;
+      }
+
+      .default-icon {
+        display: none;
+      }
+      
+      .hover-icon {
+        display: block;
+      }
+    }
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+
+    p {
+      margin: 0;
+      font-family: var(--font-primary);
+      font-size: 14px;
+      color: #333;
+      transition: color 0.2s, font-size 0.2s;
+    }
+  }
+}
