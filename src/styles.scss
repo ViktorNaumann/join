@@ -24,19 +24,46 @@
   src: url('/assets/fonts/inter-v19-latin-700.woff2') format('woff2');
 }
 
-.inter400 {
+@mixin inter400-fs27 {
     font-family: 'Inter';
     font-weight: 400;
+    font-size: 27px;
 }
 
-.inter500 {
+@mixin inter400-fs20 {
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 20px;
+}
+
+@mixin inter400-fs16 {
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 16px;
+}
+
+@mixin inter400-fs12 {
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 12px;
+}
+
+@mixin inter500-fs47 {
     font-family: 'Inter';
     font-weight: 500;
+    font-size: 47px;
 }
 
-.inter700 {
+@mixin inter700-fs61 {
     font-family: 'Inter';
     font-weight: 700;
+    font-size: 61px;
+}
+
+@mixin inter700-fs21 {
+    font-family: 'Inter';
+    font-weight: 700;
+    font-size: 21px;
 }
 //#endregion
 
@@ -58,6 +85,12 @@
   --font-primary: 'Inter', sans-serif;
   // --font-secondary: 'Open Sans', sans-serif;
   // --font-heading: 'Montserrat', serif;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 //#endregion
 
