@@ -1,11 +1,13 @@
 @import './../../styles.scss';
 
-.section {
-    height: 100dvh;
-    width: 1440px;
+section {
+    width: 1212px;
+    height: 592px;
     display: flex;
+    background-color: var(--background-light);
 }
 
+//#region left-frame
 .left-frame {
     width: 467px;
     height: 594px;
@@ -14,6 +16,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 66px 48px;
+    gap: 12px;
     color: var(--text-color-light)
 }
 
@@ -25,14 +29,58 @@ h1 {
     @include inter400-fs27;
 }
 
-.right-frame {
-    width: 1212px;
-    height: 592px;
-}
-
 .logo {
     width: 55px;
     height: 65px;
+}
+
+.separator {
+    width: 90px;
+    height: 3px;
+    background-color: var(--accent-primary-color);
+}
+//#endregion
+
+//#region right-frame
+.right-frame {
+    width: 745px;
+    height: 594px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 66px 48px;
+    gap: 12px;
+}
+
+.close-btn-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.form-wrapper {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+
+form {
+    gap: 12px;
+}
+
+.btn-light {
+    @include btn;
+    @include btn-light;
+    @include flex-center;
+}
+
+.btn-dark {
+    @include btn;
+    @include btn-dark;
+    @include flex-center;
 }
 
 .img-user-wrapper {
@@ -46,5 +94,12 @@ h1 {
 .img-user{
     width: 64px;
     height: 64px;
-    stroke: white;
 }
+
+.input-icon {
+    margin: 0 auto;
+    width: 24px;
+    height: 24px;
+}
+
+//#endregion

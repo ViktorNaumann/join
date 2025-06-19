@@ -92,12 +92,31 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin btn {
+  height: 56px;
+  width: fit-content;
+  padding: 16px;
+  gap: 4px;
+  border-radius: 10px;
+}
+
+@mixin btn-light {
+  border: 1px solid var(--background-dark);
+  color: var(--text-color-dark);
+}
+
+@mixin btn-dark {
+  background-color: var(--background-dark);
+  color: var(--text-color-light);
+}
 //#endregion
 
 //#region global default styles
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   a {
     text-decoration: none;
   }
