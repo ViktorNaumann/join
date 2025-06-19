@@ -67,6 +67,30 @@
 }
 //#endregion
 
+//#region global default styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  a {
+    text-decoration: none;
+  }
+  input,
+  textarea {
+    border: unset;
+    outline: none;
+  }
+}
+
+.layout-container {
+  max-width: 1440px;
+  margin-left: 0;
+  margin-right: auto;
+  width: 100%;
+}
+//#endregion
+
+
 //#region custom properties
 :root {
   // Farben
@@ -93,42 +117,45 @@
   align-items: center;
 }
 
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin form-group {
+  height: 50px;
+  width: 422px;
+  border-radius: 10px;
+  border: 1px solid var(--background-default-dark);
+  padding: 13px 21px;
+  @include flex-between();
+  @include inter400-fs20();
+  &:focus-within {
+     border: 1px solid var(--accent-primary-color);
+  }
+}
+
 @mixin btn {
   height: 56px;
   width: fit-content;
   padding: 16px;
-  gap: 4px;
+  gap: 8px;
   border-radius: 10px;
+  border: unset;
+  background-color: unset;
 }
 
 @mixin btn-light {
-  border: 1px solid var(--background-dark);
+  border: 1px solid #2a3647;
   color: var(--text-color-dark);
+  @include inter400-fs20()
 }
 
 @mixin btn-dark {
   background-color: var(--background-dark);
   color: var(--text-color-light);
+  @include inter700-fs21()
 }
 //#endregion
 
-//#region global default styles
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  a {
-    text-decoration: none;
-  }
-  button, input, textarea {
-    border: unset;
-  }
-}
-
-.layout-container {
-  max-width: 1440px;
-  margin-left: 0;
-  margin-right: auto;
-  width: 100%;
-}
-//#endregion
