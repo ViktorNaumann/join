@@ -55,13 +55,17 @@ h1 {
 
 .close-btn-wrapper {
     width: 100%;
-    height: 50px;
+    height: 25px;
     display: flex;
     justify-content: flex-end;
 }
 
 .btn-close {
     @include btn();
+    &:hover {
+        background-color: var(--background-default-light);
+        border-radius: 50%;
+    }
 }
 
 .form-wrapper {
@@ -101,6 +105,8 @@ form {
     @include btn();
     @include btn-light();
     @include flex-center();
+    @include svg-hover();
+    
 }
 
 .btn-dark {

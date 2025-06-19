@@ -137,6 +137,7 @@
 }
 
 @mixin btn {
+  cursor: pointer;
   height: 56px;
   width: fit-content;
   padding: 16px;
@@ -147,15 +148,30 @@
 }
 
 @mixin btn-light {
-  border: 1px solid #2a3647;
+  border: 1px solid var(--background-dark);
   color: var(--text-color-dark);
-  @include inter400-fs20()
+  @include inter400-fs20();
+  &:hover {
+    color: var(--accent-primary-color);
+    border: 1px solid var(--accent-primary-color);
+  }
 }
 
 @mixin btn-dark {
   background-color: var(--background-dark);
   color: var(--text-color-light);
-  @include inter700-fs21()
+  @include inter700-fs21();
+  &:hover {
+    background-color: var(--accent-primary-color);
+  }
+}
+
+@mixin svg-hover {
+  &:hover {
+    svg path{
+            fill: var(--accent-primary-color);
+        }
+  }
 }
 //#endregion
 
