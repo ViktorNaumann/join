@@ -241,8 +241,16 @@ form {
   flex: 1;
 }
 
+.colorError {
+  border: 1px solid red;
+}
+
 input:focus {
   border: unset;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
 }
 
 .btn-wrapper {
@@ -257,7 +265,7 @@ input:focus {
   }
 }
 
-.btn-light {
+.btn-cancel {
   cursor: pointer;
   height: 56px;
   width: fit-content;
@@ -275,20 +283,20 @@ input:focus {
   justify-content: center;
   align-items: center;
 }
-.btn-light:hover {
+.btn-cancel:hover {
   color: var(--accent-primary-color);
   border: 1px solid var(--accent-primary-color);
 }
-.btn-light:hover svg path {
+.btn-cancel:hover svg path {
   fill: var(--accent-primary-color);
 }
 @media (max-width: 900px) {
-  .btn-light {
+  .btn-cancel {
     display: none;
   }
 }
 
-.btn-dark {
+.btn-save {
   cursor: pointer;
   height: 56px;
   width: fit-content;
@@ -306,8 +314,13 @@ input:focus {
   justify-content: center;
   align-items: center;
 }
-.btn-dark:hover {
+.btn-save:hover {
   background-color: var(--accent-primary-color);
+}
+
+.btn-save:disabled {
+  background-color: var(--background-default-dark);
+  cursor: unset;
 }
 
 .img-user-wrapper {

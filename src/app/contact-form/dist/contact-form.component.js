@@ -22,14 +22,19 @@ var ContactFormComponent = /** @class */ (function () {
             phone: ['', [forms_1.Validators.required, forms_1.Validators.min(10)]]
         });
     };
-    ContactFormComponent.prototype.onSave = function () {
-        console.log(this.contactForm.value);
-        var newContact = {
-            name: this.contactForm.value.name,
-            email: this.contactForm.value.email,
-            phone: this.contactForm.value.phone
-        };
-        this.contactService.addContact(newContact);
+    ContactFormComponent.prototype.onSubmit = function () {
+        if (this.contactForm.valid) {
+            var newContact = {
+                name: this.contactForm.value.name,
+                email: this.contactForm.value.email,
+                phone: this.contactForm.value.phone
+            };
+            // this.contactService.addContact(newContact)
+            console.log(newContact);
+        }
+        else {
+            console.log('invalid');
+        }
     };
     ContactFormComponent = __decorate([
         core_1.Component({

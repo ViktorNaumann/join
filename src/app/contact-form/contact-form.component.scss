@@ -145,9 +145,18 @@ form {
         flex:1;
     }
 }
-    input:focus {
-        border: unset;
-    }
+
+.colorError {
+    border: 1px solid red;
+}
+
+input:focus {
+    border: unset;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
 
 .btn-wrapper {
     display: flex;
@@ -159,7 +168,7 @@ form {
     }
 }
 
-.btn-light {
+.btn-cancel {
     @include btn();
     @include btn-light();
     @include flex-center();
@@ -169,11 +178,16 @@ form {
     }
 }
 
-.btn-dark {
+.btn-save {
     @include btn();
     @include btn-dark();
     @include flex-center();
 }
+
+.btn-save:disabled {
+    background-color: var(--background-default-dark);
+    cursor: unset;
+  }
 
 .img-user-wrapper {
     width: 120px;

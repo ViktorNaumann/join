@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ContactService, Contact } from '../services/contact.service';
 
@@ -26,14 +26,22 @@ export class ContactFormComponent {
     });
   }
 
-  onSave(){
-    console.log(this.contactForm.value);
-    let newContact: Contact = {
+  onSubmit(){
+    if(this.contactForm.valid){
+      let newContact: Contact = {
       name: this.contactForm.value.name,
       email: this.contactForm.value.email,
       phone: this.contactForm.value.phone
     }
-
-    this.contactService.addContact(newContact)
+    // this.contactService.addContact(newContact)
+    console.log(newContact)
+    }
+    else {
+      console.log('invalid')
+    }
   }
+
+  // onClear(ngForm: NgForm){
+
+  // }
 }
