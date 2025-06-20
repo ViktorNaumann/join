@@ -23,24 +23,27 @@
             <div class="img-user-wrapper">
                 <img class="img-user" src="assets/img/svg/person.svg" alt="User Image">
             </div>
-            <form action="">
+            <form [formGroup]="contactForm" (ngSubmit)="onSave()">
                 <div class="form-group">
                     <label for="name"></label>
-                    <input id="name" type="text" placeholder="Name">
+                    <input id="name" type="text" placeholder="Name" formControlName="name">
                     <img class="input-icon" src="assets/img/icons/person.png" alt="Person Icon">
+                    <p class="error-message" *ngIf="contactForm"></p>
                 </div>
                 <div class="form-group">
                     <label for="email"></label>
-                    <input id="email" type="text" placeholder="Email">
+                    <input id="email" type="text" placeholder="Email" formControlName="email">
                     <img class="input-icon" src="assets/img/icons/mail.png" alt="Mail Icon">
+                    <p class="error-message" *ngIf="contactForm"></p>
                 </div>
                 <div class="form-group">
                     <label for="phone"></label>
-                    <input id="phone" type="text" placeholder="Phone">
+                    <input id="phone" type="text" placeholder="Phone" formControlName="phone">
                     <img class="input-icon" src="assets/img/icons/phone.png" alt="Phone Icon">
+                    <p class="error-message" *ngIf="contactForm"></p>
                 </div>
                 <div class="btn-wrapper">
-                    <button class="btn-light">
+                    <button class="btn-light" type="reset">
                         Cancel
                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_331509_883" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
@@ -51,7 +54,7 @@
                             </g>
                         </svg>
                     </button>
-                    <button class="btn-dark">
+                    <button class="btn-dark" type="submit">
                         Create contact
                         <img src="assets/img/icons/check-light.png" alt="">
                     </button>

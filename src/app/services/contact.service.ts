@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, onSnapshot } from '@angular/fire/firestore';
+import { Firestore, collection, onSnapshot, addDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 export interface Contact {
@@ -17,8 +17,8 @@ export class ContactService {
 
   getContacts(): Observable<Contact[]> {
     return new Observable(observer => {
-      const contactsRef = collection(this.firestore, 'contacts');
       
+      const contactsRef = this.getContactsRef();
       const unsubscribe = onSnapshot(contactsRef, 
         (snapshot) => {
           const contacts: Contact[] = [];
@@ -35,6 +35,17 @@ export class ContactService {
       // Cleanup-Funktion zurückgeben
       return () => unsubscribe();
     });
+  }
+
+  getContactsRef(){
+    return collection(this.firestore, 'contacts');
+  }
+
+  async addContact(newContact: Contact) {
+    let contactsRef = this.getContactsRef();
+    await addDoc(contactsRef, newContact). catch(
+      (err) => {console.log(err)}
+    ).then( (newRef) => {console.log('New Contact list added with id', newRef?.id)})
   }
 }
 
