@@ -1,3 +1,5 @@
+@import './../../styles.scss';
+
 .sidebar {
   width: 232px;
   height: 100vh;
@@ -8,7 +10,7 @@
   justify-content: space-between;
   flex-shrink: 0;
   padding: 32px 0;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-primary);
 
   .logo-section {
     display: flex;
@@ -24,7 +26,7 @@
     .logo-text {
       font-size: 18px;
       font-weight: 600;
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-primary);
     }
   }
 
@@ -61,7 +63,7 @@
       span {
         font-size: 16px;
         color: #cdcdcd;
-        font-family: 'Inter', sans-serif;
+        font-family: var(--font-primary);
       }
 
       &:hover {
@@ -91,7 +93,7 @@
       font-weight: 400;
       color: #a8a8a8;
       text-decoration: none;
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-primary);
 
       &:hover {
        color: #29ABE2;
