@@ -19,7 +19,6 @@ export class ContactListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.contactsSubscription = this.contactService.getContacts().subscribe({
       next: (contacts) => {
-        console.log('Realtime contacts update:', contacts);
         this.groupedContacts = this.groupByInitial(contacts);
       },
       error: (error) => {
