@@ -45,11 +45,9 @@ export class ContactListComponent implements OnInit {
     
     const nameParts = name.trim().split(' ');
     if (nameParts.length === 1) {
-      // Nur ein Name vorhanden
       return nameParts[0].charAt(0).toUpperCase();
     }
     
-    // Erster Buchstabe des ersten und letzten Namens
     const firstInitial = nameParts[0].charAt(0).toUpperCase();
     const lastInitial = nameParts[nameParts.length - 1].charAt(0).toUpperCase();
     
