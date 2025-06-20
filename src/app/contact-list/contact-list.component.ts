@@ -39,6 +39,22 @@ export class ContactListComponent implements OnInit {
   }
 
   keyAsc = (a: any, b: any) => a.key.localeCompare(b.key);
+
+  getInitials(name: string | undefined): string {
+    if (!name) return '?';
+    
+    const nameParts = name.trim().split(' ');
+    if (nameParts.length === 1) {
+      // Nur ein Name vorhanden
+      return nameParts[0].charAt(0).toUpperCase();
+    }
+    
+    // Erster Buchstabe des ersten und letzten Namens
+    const firstInitial = nameParts[0].charAt(0).toUpperCase();
+    const lastInitial = nameParts[nameParts.length - 1].charAt(0).toUpperCase();
+    
+    return firstInitial + lastInitial;
+  }
 }
 
 
