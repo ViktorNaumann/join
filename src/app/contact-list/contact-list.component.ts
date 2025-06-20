@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactService, Contact } from '../services/contact.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contact-list',
@@ -9,21 +10,26 @@ import { ContactService, Contact } from '../services/contact.service';
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.scss']
 })
-export class ContactListComponent implements OnInit {
+export class ContactListComponent implements OnInit, OnDestroy {
   groupedContacts: { [key: string]: Contact[] } = {};
+  private contactsSubscription: Subscription = new Subscription();
 
   constructor(private contactService: ContactService) {}
 
   ngOnInit(): void {
-    this.contactService.getContacts().subscribe({
+    this.contactsSubscription = this.contactService.getContacts().subscribe({
       next: (contacts) => {
-        console.log('Loaded contacts:', contacts); // Debug
+        console.log('Realtime contacts update:', contacts);
         this.groupedContacts = this.groupByInitial(contacts);
       },
       error: (error) => {
         console.error('Error loading contacts:', error);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.contactsSubscription.unsubscribe();
   }
 
   groupByInitial(contacts: Contact[]): { [key: string]: Contact[] } {
@@ -47,10 +53,8 @@ export class ContactListComponent implements OnInit {
     if (nameParts.length === 1) {
       return nameParts[0].charAt(0).toUpperCase();
     }
-    
     const firstInitial = nameParts[0].charAt(0).toUpperCase();
     const lastInitial = nameParts[nameParts.length - 1].charAt(0).toUpperCase();
-    
     return firstInitial + lastInitial;
   }
 }
