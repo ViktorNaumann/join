@@ -42,24 +42,24 @@
   }
 
   h4 {
-    margin-top: 16px;
+    margin-top: clamp(8px, 2vw, 16px);
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: clamp(14px, 3vw, 20px);
     color: #000000;
-    padding: clamp(12px, 2.5vw, 17px) clamp(18px, 5vw, 36px);
+    padding: clamp(8px, 1.5vw, 17px) clamp(12px, 3vw, 36px);
     gap: 8px;
     border-bottom: 1px solid #D1D1D1;
-    margin-bottom: 8px;
+    margin-bottom: clamp(4px, 1vw, 8px);
     max-width: 352px;
   }
 
   .contact-entry {
     display: flex;
     align-items: center;
-    margin: 8px 0;
-    padding: clamp(12px, 2.5vw, 15px) clamp(12px, 3vw, 24px);
-    gap: clamp(16px, 3vw, 24px);
+    margin: clamp(4px, 1vw, 8px) 0;
+    padding: clamp(8px, 1.5vw, 15px) clamp(8px, 2vw, 24px);
+    gap: clamp(12px, 2vw, 24px);
     flex-wrap: wrap;
 
     .avatar {
