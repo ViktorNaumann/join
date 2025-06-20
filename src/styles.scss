@@ -25,45 +25,45 @@
 }
 
 @mixin inter400-fs27 {
-    font-family: 'Inter';
-    font-weight: 400;
-    font-size: 27px;
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: clamp(18px, calc(0.8vw + 15.5px), 27px);
 }
 
 @mixin inter400-fs20 {
-    font-family: 'Inter';
-    font-weight: 400;
-    font-size: 20px;
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: clamp(16px, calc(0.36vw + 14.85px), 20px);
 }
 
 @mixin inter400-fs16 {
-    font-family: 'Inter';
-    font-weight: 400;
-    font-size: 16px;
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 16px;
 }
 
 @mixin inter400-fs12 {
-    font-family: 'Inter';
-    font-weight: 400;
-    font-size: 12px;
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 12px;
 }
 
 @mixin inter500-fs47 {
-    font-family: 'Inter';
-    font-weight: 500;
-    font-size: 47px;
+  font-family: 'Inter';
+  font-weight: 500;
+  font-size: clamp(37px, calc(0.89vw + 33px), 47px);
 }
 
 @mixin inter700-fs61 {
-    font-family: 'Inter';
-    font-weight: 700;
-    font-size: 61px;
+  font-family: 'Inter';
+  font-weight: 700;
+  font-size: clamp(40px, calc(1.875vw + 34px), 61px);
 }
 
 @mixin inter700-fs21 {
-    font-family: 'Inter';
-    font-weight: 700;
-    font-size: 21px;
+  font-family: 'Inter';
+  font-weight: 700;
+  font-size: clamp(18px, calc(0.27vw + 17.14px), 21px);
 }
 //#endregion
 
@@ -124,11 +124,11 @@
 }
 
 @mixin form-group {
-  height: 50px;
-  width: 422px;
+  height: fit-content;
+  width: clamp(350px, calc(6.43vw + 142.6px), 422px);
   border-radius: 10px;
   border: 1px solid var(--background-default-dark);
-  padding: 13px 21px;
+  padding: clamp(8px, calc(0.45vw + 6.56px), 13px) clamp(18px, calc(0.27vw + 17.14px), 21px);
   @include flex-between();
   @include inter400-fs20();
   &:focus-within {
@@ -140,7 +140,7 @@
   cursor: pointer;
   height: 56px;
   width: fit-content;
-  padding: 16px;
+  padding: 16px clamp(10px, calc(0.54vw + 8.3px), 16px);
   gap: 8px;
   border-radius: 10px;
   border: unset;

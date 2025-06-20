@@ -1,25 +1,75 @@
 @import './../../styles.scss';
 
 section {
-    width: 1212px;
+    width: fit-content;
+    max-width: 1212px;
     height: 592px;
     display: flex;
     border-radius: 30px;
+    position: relative;
     background-color: var(--background-light);
+    @media (max-width: 900px) {
+        flex-direction: column;
+        align-items: center;
+        height: 100dvh;
+        padding: 60px 24px; //noch auf header & footer anpassen
+    };
+     @media (max-width: 400px) {
+        padding: 60px 8px; //noch auf header & footer anpassen
+    };
 }
 
 //#region left-frame
 .left-frame {
-    width: 487px;
+    // width: 487px;
+    min-width: 425px;
     height: 594px;
     background-color: var(--background-dark);
     border-radius: 30px 0px 0px 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 48px;
+    padding: clamp(16px, calc(2.86vw + 6.85px), 48px);
     gap: 12px;
-    color: var(--text-color-light)
+    color: var(--text-color-light);
+    @media (max-width: 900px) {
+        min-width: unset;
+        width: 100%;
+        height: 420px;
+        // padding: 24px;
+        border-radius: 30px 30px 0px 0px;
+    };
+    
+}
+
+.close-btn-wrapper {
+    position: absolute;
+    top: 10%;
+    right: 50%;
+    translate: 50% 0;
+    width: 80%;
+    height: fit-content;
+    display: flex;
+    justify-content: flex-end;
+    @media(min-width: 900px) {
+        width: 95%;
+    }
+}
+
+.btn-close {
+    @include btn();
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    &:hover {
+        background-color: var(--background-default-light);
+        border-radius: 50%;
+    }
+    @media (max-width: 900px) {
+        svg path{
+            fill: var(--text-color-light);
+        }
+    }
 }
 
 h1 {
@@ -33,6 +83,9 @@ h1 {
 .logo {
     width: 55px;
     height: 65px;
+    @media (max-width: 900px) {
+       display: none;
+    };
 }
 
 .separator {
@@ -47,58 +100,63 @@ h1 {
     width: 725px;
     height: 594px;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 48px;
-    gap: 60px;
-}
-
-.close-btn-wrapper {
-    width: 100%;
-    height: 25px;
-    display: flex;
     justify-content: flex-end;
-}
-
-.btn-close {
-    @include btn();
-    &:hover {
-        background-color: var(--background-default-light);
-        border-radius: 50%;
-    }
+    align-items: center;
+    padding: clamp(16px, calc(2.86vw + 6.85px), 48px);
+    gap: 60px;
+    @media (max-width: 900px) {
+        width: 100%;
+        flex: 1;
+        // padding: 24px;
+        border-radius: 0px 0px 30px 30px;
+        position: relative;
+    };
 }
 
 .form-wrapper {
     width: 100%;
-    height: 300px;
+    height: fit-content;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 50px;
+    gap: 10%;
+    @media(max-width: 900px) {
+        flex-direction: column;
+        flex: 1;
+        justify-content: flex-start;
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, calc(1.56vw + 7px), 32px);
+    flex:1;
+    @media(max-width: 900px) {
+        margin-top: 80px;
+    }
 }
 
 .form-group {
     @include form-group();
+    width: 100%;
     > input {
         @include inter400-fs20();
         flex:1;
     }
+}
     input:focus {
         border: unset;
     }
-}
 
 .btn-wrapper {
     display: flex;
     align-items: center;
     height: 70px;
     gap: 24px;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+    @media(max-width: 900px) {
+        justify-content: center;
+    }
 }
 
 .btn-light {
@@ -106,7 +164,9 @@ form {
     @include btn-light();
     @include flex-center();
     @include svg-hover();
-    
+     @media(max-width: 900px) {
+        display: none;;
+    }
 }
 
 .btn-dark {
@@ -121,6 +181,13 @@ form {
     background-color: var(--background-default-dark);
     border-radius: 50%;
     @include flex-center;
+    @media(max-width: 900px) {
+        border: 2px soldi var(--background-light);
+        position: absolute;
+        top: 0;
+        translate: 0 -50%;
+        margin-bottom: 45px;
+    }
 }
 
 .img-user{
