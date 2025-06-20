@@ -1,0 +1,15 @@
+<div class="contact-list">
+  <button class="add-button">Add new contact</button>
+
+  <div *ngFor="let group of groupedContacts | keyvalue : keyAsc">
+    <h4>{{ group.key }}</h4>
+    <div *ngFor="let contact of group.value" class="contact-entry">
+      <div class="avatar">{{ contact?.name?.charAt(0) || '?' }}</div>
+      <div class="info">
+        <div class="name">{{ contact?.name || 'Unbekannt' }}</div>
+        <div class="email">{{ contact?.email || 'Keine E-Mail' }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+

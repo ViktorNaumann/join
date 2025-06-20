@@ -4,10 +4,11 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component'; // Diese Zeile hinzufügen
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { ContactDetailsComponent } from './contact-details/contact-details.component';
+import { ContactListComponent } from './contact-list/contact-list.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, SidebarComponent, ContactFormComponent, ContactDetailsComponent], // SidebarComponent hier hinzufügen
+  imports: [RouterOutlet, HeaderComponent, SidebarComponent, ContactFormComponent, ContactDetailsComponent, ContactListComponent], // SidebarComponent hier hinzufügen
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
