@@ -1,22 +1,65 @@
 <div class="contact-detail-section">
-  <div class="user-profile">
-    <p>AM</p>
+  <div class="contact-header">
+    <h1>Contacts</h1>
+    <div class="header-divider"></div>
+    <p>Better with a team</p>
   </div>
 
-  <div class="user-name">
-    <p>Anton Meyer</p>
+  <div class="contact-content" *ngIf="contact">
+    <div class="contact-container">
+      <div class="user-logo">
+        <!-- <p>AM</p> -->
+        <p>{{ getInitials(contact.name) }}</p>
+      </div>
+      <div class="user-name">
+        <!-- <p>Anton Meyer</p> -->
+        <p>{{ contact.name || "Unbekannt" }}</p>
 
-    <div class="user-options">
-      <div class="option-item">
-        <img class="default-icon" src="assets/img/icons/edit-single.png" alt="" />
-        <img class="hover-icon" src="assets/img/icons/edit-single-hover.png" alt="">
-        <p>Edit</p>
+        <div class="user-options">
+          <div class="option-item">
+            <img
+              class="default-icon"
+              src="assets/img/icons/edit-single2.png"
+              alt=""
+            />
+            <img
+              class="hover-icon"
+              src="assets/img/icons/edit-single-hover.png"
+              alt=""
+            />
+            <p>Edit</p>
+          </div>
+
+          <div class="option-item">
+            <img
+              class="default-icon"
+              src="assets/img/icons/delete.png"
+              alt=""
+            />
+            <img
+              class="hover-icon"
+              src="assets/img/icons/delete-hover.png"
+              alt=""
+            />
+            <p>Delete</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-info">
+      <h3>Contact Information</h3>
+
+      <div class="contact-item email-item">
+        <p class="contact-label">Email</p>
+        <p class="contact-value">{{ contact?.email || "Keine E-Mail" }}</p>
       </div>
 
-      <div class="option-item">
-        <img class="default-icon" src="assets/img/icons/delete.png" alt="" />
-        <img class="hover-icon" src="assets/img/icons/delete-hover.png" alt="">
-        <p>Delete</p>
+      <div class="contact-item">
+        <p class="contact-label">Phone</p>
+        <p class="contact-value">
+          {{ contact?.phone || "Keine Telefonnummer" }}
+        </p>
       </div>
     </div>
   </div>

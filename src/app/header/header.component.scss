@@ -1,27 +1,27 @@
 @import "./../../styles.scss";
 
-header{
-    width: 100%;
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: whitesmoke;
-    box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.499);
+header {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: whitesmoke;
+  box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.499);
 }
 
-.headline-text{
-    font-family: var(--font-primary);
-    font-size: 20px;
-    padding-left: 94px;
+.headline-text {
+  font-family: var(--font-primary);
+  font-size: 20px;
+  padding-left: 94px;
 }
 
-.icon-section{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-right: 30px;
-    gap: 12px;
+.icon-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 30px;
+  gap: 12px;
 }
 
 .help-icon {
@@ -52,9 +52,7 @@ header{
     font-family: var(--font-primary);
     font-size: 18px;
     font-weight: 500;
-    color: blue;
+    color: #29aae1;
     text-align: center;
   }
 }
-
-

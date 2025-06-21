@@ -56,7 +56,7 @@ exports.__esModule = true;
 exports.ContactService = exports.notOnlyWhitespace = void 0;
 var core_1 = require("@angular/core");
 var firestore_1 = require("@angular/fire/firestore");
-var rxjs_1 = require("rxjs");
+var rxjs_1 = require("rxjs"); //NEU BehaviorSubject
 function notOnlyWhitespace(control) {
     var value = control.value;
     if (typeof value === 'string' && value.trim().length === 0) {
@@ -68,6 +68,9 @@ exports.notOnlyWhitespace = notOnlyWhitespace;
 var ContactService = /** @class */ (function () {
     function ContactService(firestore) {
         this.firestore = firestore;
+        //NEU
+        this.selectedContactSubject = new rxjs_1.BehaviorSubject(null);
+        this.selectedContact$ = this.selectedContactSubject.asObservable();
     }
     ContactService.prototype.getContacts = function () {
         var _this = this;
@@ -125,6 +128,14 @@ var ContactService = /** @class */ (function () {
             email: updatedContact.email,
             phone: updatedContact.phone
         };
+    };
+    //NEU
+    ContactService.prototype.selectContact = function (contact) {
+        this.selectedContactSubject.next(contact);
+    };
+    //NEU
+    ContactService.prototype.clearSelection = function () {
+        this.selectedContactSubject.next(null);
     };
     ContactService = __decorate([
         core_1.Injectable({

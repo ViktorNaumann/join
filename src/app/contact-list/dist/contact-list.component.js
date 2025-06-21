@@ -14,7 +14,9 @@ var ContactListComponent = /** @class */ (function () {
     function ContactListComponent(contactService) {
         this.contactService = contactService;
         this.groupedContacts = {};
+        this.selectedContact = null; //NEU
         this.contactsSubscription = new rxjs_1.Subscription();
+        this.selectionSubscription = new rxjs_1.Subscription(); //NEU
         this.keyAsc = function (a, b) { return a.key.localeCompare(b.key); };
     }
     ContactListComponent.prototype.ngOnInit = function () {
@@ -27,9 +29,21 @@ var ContactListComponent = /** @class */ (function () {
                 console.error('Error loading contacts:', error);
             }
         });
+        //NEU Aktuelle Auswahl verfolgen für visuelle Hervorhebung
+        this.selectionSubscription = this.contactService.selectedContact$.subscribe(function (contact) { return _this.selectedContact = contact; });
     };
     ContactListComponent.prototype.ngOnDestroy = function () {
         this.contactsSubscription.unsubscribe();
+        this.selectionSubscription.unsubscribe(); //NEU
+    };
+    //NEU
+    ContactListComponent.prototype.onContactSelect = function (contact) {
+        this.contactService.selectContact(contact);
+    };
+    //NEU
+    ContactListComponent.prototype.isSelected = function (contact) {
+        var _a;
+        return ((_a = this.selectedContact) === null || _a === void 0 ? void 0 : _a.id) === contact.id;
     };
     ContactListComponent.prototype.groupByInitial = function (contacts) {
         var validContacts = contacts.filter(function (contact) { return contact && contact.name; });

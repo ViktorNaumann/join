@@ -12,13 +12,13 @@
     max-width: 352px;
     height: clamp(48px, 12vw, 56px);
     margin-top: 22.5px;
-    background-color: #2A3647;
-    color: #FFFFFF;
+    background-color: #2a3647;
+    color: #ffffff;
     font-family: var(--font-primary);
     font-weight: 700;
     font-size: clamp(14px, 3.2vw, 21px);
     border-radius: 10px;
-    border: 1px solid #2A3647;
+    border: 1px solid #2a3647;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,10 +31,10 @@
     }
 
     &::after {
-      content: '';
+      content: "";
       width: clamp(20px, 4vw, 24px);
       height: clamp(20px, 4vw, 24px);
-      background-image: url('../../../public/assets/img/svg/add-person.svg');
+      background-image: url("../../../public/assets/img/svg/add-person.svg");
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
@@ -43,13 +43,13 @@
 
   h4 {
     margin-top: clamp(8px, 2vw, 16px);
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-weight: 400;
     font-size: clamp(14px, 3vw, 20px);
     color: #000000;
     padding: clamp(8px, 1.5vw, 17px) clamp(12px, 3vw, 36px);
     gap: 8px;
-    border-bottom: 1px solid #D1D1D1;
+    border-bottom: 1px solid #d1d1d1;
     margin-bottom: clamp(4px, 1vw, 8px);
     max-width: 352px;
   }
@@ -61,6 +61,20 @@
     padding: clamp(8px, 1.5vw, 15px) clamp(8px, 2vw, 24px);
     gap: clamp(12px, 2vw, 24px);
     flex-wrap: wrap;
+
+    // NEU
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+
+    &.selected {
+      background-color: #e3f2fd;
+      border-left: 3px solid #2196f3;
+    }
+    // NEU
 
     .avatar {
       width: 32px;
@@ -76,19 +90,18 @@
 
     .info {
       .name {
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         font-weight: 400;
         font-size: clamp(14px, 3vw, 20px);
         color: #000000;
       }
 
       .email {
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         font-weight: 400;
         font-size: clamp(12px, 2.5vw, 16px);
-        color: #007CEE;
+        color: #007cee;
       }
     }
   }
 }
-

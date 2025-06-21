@@ -12,7 +12,9 @@ import { Subscription } from 'rxjs';
 })
 export class ContactListComponent implements OnInit, OnDestroy {
   groupedContacts: { [key: string]: Contact[] } = {};
+  selectedContact: Contact | null = null; //NEU
   private contactsSubscription: Subscription = new Subscription();
+  private selectionSubscription: Subscription = new Subscription(); //NEU
 
   constructor(private contactService: ContactService) {}
 
@@ -25,10 +27,28 @@ export class ContactListComponent implements OnInit, OnDestroy {
         console.error('Error loading contacts:', error);
       }
     });
+
+
+    //NEU Aktuelle Auswahl verfolgen für visuelle Hervorhebung
+    this.selectionSubscription = this.contactService.selectedContact$.subscribe(
+      contact => this.selectedContact = contact
+    );
+
   }
+
 
   ngOnDestroy(): void {
     this.contactsSubscription.unsubscribe();
+    this.selectionSubscription.unsubscribe(); //NEU
+  }
+
+  //NEU
+   onContactSelect(contact: Contact): void {
+    this.contactService.selectContact(contact);
+  }
+  //NEU
+  isSelected(contact: Contact): boolean {
+    return this.selectedContact?.id === contact.id;
   }
 
   groupByInitial(contacts: Contact[]): { [key: string]: Contact[] } {

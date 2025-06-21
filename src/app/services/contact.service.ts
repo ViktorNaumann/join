@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, onSnapshot, addDoc, doc, updateDoc } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs'; //NEU BehaviorSubject
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 export interface Contact {
@@ -22,6 +22,10 @@ export function notOnlyWhitespace(control: AbstractControl): ValidationErrors | 
   providedIn: 'root'
 })
 export class ContactService {
+//NEU
+private selectedContactSubject = new BehaviorSubject<Contact | null>(null);
+  public selectedContact$ = this.selectedContactSubject.asObservable();
+
   constructor(private firestore: Firestore) {}
 
   getContacts(): Observable<Contact[]> {
@@ -71,5 +75,14 @@ export class ContactService {
       phone: updatedContact.phone
       }
     }
+
+    //NEU
+    selectContact(contact: Contact): void {
+    this.selectedContactSubject.next(contact);
+  }
+    //NEU
+  clearSelection(): void {
+    this.selectedContactSubject.next(null);
+  }
 }
 
