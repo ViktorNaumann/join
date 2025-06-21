@@ -10,6 +10,7 @@ exports.ContactFormComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var common_1 = require("@angular/common");
+var contact_service_1 = require("../services/contact.service");
 var ContactFormComponent = /** @class */ (function () {
     function ContactFormComponent(form, contactService) {
         this.form = form;
@@ -17,25 +18,46 @@ var ContactFormComponent = /** @class */ (function () {
     }
     ContactFormComponent.prototype.ngOnInit = function () {
         this.contactForm = this.form.group({
-            name: ['', [forms_1.Validators.required]],
+            name: ['', [forms_1.Validators.required, contact_service_1.notOnlyWhitespace]],
             email: ['', [forms_1.Validators.required, forms_1.Validators.email]],
-            phone: ['', [forms_1.Validators.required, forms_1.Validators.min(10)]]
+            phone: ['', [forms_1.Validators.required, forms_1.Validators.min(10), forms_1.Validators.pattern(/^\d+$/)]]
         });
+        if (this.contactToEdit) { //Anzeigen der Daten im Inputfeld
+            this.contactForm.patchValue({
+                name: this.contactToEdit.name,
+                email: this.contactToEdit.email,
+                phone: this.contactToEdit.phone
+            });
+        }
     };
     ContactFormComponent.prototype.onSubmit = function () {
+        var _a;
         if (this.contactForm.valid) {
-            var newContact = {
-                name: this.contactForm.value.name,
-                email: this.contactForm.value.email,
-                phone: this.contactForm.value.phone
-            };
-            // this.contactService.addContact(newContact)
-            console.log(newContact);
+            if ((_a = this.contactToEdit) === null || _a === void 0 ? void 0 : _a.id) {
+                var editContact = {
+                    name: this.contactForm.value.name.trim(),
+                    email: this.contactForm.value.email.trim(),
+                    phone: this.contactForm.value.phone.trim()
+                };
+                this.contactService.updateContact(this.contactToEdit.id, editContact);
+            }
+            else {
+                var newContact = {
+                    name: this.contactForm.value.name.trim(),
+                    email: this.contactForm.value.email.trim(),
+                    phone: this.contactForm.value.phone.trim()
+                };
+                // this.contactService.addContact(newContact)
+                console.log(newContact);
+            }
         }
         else {
             console.log('invalid');
         }
     };
+    __decorate([
+        core_1.Input()
+    ], ContactFormComponent.prototype, "contactToEdit");
     ContactFormComponent = __decorate([
         core_1.Component({
             selector: 'app-contact-form',

@@ -137,6 +137,11 @@ form {
     }
 }
 
+.form-group-wrapper {
+    height: 50px;
+    width: fit-content;
+}
+
 .form-group {
     @include form-group();
     width: 100%;
@@ -147,15 +152,17 @@ form {
 }
 
 .colorError {
-    border: 1px solid red;
+    border: 1px solid var(--text-color-error);
+}
+
+.error-message {
+    @include inter400-fs12;
+    color: var(--text-color-error);
+    display: hidden;
 }
 
 input:focus {
     border: unset;
-}
-
-input.ng-invalid.ng-touched {
-    border: 1px solid red;
 }
 
 .btn-wrapper {
@@ -181,6 +188,18 @@ input.ng-invalid.ng-touched {
 .btn-save {
     @include btn();
     @include btn-dark();
+    @include flex-center();
+}
+
+.btn-edit {
+    @include btn();
+    @include btn-dark();
+    @include flex-center();
+}
+
+.btn-delete {
+    @include btn();
+    @include btn-light();
     @include flex-center();
 }
 

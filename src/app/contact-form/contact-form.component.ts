@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ContactService, Contact } from '../services/contact.service';
+import { notOnlyWhitespace } from '../services/contact.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -15,27 +16,44 @@ import { ContactService, Contact } from '../services/contact.service';
 })
 export class ContactFormComponent {
   contactForm!: FormGroup;
+  @Input() contactToEdit?: Contact;
 
   constructor(private form: FormBuilder, private contactService: ContactService) {}
 
   ngOnInit(): void {
     this.contactForm = this.form.group({
-      name: ['', [Validators.required]],
+      name: ['', [Validators.required, notOnlyWhitespace]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.min(10)]]
+      phone: ['', [Validators.required, Validators.min(10), Validators.pattern(/^\d+$/)]]
     });
+    if (this.contactToEdit) { //Anzeigen der Daten im Inputfeld
+    this.contactForm.patchValue({
+      name: this.contactToEdit.name,
+      email: this.contactToEdit.email,
+      phone: this.contactToEdit.phone
+    });
+  }
   }
 
   onSubmit(){
     if(this.contactForm.valid){
+      if(this.contactToEdit?.id) {
+        let editContact: Contact = {
+          name: this.contactForm.value.name.trim(),
+          email: this.contactForm.value.email.trim(),
+          phone: this.contactForm.value.phone.trim()
+        }
+        this.contactService.updateContact(this.contactToEdit.id, editContact);
+      } else {
       let newContact: Contact = {
-      name: this.contactForm.value.name,
-      email: this.contactForm.value.email,
-      phone: this.contactForm.value.phone
+      name: this.contactForm.value.name.trim(),
+      email: this.contactForm.value.email.trim(),
+      phone: this.contactForm.value.phone.trim()
     }
     // this.contactService.addContact(newContact)
     console.log(newContact)
     }
+      }
     else {
       console.log('invalid')
     }

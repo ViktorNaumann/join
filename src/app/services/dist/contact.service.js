@@ -53,10 +53,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.ContactService = void 0;
+exports.ContactService = exports.notOnlyWhitespace = void 0;
 var core_1 = require("@angular/core");
 var firestore_1 = require("@angular/fire/firestore");
 var rxjs_1 = require("rxjs");
+function notOnlyWhitespace(control) {
+    var value = control.value;
+    if (typeof value === 'string' && value.trim().length === 0) {
+        return { whitespace: true };
+    }
+    return null;
+}
+exports.notOnlyWhitespace = notOnlyWhitespace;
 var ContactService = /** @class */ (function () {
     function ContactService(firestore) {
         this.firestore = firestore;
@@ -95,6 +103,28 @@ var ContactService = /** @class */ (function () {
                 }
             });
         });
+    };
+    ContactService.prototype.updateContact = function (id, updatedContact) {
+        return __awaiter(this, void 0, void 0, function () {
+            var docRef;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        docRef = firestore_1.doc(firestore_1.collection(this.firestore, 'contacts'), id);
+                        return [4 /*yield*/, firestore_1.updateDoc(docRef, this.getCleanJson(updatedContact))["catch"](function (err) { console.error(err); })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ContactService.prototype.getCleanJson = function (updatedContact) {
+        return {
+            name: updatedContact.name,
+            email: updatedContact.email,
+            phone: updatedContact.phone
+        };
     };
     ContactService = __decorate([
         core_1.Injectable({

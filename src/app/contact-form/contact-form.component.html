@@ -13,8 +13,9 @@
      </div>
     <div class="left-frame">
         <img src="assets/img/logo/logo.png" alt="Join Logo" class="logo">
-        <h1>Add contact</h1>
-        <p class="sub-heading">Tasks are better with a team!</p>
+        <h1 *ngIf="!contactToEdit">Add contact</h1>
+        <h1 *ngIf="contactToEdit">Edit contact</h1>
+        <p class="sub-heading" *ngIf="!contactToEdit">Tasks are better with a team!</p>
         <div class="separator"></div>
     </div>
     <div class="right-frame">
@@ -24,27 +25,31 @@
                 <img class="img-user" src="assets/img/svg/person.svg" alt="User Image">
             </div>
             <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-                <div class="form-group" [ngStyle]="{'colorError': contactForm.value.name.invalid}">
-                    <label for="name"></label>
-                    <input id="name" type="text" placeholder="Name" formControlName="name">
-                    <img class="input-icon" src="assets/img/icons/person.png" alt="Person Icon">
+                <div class="form-group-wrapper">
+                    <div class="form-group" [ngClass]="{'colorError': contactForm.get('name')?.invalid && contactForm.get('name')?.touched}">
+                        <label for="name"></label>
+                        <input id="name" type="text" placeholder="Name" formControlName="name">
+                        <img class="input-icon" src="assets/img/icons/person.png" alt="Person Icon">
+                    </div>
+                    <p class="error-message" *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched">Oops! Please add a name.</p>
                 </div>
-                <p class="error-message" *ngIf="contactForm.get('name')?.invalid"></p>
-
-                <div class="form-group" [ngStyle]="{'colorError': contactForm.value.email.invalid}">
-                    <label for="email"></label>
-                    <input id="email" type="text" placeholder="Email" formControlName="email">
-                    <img class="input-icon" src="assets/img/icons/mail.png" alt="Mail Icon">
+                <div class="form-group-wrapper">
+                    <div class="form-group" [ngClass]="{'colorError': contactForm.get('email')?.invalid && contactForm.get('email')?.touched}">
+                        <label for="email"></label>
+                        <input id="email" type="text" placeholder="Email" formControlName="email">
+                        <img class="input-icon" src="assets/img/icons/mail.png" alt="Mail Icon">
+                    </div>
+                    <p class="error-message" *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">Oops! This email seems invalid or missing.</p>
                 </div>
-                <p class="error-message" *ngIf="contactForm.get('email')?.invalid"></p>
-                
-                <div class="form-group" [ngStyle]="{'colorError': contactForm.value.name.invalid}">
-                    <label for="phone"></label>
-                    <input id="phone" type="text" placeholder="Phone" formControlName="phone">
-                    <img class="input-icon" src="assets/img/icons/phone.png" alt="Phone Icon">
-                </div>
-                <p class="error-message" *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.dirty"></p>
-                <div class="btn-wrapper">
+                <div class="form-group-wrapper">
+                    <div class="form-group" [ngClass]="{'colorError': contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched}">
+                        <label for="phone"></label>
+                        <input id="phone" type="text" placeholder="Phone" formControlName="phone">
+                        <img class="input-icon" src="assets/img/icons/phone.png" alt="Phone Icon">
+                    </div>
+                    <p class="error-message" *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched">Oh! Don´t forget the phone number.</p>
+                </div>                
+                 <div class="btn-wrapper">
                     <button class="btn-cancel" type="reset">
                         Cancel
                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,8 +61,15 @@
                             </g>
                         </svg>
                     </button>
+                     <button class="btn-delete" *ngIf="contactToEdit">
+                        Delete
+                    </button>
                     <button class="btn-save" type="submit" [disabled]="contactForm.invalid">
                         Create contact
+                        <img src="assets/img/icons/check-light.png" alt="">
+                    </button>
+                    <button class="btn-edit" [disabled]="contactForm.invalid" *ngIf="contactToEdit">
+                        Save
                         <img src="assets/img/icons/check-light.png" alt="">
                     </button>
                 </div>

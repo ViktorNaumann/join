@@ -52,6 +52,7 @@
   --text-color-light: #ffffff;
   --text-color-medium: #b9babc;
   --text-color-dark: #2a3647;
+  --text-color-error: red;
   --background-main: #f6f7f8;
   --background-dark: #2a3647;
   --background-light: #ffffff;
@@ -217,6 +218,11 @@ form {
   }
 }
 
+.form-group-wrapper {
+  height: 50px;
+  width: fit-content;
+}
+
 .form-group {
   height: fit-content;
   width: clamp(350px, calc(6.43vw + 142.6px), 422px);
@@ -242,15 +248,19 @@ form {
 }
 
 .colorError {
-  border: 1px solid red;
+  border: 1px solid var(--text-color-error);
+}
+
+.error-message {
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--text-color-error);
+  display: hidden;
 }
 
 input:focus {
   border: unset;
-}
-
-input.ng-invalid.ng-touched {
-  border: 1px solid red;
 }
 
 .btn-wrapper {
@@ -316,6 +326,51 @@ input.ng-invalid.ng-touched {
 }
 .btn-save:hover {
   background-color: var(--accent-primary-color);
+}
+
+.btn-edit {
+  cursor: pointer;
+  height: 56px;
+  width: fit-content;
+  padding: 16px clamp(10px, calc(0.54vw + 8.3px), 16px);
+  gap: 8px;
+  border-radius: 10px;
+  border: unset;
+  background-color: unset;
+  background-color: var(--background-dark);
+  color: var(--text-color-light);
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: clamp(18px, calc(0.27vw + 17.14px), 21px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-edit:hover {
+  background-color: var(--accent-primary-color);
+}
+
+.btn-delete {
+  cursor: pointer;
+  height: 56px;
+  width: fit-content;
+  padding: 16px clamp(10px, calc(0.54vw + 8.3px), 16px);
+  gap: 8px;
+  border-radius: 10px;
+  border: unset;
+  background-color: unset;
+  border: 1px solid var(--background-dark);
+  color: var(--text-color-dark);
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: clamp(16px, calc(0.36vw + 14.85px), 20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-delete:hover {
+  color: var(--accent-primary-color);
+  border: 1px solid var(--accent-primary-color);
 }
 
 .btn-save:disabled {
