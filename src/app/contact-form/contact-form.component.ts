@@ -47,7 +47,9 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(){
+    //Das Formular muss valide sein
     if(this.contactForm.valid){
+      //Wenn Kontaktdaten übergeben wurden soll editiert/geupdated werden
       if(this.contactToEdit?.id) {
         let editContact: Contact = {
           name: this.contactForm.value.name.trim(),
@@ -56,6 +58,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
         }
         this.contactService.updateContact(this.contactToEdit.id, editContact);
       } else {
+      //andernfalls soll ein neuer Kontakt erstellt werden
       let newContact: Contact = {
       name: this.contactForm.value.name.trim(),
       email: this.contactForm.value.email.trim(),
@@ -64,10 +67,11 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     this.contactService.addContact(newContact)
     console.log(newContact)
     }
+    //Inputs danach immer leeren
     this.clearInputs();
       }
     else {
-      console.log('invalid')
+      console.log('invalid') 
     }
   }
 
