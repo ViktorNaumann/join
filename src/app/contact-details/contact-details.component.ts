@@ -14,7 +14,7 @@ import { map } from 'rxjs/operators';
     trigger('slideInFromRight', [
       transition('* => *', [
         style({ transform: 'translateX(100%)', opacity: 0 }),
-        animate('300ms ease-in-out', style({ transform: 'translateX(0%)', opacity: 1 }))
+        animate('250ms ease-in-out', style({ transform: 'translateX(0%)', opacity: 1 }))
       ])
     ])
   ]
