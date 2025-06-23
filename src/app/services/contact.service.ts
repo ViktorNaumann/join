@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, onSnapshot, addDoc, doc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, collection, onSnapshot, addDoc, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs'; //NEU BehaviorSubject
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
@@ -23,7 +23,7 @@ export function notOnlyWhitespace(control: AbstractControl): ValidationErrors | 
 })
 export class ContactService {
 //NEU
-private selectedContactSubject = new BehaviorSubject<Contact | null>(null);
+  private selectedContactSubject = new BehaviorSubject<Contact | null>(null);
   public selectedContact$ = this.selectedContactSubject.asObservable();
 
   constructor(private firestore: Firestore) {}
@@ -54,6 +54,10 @@ private selectedContactSubject = new BehaviorSubject<Contact | null>(null);
     return collection(this.firestore, 'contacts');
   }
 
+  getSingleContactsRef(docId: string){
+    return doc(collection(this.firestore, 'contacts'), docId);
+  }
+
   async addContact(newContact: Contact) {
     let contactsRef = this.getContactsRef();
     await addDoc(contactsRef, newContact). catch(
@@ -61,8 +65,8 @@ private selectedContactSubject = new BehaviorSubject<Contact | null>(null);
     ).then( (newRef) => {console.log('New Contact list added with id', newRef?.id)})
   }
 
-  async updateContact(id: string, updatedContact: Contact) {
-    let docRef = doc(collection(this.firestore, 'contacts'), id);
+  async updateContact(docId: string, updatedContact: Contact) {
+    let docRef = this.getSingleContactsRef(docId);
     await updateDoc(docRef,this.getCleanJson(updatedContact)).catch(
       (err) => {console.error(err)}
     );
@@ -76,13 +80,20 @@ private selectedContactSubject = new BehaviorSubject<Contact | null>(null);
       }
     }
 
-    //NEU
-    selectContact(contact: Contact): void {
+  //NEU
+  selectContact(contact: Contact): void {
     this.selectedContactSubject.next(contact);
   }
     //NEU
   clearSelection(): void {
     this.selectedContactSubject.next(null);
   }
+
+  async deleteContact(docId: string) {
+    await deleteDoc(this.getSingleContactsRef(docId)).catch(
+      (err) => {console.log(err);}
+    );
+  }
+  
 }
 

@@ -50,16 +50,28 @@ export class ContactFormComponent {
       email: this.contactForm.value.email.trim(),
       phone: this.contactForm.value.phone.trim()
     }
-    // this.contactService.addContact(newContact)
+    this.contactService.addContact(newContact)
     console.log(newContact)
     }
+    this.clearInputs();
       }
     else {
       console.log('invalid')
     }
   }
 
-  // onClear(ngForm: NgForm){
+  clearInputs() {
+    this.contactForm.reset();
+    console.log('Inputs cleared')
+  }
 
-  // }
+  deleteContact() {
+    if(this.contactToEdit?.id) {
+      this.contactService.deleteContact(this.contactToEdit?.id);
+    }
+    console.log('Deleted contact with', this.contactToEdit?.id)
+    // this.contactService.deleteContact('kFUgrtMZHpap4hhb1SHn') //war zum Testen des Löschens
+  }
+
+  
 }
