@@ -82,11 +82,12 @@ export class ContactFormComponent implements OnInit, OnDestroy {
       email: this.contactForm.value.email.trim(),
       phone: this.contactForm.value.phone.trim()
     }
-    this.contactService.addContact(newContact)
+    this.contactService.addContact(newContact);
     console.log(newContact)
     }
     //Inputs danach immer leeren
     this.clearInputs();
+    this.onClose();
       }
     else {
       console.log('invalid') 
