@@ -5,14 +5,12 @@
     <p>Better with a team</p>
   </div>
 
-  <div class="contact-content" *ngIf="contact">
+  <div class="contact-content" *ngIf="contact" [@slideInFromRight]="contact.id">
     <div class="contact-container">
       <div class="user-logo">
-        <!-- <p>AM</p> -->
         <p>{{ getInitials(contact.name) }}</p>
       </div>
       <div class="user-name">
-        <!-- <p>Anton Meyer</p> -->
         <p>{{ contact.name || "Unbekannt" }}</p>
 
         <div class="user-options">

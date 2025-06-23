@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ContactService, Contact } from '../services/contact.service';
 import { Subscription, combineLatest } from 'rxjs';
@@ -8,10 +9,19 @@ import { map } from 'rxjs/operators';
   selector: 'app-contact-details',
   imports: [CommonModule],
   templateUrl: './contact-details.component.html',
-  styleUrl: './contact-details.component.scss'
+  styleUrl: './contact-details.component.scss',
+  animations: [
+    trigger('slideInFromRight', [
+      transition('* => *', [
+        style({ transform: 'translateX(100%)', opacity: 0 }),
+        animate('300ms ease-in-out', style({ transform: 'translateX(0%)', opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class ContactDetailsComponent implements OnInit, OnDestroy {
   contact?: Contact;
+  animationState = 0; // Trigger für Animation
   private subscription?: Subscription;
 
   constructor(private contactService: ContactService) {}
