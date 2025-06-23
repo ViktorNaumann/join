@@ -30,6 +30,12 @@ export class ContactService {
   private showFormSubject = new BehaviorSubject<boolean>(false);
   public showForm$ = this.showFormSubject.asObservable();
 
+
+// NEU - Für das Übertragen der Kontaktdaten zum Bearbeiten
+  private editContactSubject = new BehaviorSubject<Contact | null>(null);
+  public editContact$ = this.editContactSubject.asObservable();
+
+
   constructor(private firestore: Firestore) {}
 
   getContacts(): Observable<Contact[]> {
@@ -98,8 +104,15 @@ export class ContactService {
     this.showFormSubject.next(true);
   }
 
+  // NEU - Methode für Edit-Modus
+  showEditForm(contact: Contact): void {
+    this.editContactSubject.next(contact);
+    this.showFormSubject.next(true);
+  }
+
   hideForm(): void {
     this.showFormSubject.next(false);
+    this.editContactSubject.next(null); //NEU
   }
   async deleteContact(docId: string) {
     await deleteDoc(this.getSingleContactsRef(docId)).catch(

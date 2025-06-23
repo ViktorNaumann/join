@@ -17,7 +17,10 @@ import { Subscription } from 'rxjs';
 })
 export class ContactFormComponent implements OnInit, OnDestroy {
   contactForm!: FormGroup;
-  @Input() contactToEdit?: Contact;
+  //NEU
+  contactToEdit?: Contact;
+  private editContactSubscription?: Subscription;
+  // @Input() contactToEdit?: Contact;
 
   constructor(private form: FormBuilder, private contactService: ContactService) {}
 
@@ -28,17 +31,32 @@ export class ContactFormComponent implements OnInit, OnDestroy {
       phone: ['', [Validators.required, Validators.min(10), Validators.pattern(/^\d+$/)]]
     });
     
-    if (this.contactToEdit) {
-      this.contactForm.patchValue({
-        name: this.contactToEdit.name,
-        email: this.contactToEdit.email,
-        phone: this.contactToEdit.phone
-      });
-    }
+    // if (this.contactToEdit) {
+    //   this.contactForm.patchValue({
+    //     name: this.contactToEdit.name,
+    //     email: this.contactToEdit.email,
+    //     phone: this.contactToEdit.phone
+    //   });
+    // }
+
+    // NEU - Edit-Kontakt aus Service abrufen
+    this.editContactSubscription = this.contactService.editContact$.subscribe(contact => {
+      this.contactToEdit = contact || undefined;
+      if (this.contactToEdit) {
+        this.contactForm.patchValue({
+          name: this.contactToEdit.name,
+          email: this.contactToEdit.email,
+          phone: this.contactToEdit.phone
+        });
+      }
+    });
   }
 
   ngOnDestroy(): void {
-    // Cleanup falls nötig
+    //NEU
+    if (this.editContactSubscription) {
+      this.editContactSubscription.unsubscribe();
+    }
   }
 
   onClose(): void {

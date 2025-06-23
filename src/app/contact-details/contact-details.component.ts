@@ -29,6 +29,22 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
+
+   // NEU - Edit-Funktionalität
+  onEditContact(): void {
+    if (this.contact) {
+      // this.contactService.showAddForm();
+      this.contactService.showEditForm(this.contact); //NEU
+    }
+  }
+
+  // NEU - Delete-Funktionalität
+  onDeleteContact(): void {
+    if (this.contact?.id) {
+      this.contactService.deleteContact(this.contact.id);
+      this.contactService.clearSelection(); // Auswahl nach dem Löschen zurücksetzen
+    }
+  }
  
 
   getInitials(name?: string): string {

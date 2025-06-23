@@ -16,7 +16,7 @@
         <p>{{ contact.name || "Unbekannt" }}</p>
 
         <div class="user-options">
-          <div class="option-item">
+          <div class="option-item" (click)="onEditContact()">
             <img
               class="default-icon"
               src="assets/img/icons/edit-single2.png"
@@ -30,7 +30,7 @@
             <p>Edit</p>
           </div>
 
-          <div class="option-item">
+          <div class="option-item" (click)="onDeleteContact()">
             <img
               class="default-icon"
               src="assets/img/icons/delete.png"
