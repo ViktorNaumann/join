@@ -49,7 +49,7 @@
                     <p class="error-message" *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched">Oh! Don´t forget the phone number.</p>
                 </div>                
                  <div class="btn-wrapper">
-                    <button class="btn-cancel" type="reset" (click)="clearInputs()">
+                    <button class="btn-cancel" type="reset" *ngIf="!contactToEdit" (click)="clearInputs()">
                         Cancel
                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_331509_883" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
@@ -63,7 +63,7 @@
                      <button class="btn-delete" *ngIf="contactToEdit" (click)="deleteContact()">
                         Delete
                     </button>
-                    <button class="btn-save" type="submit" [disabled]="contactForm.invalid">
+                    <button class="btn-save" type="submit" *ngIf="!contactToEdit" [disabled]="contactForm.invalid">
                         Create contact
                         <img src="assets/img/icons/check-light.png" alt="Checked Icon">
                     </button>
