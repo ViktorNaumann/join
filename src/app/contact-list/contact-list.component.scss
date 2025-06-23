@@ -72,8 +72,11 @@
     }
 
     &.selected {
-      background-color: #e3f2fd;
-      border-left: 3px solid #2196f3;
+      background-color: #2A3647;
+      
+      .info .name {
+        color: #FFFFFF;
+      }
     }
     // NEU
 
