@@ -26,6 +26,10 @@ export class ContactService {
 private selectedContactSubject = new BehaviorSubject<Contact | null>(null);
   public selectedContact$ = this.selectedContactSubject.asObservable();
 
+  // NEU - Für das Anzeigen/Verbergen des Formulars
+  private showFormSubject = new BehaviorSubject<boolean>(false);
+  public showForm$ = this.showFormSubject.asObservable();
+
   constructor(private firestore: Firestore) {}
 
   getContacts(): Observable<Contact[]> {
@@ -83,6 +87,15 @@ private selectedContactSubject = new BehaviorSubject<Contact | null>(null);
     //NEU
   clearSelection(): void {
     this.selectedContactSubject.next(null);
+  }
+
+  // NEU - Methoden für Formular-Anzeige
+  showAddForm(): void {
+    this.showFormSubject.next(true);
+  }
+
+  hideForm(): void {
+    this.showFormSubject.next(false);
   }
 }
 

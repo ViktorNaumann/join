@@ -1,6 +1,6 @@
 <section>
     <div class="close-btn-wrapper">
-        <button class="btn-close">
+        <button class="btn-close" (click)="onClose()">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <mask id="mask0_331509_883" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
               <rect width="24" height="24" fill="#D9D9D9"/>
@@ -19,7 +19,6 @@
         <div class="separator"></div>
     </div>
     <div class="right-frame">
-
         <div class="form-wrapper">
             <div class="img-user-wrapper">
                 <img class="img-user" src="assets/img/svg/person.svg" alt="User Image">
@@ -50,7 +49,7 @@
                     <p class="error-message" *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched">Oh! Don´t forget the phone number.</p>
                 </div>                
                  <div class="btn-wrapper">
-                    <button class="btn-cancel" type="reset">
+                    <button class="btn-cancel" type="button" (click)="onClose()">
                         Cancel
                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_331509_883" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">

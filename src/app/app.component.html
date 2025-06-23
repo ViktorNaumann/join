@@ -21,9 +21,6 @@
     <app-header></app-header>
     <div class="main-content">
       <router-outlet></router-outlet>
-      <div class="contact-form">
-        <app-contact-form></app-contact-form>
-      </div>
       
       <div class="contact-section">
         <div class="contact-list">
@@ -33,7 +30,11 @@
           <app-contact-details></app-contact-details>
         </div>
       </div>
-
     </div>
   </div>
+</div>
+
+<!-- Contact Form als Overlay - nur anzeigen wenn showForm$ true ist -->
+<div *ngIf="showForm$ | async" class="contact-form-overlay">
+  <app-contact-form></app-contact-form>
 </div>

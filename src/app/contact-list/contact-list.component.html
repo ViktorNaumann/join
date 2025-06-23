@@ -1,5 +1,5 @@
 <div class="contact-list">
-  <button class="add-button">Add new contact</button>
+  <button class="add-button" (click)="onAddNewContact()">Add new contact</button>
 
   <div *ngFor="let group of groupedContacts | keyvalue : keyAsc">
     <h4>{{ group.key }}</h4>

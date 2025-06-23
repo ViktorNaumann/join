@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ContactService, Contact } from '../services/contact.service';
 import { notOnlyWhitespace } from '../services/contact.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contact-form',
@@ -14,7 +15,7 @@ import { notOnlyWhitespace } from '../services/contact.service';
   templateUrl: './contact-form.component.html',
   styleUrl: './contact-form.component.scss'
 })
-export class ContactFormComponent {
+export class ContactFormComponent implements OnInit, OnDestroy {
   contactForm!: FormGroup;
   @Input() contactToEdit?: Contact;
 
@@ -26,13 +27,23 @@ export class ContactFormComponent {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.min(10), Validators.pattern(/^\d+$/)]]
     });
-    if (this.contactToEdit) { //Anzeigen der Daten im Inputfeld
-    this.contactForm.patchValue({
-      name: this.contactToEdit.name,
-      email: this.contactToEdit.email,
-      phone: this.contactToEdit.phone
-    });
+    
+    if (this.contactToEdit) {
+      this.contactForm.patchValue({
+        name: this.contactToEdit.name,
+        email: this.contactToEdit.email,
+        phone: this.contactToEdit.phone
+      });
+    }
   }
+
+  ngOnDestroy(): void {
+    // Cleanup falls nötig
+  }
+
+  onClose(): void {
+    this.contactService.hideForm();
+    this.contactForm.reset();
   }
 
   onSubmit(){
@@ -45,21 +56,14 @@ export class ContactFormComponent {
         }
         this.contactService.updateContact(this.contactToEdit.id, editContact);
       } else {
-      let newContact: Contact = {
-      name: this.contactForm.value.name.trim(),
-      email: this.contactForm.value.email.trim(),
-      phone: this.contactForm.value.phone.trim()
-    }
-    // this.contactService.addContact(newContact)
-    console.log(newContact)
-    }
+        let newContact: Contact = {
+          name: this.contactForm.value.name.trim(),
+          email: this.contactForm.value.email.trim(),
+          phone: this.contactForm.value.phone.trim()
+        }
+        this.contactService.addContact(newContact);
       }
-    else {
-      console.log('invalid')
+      this.onClose();
     }
   }
-
-  // onClear(ngForm: NgForm){
-
-  // }
 }

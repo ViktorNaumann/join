@@ -51,6 +51,11 @@ export class ContactListComponent implements OnInit, OnDestroy {
     return this.selectedContact?.id === contact.id;
   }
 
+  // NEU - Methode für Add-Button
+  onAddNewContact(): void {
+    this.contactService.showAddForm();
+  }
+
   groupByInitial(contacts: Contact[]): { [key: string]: Contact[] } {
     const validContacts = contacts.filter(contact => contact && contact.name);
     
