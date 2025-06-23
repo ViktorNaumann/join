@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ContactService, Contact } from '../services/contact.service';
-import { Subscription } from 'rxjs';
+import { Subscription, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contact-details',
@@ -11,12 +12,22 @@ import { Subscription } from 'rxjs';
 })
 export class ContactDetailsComponent implements OnInit, OnDestroy {
   contact?: Contact;
-  private selectedContactSubscription?: Subscription;
+  private subscription?: Subscription;
 
   constructor(private contactService: ContactService) {}
 
-  ngOnInit(): void {
-    this.selectedContactSubscription = this.contactService.selectedContact$.subscribe({
+ ngOnInit(): void {
+    // Kombiniere selectedContact$ und getContacts() um immer aktuelle Daten zu haben
+    this.subscription = combineLatest([
+      this.contactService.selectedContact$,
+      this.contactService.getContacts()
+    ]).pipe(
+      map(([selectedContact, allContacts]) => {
+        if (!selectedContact) return null;
+        // Finde den aktuellen Kontakt in der Liste aller Kontakte
+        return allContacts.find(contact => contact.id === selectedContact.id) || selectedContact;
+      })
+    ).subscribe({
       next: (contact) => {
         this.contact = contact || undefined;
       }
@@ -24,8 +35,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.selectedContactSubscription) {
-      this.selectedContactSubscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 
