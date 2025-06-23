@@ -102,6 +102,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   deleteContact() {
     if(this.contactToEdit?.id) {
       this.contactService.deleteContact(this.contactToEdit?.id);
+      this.onClose();
     }
     console.log('Deleted contact with', this.contactToEdit?.id)
     // this.contactService.deleteContact('kFUgrtMZHpap4hhb1SHn') //war zum Testen des Löschens
