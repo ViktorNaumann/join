@@ -56,14 +56,33 @@ export class ContactFormComponent implements OnInit, OnDestroy {
         }
         this.contactService.updateContact(this.contactToEdit.id, editContact);
       } else {
-        let newContact: Contact = {
-          name: this.contactForm.value.name.trim(),
-          email: this.contactForm.value.email.trim(),
-          phone: this.contactForm.value.phone.trim()
-        }
-        this.contactService.addContact(newContact);
+      let newContact: Contact = {
+      name: this.contactForm.value.name.trim(),
+      email: this.contactForm.value.email.trim(),
+      phone: this.contactForm.value.phone.trim()
+    }
+    this.contactService.addContact(newContact)
+    console.log(newContact)
+    }
+    this.clearInputs();
       }
-      this.onClose();
+    else {
+      console.log('invalid')
     }
   }
+
+  clearInputs() {
+    this.contactForm.reset();
+    console.log('Inputs cleared')
+  }
+
+  deleteContact() {
+    if(this.contactToEdit?.id) {
+      this.contactService.deleteContact(this.contactToEdit?.id);
+    }
+    console.log('Deleted contact with', this.contactToEdit?.id)
+    // this.contactService.deleteContact('kFUgrtMZHpap4hhb1SHn') //war zum Testen des Löschens
+  }
+
+  
 }
