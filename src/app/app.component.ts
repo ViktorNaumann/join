@@ -5,7 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { ContactDetailsComponent } from './contact-details/contact-details.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
-import { ContactService } from './services/contact.service';
+import { ContactService, Contact } from './services/contact.service';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -70,19 +70,22 @@ export class AppComponent {
     });
   }
 
-  onContactAdded(event: string) {
-    if (event === 'new') {
-      this.toastAnimationState = this.animationDirection;
-      this.toastMessageVisible = true;
-
-      setTimeout(() => {
-        this.toastMessageVisible = false;
-        this.toastAnimationState = 'void'; // Für Animation "leave"
-      }, 3000);
-    }
+  onContactAdded(newContact: Contact) {
+    this.contactService.selectContact(newContact);
+    this.startMessageAnimation();
   }
 
   setAnimationDirection(width: number) {
     this.animationDirection = width < 900 ? 'bottom' : 'right';
+  }
+
+  startMessageAnimation(){
+    this.toastAnimationState = this.animationDirection;
+    this.toastMessageVisible = true;
+
+    setTimeout(() => {
+      this.toastMessageVisible = false;
+      this.toastAnimationState = 'void'; // Für Animation "leave"
+    }, 3000);
   }
 }

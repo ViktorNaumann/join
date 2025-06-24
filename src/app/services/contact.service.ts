@@ -68,11 +68,24 @@ export class ContactService {
     return doc(collection(this.firestore, 'contacts'), docId);
   }
 
-  async addContact(newContact: Contact) {
-    let contactsRef = this.getContactsRef();
-    await addDoc(contactsRef, newContact). catch(
-      (err) => {console.log(err)}
-    ).then( (newRef) => {console.log('New Contact list added with id', newRef?.id)})
+  // async addContact(newContact: Contact) {
+  //   let contactsRef = this.getContactsRef();
+  //   await addDoc(contactsRef, newContact). catch(
+  //     (err) => {console.log(err)}
+  //   ).then( (newRef) => {console.log('New Contact list added with id', newRef?.id)})
+  // }
+
+  async addContact(newContact: Contact): Promise<Contact | null> {
+    try {
+      const contactsRef = this.getContactsRef();
+      const docRef = await addDoc(contactsRef, newContact);
+      const fullContact: Contact = { id: docRef.id, ...newContact };
+      console.log('New contact added with id:', docRef.id);
+      return fullContact;
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
   }
 
   async updateContact(docId: string, updatedContact: Contact) {

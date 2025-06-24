@@ -17,7 +17,7 @@ import { Subscription } from 'rxjs';
 })
 
 export class ContactFormComponent implements OnInit, OnDestroy {
-  @Output()addedContact = new EventEmitter<string>();
+  @Output()addedContact = new EventEmitter<Contact>();
   contactForm!: FormGroup;
   contactToEdit?: Contact;
   private editContactSubscription?: Subscription;
@@ -54,7 +54,7 @@ getDataToEdit = (contact: Contact | null) => {
     this.contactForm.reset();
   }
 
-  onSubmit(){
+  async onSubmit(){
     if(this.contactForm.valid){
       const { name, email, phone } = this.contactForm.value;
       const contact: Contact = {
@@ -67,11 +67,13 @@ getDataToEdit = (contact: Contact | null) => {
         this.contactService.updateContact(this.contactToEdit.id, contact);
       } else {
         //andernfalls soll ein neuer Kontakt erstellt werden
-        this.contactService.addContact(contact);
-      }
+        const newContact = await this.contactService.addContact(contact);
+        if (newContact) {
+          this.addedContact.emit(newContact); // <--- Neuer vollständiger Kontakt mit ID
+        }
+    }
       this.clearInputs();
       this.onClose();
-      this.sendAddedInfo();
     }
   }
 
@@ -88,7 +90,7 @@ getDataToEdit = (contact: Contact | null) => {
     console.log('Deleted contact with', this.contactToEdit?.id);
   }
 
-  sendAddedInfo(){
-    this.addedContact.emit('new');
-  }
+  // sendAddedInfo(){
+  //   this.addedContact.emit('new');
+  // }
 }
