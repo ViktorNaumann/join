@@ -52,7 +52,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 export class AppComponent {
   title = 'join';
   animationDirection: 'right' | 'bottom' = 'right';
-  
+  toastMessageVisible = false;
+  toastAnimationState: 'right' | 'bottom' | 'void' = 'void';
   // Observable für die Formular-Sichtbarkeit
   showForm$: Observable<boolean>;
 
@@ -63,10 +64,22 @@ export class AppComponent {
   ngOnInit() {
     // Initiale Richtung bestimmen
     this.setAnimationDirection(window.innerWidth);
-    // Optional: auf Fenstergrößenänderung reagieren
+    // Auf Fenstergröße reagieren
     window.addEventListener('resize', () => {
       this.setAnimationDirection(window.innerWidth);
     });
+  }
+
+  onContactAdded(event: string) {
+    if (event === 'new') {
+      this.toastAnimationState = this.animationDirection;
+      this.toastMessageVisible = true;
+
+      setTimeout(() => {
+        this.toastMessageVisible = false;
+        this.toastAnimationState = 'void'; // Für Animation "leave"
+      }, 3000);
+    }
   }
 
   setAnimationDirection(width: number) {

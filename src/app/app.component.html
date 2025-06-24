@@ -36,5 +36,9 @@
 
 <!-- Contact Form als Overlay - nur anzeigen wenn showForm$ true ist -->
 <div *ngIf="showForm$ | async" class="contact-form-overlay" [@slideInOut]="animationDirection">
-  <app-contact-form></app-contact-form>
+  <app-contact-form (addedContact)="onContactAdded($event)"></app-contact-form>
+</div>
+
+<div *ngIf="toastMessageVisible" class="toast-message" [@slideInOut]="toastAnimationState">
+  Contact successfully created
 </div>

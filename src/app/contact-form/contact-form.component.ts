@@ -1,10 +1,9 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ContactService, Contact } from '../services/contact.service';
 import { notOnlyWhitespace } from '../services/contact.service';
 import { Subscription } from 'rxjs';
-
 
 @Component({
   selector: 'app-contact-form',
@@ -14,14 +13,14 @@ import { Subscription } from 'rxjs';
     FormsModule,
   ],
   templateUrl: './contact-form.component.html',
-  styleUrl: './contact-form.component.scss'
+  styleUrl: './contact-form.component.scss',
 })
+
 export class ContactFormComponent implements OnInit, OnDestroy {
+  @Output()addedContact = new EventEmitter<string>();
   contactForm!: FormGroup;
-  //NEU
   contactToEdit?: Contact;
   private editContactSubscription?: Subscription;
-
   constructor(private form: FormBuilder, private contactService: ContactService) {}
 
   ngOnInit(): void {
@@ -30,7 +29,6 @@ export class ContactFormComponent implements OnInit, OnDestroy {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.min(10), Validators.pattern(/^\d+$/)]]
     });
-    // NEU - Edit-Kontakt aus Service abrufen
     this.editContactSubscription =  this.contactService.editContact$.subscribe(this.getDataToEdit);
   }
 
@@ -46,7 +44,6 @@ getDataToEdit = (contact: Contact | null) => {
 }
 
   ngOnDestroy(): void {
-    //NEU
     if (this.editContactSubscription) {
       this.editContactSubscription.unsubscribe();
     }
@@ -58,7 +55,6 @@ getDataToEdit = (contact: Contact | null) => {
   }
 
   onSubmit(){
-    //Das Formular muss valide sein
     if(this.contactForm.valid){
       const { name, email, phone } = this.contactForm.value;
       const contact: Contact = {
@@ -75,6 +71,7 @@ getDataToEdit = (contact: Contact | null) => {
       }
       this.clearInputs();
       this.onClose();
+      this.sendAddedInfo();
     }
   }
 
@@ -88,9 +85,10 @@ getDataToEdit = (contact: Contact | null) => {
       this.contactService.deleteContact(this.contactToEdit?.id);
       this.onClose();
     }
-    console.log('Deleted contact with', this.contactToEdit?.id)
-    // this.contactService.deleteContact('kFUgrtMZHpap4hhb1SHn') //war zum Testen des Löschens
+    console.log('Deleted contact with', this.contactToEdit?.id);
   }
 
-  
+  sendAddedInfo(){
+    this.addedContact.emit('new');
+  }
 }
