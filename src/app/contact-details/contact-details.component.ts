@@ -87,7 +87,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  // NEU - Edit-Funktionalität
+  
   onEditContact(): void {
     if (this.contact) {
       this.isEditing = true;
@@ -95,7 +95,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  // NEU - Delete-Funktionalität
+  
   onDeleteContact(): void {
     if (this.contact?.id) {
       this.isDeleting = true;
@@ -104,12 +104,23 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
+  // getInitials(name?: string): string {
+  //   if (!name) return 'NN';
+  //   return name
+  //     .split(' ')
+  //     .map((n) => n[0])
+  //     .join('')
+  //     .toUpperCase();
+  // }
+
   getInitials(name?: string): string {
-    if (!name) return 'NN';
-    return name
-      .split(' ')
-      .map((n) => n[0])
-      .join('')
-      .toUpperCase();
+    return this.contactService.getInitials(name);
   }
+
+  // NEU - Avatar-Farbe aus dem Service
+  getContactColor(name?: string): string {
+    if (!name) return '#9E9E9E'; // Fallback-Farbe für leere Namen
+    return this.contactService.getContactColor(name);
+  }
+
 }
