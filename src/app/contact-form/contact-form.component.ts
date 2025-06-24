@@ -21,7 +21,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   contactForm!: FormGroup;
   contactToEdit?: Contact;
   private editContactSubscription?: Subscription;
-  constructor(private form: FormBuilder, private contactService: ContactService) {}
+  constructor(private form: FormBuilder, public contactService: ContactService) {}
 
   ngOnInit(): void {
     this.contactForm = this.form.group({
@@ -88,14 +88,5 @@ getDataToEdit = (contact: Contact | null) => {
       this.onClose();
     }
     console.log('Deleted contact with', this.contactToEdit?.id);
-  }
-
-  getInitials(name?: string): string {
-    if (!name) return 'NN';
-    return name
-      .split(' ')
-      .map((n) => n[0])
-      .join('')
-      .toUpperCase();
   }
 }

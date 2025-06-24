@@ -20,9 +20,9 @@
     </div>
     <div class="right-frame">
         <div class="form-wrapper">
-            <div class="img-user-wrapper">
+            <div class="img-user-wrapper" [style.background-color]="contactToEdit ? contactService.getContactColor(contactToEdit.name) : 'var(--background-light)'">
                 <img class="img-user" src="assets/img/svg/person.svg" alt="User Image" *ngIf="!contactToEdit">
-                <p class="contact-initials" *ngIf="contactToEdit">{{ getInitials(contactToEdit.name) }}</p>
+                <p class="contact-initials" *ngIf="contactToEdit">{{ contactService.getInitials(contactToEdit.name) }}</p>
             </div>
             <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
                 <div class="form-group-wrapper">
