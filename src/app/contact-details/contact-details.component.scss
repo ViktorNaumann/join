@@ -120,9 +120,10 @@
   }
 
   .option-item {
+    width: 70px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     cursor: pointer;
     padding: 5px;
 
@@ -213,13 +214,13 @@
 
   .user-options {
     gap: 2px;
-    
+
     .option-item {
       img {
         width: 18px;
         height: 18px;
       }
-      
+
       p {
         font-size: 13px;
       }
