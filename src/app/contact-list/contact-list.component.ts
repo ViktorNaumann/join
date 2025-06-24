@@ -16,7 +16,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
   private contactsSubscription: Subscription = new Subscription();
   private selectionSubscription: Subscription = new Subscription(); //NEU
 
-  constructor(private contactService: ContactService) {}
+  constructor(public contactService: ContactService) {}
 
   ngOnInit(): void {
     this.contactsSubscription = this.contactService.getContacts().subscribe({
@@ -71,15 +71,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
   keyAsc = (a: any, b: any) => a.key.localeCompare(b.key);
 
   getInitials(name: string | undefined): string {
-    if (!name) return '?';
-    
-    const nameParts = name.trim().split(' ');
-    if (nameParts.length === 1) {
-      return nameParts[0].charAt(0).toUpperCase();
-    }
-    const firstInitial = nameParts[0].charAt(0).toUpperCase();
-    const lastInitial = nameParts[nameParts.length - 1].charAt(0).toUpperCase();
-    return firstInitial + lastInitial;
+    return this.contactService.getInitials(name);
   }
 }
 

@@ -7,8 +7,8 @@
 
   <div class="contact-content" *ngIf="contact" [@slideInFromRight]="contact.id">
     <div class="contact-container">
-      <div class="user-logo">
-        <p>{{ getInitials(contact.name) }}</p>
+      <div class="user-logo" [style.background-color]="contactService.getContactColor(contact.name)">
+        <p>{{ contactService.getInitials(contact.name) }}</p>
       </div>
       <div class="user-name">
         <p>{{ contact.name || "Unbekannt" }}</p>

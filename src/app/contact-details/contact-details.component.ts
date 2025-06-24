@@ -24,7 +24,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   animationState = 0; // Trigger für Animation
   private subscription?: Subscription;
 
-  constructor(private contactService: ContactService) {}
+  constructor(public contactService: ContactService) {}
 
  ngOnInit(): void {
     // Kombiniere selectedContact$ und getContacts() um immer aktuelle Daten zu haben
@@ -65,11 +65,5 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
       this.contactService.deleteContact(this.contact.id);
       this.contactService.clearSelection(); // Auswahl nach dem Löschen zurücksetzen
     }
-  }
- 
-
-  getInitials(name?: string): string {
-    if (!name) return 'NN';
-    return name.split(' ').map(n => n[0]).join('').toUpperCase();
   }
 }

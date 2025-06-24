@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, onSnapshot, addDoc, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
-import { BehaviorSubject, Observable } from 'rxjs'; //NEU BehaviorSubject
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 export interface Contact {
@@ -22,19 +22,20 @@ export function notOnlyWhitespace(control: AbstractControl): ValidationErrors | 
   providedIn: 'root'
 })
 export class ContactService {
-//NEU
   private selectedContactSubject = new BehaviorSubject<Contact | null>(null);
   public selectedContact$ = this.selectedContactSubject.asObservable();
 
-  // NEU - Für das Anzeigen/Verbergen des Formulars
   private showFormSubject = new BehaviorSubject<boolean>(false);
   public showForm$ = this.showFormSubject.asObservable();
 
-
-// NEU - Für das Übertragen der Kontaktdaten zum Bearbeiten
   private editContactSubject = new BehaviorSubject<Contact | null>(null);
   public editContact$ = this.editContactSubject.asObservable();
 
+  // NEU - Avatar-Farben
+  private avatarColors = [
+    '#9C27B0', '#2196F3', '#FF9800', '#4CAF50', '#F44336', '#00BCD4', 
+    '#795548', '#607D8B', '#E91E63', '#3F51B5', '#CDDC39', '#FF5722'
+  ];
 
   constructor(private firestore: Firestore) {}
 
@@ -132,6 +133,22 @@ export class ContactService {
       (err) => {console.log(err);}
     );
   }
-  
+
+  // NEU - Avatar-Funktionen
+  getContactColor(contactName: string): string {
+    let hash = 0;
+    for (let i = 0; i < contactName.length; i++) {
+      hash += contactName.charCodeAt(i);
+    }
+    return this.avatarColors[hash % this.avatarColors.length];
+  }
+
+  getInitials(name?: string): string {
+    if (!name) return '?';
+    const words = name.trim().split(' ');
+    if (words.length === 1) return words[0][0].toUpperCase();
+    return (words[0][0] + words[words.length - 1][0]).toUpperCase();
+  }
+
 }
 
