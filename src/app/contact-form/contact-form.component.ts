@@ -90,7 +90,12 @@ getDataToEdit = (contact: Contact | null) => {
     console.log('Deleted contact with', this.contactToEdit?.id);
   }
 
-  // sendAddedInfo(){
-  //   this.addedContact.emit('new');
-  // }
+  getInitials(name?: string): string {
+    if (!name) return 'NN';
+    return name
+      .split(' ')
+      .map((n) => n[0])
+      .join('')
+      .toUpperCase();
+  }
 }

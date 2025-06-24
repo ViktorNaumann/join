@@ -69,6 +69,10 @@ section {
         svg path{
             fill: var(--text-color-light);
         }
+        &:hover {
+            background-color: var(--accent-primary-color);
+            border-radius: 50%;
+        }
     }
 }
 
@@ -223,9 +227,14 @@ input:focus {
     }
 }
 
-.img-user{
+.img-user {
     width: 64px;
     height: 64px;
+}
+
+.contact-initials {
+    @include inter500-fs47;
+    color: var(--text-color-light)
 }
 
 .input-icon {
