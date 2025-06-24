@@ -1,3 +1,4 @@
+<!-- Animation ergänzt - Richtung abhängig von Viewport -->
 <section>
     <div class="close-btn-wrapper">
         <button class="btn-close" (click)="onClose()">
@@ -49,7 +50,7 @@
                     <p class="error-message" *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched">Oh! Don´t forget the phone number.</p>
                 </div>                
                  <div class="btn-wrapper">
-                    <button class="btn-cancel" type="reset" *ngIf="!contactToEdit" (click)="clearInputs()">
+                    <button class="btn-cancel" type="reset" *ngIf="!contactToEdit" (click)="onClose()">
                         Cancel
                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_331509_883" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">

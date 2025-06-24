@@ -35,6 +35,6 @@
 </div>
 
 <!-- Contact Form als Overlay - nur anzeigen wenn showForm$ true ist -->
-<div *ngIf="showForm$ | async" class="contact-form-overlay">
+<div *ngIf="showForm$ | async" class="contact-form-overlay" [@slideInOut]="animationDirection">
   <app-contact-form></app-contact-form>
 </div>

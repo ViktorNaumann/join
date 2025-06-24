@@ -5,6 +5,7 @@ import { ContactService, Contact } from '../services/contact.service';
 import { notOnlyWhitespace } from '../services/contact.service';
 import { Subscription } from 'rxjs';
 
+
 @Component({
   selector: 'app-contact-form',
   imports: [
@@ -20,7 +21,6 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   //NEU
   contactToEdit?: Contact;
   private editContactSubscription?: Subscription;
-  // @Input() contactToEdit?: Contact;
 
   constructor(private form: FormBuilder, private contactService: ContactService) {}
 
@@ -30,27 +30,20 @@ export class ContactFormComponent implements OnInit, OnDestroy {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.min(10), Validators.pattern(/^\d+$/)]]
     });
-    
-    // if (this.contactToEdit) {
-    //   this.contactForm.patchValue({
-    //     name: this.contactToEdit.name,
-    //     email: this.contactToEdit.email,
-    //     phone: this.contactToEdit.phone
-    //   });
-    // }
-
     // NEU - Edit-Kontakt aus Service abrufen
-    this.editContactSubscription = this.contactService.editContact$.subscribe(contact => {
-      this.contactToEdit = contact || undefined;
-      if (this.contactToEdit) {
-        this.contactForm.patchValue({
-          name: this.contactToEdit.name,
-          email: this.contactToEdit.email,
-          phone: this.contactToEdit.phone
-        });
-      }
+    this.editContactSubscription =  this.contactService.editContact$.subscribe(this.getDataToEdit);
+  }
+
+getDataToEdit = (contact: Contact | null) => {
+  this.contactToEdit = contact || undefined;
+  if (this.contactToEdit) {
+    this.contactForm.patchValue({
+      name: this.contactToEdit.name,
+      email: this.contactToEdit.email,
+      phone: this.contactToEdit.phone
     });
   }
+}
 
   ngOnDestroy(): void {
     //NEU
@@ -67,30 +60,21 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   onSubmit(){
     //Das Formular muss valide sein
     if(this.contactForm.valid){
+      const { name, email, phone } = this.contactForm.value;
+      const contact: Contact = {
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone.trim()
+      };
       //Wenn Kontaktdaten übergeben wurden soll editiert/geupdated werden
       if(this.contactToEdit?.id) {
-        let editContact: Contact = {
-          name: this.contactForm.value.name.trim(),
-          email: this.contactForm.value.email.trim(),
-          phone: this.contactForm.value.phone.trim()
-        }
-        this.contactService.updateContact(this.contactToEdit.id, editContact);
+        this.contactService.updateContact(this.contactToEdit.id, contact);
       } else {
-      //andernfalls soll ein neuer Kontakt erstellt werden
-      let newContact: Contact = {
-      name: this.contactForm.value.name.trim(),
-      email: this.contactForm.value.email.trim(),
-      phone: this.contactForm.value.phone.trim()
-    }
-    this.contactService.addContact(newContact);
-    console.log(newContact)
-    }
-    //Inputs danach immer leeren
-    this.clearInputs();
-    this.onClose();
+        //andernfalls soll ein neuer Kontakt erstellt werden
+        this.contactService.addContact(contact);
       }
-    else {
-      console.log('invalid') 
+      this.clearInputs();
+      this.onClose();
     }
   }
 

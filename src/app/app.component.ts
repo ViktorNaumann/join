@@ -8,6 +8,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { ContactService } from './services/contact.service';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -22,15 +23,53 @@ import { Observable } from 'rxjs';
     CommonModule
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  //NEU Richtung der Animation abhängig vom Viewport
+  animations: [
+    trigger('slideInOut', [
+      // ENTER: void => right
+      transition('void => right', [
+        style({ transform: 'translateX(100%)', opacity: 0 }),
+        animate('250ms ease-in-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      ]),
+      // LEAVE: right => void
+      transition('right => void', [
+        animate('250ms ease-in-out', style({ transform: 'translateX(100%)', opacity: 0 }))
+      ]),
+
+      // ENTER: void => bottom
+      transition('void => bottom', [
+        style({ transform: 'translateY(100%)', opacity: 0 }),
+        animate('250ms ease-in-out', style({ transform: 'translateY(0)', opacity: 1 }))
+      ]),
+      // LEAVE: bottom => void
+      transition('bottom => void', [
+        animate('250ms ease-in-out', style({ transform: 'translateY(100%)', opacity: 0 }))
+      ])
+    ])
+  ],
 })
 export class AppComponent {
   title = 'join';
+  animationDirection: 'right' | 'bottom' = 'right';
   
   // Observable für die Formular-Sichtbarkeit
   showForm$: Observable<boolean>;
 
   constructor(private contactService: ContactService) {
     this.showForm$ = this.contactService.showForm$;
+  }
+
+  ngOnInit() {
+    // Initiale Richtung bestimmen
+    this.setAnimationDirection(window.innerWidth);
+    // Optional: auf Fenstergrößenänderung reagieren
+    window.addEventListener('resize', () => {
+      this.setAnimationDirection(window.innerWidth);
+    });
+  }
+
+  setAnimationDirection(width: number) {
+    this.animationDirection = width < 900 ? 'bottom' : 'right';
   }
 }
