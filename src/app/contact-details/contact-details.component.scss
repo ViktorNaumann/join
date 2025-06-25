@@ -13,8 +13,8 @@
   margin-right: auto;
   display: flex;
   flex-direction: column;
-  padding-left: clamp(20px, 5vw, 50px);
-  padding-right: clamp(20px, 5vw, 50px);
+  padding-left: clamp(15px, 3vw, 50px);
+  padding-right: clamp(15px, 3vw, 50px);
   min-height: 100vh;
 }
 
@@ -22,13 +22,12 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  padding-top: 80px;
+  padding-top: clamp(40px, 8vh, 80px);
   min-height: 200px;
 
   h1 {
     font-family: var(--font-primary);
-
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(1.5rem, 5vw, 3.5rem);
     font-weight: 600;
     margin: 0;
     color: #333;
@@ -36,7 +35,6 @@
 
   .header-divider {
     width: 3px;
-    height: 60px;
     height: clamp(40px, 8vh, 60px);
     background-color: var(--accent-primary-color);
     border-radius: 2px;
@@ -44,30 +42,10 @@
 
   p {
     font-family: var(--font-primary);
-    // font-size: 24px;
     font-size: clamp(1rem, 3vw, 1.5rem);
     font-weight: 400;
-    // margin: 0 0 10px 0;
     margin: 0;
     color: black;
-  }
-
-  /* Mobile Anpassungen */
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    min-height: auto;
-
-    .header-divider {
-      display: none;
-    }
-
-    p {
-      border-bottom: 3px solid var(--accent-primary-color);
-      padding-bottom: 10px;
-      width: 20%;
-    }
   }
 }
 
@@ -86,18 +64,17 @@
 }
 
 .user-logo {
-  width: clamp(80px, 15vw, 110px);
-  height: clamp(80px, 15vw, 110px);
+  width: clamp(60px, 12vw, 110px);
+  height: clamp(60px, 12vw, 110px);
   display: flex;
   justify-content: center;
   align-items: center;
   border: clamp(2px, 0.5vmin, 3px) solid white;
   border-radius: 50%;
-  background-color: #ff7a01;
 
   p {
     font-family: var(--font-primary);
-    font-size: clamp(24px, 5vmin, 38px);
+    font-size: clamp(18px, 4vmin, 38px);
     font-weight: 500;
     color: white;
     text-align: center;
@@ -108,10 +85,11 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex: 1;
 
   > p {
     font-family: var(--font-primary);
-    font-size: clamp(24px, 6vw, 42px);
+    font-size: clamp(18px, 5vw, 42px);
     font-weight: 500;
     margin: 0;
   }
@@ -120,11 +98,6 @@
 .user-options {
   display: flex;
   gap: 4px;
-
-  /* Mobile Anpassungen */
-  @media (max-width: 768px) {
-    display: none;
-  }
 
   .option-item {
     width: 70px;
@@ -159,7 +132,6 @@
     }
 
     p {
-      // width: 50px;
       min-width: fit-content;
       margin: 0;
       font-family: var(--font-primary);
@@ -173,25 +145,25 @@
 .contact-info {
   display: flex;
   flex-direction: column;
-  margin-top: clamp(20px, 4vw, 30px);
-  gap: clamp(15px, 3vw, 20px);
+  margin-top: clamp(15px, 3vw, 30px);
+  gap: clamp(10px, 2vw, 20px);
 
   h3 {
     font-family: var(--font-primary);
-    font-size: clamp(16px, 2.5vw, 18px);
+    font-size: clamp(14px, 2.5vw, 18px);
     font-weight: 300;
     color: black;
-    margin: 0 0 10px 0;
+    margin: 0 0 8px 0;
   }
 
   .contact-item {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
 
     .contact-label {
       font-family: var(--font-primary);
-      font-size: clamp(12px, 2vw, 14px);
+      font-size: clamp(11px, 2vw, 14px);
       font-weight: bold;
       color: black;
       margin: 0;
@@ -199,7 +171,7 @@
 
     .contact-value {
       font-family: var(--font-primary);
-      font-size: clamp(12px, 2vw, 14px);
+      font-size: clamp(11px, 2vw, 14px);
       font-weight: 400;
       color: black;
       margin: 0;
@@ -212,25 +184,70 @@
   }
 }
 
-/* Tablet Anpassungen */
-@media (max-width: 1024px) {
-  .contact-detail-section {
-    padding-left: 30px;
-    padding-right: 30px;
+@media (max-width: 1210px) {
+  .contact-header {
+    h1 {
+      font-size: clamp(1.5rem, 2.5vw, 3.5rem);
+    }
+
+    .header-divider {
+      height: clamp(40px, 3vw, 60px);
+    }
+
+    p {
+      font-size: clamp(1rem, 1.5vw, 1.5rem);
+    }
+  }
+
+  .user-name {
+    gap: 10px;
+
+    > p {
+      font-size: clamp(18px, 2.5vw, 42px);
+    }
+  }
+
+  .user-logo {
+    width: clamp(60px, 8vw, 110px);
+    height: clamp(60px, 8vw, 110px);
+
+    p {
+      font-size: clamp(18px, 3vmin, 38px);
+      font-weight: 500;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    min-height: auto;
+    padding-bottom: 12px;
+
+    .header-divider {
+      display: none;
+    }
+
+    p {
+      padding-bottom: 10px;
+      position: relative;
+      width: auto; /* Text nimmt natürliche Breite ein */
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px; /* Feste kurze Länge für den Divider */
+        height: 3px;
+        background-color: var(--accent-primary-color);
+      }
+    }
   }
 
   .user-options {
-    gap: 2px;
-
-    .option-item {
-      img {
-        width: 18px;
-        height: 18px;
-      }
-
-      p {
-        font-size: 13px;
-      }
-    }
+    display: none;
   }
 }
