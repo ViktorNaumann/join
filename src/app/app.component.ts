@@ -8,7 +8,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { ContactService, Contact } from './services/contact.service';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { trigger, state, style, transition, animate, AnimationEvent } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -54,6 +54,7 @@ export class AppComponent {
   animationDirection: 'right' | 'bottom' = 'right';
   toastMessageVisible = false;
   toastAnimationState: 'right' | 'bottom' | 'void' = 'void';
+  backgroundVisible = false;
   // Observable für die Formular-Sichtbarkeit
   showForm$: Observable<boolean>;
 
@@ -87,5 +88,19 @@ export class AppComponent {
       this.toastMessageVisible = false;
       this.toastAnimationState = 'void'; // Für Animation "leave"
     }, 3000);
+  }
+
+  removeBackground(event: string) {
+    if (event === 'closed') {
+        this.backgroundVisible = false;
+     }
+  }
+
+  onOverlayAnimationDone(event: AnimationEvent) {
+    if (event.toState === 'right' || event.toState === 'bottom') {
+      setTimeout(() => {
+        this.backgroundVisible = true;
+      }, 100);
+    }
   }
 }

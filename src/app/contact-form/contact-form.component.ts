@@ -18,6 +18,7 @@ import { Subscription } from 'rxjs';
 
 export class ContactFormComponent implements OnInit, OnDestroy {
   @Output()addedContact = new EventEmitter<Contact>();
+  @Output()closeOverlay = new EventEmitter<string>();
   contactForm!: FormGroup;
   contactToEdit?: Contact;
   private editContactSubscription?: Subscription;
@@ -52,6 +53,7 @@ getDataToEdit = (contact: Contact | null) => {
   onClose(): void {
     this.contactService.hideForm();
     this.contactForm.reset();
+    this.closeOverlay.emit('closed');
   }
 
   async onSubmit(){

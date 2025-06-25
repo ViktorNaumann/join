@@ -2,13 +2,14 @@
 
 section {
   width: 100%;
-  max-width: 1212px;
   height: auto;
   display: flex;
   border-radius: 30px;
   position: relative;
   flex-wrap: wrap;
+  padding: 8px;
   @media (max-width: 1000px) {
+    padding: 0;
     flex-direction: column;
     align-items: center;
     height: 760px;
@@ -21,8 +22,8 @@ section {
 .left-frame {
     flex: 1 1 40%;
     min-width: 320px;
-    max-width: 487px;
-    height: 594px;
+    width: 600px;
+    height: 530px;
     background-color: var(--background-dark);
     border-radius: 30px 0px 0px 30px;
     display: flex;
@@ -40,8 +41,8 @@ section {
 
 .close-btn-wrapper {
     position: absolute;
-    top: 10%;
-    right: 50%;
+    top: 4%;
+    right: 45%;
     translate: 50% 0;
     width: 80%;
     height: fit-content;
@@ -49,7 +50,10 @@ section {
     justify-content: flex-end;
     @media(min-width: 1000px) {
         width: 95%;
+        top: 8%;
+        right: 51%;
     }
+    
 }
 
 .btn-close {
@@ -100,7 +104,7 @@ h1 {
     flex: 1 1 60%;
     min-width: 320px;
     max-width: 725px;
-    height: 594px;
+    height: 530px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -141,7 +145,7 @@ form {
 
 .form-group-wrapper {
     height: 50px;
-    width: fit-content;
+    width: 100%;
 }
 
 .form-group {
