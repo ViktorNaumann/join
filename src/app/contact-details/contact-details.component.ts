@@ -29,11 +29,13 @@ import { map } from 'rxjs/operators';
   ],
 })
 export class ContactDetailsComponent implements OnInit, OnDestroy {
+  contactVisible = false; //NEU
   contact?: Contact;
   animationState = 0; // Trigger für Animation
   isDeleting = false;
   isEditing = false;
   private subscription?: Subscription;
+  private firstLoad = true; // NEU - Add this flag
 
   // NEU - Getter für Template - kombiniert beide Flags
   get isAnimationDisabled(): boolean {
@@ -61,27 +63,34 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
 
       .subscribe({
         next: (contact) => {
-          const isFirstContact = !this.contact;
+          const wasEmpty = !this.contact;
           const isContactChange = contact && contact !== this.contact;
 
-          // Animation bei Kontaktwechsel oder erstem Kontakt (aber nicht beim Löschen/Editieren)
-          if (
-            !this.isDeleting &&
-            !this.isEditing &&
-            (isFirstContact || isContactChange)
-          ) {
-            this.animationState++; // Animation triggern
-          }
-
+          // First update the contact data
           this.contact = contact || undefined;
 
           // Flags zurücksetzen
           if (!contact) {
             this.isDeleting = false;
             this.isEditing = false;
+            this.contactVisible = false;
+          } else if (!this.isDeleting && !this.isEditing && 
+                    (this.firstLoad || wasEmpty || isContactChange)) {
+            // For new contacts, use setTimeout to ensure DOM updates first
+            if (wasEmpty || this.firstLoad) {
+              this.contactVisible = true;
+              setTimeout(() => {
+                this.animationState++; 
+                this.firstLoad = false;
+              }, 50);
+            } else {
+              // For contact changes, we can increment immediately
+              this.animationState++;
+            }
           }
         },
       });
+
   }
 
   ngOnDestroy(): void {
