@@ -1,28 +1,27 @@
 @import './../../styles.scss';
 
 section {
-    width: fit-content;
-    max-width: 1212px;
-    height: 592px;
-    display: flex;
-    border-radius: 30px;
-    position: relative;
-    background-color: var(--background-light);
-    @media (max-width: 900px) {
-        flex-direction: column;
-        align-items: center;
-        height: 100dvh;
-        padding: 60px 24px; //noch auf header & footer anpassen
-    };
-     @media (max-width: 400px) {
-        padding: 60px 8px; //noch auf header & footer anpassen
-    };
+  width: 100%;
+  max-width: 1212px;
+  height: auto;
+  display: flex;
+  border-radius: 30px;
+  position: relative;
+  flex-wrap: wrap;
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    align-items: center;
+    height: 760px;
+    max-width: 390px;
+    min-width: 320px;
+  }
 }
 
 //#region left-frame
 .left-frame {
-    // width: 487px;
-    min-width: 425px;
+    flex: 1 1 40%; //neu
+    min-width: 320px;
+    max-width: 487px;
     height: 594px;
     background-color: var(--background-dark);
     border-radius: 30px 0px 0px 30px;
@@ -32,12 +31,9 @@ section {
     padding: clamp(16px, calc(2.86vw + 6.85px), 48px);
     gap: 12px;
     color: var(--text-color-light);
-    @media (max-width: 900px) {
-        min-width: unset;
-        width: 100%;
-        height: 420px;
-        // padding: 24px;
+    @media (max-width: 1000px) {
         border-radius: 30px 30px 0px 0px;
+        width: 100%;
     };
     
 }
@@ -51,7 +47,7 @@ section {
     height: fit-content;
     display: flex;
     justify-content: flex-end;
-    @media(min-width: 900px) {
+    @media(min-width: 1000px) {
         width: 95%;
     }
 }
@@ -65,7 +61,7 @@ section {
         background-color: var(--background-default-light);
         border-radius: 50%;
     }
-    @media (max-width: 900px) {
+    @media (max-width: 1000px) {
         svg path{
             fill: var(--text-color-light);
         }
@@ -87,7 +83,7 @@ h1 {
 .logo {
     width: 55px;
     height: 65px;
-    @media (max-width: 900px) {
+    @media (max-width: 1000px) {
        display: none;
     };
 }
@@ -101,19 +97,21 @@ h1 {
 
 //#region right-frame
 .right-frame {
-    width: 725px;
+    flex: 1 1 60%;
+    min-width: 320px;
+    max-width: 725px;
     height: 594px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: clamp(16px, calc(2.86vw + 6.85px), 48px);
     gap: 60px;
-    @media (max-width: 900px) {
-        width: 100%;
-        flex: 1;
-        // padding: 24px;
+    border-radius: 0px 30px 30px 0px;
+    background-color: var(--background-light);
+    @media (max-width: 1000px) {
         border-radius: 0px 0px 30px 30px;
         position: relative;
+        width: 100%;
     };
 }
 
@@ -124,7 +122,7 @@ h1 {
     justify-content: flex-end;
     align-items: center;
     gap: 10%;
-    @media(max-width: 900px) {
+    @media(max-width: 1000px) {
         flex-direction: column;
         flex: 1;
         justify-content: flex-start;
@@ -136,7 +134,7 @@ form {
     flex-direction: column;
     gap: clamp(12px, calc(1.56vw + 7px), 32px);
     flex:1;
-    @media(max-width: 900px) {
+    @media(max-width: 1000px) {
         margin-top: 80px;
     }
 }
@@ -174,7 +172,7 @@ input:focus {
     align-items: center;
     height: 70px;
     gap: 24px;
-    @media(max-width: 900px) {
+    @media(max-width: 1000px) {
         justify-content: center;
     }
 }
@@ -184,7 +182,7 @@ input:focus {
     @include btn-light();
     @include flex-center();
     @include svg-hover();
-     @media(max-width: 900px) {
+    @media(max-width: 1000px) {
         display: none;;
     }
 }
@@ -210,7 +208,7 @@ input:focus {
 .btn-save:disabled {
     background-color: var(--background-default-dark);
     cursor: unset;
-  }
+}
 
 .img-user-wrapper {
     width: 120px;
@@ -218,7 +216,7 @@ input:focus {
     background-color: var(--background-default-dark);
     border-radius: 50%;
     @include flex-center;
-    @media(max-width: 900px) {
+    @media(max-width: 1000px) {
         border: 2px solid var(--background-light);
         position: absolute;
         top: 0;

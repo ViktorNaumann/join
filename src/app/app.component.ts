@@ -76,7 +76,7 @@ export class AppComponent {
   }
 
   setAnimationDirection(width: number) {
-    this.animationDirection = width < 900 ? 'bottom' : 'right';
+    this.animationDirection = width < 1000 ? 'bottom' : 'right';
   }
 
   startMessageAnimation(){
