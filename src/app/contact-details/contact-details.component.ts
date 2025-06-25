@@ -17,13 +17,16 @@ import { map } from 'rxjs/operators';
   templateUrl: './contact-details.component.html',
   styleUrl: './contact-details.component.scss',
   animations: [
-  trigger('slideInFromRight', [
-    transition('* => *', [
-      style({ transform: 'translateX(100%)', opacity: 0 }),
-      animate('250ms ease-in-out', style({ transform: 'translateX(0%)', opacity: 1 }))
-    ])
-  ]),
-],
+    trigger('slideInFromRight', [
+      transition(':increment', [
+        style({ transform: 'translateX(100%)', opacity: 0 }),
+        animate(
+          '250ms ease-in-out',
+          style({ transform: 'translateX(0%)', opacity: 1 })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class ContactDetailsComponent implements OnInit, OnDestroy {
   contact?: Contact;
@@ -55,16 +58,19 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
           );
         })
       )
+
       .subscribe({
         next: (contact) => {
-          // Animation nur bei echtem Kontaktwechsel (nicht beim Löschen/Editieren)
+          const isFirstContact = !this.contact;
+          const isContactChange = contact && contact !== this.contact;
+
+          // Animation bei Kontaktwechsel oder erstem Kontakt (aber nicht beim Löschen/Editieren)
           if (
             !this.isDeleting &&
             !this.isEditing &&
-            contact &&
-            contact !== this.contact
+            (isFirstContact || isContactChange)
           ) {
-            this.animationState++;
+            this.animationState++; // Animation triggern
           }
 
           this.contact = contact || undefined;
@@ -84,7 +90,6 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  
   onEditContact(): void {
     if (this.contact) {
       this.isEditing = true;
@@ -92,7 +97,6 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  
   onDeleteContact(): void {
     if (this.contact?.id) {
       this.isDeleting = true;
@@ -119,5 +123,4 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     if (!name) return '#9E9E9E'; // Fallback-Farbe für leere Namen
     return this.contactService.getContactColor(name);
   }
-
 }
