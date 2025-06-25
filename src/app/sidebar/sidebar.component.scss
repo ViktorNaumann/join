@@ -104,8 +104,8 @@
   }
 }
 
-// Media Query für mobile Ansicht (1000px bis 320px)
-@media (max-width: 1000px) and (min-width: 320px) {
+
+@media (max-width: 1000px) and (min-width: 300px) {
   .sidebar {
     position: fixed;
     bottom: 0;
@@ -170,7 +170,7 @@
     }
 
     .legal-links {
-      display: none; // Legal Links werden in der mobilen Ansicht ausgeblendet
+      display: none;
     }
   }
 }
