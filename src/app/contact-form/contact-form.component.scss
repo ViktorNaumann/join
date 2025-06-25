@@ -219,10 +219,10 @@ input:focus {
     border-radius: 50%;
     @include flex-center;
     @media(max-width: 900px) {
-        border: 2px soldi var(--background-light);
+        border: 2px solid var(--background-light);
         position: absolute;
         top: 0;
-        translate: 0 -50%;
+        transform: translate(0, -50%);
         margin-bottom: 45px;
     }
 }
