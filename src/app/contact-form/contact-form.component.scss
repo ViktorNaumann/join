@@ -211,7 +211,7 @@ input:focus {
 }
 
 .img-user-wrapper {
-    width: 120px;
+    min-width: 120px;
     height: 120px;
     background-color: var(--background-default-dark);
     border-radius: 50%;
