@@ -3,13 +3,11 @@
 .contact-list {
   width: 100%;
   max-width: 456px;
-  // max-height: calc(100vh - 100px);
   height: 100%;
   max-height: none;
   overflow-y: auto;
   padding: clamp(16px, 4vw, 32px) clamp(12px, 3vw, 24px);
   margin-top: -17px;
-  box-sizing: border-box;
 
   .add-button {
     width: calc(100% - clamp(12px, 3vw, 24px));
