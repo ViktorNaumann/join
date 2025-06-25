@@ -17,17 +17,13 @@ import { map } from 'rxjs/operators';
   templateUrl: './contact-details.component.html',
   styleUrl: './contact-details.component.scss',
   animations: [
-    trigger('slideInFromRight', [
-      state('void', style({ transform: 'translateX(100%)', opacity: 0 })),
-      state('*', style({ transform: 'translateX(0%)', opacity: 1 })),
-      transition('void => *', [
-        animate('250ms ease-in-out')
-      ]),
-      transition('* => void', [
-        animate('250ms ease-in-out', style({ transform: 'translateX(100%)', opacity: 0 }))
-      ])
-    ]),
-  ],
+  trigger('slideInFromRight', [
+    transition('* => *', [
+      style({ transform: 'translateX(100%)', opacity: 0 }),
+      animate('250ms ease-in-out', style({ transform: 'translateX(0%)', opacity: 1 }))
+    ])
+  ]),
+],
 })
 export class ContactDetailsComponent implements OnInit, OnDestroy {
   contact?: Contact;

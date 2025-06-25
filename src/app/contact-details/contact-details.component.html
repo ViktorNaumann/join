@@ -7,7 +7,7 @@
     <p>Better with a team</p>
   </div>
 
-  <div class="contact-content" *ngIf="contact" [@slideInFromRight]="!isAnimationDisabled"
+  <div class="contact-content" *ngIf="contact" [@slideInFromRight]="animationState"
        [@.disabled]="isAnimationDisabled">
     <div class="contact-container">
       <div class="user-logo" [style.background-color]="getContactColor(contact.name)">
