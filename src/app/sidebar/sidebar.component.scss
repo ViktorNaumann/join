@@ -1,4 +1,4 @@
-@import './../../styles.scss';
+@import "./../../styles.scss";
 
 .sidebar {
   width: 232px;
@@ -11,6 +11,8 @@
   flex-shrink: 0;
   padding: 32px 0;
   font-family: var(--font-primary);
+  overflow: hidden;
+  box-sizing: border-box;
 
   .logo-section {
     display: flex;
@@ -36,7 +38,7 @@
     width: 100%;
 
     ul {
-        width: 100%;
+      width: 100%;
       list-style: none;
       padding: 0;
       margin: 0;
@@ -45,7 +47,7 @@
       gap: 16px;
     }
 
-       li {
+    li {
       display: flex;
       align-items: center;
       gap: 16px;
@@ -54,7 +56,7 @@
       transition: background-color 0.2s ease;
       width: 100%;
       box-sizing: border-box;
-      
+
       img {
         width: 24px;
         height: 24px;
@@ -67,7 +69,7 @@
       }
 
       &:hover {
-        background-color: #2A3D59;
+        background-color: #2a3d59;
 
         span {
           color: white;
@@ -85,7 +87,7 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    padding-bottom: 150px;
+    padding-bottom: 32px;
     cursor: pointer;
 
     a {
@@ -96,14 +98,13 @@
       font-family: var(--font-primary);
 
       &:hover {
-       color: #29ABE2;
-       font-size: 16px;
-       font-weight: 700;
+        color: #29abe2;
+        font-size: 16px;
+        font-weight: 700;
       }
     }
   }
 }
-
 
 @media (max-width: 1000px) and (min-width: 300px) {
   .sidebar {
@@ -156,8 +157,8 @@
         }
 
         &.active {
-          background-color: #2A3D59;
-          
+          background-color: #2a3d59;
+
           span {
             color: white;
           }
@@ -174,5 +175,3 @@
     }
   }
 }
-
-

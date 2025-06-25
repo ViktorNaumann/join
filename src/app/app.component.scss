@@ -1,4 +1,4 @@
-@import './../styles.scss';
+@import "./../styles.scss";
 
 .app-layout {
   display: flex;
@@ -11,36 +11,28 @@
   flex-direction: column;
 }
 
-.layout-container {
+.contacts-layout {
   display: flex;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.content-wrapper {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
-.main-content {
-  flex-grow: 1;
-  overflow: hidden;
-}
-
-.contact-section {
-  display: flex;
-  margin-top: 20px;
-}
-
-.contact-list{
-  flex-shrink: 0;
-}
-
-.contact-details {
   flex: 1;
+  overflow: hidden;
+}
+
+.contact-list-container {
+  flex-shrink: 0;
+  width: 400px; // Feste Breite für die Contact-List
+  max-width: 1440px;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 20px;
+  overflow: hidden;
+  // overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.contact-details-wrapper {
+  flex: 1; // Nimmt den restlichen Platz ein
   min-width: 0;
+  overflow: hidden;
 }
 
 .contact-form-overlay {
@@ -71,4 +63,3 @@
   background-color: var(--background-dark);
   border-radius: 10px;
 }
-

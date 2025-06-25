@@ -1,5 +1,5 @@
 
-<div class="app-layout">
+<!-- <div class="app-layout">
   <app-sidebar></app-sidebar>
   <div class="main-layout">
     <app-header></app-header>
@@ -20,7 +20,30 @@
       </div>
     </div>
   </div>
+</div> -->
+
+
+<div class="app-layout">
+  <app-sidebar></app-sidebar>
+  <div class="main-layout">
+    <app-header></app-header>
+    
+    <!-- Flex-Container für Contact-List und Contact-Details -->
+    <div class="contacts-layout">
+      <!-- Contact-List in begrenzter Struktur -->
+      <div class="contact-list-container">
+        <app-contact-list></app-contact-list>
+      </div>
+      
+      <!-- Contact-Details ohne Begrenzung -->
+      <div class="contact-details-wrapper">
+        <app-contact-details></app-contact-details>
+      </div>
+    </div>
+  </div>
 </div>
+
+
 
 <!-- Contact Form als Overlay - nur anzeigen wenn showForm$ true ist -->
 <div *ngIf="showForm$ | async" class="contact-form-overlay" [@slideInOut]="animationDirection">
