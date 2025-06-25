@@ -102,11 +102,18 @@
     }
 
     .info {
+      flex: 1;
+      min-width: 0;
+      
       .name {
         font-family: "Inter", sans-serif;
         font-weight: 400;
         font-size: clamp(14px, 3vw, 20px);
         color: #000000;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 2px;
       }
 
       .email {
@@ -114,6 +121,9 @@
         font-weight: 400;
         font-size: clamp(12px, 2.5vw, 16px);
         color: #007cee;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }
