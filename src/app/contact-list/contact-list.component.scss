@@ -128,3 +128,100 @@
     }
   }
 }
+
+// Media Queries für responsive Design
+@media (max-width: 780px) {
+  .contact-list {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: clamp(16px, 4vw, 32px) clamp(12px, 3vw, 24px);
+    
+    .add-button {
+      display: none; // Versteckt den normalen Button unter 1024px
+    }
+    
+    h4 {
+      max-width: none;
+      width: 100%;
+    }
+    
+    .contact-entry {
+      width: 100%;
+      max-width: none;
+    }
+  }
+  
+  .fab-container {
+    display: block !important; // Zeigt den FAB unter 1024px mit !important
+    bottom: 100px !important;
+    right: 16px !important;
+  }
+  
+  .fab {
+    width: 48px;
+    height: 48px;
+    
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+// Floating Action Button
+.fab-container {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  z-index: 1000;
+  display: none; // Standardmäßig versteckt (über 780px)
+}
+
+.fab {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #2a3647;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #364155;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  img {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1); // Macht das Icon weiß
+  }
+}
+
+// Media Queries für sehr kleine Bildschirme
+@media (max-width: 400px) {
+  .fab-container {
+    bottom: 120px;
+    right: 12px;
+  }
+
+  .fab {
+    width: 44px;
+    height: 44px;
+
+    img {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
