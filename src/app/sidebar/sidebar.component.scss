@@ -122,18 +122,18 @@
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 
     .logo-section {
-      display: none; // Logo wird in der mobilen Ansicht ausgeblendet
+      display: none;
     }
 
     .navigation {
       flex: 1;
-      max-width: 600px;
+      width: 100%;
 
       ul {
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: space-between;
         align-items: center;
-        gap: 8px;
+        gap: 0;
         width: 100%;
       }
 
@@ -142,7 +142,7 @@
         padding: 8px 12px;
         gap: 4px;
         text-align: center;
-        min-width: 60px;
+        flex: 1;
         border-radius: 8px;
 
         img {
