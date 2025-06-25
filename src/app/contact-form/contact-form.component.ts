@@ -62,14 +62,12 @@ getDataToEdit = (contact: Contact | null) => {
         email: email.trim(),
         phone: phone.trim()
       };
-      //Wenn Kontaktdaten übergeben wurden soll editiert/geupdated werden
       if(this.contactToEdit?.id) {
         this.contactService.updateContact(this.contactToEdit.id, contact);
       } else {
-        //andernfalls soll ein neuer Kontakt erstellt werden
         const newContact = await this.contactService.addContact(contact);
         if (newContact) {
-          this.addedContact.emit(newContact); // <--- Neuer vollständiger Kontakt mit ID
+          this.addedContact.emit(newContact);
         }
     }
       this.clearInputs();
