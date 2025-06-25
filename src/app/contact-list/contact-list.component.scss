@@ -10,28 +10,17 @@
   margin-top: -17px;
 
   .add-button {
+    @include btn;
+    @include btn-dark;
     width: calc(100% - clamp(12px, 3vw, 24px));
     max-width: 352px;
     height: clamp(48px, 12vw, 56px);
     margin-top: 22.5px;
-    background-color: #2a3647;
-    color: #ffffff;
-    font-family: var(--font-primary);
-    font-weight: 700;
-    font-size: clamp(14px, 3.2vw, 21px);
-    border-radius: 10px;
-    border: 1px solid #2a3647;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: clamp(12px, 2.5vw, 16px);
-    cursor: pointer;
     transition: background-color 0.2s ease;
-
-    &:hover {
-      background-color: #29ABE2;
-      border: none;
-    }
 
     &::after {
       content: "";
