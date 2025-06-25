@@ -7,8 +7,9 @@
     <p>Better with a team</p>
   </div>
 
-  <div class="contact-content" *ngIf="contact && contactVisible" [@slideInFromRight]="animationState"
-     [@.disabled]="isAnimationDisabled">
+  <div class="contact-content" *ngIf="contact && contactVisible" 
+    [@slideInFromRight]="animationState"
+    [@.disabled]="isAnimationDisabled">
     <div class="contact-container">
       <div class="user-logo" [style.background-color]="getContactColor(contact.name)">
         <p>{{ getInitials(contact.name) }}</p>

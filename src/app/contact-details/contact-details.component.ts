@@ -16,8 +16,18 @@ import { map } from 'rxjs/operators';
   imports: [CommonModule],
   templateUrl: './contact-details.component.html',
   styleUrl: './contact-details.component.scss',
+
   animations: [
     trigger('slideInFromRight', [
+      // Add an initial state for elements entering the DOM
+      transition(':enter', [
+        style({ transform: 'translateX(100%)', opacity: 0 }),
+        animate(
+          '250ms ease-in-out',
+          style({ transform: 'translateX(0%)', opacity: 1 })
+        ),
+      ]),
+      // Keep the increment transition for subsequent changes
       transition(':increment', [
         style({ transform: 'translateX(100%)', opacity: 0 }),
         animate(
@@ -66,31 +76,36 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
           const wasEmpty = !this.contact;
           const isContactChange = contact && contact !== this.contact;
 
-          // First update the contact data
+          // Update contact data but don't show it yet
           this.contact = contact || undefined;
 
-          // Flags zurücksetzen
+          // Reset flags
           if (!contact) {
             this.isDeleting = false;
             this.isEditing = false;
             this.contactVisible = false;
-          } else if (!this.isDeleting && !this.isEditing && 
-                    (this.firstLoad || wasEmpty || isContactChange)) {
-            // For new contacts, use setTimeout to ensure DOM updates first
-            if (wasEmpty || this.firstLoad) {
-              this.contactVisible = true;
+          } else if (isContactChange) {
+            // Reset editing flag when changing contacts
+            this.isEditing = false;
+
+            if (
+              !this.isDeleting &&
+              (this.firstLoad || wasEmpty || isContactChange)
+            ) {
+              // Important: Keep element hidden until animation is ready
+              this.contactVisible = false;
+
+              // Short timeout to ensure the DOM has time to process the visibility change
               setTimeout(() => {
-                this.animationState++; 
+                // Now make it visible and trigger the animation
+                this.contactVisible = true;
+                this.animationState++;
                 this.firstLoad = false;
-              }, 50);
-            } else {
-              // For contact changes, we can increment immediately
-              this.animationState++;
+              }, 10);
             }
           }
         },
       });
-
   }
 
   ngOnDestroy(): void {
