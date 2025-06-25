@@ -1,5 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, onSnapshot, addDoc, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  onSnapshot,
+  addDoc,
+  doc,
+  updateDoc,
+  deleteDoc,
+} from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
@@ -10,7 +18,9 @@ export interface Contact {
   phone?: string;
 }
 
-export function notOnlyWhitespace(control: AbstractControl): ValidationErrors | null {
+export function notOnlyWhitespace(
+  control: AbstractControl
+): ValidationErrors | null {
   const value = control.value;
   if (typeof value === 'string' && value.trim().length === 0) {
     return { whitespace: true };
@@ -19,7 +29,7 @@ export function notOnlyWhitespace(control: AbstractControl): ValidationErrors | 
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ContactService {
   private selectedContactSubject = new BehaviorSubject<Contact | null>(null);
@@ -33,17 +43,27 @@ export class ContactService {
 
   // NEU - Avatar-Farben
   private avatarColors = [
-    '#9C27B0', '#2196F3', '#FF9800', '#4CAF50', '#F44336', '#00BCD4', 
-    '#795548', '#607D8B', '#E91E63', '#3F51B5', '#CDDC39', '#FF5722'
+    '#9C27B0',
+    '#2196F3',
+    '#FF9800',
+    '#4CAF50',
+    '#F44336',
+    '#00BCD4',
+    '#795548',
+    '#607D8B',
+    '#E91E63',
+    '#3F51B5',
+    '#CDDC39',
+    '#FF5722',
   ];
 
   constructor(private firestore: Firestore) {}
 
   getContacts(): Observable<Contact[]> {
-    return new Observable(observer => {
-      
+    return new Observable((observer) => {
       const contactsRef = this.getContactsRef();
-      const unsubscribe = onSnapshot(contactsRef, 
+      const unsubscribe = onSnapshot(
+        contactsRef,
         (snapshot) => {
           const contacts: Contact[] = [];
           snapshot.forEach((doc) => {
@@ -61,11 +81,11 @@ export class ContactService {
     });
   }
 
-  getContactsRef(){
+  getContactsRef() {
     return collection(this.firestore, 'contacts');
   }
 
-  getSingleContactsRef(docId: string){
+  getSingleContactsRef(docId: string) {
     return doc(collection(this.firestore, 'contacts'), docId);
   }
 
@@ -91,24 +111,24 @@ export class ContactService {
 
   async updateContact(docId: string, updatedContact: Contact) {
     let docRef = this.getSingleContactsRef(docId);
-    await updateDoc(docRef,this.getCleanJson(updatedContact)).catch(
-      (err) => {console.error(err)}
-    );
+    await updateDoc(docRef, this.getCleanJson(updatedContact)).catch((err) => {
+      console.error(err);
+    });
   }
 
   getCleanJson(updatedContact: Contact) {
-      return {
+    return {
       name: updatedContact.name,
       email: updatedContact.email,
-      phone: updatedContact.phone
-      }
-    }
+      phone: updatedContact.phone,
+    };
+  }
 
   //NEU
   selectContact(contact: Contact): void {
     this.selectedContactSubject.next(contact);
   }
-    //NEU
+  //NEU
   clearSelection(): void {
     this.selectedContactSubject.next(null);
   }
@@ -129,9 +149,9 @@ export class ContactService {
     this.editContactSubject.next(null); //NEU
   }
   async deleteContact(docId: string) {
-    await deleteDoc(this.getSingleContactsRef(docId)).catch(
-      (err) => {console.log(err);}
-    );
+    await deleteDoc(this.getSingleContactsRef(docId)).catch((err) => {
+      console.log(err);
+    });
   }
 
   // NEU - Avatar-Funktionen
@@ -149,6 +169,4 @@ export class ContactService {
     if (words.length === 1) return words[0][0].toUpperCase();
     return (words[0][0] + words[words.length - 1][0]).toUpperCase();
   }
-
 }
-

@@ -1,14 +1,32 @@
 @import "./../../styles.scss";
 
+// .contact-detail-section {
+//   width: 100%;
+//   min-height: 100vh;
+//   background-color: rgba(128, 128, 128, 0.099);
+//   display: flex;
+//   flex-direction: column;
+//   padding-left: clamp(20px, 5vw, 50px);
+//   padding-right: clamp(20px, 5vw, 50px);
+//   margin-top: -17px;
+// }
+
 .contact-detail-section {
   width: 100%;
   min-height: 100vh;
   background-color: rgba(128, 128, 128, 0.099);
+  margin-top: -17px;
+}
+
+.contact-detail-content {
+  max-width: 1440px; // Gleiche Begrenzung wie .layout-container
+  margin-left: 0;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
   padding-left: clamp(20px, 5vw, 50px);
   padding-right: clamp(20px, 5vw, 50px);
-  margin-top: -17px;
+  min-height: 100vh;
 }
 
 .contact-header {
@@ -20,7 +38,7 @@
 
   h1 {
     font-family: var(--font-primary);
-    // font-size: 54px;
+
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 600;
     margin: 0;

@@ -1,33 +1,21 @@
-<!-- <div class="layout-container">
+
+<div class="app-layout">
   <app-sidebar></app-sidebar>
-  <div class="content-wrapper">
+  <div class="main-layout">
     <app-header></app-header>
-    <div class="main-content">
-      <router-outlet></router-outlet>
-      <app-contact-list></app-contact-list>
-    </div>
-  </div>
-</div>
-
-<div class="contact-form">
-  <app-contact-form></app-contact-form>
-</div>  -->
-
-
-
- <div class="layout-container">
-  <app-sidebar></app-sidebar>
-  <div class="content-wrapper">
-    <app-header></app-header>
-    <div class="main-content">
-      <router-outlet></router-outlet>
-      
-      <div class="contact-section">
-        <div class="contact-list">
-          <app-contact-list></app-contact-list>
-        </div>
-        <div class="contact-details">
-          <app-contact-details></app-contact-details>
+    <div class="layout-container">
+      <div class="content-wrapper">
+        <div class="main-content">
+          <router-outlet></router-outlet>
+          
+          <div class="contact-section">
+            <div class="contact-list">
+              <app-contact-list></app-contact-list>
+            </div>
+            <div class="contact-details">
+              <app-contact-details></app-contact-details>
+            </div>
+          </div>
         </div>
       </div>
     </div>
