@@ -4,7 +4,7 @@
       <h1>Contacts</h1>
       <div class="header-divider"></div>
       <p>Better with a team</p>
-      <div class="back-btn mobile-back-btn" (click)="onBackToList()">
+      <div class="mobile-back-btn" (click)="onBackToList()">
         <img src="assets/img/icons/arrow-left-line.png" alt="" />
       </div>
     </div>
@@ -79,8 +79,16 @@
       *ngIf="contact && contactVisible"
       (click)="toggleMobileMenu()"
     >
-      <img src="assets/img/icons/contact-detail-menubtn.png" alt="" />
-      <!-- <img src="assets/img/icons/contact-detail-menubtn-light.png" alt="" /> -->
+      <img
+        class="default-icon"
+        src="assets/img/icons/contact-detail-menubtn.png"
+        alt=""
+      />
+      <img
+        class="hover-icon"
+        src="assets/img/icons/contact-detail-menubtn-light.png"
+        alt=""
+      />
     </div>
 
     <div class="mobile-menu" *ngIf="menuOpen && contact" @slideInOut>
