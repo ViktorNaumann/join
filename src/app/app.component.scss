@@ -27,7 +27,6 @@
   margin-right: 0;
   padding: 20px;
   overflow: hidden;
-  
 }
 
 .contact-details-wrapper {
@@ -70,48 +69,61 @@
   border-radius: 10px;
 }
 
-// Media Queries für responsive Design
 // @media (max-width: 780px) and (min-width: 300px) {
 //   .contacts-layout {
 //     justify-content: center;
 //     padding: 0 20px;
 //   }
-  
+
 //   .contact-list-container {
 //     width: 100%;
 //     max-width: 500px;
 //     flex: 1;
 //     padding: 20px 0;
+
+//     &.mobile-hidden {
+//       display: none;
+//     }
 //   }
-  
+
 //   .contact-details-wrapper {
-//     display: none; // Versteckt die Detailansicht bei kleineren Bildschirmen
+//     display: none;
+
+//     &.mobile-visible {
+//       display: flex;
+//       flex: 1;
+//     }
 //   }
 // }
 
 @media (max-width: 780px) and (min-width: 300px) {
   .contacts-layout {
     justify-content: center;
-    padding: 0 20px;
+    padding: 0;
+    width: 100%;
+    flex-direction: column; // Wichtig: Stapelt die Container vertikal
   }
-  
+
   .contact-list-container {
     width: 100%;
     max-width: 500px;
     flex: 1;
-    padding: 20px 0;
-    
+    padding: 20px;
+
     &.mobile-hidden {
       display: none;
     }
   }
-  
+
   .contact-details-wrapper {
     display: none;
-    
+    width: 100%;
+
     &.mobile-visible {
       display: flex;
       flex: 1;
+      width: 100%;
+      // Keine absolute Positionierung
     }
   }
 }
