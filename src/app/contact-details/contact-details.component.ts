@@ -6,7 +6,7 @@ import {
   transition,
   animate,
 } from '@angular/animations';
-import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { ContactService, Contact } from '../services/contact.service';
 import { Subscription, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -36,20 +36,56 @@ import { map } from 'rxjs/operators';
         ),
       ]),
     ]),
+
+// NEU: Animation für mobile menu
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({ transform: 'translateX(100%)', opacity: 0 }),
+        animate('200ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('200ms ease-in', style({ transform: 'translateX(100%)', opacity: 0 }))
+      ])
+    ])
+
   ],
 })
 export class ContactDetailsComponent implements OnInit, OnDestroy {
-  contactVisible = false; //NEU
+  contactVisible = false; 
   contact?: Contact;
   animationState = 0; // Trigger für Animation
   isDeleting = false;
   isEditing = false;
+  // NEU: Mobile menu properties
+  menuOpen = false;
+  isMobile = window.innerWidth < 768;
   private subscription?: Subscription;
-  private firstLoad = true; // NEU - Add this flag
+  private firstLoad = true; // Add this flag
 
   @Output() backToList = new EventEmitter<void>();
 
-  // NEU - Getter für Template - kombiniert beide Flags
+
+
+ // NEU: HostListener für Resize-Events
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    const width = (event.target as Window).innerWidth;
+    this.isMobile = width < 768;
+    if (!this.isMobile && this.menuOpen) {
+      this.menuOpen = false;
+    }
+  }
+
+  // NEU: Toggle Menu Funktion
+  toggleMobileMenu() {
+    if (this.isMobile) {
+      this.menuOpen = !this.menuOpen;
+    }
+  }
+
+
+
+  // Getter für Template - kombiniert beide Flags
   get isAnimationDisabled(): boolean {
     return this.isDeleting || this.isEditing;
   }
@@ -120,6 +156,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     if (this.contact) {
       this.isEditing = true;
       this.contactService.showEditForm(this.contact); //NEU
+      this.menuOpen = false; // NEU: Menu schließen nach Aktion
     }
   }
 
@@ -128,32 +165,25 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
       this.isDeleting = true;
       this.contactService.deleteContact(this.contact.id);
       this.contactService.clearSelection(); // Auswahl nach dem Löschen zurücksetzen
+      this.menuOpen = false; // NEU: Menu schließen nach Aktion
     }
   }
 
-  // getInitials(name?: string): string {
-  //   if (!name) return 'NN';
-  //   return name
-  //     .split(' ')
-  //     .map((n) => n[0])
-  //     .join('')
-  //     .toUpperCase();
-  // }
+  
 
   getInitials(name?: string): string {
     return this.contactService.getInitials(name);
   }
 
-  // NEU - Avatar-Farbe aus dem Service
+  // Avatar-Farbe aus dem Service
   getContactColor(name?: string): string {
     if (!name) return '#9E9E9E'; // Fallback-Farbe für leere Namen
     return this.contactService.getContactColor(name);
   }
 
-  //NEU Schließen über den Pfeil
+  // Schließen über den Pfeil
   closeContactDetails(): void {
     this.contactVisible = false;
-    // this.contactService.clearSelection();
 }
 
 onBackToList() {

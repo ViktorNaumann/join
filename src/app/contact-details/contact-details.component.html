@@ -83,14 +83,14 @@
        </div> -->
 
 
-      <div class="mobile-options">
+      <div class="mobile-options" (click)="toggleMobileMenu()">
         <img src="assets/img/icons/contact-detail-menubtn.png" alt="" />
-        <img src="assets/img/icons/contact-detail-menubtn-light.png" alt="" />
+        <!-- <img src="assets/img/icons/contact-detail-menubtn-light.png" alt="" /> -->
       </div>
 
      
 
-      <div class="mobile-menu">
+      <div class="mobile-menu" *ngIf="menuOpen" @slideInOut>
         <div class="mobile-option-item" (click)="onEditContact()">
           <img
             class="default-icon"

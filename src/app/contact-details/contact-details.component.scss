@@ -198,17 +198,42 @@
   }
 }
 
-.mobile-options{
+.mobile-options {
   display: none;
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 100;
+
+  img {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 //NEU Smartphone Menü
+// .mobile-menu {
+//   display: none;
+//   position: absolute;
+//   bottom: 100px;
+//   right: 10px;
+//   transform: translate(0);
+//   flex-direction: column;
+//   width: 120px;
+//   height: auto;
+//   background-color: var(--background-default-dark);
+//   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+//   padding: 10px;
+//   gap: 8px;
+//   border-radius: 20px 20px 0 20px;
+//   @include inter400-fs16;
+//   }
+
 .mobile-menu {
-  display: none;
-  position: absolute;
+  position: fixed;
   bottom: 100px;
   right: 10px;
-  transform: translate(0);
   flex-direction: column;
   width: 120px;
   height: auto;
@@ -217,51 +242,51 @@
   padding: 10px;
   gap: 8px;
   border-radius: 20px 20px 0 20px;
+  z-index: 99;
   @include inter400-fs16;
+}
+
+.mobile-option-item {
+  width: 70px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 5px;
+
+  .hover-icon {
+    display: none;
   }
 
- .mobile-option-item {
-    width: 70px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-    padding: 5px;
+  &:hover {
+    p {
+      color: var(--accent-primary-color);
+      font-weight: bold;
+    }
 
-    .hover-icon {
+    .default-icon {
       display: none;
     }
 
-    &:hover {
-      p {
-        color: var(--accent-primary-color);
-        font-weight: bold;
-      }
-
-      .default-icon {
-        display: none;
-      }
-
-      .hover-icon {
-        display: block;
-      }
-    }
-
-    img {
-      width: 22px;
-      height: 22px;
-    }
-
-    p {
-      min-width: fit-content;
-      margin: 0;
-      font-family: var(--font-primary);
-      font-size: 15px;
-      color: black;
-      transition: color 0.2s, font-size 0.2s;
+    .hover-icon {
+      display: block;
     }
   }
 
+  img {
+    width: 22px;
+    height: 22px;
+  }
+
+  p {
+    min-width: fit-content;
+    margin: 0;
+    font-family: var(--font-primary);
+    font-size: 15px;
+    color: black;
+    transition: color 0.2s, font-size 0.2s;
+  }
+}
 
 @media (max-width: 1210px) {
   .contact-header {
@@ -370,6 +395,10 @@
         background-color: var(--accent-primary-color);
       }
     }
+  }
+
+  .mobile-options {
+    display: block; // In mobiler Ansicht sichtbar
   }
 
   .user-options {
