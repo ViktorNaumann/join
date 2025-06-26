@@ -25,12 +25,6 @@
       width: 100px;
       height: 122px;
     }
-
-    .logo-text {
-      font-size: 18px;
-      font-weight: 600;
-      font-family: var(--font-primary);
-    }
   }
 
   .navigation {
@@ -75,7 +69,8 @@
         font-family: var(--font-primary);
       }
 
-      &:hover {
+      &:hover,
+      &.active {
         background-color: #2a3d59;
 
         span {
