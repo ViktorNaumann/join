@@ -69,6 +69,24 @@
 }
 
 // Media Queries für responsive Design
+// @media (max-width: 780px) and (min-width: 300px) {
+//   .contacts-layout {
+//     justify-content: center;
+//     padding: 0 20px;
+//   }
+  
+//   .contact-list-container {
+//     width: 100%;
+//     max-width: 500px;
+//     flex: 1;
+//     padding: 20px 0;
+//   }
+  
+//   .contact-details-wrapper {
+//     display: none; // Versteckt die Detailansicht bei kleineren Bildschirmen
+//   }
+// }
+
 @media (max-width: 780px) and (min-width: 300px) {
   .contacts-layout {
     justify-content: center;
@@ -80,9 +98,18 @@
     max-width: 500px;
     flex: 1;
     padding: 20px 0;
+    
+    &.mobile-hidden {
+      display: none;
+    }
   }
   
   .contact-details-wrapper {
-    display: none; // Versteckt die Detailansicht bei kleineren Bildschirmen
+    display: none;
+    
+    &.mobile-visible {
+      display: flex;
+      flex: 1;
+    }
   }
 }
