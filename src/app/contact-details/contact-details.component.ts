@@ -6,7 +6,15 @@ import {
   transition,
   animate,
 } from '@angular/animations';
-import { Component, Output, EventEmitter, OnInit, OnDestroy, HostListener } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+  HostListener,
+  ElementRef,
+} from '@angular/core';
 import { ContactService, Contact } from '../services/contact.service';
 import { Subscription, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -37,21 +45,26 @@ import { map } from 'rxjs/operators';
       ]),
     ]),
 
-// NEU: Animation für mobile menu
+    // NEU: Animation für mobile menu
     trigger('slideInOut', [
       transition(':enter', [
         style({ transform: 'translateX(100%)', opacity: 0 }),
-        animate('200ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+        animate(
+          '200ms ease-out',
+          style({ transform: 'translateX(0)', opacity: 1 })
+        ),
       ]),
       transition(':leave', [
-        animate('200ms ease-in', style({ transform: 'translateX(100%)', opacity: 0 }))
-      ])
-    ])
-
+        animate(
+          '200ms ease-in',
+          style({ transform: 'translateX(100%)', opacity: 0 })
+        ),
+      ]),
+    ]),
   ],
 })
 export class ContactDetailsComponent implements OnInit, OnDestroy {
-  contactVisible = false; 
+  contactVisible = false;
   contact?: Contact;
   animationState = 0; // Trigger für Animation
   isDeleting = false;
@@ -64,9 +77,31 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
 
   @Output() backToList = new EventEmitter<void>();
 
+  constructor(
+    private contactService: ContactService,
+    private elementRef: ElementRef
+  ) {}
 
+  // NEU: HostListener für Document-Clicks
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event) {
+    const target = event.target as HTMLElement;
+    const mobileMenu =
+      this.elementRef.nativeElement.querySelector('.mobile-menu');
+    const mobileOptions =
+      this.elementRef.nativeElement.querySelector('.mobile-options');
 
- // NEU: HostListener für Resize-Events
+    // Prüfen ob das Click-Target innerhalb des Mobile-Menus oder Mobile-Options ist
+    if (
+      this.menuOpen &&
+      !mobileMenu?.contains(target) &&
+      !mobileOptions?.contains(target)
+    ) {
+      this.menuOpen = false;
+    }
+  }
+
+  // NEU: HostListener für Resize-Events
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     const width = (event.target as Window).innerWidth;
@@ -83,14 +118,10 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-
-
   // Getter für Template - kombiniert beide Flags
   get isAnimationDisabled(): boolean {
     return this.isDeleting || this.isEditing;
   }
-
-  constructor(private contactService: ContactService) {}
 
   ngOnInit(): void {
     // Kombiniere selectedContact$ und getContacts() um immer aktuelle Daten zu haben
@@ -169,8 +200,6 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  
-
   getInitials(name?: string): string {
     return this.contactService.getInitials(name);
   }
@@ -184,9 +213,9 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   // Schließen über den Pfeil
   closeContactDetails(): void {
     this.contactVisible = false;
-}
+  }
 
-onBackToList() {
+  onBackToList() {
     this.backToList.emit();
   }
 }

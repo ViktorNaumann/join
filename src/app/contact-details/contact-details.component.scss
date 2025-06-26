@@ -201,34 +201,15 @@
 .mobile-options {
   display: none;
   position: fixed;
-  bottom: 80px;
+  bottom: 100px;
   right: 20px;
   cursor: pointer;
-  z-index: 100;
 
   img {
-    width: 32px;
-    height: 32px;
+    width: 60px;
+    height: auto;
   }
 }
-
-//NEU Smartphone Menü
-// .mobile-menu {
-//   display: none;
-//   position: absolute;
-//   bottom: 100px;
-//   right: 10px;
-//   transform: translate(0);
-//   flex-direction: column;
-//   width: 120px;
-//   height: auto;
-//   background-color: var(--background-default-dark);
-//   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
-//   padding: 10px;
-//   gap: 8px;
-//   border-radius: 20px 20px 0 20px;
-//   @include inter400-fs16;
-//   }
 
 .mobile-menu {
   position: fixed;
@@ -287,6 +268,13 @@
     transition: color 0.2s, font-size 0.2s;
   }
 }
+
+//
+//
+//
+//
+//
+//
 
 @media (max-width: 1210px) {
   .contact-header {
