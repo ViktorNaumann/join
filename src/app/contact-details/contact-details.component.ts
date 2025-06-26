@@ -107,7 +107,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     const width = (event.target as Window).innerWidth;
-    this.isMobile = width < 768;
+    this.isMobile = width < 780;
     if (!this.isMobile && this.menuOpen) {
       this.menuOpen = false;
     }
