@@ -87,16 +87,20 @@ header {
   width: 150px;
   height: auto;
   background-color: var(--background-dark);
-  padding: 20px;
-  gap: 16px;
+  padding: 10px;
+  gap: 8px;
   border-radius: 20px 0 20px 20px;
   @include inter400-fs16;
   a {
     color: #a8a8a8;
     text-decoration: none;
+    cursor: pointer;
+    padding: 10px 8px;
+    border-radius: 10px;
 
     &:hover {
       color: white;
+      background-color: #2a3d59;
     }
   }
 
