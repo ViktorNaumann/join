@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactService, Contact } from '../services/contact.service';
 import { Subscription } from 'rxjs';
@@ -16,6 +16,8 @@ export class ContactListComponent implements OnInit, OnDestroy {
   private contactsSubscription: Subscription = new Subscription();
   private selectionSubscription: Subscription = new Subscription(); //NEU
 
+  @Output() contactSelected = new EventEmitter<void>();
+
   constructor(public contactService: ContactService) {}
 
   ngOnInit(): void {
@@ -29,7 +31,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
     });
 
 
-    //NEU Aktuelle Auswahl verfolgen für visuelle Hervorhebung
+    // Aktuelle Auswahl verfolgen für visuelle Hervorhebung
     this.selectionSubscription = this.contactService.selectedContact$.subscribe(
       contact => this.selectedContact = contact
     );
@@ -39,19 +41,23 @@ export class ContactListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.contactsSubscription.unsubscribe();
-    this.selectionSubscription.unsubscribe(); //NEU
+    this.selectionSubscription.unsubscribe();
   }
 
-  //NEU
+  
    onContactSelect(contact: Contact): void {
     this.contactService.selectContact(contact);
+
+    // Neues Event für Mobile-Navigation emittieren
+    this.contactSelected.emit();
   }
-  //NEU
+
+  
   isSelected(contact: Contact): boolean {
     return this.selectedContact?.id === contact.id;
   }
 
-  // NEU - Methode für Add-Button
+  // Methode für Add-Button
   onAddNewContact(): void {
     this.contactService.showAddForm();
   }

@@ -3,41 +3,33 @@
   <app-sidebar></app-sidebar>
   <div class="main-layout">
     <app-header></app-header>
-    <div class="layout-container">
-      <div class="content-wrapper">
-        <div class="main-content">
-          <router-outlet></router-outlet>
-          
-          <div class="contact-section">
-            <div class="contact-list">
-              <app-contact-list></app-contact-list>
-            </div>
-            <div class="contact-details">
-              <app-contact-details></app-contact-details>
-            </div>
-          </div>
-        </div>
+    
+    <div class="contacts-layout">
+      
+      <div class="contact-list-container">
+        <app-contact-list></app-contact-list>
+      </div>
+      
+      <div class="contact-details-wrapper">
+        <app-contact-details></app-contact-details>
       </div>
     </div>
   </div>
 </div> -->
-
 
 <div class="app-layout">
   <app-sidebar></app-sidebar>
   <div class="main-layout">
     <app-header></app-header>
     
-    <!-- Flex-Container für Contact-List und Contact-Details -->
     <div class="contacts-layout">
-      <!-- Contact-List in begrenzter Struktur -->
-      <div class="contact-list-container">
-        <app-contact-list></app-contact-list>
+      
+      <div class="contact-list-container" [class.mobile-hidden]="showContactDetails">
+        <app-contact-list (contactSelected)="onContactSelected()"></app-contact-list>
       </div>
       
-      <!-- Contact-Details ohne Begrenzung -->
-      <div class="contact-details-wrapper">
-        <app-contact-details></app-contact-details>
+      <div class="contact-details-wrapper" [class.mobile-visible]="showContactDetails">
+        <app-contact-details (backToList)="onBackToList()"></app-contact-details>
       </div>
     </div>
   </div>

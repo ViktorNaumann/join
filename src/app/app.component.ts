@@ -58,6 +58,9 @@ export class AppComponent {
   // Observable für die Formular-Sichtbarkeit
   showForm$: Observable<boolean>;
 
+  // Neue Variable für Mobile-Navigation
+  showContactDetails = false;
+
   constructor(private contactService: ContactService) {
     this.showForm$ = this.contactService.showForm$;
   }
@@ -102,5 +105,14 @@ export class AppComponent {
         this.backgroundVisible = true;
       }, 100);
     }
+  }
+
+  // Methode zum Zurücknavigieren zur Liste
+  onBackToList() {
+    this.showContactDetails = false;
+  }
+  // Methode die aufgerufen wird, wenn ein Kontakt ausgewählt wird
+  onContactSelected() {
+    this.showContactDetails = true;
   }
 }

@@ -6,7 +6,7 @@ import {
   transition,
   animate,
 } from '@angular/animations';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { ContactService, Contact } from '../services/contact.service';
 import { Subscription, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -46,6 +46,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   isEditing = false;
   private subscription?: Subscription;
   private firstLoad = true; // NEU - Add this flag
+
+  @Output() backToList = new EventEmitter<void>();
 
   // NEU - Getter für Template - kombiniert beide Flags
   get isAnimationDisabled(): boolean {
@@ -153,4 +155,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     this.contactVisible = false;
     // this.contactService.clearSelection();
 }
+
+onBackToList() {
+    this.backToList.emit();
+  }
 }
