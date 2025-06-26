@@ -76,6 +76,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   private firstLoad = true; // Add this flag
 
   @Output() backToList = new EventEmitter<void>();
+  @Output() noContactVisible = new EventEmitter<void>();
 
   constructor(
     private contactService: ContactService,
@@ -88,8 +89,9 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     const target = event.target as HTMLElement;
     const mobileMenu =
       this.elementRef.nativeElement.querySelector('.mobile-menu');
-    const mobileOptions =
-      this.elementRef.nativeElement.querySelector('.mobile-options-btn');
+    const mobileOptions = this.elementRef.nativeElement.querySelector(
+      '.mobile-options-btn'
+    );
 
     // Prüfen ob das Click-Target innerhalb des Mobile-Menus oder Mobile-Options ist
     if (
@@ -153,6 +155,11 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
             this.isDeleting = false;
             this.isEditing = false;
             this.contactVisible = false;
+
+            // NEU: Event emittieren wenn kein Kontakt angezeigt wird
+            setTimeout(() => {
+              this.noContactVisible.emit();
+            }, 100);
           } else if (isContactChange) {
             // Reset editing flag when changing contacts
             this.isEditing = false;
@@ -194,9 +201,9 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   onDeleteContact(): void {
     if (this.contact?.id) {
       this.isDeleting = true;
+      this.menuOpen = false; // NEU: Menu schließen nach Aktion
       this.contactService.deleteContact(this.contact.id);
       this.contactService.clearSelection(); // Auswahl nach dem Löschen zurücksetzen
-      this.menuOpen = false; // NEU: Menu schließen nach Aktion
     }
   }
 

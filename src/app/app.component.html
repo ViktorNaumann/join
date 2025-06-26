@@ -1,48 +1,50 @@
-
-<!-- <div class="app-layout">
-  <app-sidebar></app-sidebar>
-  <div class="main-layout">
-    <app-header></app-header>
-    
-    <div class="contacts-layout">
-      
-      <div class="contact-list-container">
-        <app-contact-list></app-contact-list>
-      </div>
-      
-      <div class="contact-details-wrapper">
-        <app-contact-details></app-contact-details>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <div class="app-layout">
   <app-sidebar></app-sidebar>
   <div class="main-layout">
     <app-header></app-header>
-    
+
     <div class="contacts-layout">
-      
-      <div class="contact-list-container" [class.mobile-hidden]="showContactDetails">
-        <app-contact-list (contactSelected)="onContactSelected()"></app-contact-list>
+      <div
+        class="contact-list-container"
+        [class.mobile-hidden]="showContactDetails"
+      >
+        <app-contact-list
+          (contactSelected)="onContactSelected()"
+        ></app-contact-list>
       </div>
-      
-      <div class="contact-details-wrapper" [class.mobile-visible]="showContactDetails">
-        <app-contact-details (backToList)="onBackToList()"></app-contact-details>
+
+      <div
+        class="contact-details-wrapper"
+        [class.mobile-visible]="showContactDetails"
+      >
+        <app-contact-details
+          (backToList)="onBackToList()"
+          (noContactVisible)="onNoContactVisible()"
+        ></app-contact-details>
       </div>
     </div>
   </div>
 </div>
 
-
-
 <!-- Contact Form als Overlay - nur anzeigen wenn showForm$ true ist -->
-<div *ngIf="showForm$ | async" class="contact-form-overlay" [@slideInOut]="animationDirection" (@slideInOut.done)="onOverlayAnimationDone($event)" [class.backgroundVisible]="backgroundVisible">
-  <app-contact-form (addedContact)="onContactAdded($event)" (closeOverlay)="removeBackground($event)"></app-contact-form>
+<div
+  *ngIf="showForm$ | async"
+  class="contact-form-overlay"
+  [@slideInOut]="animationDirection"
+  (@slideInOut.done)="onOverlayAnimationDone($event)"
+  [class.backgroundVisible]="backgroundVisible"
+>
+  <app-contact-form
+    (addedContact)="onContactAdded($event)"
+    (closeOverlay)="removeBackground($event)"
+  ></app-contact-form>
 </div>
 
-<div *ngIf="toastMessageVisible" class="toast-message" [@slideInOut]="toastAnimationState">
+<div
+  *ngIf="toastMessageVisible"
+  class="toast-message"
+  [@slideInOut]="toastAnimationState"
+>
   Contact successfully created
 </div>
 

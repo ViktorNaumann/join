@@ -8,19 +8,26 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { ContactService, Contact } from './services/contact.service';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
-import { trigger, state, style, transition, animate, AnimationEvent } from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+  AnimationEvent,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet, 
-    SidebarComponent, 
-    HeaderComponent, 
-    ContactListComponent, 
+    RouterOutlet,
+    SidebarComponent,
+    HeaderComponent,
+    ContactListComponent,
     ContactDetailsComponent,
     ContactFormComponent,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -30,23 +37,35 @@ import { trigger, state, style, transition, animate, AnimationEvent } from '@ang
       // ENTER: void => right
       transition('void => right', [
         style({ transform: 'translateX(100%)', opacity: 0 }),
-        animate('250ms ease-in-out', style({ transform: 'translateX(0)', opacity: 1 }))
+        animate(
+          '250ms ease-in-out',
+          style({ transform: 'translateX(0)', opacity: 1 })
+        ),
       ]),
       // LEAVE: right => void
       transition('right => void', [
-        animate('250ms ease-in-out', style({ transform: 'translateX(100%)', opacity: 0 }))
+        animate(
+          '250ms ease-in-out',
+          style({ transform: 'translateX(100%)', opacity: 0 })
+        ),
       ]),
 
       // ENTER: void => bottom
       transition('void => bottom', [
         style({ transform: 'translateY(100%)', opacity: 0 }),
-        animate('250ms ease-in-out', style({ transform: 'translateY(0)', opacity: 1 }))
+        animate(
+          '250ms ease-in-out',
+          style({ transform: 'translateY(0)', opacity: 1 })
+        ),
       ]),
       // LEAVE: bottom => void
       transition('bottom => void', [
-        animate('250ms ease-in-out', style({ transform: 'translateY(100%)', opacity: 0 }))
-      ])
-    ])
+        animate(
+          '250ms ease-in-out',
+          style({ transform: 'translateY(100%)', opacity: 0 })
+        ),
+      ]),
+    ]),
   ],
 })
 export class AppComponent {
@@ -84,7 +103,7 @@ export class AppComponent {
     this.animationDirection = width < 1000 ? 'bottom' : 'right';
   }
 
-  startMessageAnimation(){
+  startMessageAnimation() {
     this.toastAnimationState = this.animationDirection;
     this.toastMessageVisible = true;
 
@@ -96,8 +115,8 @@ export class AppComponent {
 
   removeBackground(event: string) {
     if (event === 'closed') {
-        this.backgroundVisible = false;
-     }
+      this.backgroundVisible = false;
+    }
   }
 
   onOverlayAnimationDone(event: AnimationEvent) {
@@ -115,5 +134,13 @@ export class AppComponent {
   // Methode die aufgerufen wird, wenn ein Kontakt ausgewählt wird
   onContactSelected() {
     this.showContactDetails = true;
+  }
+
+  // NEU: Methode für automatisches Zurückkehren zur Liste
+  onNoContactVisible() {
+    // Nur in mobiler Ansicht automatisch zur Liste zurückkehren
+    if (window.innerWidth < 768) {
+      this.showContactDetails = false;
+    }
   }
 }
