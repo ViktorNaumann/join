@@ -21,7 +21,7 @@
 
 .contact-list-container {
   flex-shrink: 0;
-  width: 400px; // Feste Breite für die Contact-List
+  width: 400px;
   max-width: 1440px;
   margin-left: 0;
   margin-right: 0;
@@ -30,7 +30,7 @@
 }
 
 .contact-details-wrapper {
-  flex: 1; // Nimmt den restlichen Platz ein
+  flex: 1;
   min-width: 0;
   overflow: hidden;
 }
@@ -41,7 +41,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0); // Start: transparent
+  background-color: rgba(0, 0, 0, 0);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,7 +49,7 @@
   transition: background-color 300ms ease-in-out;
 
   &.backgroundVisible {
-    background-color: rgba(0, 0, 0, 0.5); // Ziel: halbtransparent
+    background-color: rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -101,14 +101,16 @@
     justify-content: center;
     padding: 0;
     width: 100%;
-    flex-direction: column; // Wichtig: Stapelt die Container vertikal
+    flex-direction: column;
   }
 
   .contact-list-container {
     width: 100%;
-    max-width: 500px;
+    max-width: none;
     flex: 1;
     padding: 20px;
+    overflow-y: auto; 
+    height: 100%; 
 
     &.mobile-hidden {
       display: none;
@@ -118,12 +120,12 @@
   .contact-details-wrapper {
     display: none;
     width: 100%;
+    position: relative;
 
     &.mobile-visible {
       display: flex;
       flex: 1;
       width: 100%;
-      // Keine absolute Positionierung
     }
   }
 }
