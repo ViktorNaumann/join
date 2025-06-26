@@ -15,8 +15,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: clamp(0.5rem, 2vw, 1.25rem); // Min: 8px, Max: 20px
-  padding-right: clamp(0.5rem, 2vw, 1.25rem);
+  padding-left: clamp(1rem, 2vw, 1.25rem); // Min: 8px, Max: 20px
+  padding-right: clamp(1rem, 2vw, 1.25rem);
 }
 
 .logo {
