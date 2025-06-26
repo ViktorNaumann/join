@@ -90,6 +90,7 @@ header {
   padding: 10px;
   gap: 8px;
   border-radius: 20px 0 20px 20px;
+  z-index: 2;
   @include inter400-fs16;
   a {
     color: #a8a8a8;
