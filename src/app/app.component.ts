@@ -104,7 +104,7 @@ export class AppComponent {
     if (event.toState === 'right' || event.toState === 'bottom') {
       setTimeout(() => {
         this.backgroundVisible = true;
-      }, 1000);
+      }, 50);
     }
   }
 
