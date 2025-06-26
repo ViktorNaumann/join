@@ -1,14 +1,13 @@
+
 <div class="contact-detail-section">
   <div class="contact-detail-content">
-    
   <div class="contact-header">
     <h1>Contacts</h1>
     <div class="header-divider"></div>
     <p>Better with a team</p>
   </div>
-
   <div class="contact-content" *ngIf="contact && contactVisible" [@slideInFromRight]="animationState"
-     [@.disabled]="isAnimationDisabled">
+     [@.disabled]="isAnimationDisabled" >
     <div class="contact-container">
       <div class="user-logo" [style.background-color]="getContactColor(contact.name)">
         <p>{{ getInitials(contact.name) }}</p>

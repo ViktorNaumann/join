@@ -132,4 +132,10 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     if (!name) return '#9E9E9E'; // Fallback-Farbe für leere Namen
     return this.contactService.getContactColor(name);
   }
+
+  //NEU Schließen über den Pfeil
+  closeContactDetails(): void {
+    this.contactVisible = false;
+    // this.contactService.clearSelection();
+}
 }
