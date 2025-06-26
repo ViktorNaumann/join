@@ -89,7 +89,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     const mobileMenu =
       this.elementRef.nativeElement.querySelector('.mobile-menu');
     const mobileOptions =
-      this.elementRef.nativeElement.querySelector('.mobile-options');
+      this.elementRef.nativeElement.querySelector('.mobile-options-btn');
 
     // Prüfen ob das Click-Target innerhalb des Mobile-Menus oder Mobile-Options ist
     if (
