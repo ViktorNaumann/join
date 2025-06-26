@@ -76,6 +76,7 @@ export class AppComponent {
 
   onContactAdded(newContact: Contact) {
     this.contactService.selectContact(newContact);
+    this.onContactSelected();
     this.startMessageAnimation();
   }
 
@@ -103,7 +104,7 @@ export class AppComponent {
     if (event.toState === 'right' || event.toState === 'bottom') {
       setTimeout(() => {
         this.backgroundVisible = true;
-      }, 100);
+      }, 1000);
     }
   }
 
