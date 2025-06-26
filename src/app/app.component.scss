@@ -3,6 +3,8 @@
 .app-layout {
   display: flex;
   height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .main-layout {
