@@ -14,10 +14,10 @@
         <img class="help-icon" src="assets/img/icons/help.png" alt="" />
       </div>
 
-      <div class="user-profile">
+      <div class="user-profile" (click)="toggleMenu()">
         <p>SM</p>
         <!-- NEU Smartphone Links -->
-        <div class="mobile-menu-links">
+        <div class="mobile-menu-links" *ngIf="menuOpen" @slideInOut>
           <a routerLink="/help">Help</a>
           <a routerLink="/privacy-policy">Privacy Policy</a>
           <a routerLink="/legal-notice">Legal notice</a>
