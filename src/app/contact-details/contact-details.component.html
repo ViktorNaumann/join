@@ -72,48 +72,40 @@
           </p>
         </div>
       </div>
+    </div>
 
+    <div
+      class="mobile-options-btn"
+      *ngIf="contact && contactVisible"
+      (click)="toggleMobileMenu()"
+    >
+      <img src="assets/img/icons/contact-detail-menubtn.png" alt="" />
+      <!-- <img src="assets/img/icons/contact-detail-menubtn-light.png" alt="" /> -->
+    </div>
 
-       <!-- NEU Smartphone Links -->
-      <!-- <div class="mobile-menu" *ngIf="menuOpen" @slideInOut>
-          <a routerLink="/help">Help</a>
-          <a routerLink="/privacy-policy">Privacy Policy</a>
-          <a routerLink="/legal-notice">Legal notice</a>
-          <a>Log out</a>
-       </div> -->
-
-
-      <div class="mobile-options" (click)="toggleMobileMenu()">
-        <img src="assets/img/icons/contact-detail-menubtn.png" alt="" />
-        <!-- <img src="assets/img/icons/contact-detail-menubtn-light.png" alt="" /> -->
+    <div class="mobile-menu" *ngIf="menuOpen && contact" @slideInOut>
+      <div class="mobile-option-item" (click)="onEditContact()">
+        <img
+          class="default-icon"
+          src="assets/img/icons/edit-single2.png"
+          alt=""
+        />
+        <img
+          class="hover-icon"
+          src="assets/img/icons/edit-single-hover.png"
+          alt=""
+        />
+        <p>Edit</p>
       </div>
 
-     
-
-      <div class="mobile-menu" *ngIf="menuOpen" @slideInOut>
-        <div class="mobile-option-item" (click)="onEditContact()">
-          <img
-            class="default-icon"
-            src="assets/img/icons/edit-single2.png"
-            alt=""
-          />
-          <img
-            class="hover-icon"
-            src="assets/img/icons/edit-single-hover.png"
-            alt=""
-          />
-          <p>Edit</p>
-        </div>
-
-        <div class="mobile-option-item" (click)="onDeleteContact()">
-          <img class="default-icon" src="assets/img/icons/delete.png" alt="" />
-          <img
-            class="hover-icon"
-            src="assets/img/icons/delete-hover.png"
-            alt=""
-          />
-          <p>Delete</p>
-        </div>
+      <div class="mobile-option-item" (click)="onDeleteContact()">
+        <img class="default-icon" src="assets/img/icons/delete.png" alt="" />
+        <img
+          class="hover-icon"
+          src="assets/img/icons/delete-hover.png"
+          alt=""
+        />
+        <p>Delete</p>
       </div>
     </div>
   </div>

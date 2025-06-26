@@ -61,6 +61,23 @@
       display: none;
     }
   }
+
+  .mobile-back-btn {
+    display: block !important;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    z-index: 1;
+    cursor: pointer;
+
+    img {
+      width: 40px;
+      height: auto;
+    }
+  }
 }
 
 .contact-content {
@@ -198,7 +215,7 @@
   }
 }
 
-.mobile-options {
+.mobile-options-btn {
   display: none;
   position: fixed;
   bottom: 100px;
@@ -333,25 +350,28 @@
     width: 100%;
   }
 
-  .mobile-back-btn {
-    display: block !important;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 8px;
-    border-radius: 4px;
-    transition: background-color 0.2s;
-    z-index: 1;
-    cursor: pointer;
+  .mobile-options-btn {
+    display: block; // In mobiler Ansicht sichtbar
+  }
 
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
-    }
+  .user-options {
+    display: none;
+  }
 
-    img {
-      width: 24px;
-      height: 24px;
-    }
+  .mobile-menu {
+    display: flex; // Nur in mobiler Ansicht sichtbar
+  }
+
+  .contact-content {
+    width: 100%;
+  }
+
+  .contact-container {
+    width: 100%;
+  }
+
+  .contact-info {
+    width: 100%;
   }
 }
 
@@ -383,29 +403,5 @@
         background-color: var(--accent-primary-color);
       }
     }
-  }
-
-  .mobile-options {
-    display: block; // In mobiler Ansicht sichtbar
-  }
-
-  .user-options {
-    display: none;
-  }
-
-  .mobile-menu {
-    display: flex; // Nur in mobiler Ansicht sichtbar
-  }
-
-  .contact-content {
-    width: 100%;
-  }
-
-  .contact-container {
-    width: 100%;
-  }
-
-  .contact-info {
-    width: 100%;
   }
 }
