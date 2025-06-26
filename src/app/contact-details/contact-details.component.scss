@@ -95,7 +95,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: clamp(2px, 0.5vmin, 3px) solid white;
+  border: 2px solid white;
   border-radius: 50%;
 
   p {
@@ -359,9 +359,37 @@
   }
 
   .contact-header {
-    position: relative;
-    padding-top: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    min-height: auto;
+    padding-bottom: 40px;
     width: 100%;
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    .header-divider {
+      display: none;
+    }
+
+    p {
+      font-size: 1.2rem;
+      padding-bottom: 15px;
+      position: relative;
+      width: auto;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background-color: var(--accent-primary-color);
+      }
+    }
   }
 
   .mobile-back-btn {
@@ -382,43 +410,50 @@
 
   .contact-content {
     width: 100%;
+    gap: 25px;
   }
 
   .contact-container {
     width: 100%;
+    gap: 20px;
+  }
+
+  .user-logo {
+    width: 80px;
+    height: 80px;
+
+    p {
+      font-size: 28px;
+    }
+  }
+
+  .user-name {
+    gap: 15px;
+
+    > p {
+      font-size: 28px;
+    }
   }
 
   .contact-info {
     width: 100%;
-  }
-}
+    margin-top: 25px;
+    gap: 20px;
 
-@media (max-width: 768px) {
-  .contact-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    min-height: auto;
-    padding-bottom: 12px;
-    width: 100%;
-
-    .header-divider {
-      display: none;
+    h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
     }
 
-    p {
-      padding-bottom: 10px;
-      position: relative;
-      width: auto;
+    .contact-item {
+      gap: 8px;
 
-      &::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 60px;
-        height: 3px;
-        background-color: var(--accent-primary-color);
+      .contact-label {
+        font-size: 16px;
+      }
+
+      .contact-value {
+        font-size: 16px;
       }
     }
   }
