@@ -53,7 +53,7 @@
 
     // Desktop: Versteckt
     &:not(.mobile-back-btn) {
-      display: block;
+      display: none;
     }
 
     // Mobile: Sichtbar und funktional
@@ -63,7 +63,7 @@
   }
 
   .mobile-back-btn {
-    display: block !important;
+    display: none;
     position: absolute;
     top: 20px;
     right: 20px;
@@ -348,6 +348,10 @@
     position: relative;
     padding-top: 20px;
     width: 100%;
+  }
+
+  .mobile-back-btn {
+    display: block !important; // In mobiler Ansicht sichtbar
   }
 
   .mobile-options-btn {
