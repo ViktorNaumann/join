@@ -5,7 +5,7 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  src: url('/assets/fonts/inter-v19-latin-regular.woff2') format('woff2'); 
+  src: url('./../public/assets/fonts/inter-v19-latin-regular.woff2') format('woff2'); 
 }
 /* inter-500 - latin */
 @font-face {
@@ -13,7 +13,7 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
-  src: url('/assets/fonts/inter-v19-latin-500.woff2') format('woff2'); 
+  src: url('./../public/assets/fonts/inter-v19-latin-500.woff2') format('woff2'); 
 }
 /* inter-700 - latin */
 @font-face {
@@ -21,7 +21,7 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  src: url('/assets/fonts/inter-v19-latin-700.woff2') format('woff2');
+  src: url('./../public/assets/fonts/inter-v19-latin-700.woff2') format('woff2');
 }
 
 @mixin inter400-fs27 {
