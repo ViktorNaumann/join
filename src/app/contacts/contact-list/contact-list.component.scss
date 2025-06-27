@@ -3,11 +3,12 @@
 .contact-list {
   width: 100%;
   max-width: 456px;
-  height: 100%;
+  height: calc(100dvh - 180px);
   max-height: none;
   overflow-y: auto;
   margin-top: -9px;
   padding-bottom: 80px;
+  scrollbar-color: var(--background-default-dark) transparent;
 
   .add-button {
     @include btn;
@@ -41,7 +42,7 @@
     color: #000000;
     padding: clamp(8px, 1.5vw, 17px) clamp(12px, 3vw, 36px);
     gap: 8px;
-    border-bottom: 1px solid #d1d1d1;
+    border-bottom: 1px solid var(--background-default-dark);
     margin-bottom: clamp(4px, 1vw, 8px);
     max-width: 352px;
   }
@@ -131,7 +132,7 @@
       background: transparent;
     }
     &::-webkit-scrollbar-thumb {
-      background-color: #8b8b8b;
+      background-color: --background-default-dark;
       border-radius: 4px;
     }
     
