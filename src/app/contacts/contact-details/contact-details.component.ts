@@ -15,12 +15,13 @@ import {
   HostListener,
   ElementRef,
 } from '@angular/core';
-import { ContactService, Contact } from '../services/contact.service';
+import { ContactService, Contact } from '../../services/contact.service';
 import { Subscription, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contact-details',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './contact-details.component.html',
   styleUrl: './contact-details.component.scss',
