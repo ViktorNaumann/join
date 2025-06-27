@@ -48,7 +48,6 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      gap: 16px;
       padding: 12px 0;
       cursor: pointer;
       transition: background-color 0.2s ease;
@@ -58,27 +57,36 @@
       padding-left: calc(32px + (232px - 200px) / 2);
       padding-right: 32px;
 
-      img {
+      a {
+        gap: 16px;
+        display: flex;
+        align-items: center;
+
+        img {
         width: 24px;
         height: 24px;
-      }
+        }
 
-      span {
-        font-size: 16px;
-        color: #cdcdcd;
-        font-family: var(--font-primary);
+        span {
+          font-size: 16px;
+          color: #cdcdcd;
+          font-family: var(--font-primary);
+        }
       }
 
       &:hover,
       &.active {
         background-color: #2a3d59;
 
-        span {
-          color: white;
-        }
+        a {
+          
+          span {
+            color: white;
+          }
 
-        img {
-          filter: brightness(0) invert(1);
+          img {
+            filter: brightness(0) invert(1);
+          }
         }
       }
     }
@@ -154,8 +162,7 @@
       }
 
       li {
-        flex-direction: column;
-        padding: 8px 12px;
+        padding: 4px 0;
         text-align: center;
         flex: 1;
         border-radius: 8px;
@@ -167,6 +174,7 @@
           display: flex;
           align-items: center;
           gap: 4px;
+          flex-direction: column;
 
           img {
             width: 20px;
