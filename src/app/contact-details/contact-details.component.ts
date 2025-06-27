@@ -15,7 +15,7 @@ import {
   HostListener,
   ElementRef,
 } from '@angular/core';
-import { ContactService, Contact } from '../../services/contact.service';
+import { ContactService, Contact } from '../services/contact.service';
 import { Subscription, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 

@@ -1,4 +1,4 @@
-@import "styles.scss";
+@import "./../../styles.scss";
 
 .contact-list {
   width: 100%;
@@ -27,7 +27,7 @@
       content: "";
       width: clamp(20px, 4vw, 24px);
       height: clamp(20px, 4vw, 24px);
-      background-image: url("../../../../public/assets/img/svg/add-person.svg");
+      background-image: url("../../../public/assets/img/svg/add-person.svg");
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;

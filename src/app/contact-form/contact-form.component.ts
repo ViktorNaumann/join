@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ContactService, Contact } from '../../services/contact.service';
-import { notOnlyWhitespace } from '../../services/contact.service';
+import { ContactService, Contact } from '../services/contact.service';
+import { notOnlyWhitespace } from '../services/contact.service';
 import { Subscription } from 'rxjs';
 
 @Component({

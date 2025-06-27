@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ContactService, Contact } from '../../services/contact.service';
+import { ContactService, Contact } from '../services/contact.service';
 import { Subscription } from 'rxjs';
 
 @Component({
