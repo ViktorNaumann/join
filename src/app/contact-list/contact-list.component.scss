@@ -3,7 +3,7 @@
 .contact-list {
   width: 100%;
   max-width: 456px;
-  height: calc(100dvh - 180px);
+  height: calc(100dvh - 100px);
   max-height: none;
   overflow-y: auto;
   margin-top: -9px;
@@ -117,6 +117,12 @@
         text-overflow: ellipsis;
       }
     }
+  }
+}
+
+@media(max-width: 1000px) {
+  .contact-list {
+    height: calc(100dvh - 190px);
   }
 }
 
