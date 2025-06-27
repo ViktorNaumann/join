@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ContactListComponent } from '../contact-list/contact-list.component';
-import { ContactDetailsComponent } from '../contact-details/contact-details.component';
-import { ContactFormComponent } from '../contact-form/contact-form.component';
+import { ContactListComponent } from './contact-list/contact-list.component';
+import { ContactDetailsComponent } from './contact-details/contact-details.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 import { ContactService, Contact } from './../services/contact.service';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
