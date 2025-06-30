@@ -3,13 +3,20 @@ import { TaskComponent } from './task/task.component';
 import {trigger, state, style,transition,animate, AnimationEvent } from '@angular/animations';
 import { Observable } from 'rxjs';
 import { TaskDetailsComponent } from './task-details/task-details.component';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+  CdkDrag,
+  CdkDropList,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-board',
   imports: [
     TaskComponent,
-    TaskDetailsComponent
-  ],
+    TaskDetailsComponent,
+  CdkDropList, CdkDrag],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
   animations: [
@@ -68,5 +75,26 @@ export class BoardComponent {
           this.backgroundVisible = true;
         }, 50);
       }
+    }  // Test-Daten für die Drag & Drop Funktionalität
+  todo:string[] = ['Task 1', 'Task 2', 'Task 3'];
+  inprogress: string[] = ['Completed Task 1'];
+  awaitfeedback: string[] = [];
+  done: string[] = [];
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
     }
+  }
 }
