@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { ContactService } from '../../services/contact.service';
 
 @Component({
   selector: 'app-task',
@@ -10,10 +11,5 @@ import { Component } from '@angular/core';
   styleUrl: './task.component.scss'
 })
 export class TaskComponent {
-  showContent = true;
-
-  onClose() {
-    console.log('Close button clicked');
-    this.showContent = false;
-  }
+  category ='technical'; //später dynamisch setzen
 }

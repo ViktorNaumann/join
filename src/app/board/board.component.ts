@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import {trigger, state, style,transition,animate, AnimationEvent } from '@angular/animations';
 import { Observable } from 'rxjs';
+import { TaskDetailsComponent } from './task-details/task-details.component';
 
 @Component({
   selector: 'app-board',
   imports: [
-    TaskComponent
+    TaskComponent,
+    TaskDetailsComponent
   ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
