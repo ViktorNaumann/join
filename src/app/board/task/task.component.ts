@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
+import { TaskService } from '../../services/task.service';
+import { Task } from '../../services/task.service';
 
 @Component({
   selector: 'app-task',
@@ -12,4 +14,16 @@ import { ContactService } from '../../services/contact.service';
 })
 export class TaskComponent {
   category ='technical'; //später dynamisch setzen
+  task?: Task;
+
+  constructor(public taskService: TaskService){}
+
+  ngOnInit(): void {
+    this.loadTasks();
+  }
+
+  loadTasks() {
+    this.taskService.getTasks()
+  }
+
 }
