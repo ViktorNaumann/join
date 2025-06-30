@@ -103,7 +103,6 @@
   gap: 20px;
   padding: 0 20px;
   @include inter400-fs12;
-  
 }
 
 .column {
@@ -126,44 +125,46 @@
     position: relative;
     width: 24px;
     height: 24px;
-  }
-
-  img {
-    position: absolute;
-    width: 22px;
-    height: 22px;
-    transition: opacity 0.3s ease;
-    cursor: pointer;
-  }
-
-  .hover-icon {
-    opacity: 0;
-  }
-
-  &:hover {
-    .default-icon {
-      // display: none;
-      opacity: 0;
+    img {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
     }
 
     .hover-icon {
-      opacity: 1;
+      opacity: 0;
+    }
+
+    &:hover {
+      .default-icon {
+        // display: none;
+        opacity: 0;
+      }
+
+      .hover-icon {
+        opacity: 1;
+      }
     }
   }
 }
 
-//
-//
-//
-// TEST
-
+.empty-column {
+  border: dashed 1px #ccc;
+  border-radius: 14px;
+  color: #ccc;
+  background-color: #cccccc31;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+  opacity: 0.9;
+  @include inter400-fs12;
+}
 
 .drop-list {
-  border: solid 1px #ccc;
   min-height: 500px;
   width: 200px;
-  background: white;
-  border-radius: 4px;
   overflow: hidden;
   display: block;
   padding: 10px; // Innenabstand hinzufügen
@@ -231,7 +232,12 @@
   width: 100%;
   height: 100%;
   // background-color: rgba(0, 0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.5); //später wieder auf 0 setzen und an visible knüpfen
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); //später wieder auf 0 setzen und an visible knüpfen
   display: flex; //hier gern auf none setzen
   justify-content: center;
   align-items: center;
