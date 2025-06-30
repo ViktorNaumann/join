@@ -19,6 +19,7 @@
     .search-input-container {
       position: relative;
       width: 250px;
+      cursor: pointer;
 
       input {
         width: 100%;
@@ -28,6 +29,7 @@
         padding: 12px 50px 12px 16px;
         @include inter400-fs16();
         background: var(--background-light);
+        cursor: pointer;
 
         &::placeholder {
           color: var(--text-color-medium);
@@ -118,6 +120,7 @@
     width: 22px;
     height: 22px;
     transition: opacity 0.3s ease;
+    cursor: pointer;
   }
 
   .hover-icon {
