@@ -1,0 +1,26 @@
+<div class="card-layout">
+    <div class="wrapper-top">
+        <p class="category-flag-card" [style.background-color]="category == 'user' ? '#0038ff': '#1fd7c1'">category type</p>
+    </div>
+    <!-- Hier Liste von Tasks reinrendern lassen -->
+    <div class="task-card">
+        <h1>Title of task</h1>
+        <p>Description about the task</p>
+        <div class="subtask-wrapper">
+            <div class="subtask-bar-default"></div>
+            <!-- <div class="subtask-bar-done"></div> -->
+            <span>1/2 Subtasks</span>
+        </div>
+        <div class="card-bottom-wrapper">
+            <div class="collaborators-wrapper">
+                <div class="img-user-wrapper">
+                    <img class="img-user" src="assets/img/svg/person.svg" alt="User Image">
+                    <img class="img-user mrg" src="assets/img/svg/person.svg" alt="User Image">
+                    <img class="img-user mrg" src="assets/img/svg/person.svg" alt="User Image">
+                </div>
+            </div>
+            <img class="card-priority" src="assets/img/icons/prio-medium.png" alt="Priority Icon">
+        </div>
+    </div>
+</div>
+

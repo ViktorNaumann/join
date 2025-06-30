@@ -142,3 +142,18 @@
     </div>
   </div>
 </section>
+
+
+<!-- vorerst hier eingebaut, um daran arbeiten zu können-->
+
+<!-- Detailansicht für Task -->
+<div 
+class="task-overlay" 
+[@slideInOut]="animationDirection"
+(@slideInOut.done)="onOverlayAnimationDone($event)"
+[class.backgroundVisible]="backgroundVisible">
+  <app-task-details></app-task-details>
+</div>
+
+<!-- Task Cards für das Board -->
+<app-task></app-task>

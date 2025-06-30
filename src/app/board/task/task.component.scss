@@ -1,0 +1,188 @@
+@import "./../../../styles.scss";
+
+//für die kleine Ansicht im Board?
+.card-layout {
+    width: 250px;
+    height: 265px;
+    background-color: var(--background-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 30px;
+    gap: 24px;
+    padding: 24px 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    @include inter400-fs16();
+    h1 {
+        @include inter700-fs16();
+    }
+    .category-flag-card {
+        @include flex-center();
+        @include inter400-fs16();
+        height: auto;
+        width: fit-content;
+        padding: 4px 8px;
+        border-radius: 10px;
+        color: var(--text-color-light);
+}
+}
+
+.task-card {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    p {
+        color: var(--background-default-dark)
+    }
+    span {
+        @include inter400-fs12();
+    }
+}
+
+.subtask-wrapper {
+    width: 100%;
+    height: fit-content;
+    @include flex-center();
+    gap: 8px;
+}
+
+.subtask-bar-default {
+    height: 6px;
+    border-radius: 2px;
+    flex: 1;
+    background-color: var(--background-default-light);
+    position: relative;
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 6px;
+        width: 50%;
+        border-radius: 2px;
+        background-color: blue;
+    }
+}
+
+.mrg {
+    margin-left: -16px;
+}
+
+.card-bottom-wrapper {
+    display: flex;
+    justify-content: space-between;
+    .card-priority {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+//overlay
+.content-wrapper {
+    height: 760px;
+    max-width: 390px;
+    min-width: 320px;
+    background-color: var(--background-light);
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    gap: 24px;
+    padding: clamp(16px, calc(2.86vw + 6.85px), 48px);
+    @include inter400-fs20();
+    h1 {
+        @include inter700-fs61();
+    }
+}
+
+.task-content {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.wrapper-top {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between
+}
+
+.category-flag {
+    @include inter400-fs20();
+    height: auto;
+    width: fit-content;
+    padding: 8px clamp(10px, calc(0.54vw + 8.3px), 16px);
+    border-radius: 10px;
+    color: var(--text-color-light);
+}
+
+.btn-close {
+    @include btn();
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    &:hover {
+        background-color: var(--background-default-light);
+        border-radius: 50%;
+    }
+}
+
+.btn-edit,
+.btn-delete {
+    @include inter400-fs16();
+    @include flex-center();
+    border: unset;
+    background-color: transparent;
+    gap: 8px;
+    svg {
+        width: 22px;
+        height: 22px;
+        path {
+            fill: var(--background-dark);
+        }
+    }
+    &:hover {
+        color: var(--accent-primary-color);
+        border-radius: 50%;
+        svg path {
+            fill: var(--accent-primary-color)
+        }
+    }
+}
+
+.btn-wrapper {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.separator {
+    width: 1px;
+    height: 16px;
+    background-color: var(--background-default-dark);
+}
+
+table {
+    gap: 24px;
+    tr {
+        height: 48px;
+    }
+}
+
+.img-user-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    img {
+        background-color: var(--background-default-light);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+    }
+    }
