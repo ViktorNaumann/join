@@ -16,7 +16,8 @@ import {
   imports: [
     TaskComponent,
     TaskDetailsComponent,
-  CdkDropList, CdkDrag],
+    CdkDropList, 
+    CdkDrag],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
   animations: [
