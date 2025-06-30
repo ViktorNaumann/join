@@ -9,6 +9,7 @@ export interface Task {
   description?: string;
   date: Date; //Firebase verarbeitet es als Timestamp, d.h. beim Auslesen muss man es wieder umwandeln
   priority: 'low' | 'medium' | 'urgent';
+  status: 'to-do' | 'in-progress' | 'await-feedback' |'done';
   assignedTo?: string[];
   category: 'technical' | 'user';
   subtask?: Subtask[];

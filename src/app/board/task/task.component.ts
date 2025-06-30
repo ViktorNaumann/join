@@ -14,7 +14,7 @@ import { Task } from '../../services/task.service';
 })
 export class TaskComponent {
   category ='technical'; //später dynamisch setzen
-  task?: Task;
+  tasks: Task[] = [];
 
   constructor(public taskService: TaskService){}
 
@@ -23,7 +23,10 @@ export class TaskComponent {
   }
 
   loadTasks() {
-    this.taskService.getTasks()
+    this.taskService.getTasks().subscribe((tasks: Task[]) => {
+      this.tasks = tasks;
+      console.log('Tasks loaded:', this.tasks);
+    });
   }
 
 }
