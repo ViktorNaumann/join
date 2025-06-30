@@ -19,3 +19,13 @@
     </div>
   </div>
 </section>
+
+
+<!-- vorerst hier eingebaut, um daran arbeiten zu können-->
+<div 
+class="task-overlay" 
+[@slideInOut]="animationDirection"
+(@slideInOut.done)="onOverlayAnimationDone($event)"
+[class.backgroundVisible]="backgroundVisible">
+  <app-task></app-task>
+</div>
