@@ -99,15 +99,28 @@
 .task-columns {
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 0 20px;
   @include inter400-fs12;
+  
 }
 
 .column {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 10px;
   position: relative;
+  flex: 1; // Gleichmäßige Verteilung der Spalten
+  max-width: 250px; // Maximale Breite pro Spalte
+  min-width: 200px; // Minimale Breite pro Spalte
+
+  .column-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 
   .icon-container {
     position: relative;
@@ -137,4 +150,76 @@
       opacity: 1;
     }
   }
+}
+
+//
+//
+//
+// TEST
+
+
+.drop-list {
+  border: solid 1px #ccc;
+  min-height: 500px;
+  width: 200px;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+  padding: 10px; // Innenabstand hinzufügen
+  margin: 10px 0; // Außenabstand für bessere Trennung
+}
+
+.drop-box {
+  padding: 15px 12px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: pointer;
+  background: white;
+  font-size: 14px;
+  margin-bottom: 8px; // Abstand zwischen Items
+  border-radius: 4px; // Abgerundete Ecken für Items
+
+  &:hover {
+    background-color: #f5f5f5; // Hover-Effekt für bessere UX
+  }
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+// Zusätzliche Styles für bessere Drop-Indikation
+.example-list.cdk-drop-list-receiving {
+  background-color: #f0f8ff; // Heller Hintergrund beim Hovern
+  border-color: var(--accent-primary-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.example-list.cdk-drop-list-dragging {
+  background-color: #f9f9f9; // Leicht anderer Hintergrund während des Draggings
 }
