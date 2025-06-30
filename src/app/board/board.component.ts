@@ -15,10 +15,10 @@ import {
   selector: 'app-board',
   imports: [
     TaskComponent,
-    TaskDetailsComponent
+    TaskDetailsComponent,
   CdkDropList, CdkDrag],
   templateUrl: './board.component.html',
-  styleUrl: './board.component.scss',,
+  styleUrl: './board.component.scss',
   animations: [
       trigger('slideInOut', [
         // ENTER: void => right
