@@ -44,7 +44,7 @@
         (cdkDropListDropped)="drop($event)"
       >
       @if (todo.length === 0) {
-          <div class="empty-column">Kein Task</div>
+          <div class="empty-column">No tasks To do</div>
         }
         @for (item of todo; track item) {
         <!-- <div class="drop-box" cdkDrag>{{ item }}</div> -->
@@ -78,7 +78,7 @@
         (cdkDropListDropped)="drop($event)"
       >
       @if (inprogress.length === 0) {
-          <div class="empty-column">Kein Task</div>
+          <div class="empty-column">No tasks To do</div>
         }
         @for (item of inprogress; track item) {
         <!-- <div class="drop-box" cdkDrag>{{ item }}</div> -->
@@ -113,7 +113,7 @@
         (cdkDropListDropped)="drop($event)"
       >
       @if (awaitfeedback.length === 0) {
-          <div class="empty-column">Kein Task</div>
+          <div class="empty-column">No tasks To do</div>
         }
         @for (item of awaitfeedback; track item) {
         <!-- <div class="drop-box" cdkDrag>{{ item }}</div> -->
@@ -148,7 +148,7 @@
         (cdkDropListDropped)="drop($event)"
       >
       @if (done.length === 0) {
-          <div class="empty-column">Kein Task</div>
+          <div class="empty-column">No tasks To do</div>
         }
         @for (item of done; track item) {
         <!-- <div class="drop-box" cdkDrag>{{ item }}</div> -->

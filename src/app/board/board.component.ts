@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import {trigger, state, style,transition,animate, AnimationEvent } from '@angular/animations';
 import { Observable } from 'rxjs';
@@ -20,6 +20,7 @@ import {
     CdkDrag],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
+  encapsulation: ViewEncapsulation.None,
   animations: [
       trigger('slideInOut', [
         // ENTER: void => right
@@ -77,8 +78,8 @@ export class BoardComponent {
         }, 50);
       }
     }  // Test-Daten für die Drag & Drop Funktionalität
-  todo:string[] = ['Task 1', 'Task 2', 'Task 3'];
-  inprogress: string[] = ['Completed Task 1'];
+  todo:string[] = ['Task 1', 'Task 2'];
+  inprogress: string[] = [];
   awaitfeedback: string[] = [];
   done: string[] = [];
 
