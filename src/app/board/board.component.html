@@ -53,7 +53,7 @@
          <!-- NEU mit Datenbankabruf -->
         @for (task of taskList; track $index) {
           @if( task.status === 'to-do') {
-           <app-task cdkDrag (taskSelected)="openTaskDetail($event)" [taskList]="taskList" [subtaskList]="subtaskList"></app-task>
+           <app-task cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList"></app-task>
           }
         }
       </div>
@@ -92,7 +92,7 @@
           <!-- NEU mit Datenbankabruf -->
         @for (task of taskList; track $index) {
           @if( task.status === 'in-progress') {
-           <app-task cdkDrag (taskSelected)="openTaskDetail($event)" [taskList]="taskList" [subtaskList]="subtaskList"></app-task>
+           <app-task cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList"></app-task>
           }
         }
       </div>
@@ -133,7 +133,7 @@
          <!-- NEU mit Datenbankabruf -->
         @for (task of taskList; track $index) {
           @if( task.status === 'await-feedback') {
-           <app-task cdkDrag (taskSelected)="openTaskDetail($event)" [taskList]="taskList" [subtaskList]="subtaskList"></app-task>
+           <app-task cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList"></app-task>
           }
         }
       </div>
@@ -174,7 +174,7 @@
           <!-- NEU mit Datenbankabruf -->
         @for (task of taskList; track $index) {
           @if( task.status === 'done') {
-           <app-task cdkDrag (taskSelected)="openTaskDetail($event)" [taskList]="taskList" [subtaskList]="subtaskList"></app-task>
+           <app-task cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList"></app-task>
           }
         }
       </div>

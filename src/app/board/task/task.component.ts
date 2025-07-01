@@ -23,7 +23,7 @@ export class TaskComponent {
   // taskList: Task[] = [];
   // subtaskList: Subtask[] = [];
   // contactList: Contact[] = [];
-  @Input() taskList: Task[] = [];
+  @Input() task!: Task;
   @Input() subtaskList: Subtask[] = [];
   @Output() taskSelected = new EventEmitter<Task>();
   seletectedTask?: Task;

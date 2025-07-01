@@ -85,13 +85,32 @@ export class TaskService {
   }
 
   async addSubtask(subColId: string, subtask: Subtask): Promise<Subtask | null> {
-  try {
-    const subtasksRef = this.getSubtasksRef(subColId);
-    const docRef = await addDoc(subtasksRef, subtask);
-    return { id: docRef.id, ...subtask };
-  } catch (error) {
-    console.error('Error adding subtask:', error);
-    return null;
+    try {
+      const subtasksRef = this.getSubtasksRef(subColId);
+      const docRef = await addDoc(subtasksRef, subtask);
+      return { id: docRef.id, ...subtask };
+    } catch (error) {
+      console.error('Error adding subtask:', error);
+      return null;
+    }
   }
-}
+
+  async updateTask(docId: string, updatedTask: Task) {
+    let docRef = this.getSingleTaskRef(docId);
+    await updateDoc(docRef, this.getCleanJson(updatedTask)).catch((err) => {
+      console.error(err);
+    });
+  }
+
+  getCleanJson(updatedTask: Task) {
+    return {
+      title: updatedTask.title,
+      description: updatedTask.description,
+      date: updatedTask.date,
+      priority: updatedTask.priority,
+      status: updatedTask.status,
+      assignedTo: updatedTask.assignedTo,
+      category: updatedTask.category,
+    };
+  }
 }

@@ -101,12 +101,14 @@ export class BoardComponent {
         }, 50);
       }
     }  // Test-Daten für die Drag & Drop Funktionalität
-  todo:string[] = ['Task 1', 'Task 2'];
-  inprogress: string[] = [];
-  awaitfeedback: string[] = [];
-  done: string[] = [];
+    
+  // NEU Typen für drag&drop zu Task[] geändert
+  todo: Task[] = [];
+  inprogress: Task[] = [];
+  awaitfeedback: Task[] = [];
+  done: Task[] = [];
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -144,7 +146,32 @@ export class BoardComponent {
   loadTasks() {
     this.unsubTask = this.taskService.getTasks().subscribe((tasks: Task[]) => {
       this.taskList = tasks;
+      // Arrays leeren
+      this.todo = [];
+      this.inprogress = [];
+      this.awaitfeedback = [];
+      this.done = [];
       console.log('Tasks loaded:', this.taskList);
+
+      for (const task of tasks) {
+      switch (task.status) {
+        case 'to-do':
+          this.todo.push(task);
+          break;
+        case 'in-progress':
+          this.inprogress.push(task);
+          break;
+        case 'await-feedback':
+          this.awaitfeedback.push(task);
+          break;
+        case 'done':
+          this.done.push(task);
+          break;
+        default:
+          console.warn(`Unbekannter Status bei Task ${task.title}:`, task.status);
+      }
+    }
+
       this.loadSubtasks();
     });
     return () => this.unsubTask.unsubscribe();
