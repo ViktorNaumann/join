@@ -39,6 +39,7 @@
         cdkDropList
         #todoList="cdkDropList"
         [cdkDropListData]="todo"
+        id="todoList"
         [cdkDropListConnectedTo]="[inprogressList, awaitfeedbackList, doneList]"
         class="drop-list"
         (cdkDropListDropped)="drop($event)"
@@ -53,7 +54,7 @@
          <!-- NEU mit Datenbankabruf -->
         @for (task of taskList; track $index) {
           @if( task.status === 'to-do') {
-           <app-task cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList"></app-task>
+           <app-task [cdkDragData]="task" cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList"></app-task>
           }
         }
       </div>
@@ -78,6 +79,7 @@
       <div
         cdkDropList
         #inprogressList="cdkDropList"
+        id="inprogressList"
         [cdkDropListData]="inprogress"
         [cdkDropListConnectedTo]="[todoList, awaitfeedbackList, doneList]"
         class="drop-list"
@@ -92,7 +94,7 @@
           <!-- NEU mit Datenbankabruf -->
         @for (task of taskList; track $index) {
           @if( task.status === 'in-progress') {
-           <app-task cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList"></app-task>
+           <app-task [cdkDragData]="task" cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList"></app-task>
           }
         }
       </div>
@@ -119,6 +121,7 @@
         cdkDropList
         #awaitfeedbackList="cdkDropList"
         [cdkDropListData]="awaitfeedback"
+        id="awaitfeedbackList"
         [cdkDropListConnectedTo]="[todoList, inprogressList, doneList]"
         class="drop-list"
         (cdkDropListDropped)="drop($event)"
@@ -133,7 +136,7 @@
          <!-- NEU mit Datenbankabruf -->
         @for (task of taskList; track $index) {
           @if( task.status === 'await-feedback') {
-           <app-task cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList"></app-task>
+           <app-task [cdkDragData]="task" cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList"></app-task>
           }
         }
       </div>
@@ -160,6 +163,7 @@
         cdkDropList
         #doneList="cdkDropList"
         [cdkDropListData]="done"
+        id="doneList"
         [cdkDropListConnectedTo]="[todoList, inprogressList, awaitfeedbackList]"
         class="drop-list"
         (cdkDropListDropped)="drop($event)"
@@ -174,7 +178,7 @@
           <!-- NEU mit Datenbankabruf -->
         @for (task of taskList; track $index) {
           @if( task.status === 'done') {
-           <app-task cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList"></app-task>
+           <app-task [cdkDragData]="task" cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList"></app-task>
           }
         }
       </div>
