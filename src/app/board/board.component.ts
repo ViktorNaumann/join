@@ -109,6 +109,23 @@ export class BoardComponent {
   done: Task[] = [];
 
   drop(event: CdkDragDrop<Task[]>) {
+    const task = event.item.data as Task; // Task-Daten aus dem Drag-Event
+    let newStatus: Task['status'];
+
+  // Status basierend auf der Container-ID bestimmen
+  if (event.container.id === 'todoList') {
+    newStatus = 'to-do';
+  } else if (event.container.id === 'inprogressList') {
+    newStatus = 'in-progress';
+  } else if (event.container.id === 'awaitfeedbackList') {
+    newStatus = 'await-feedback';
+  } else if (event.container.id === 'doneList') {
+    newStatus = 'done';
+  } else {
+    return; // Fallback, falls Container unbekannt
+  }
+
+
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -122,6 +139,17 @@ export class BoardComponent {
         event.previousIndex,
         event.currentIndex
       );
+
+// Status in Firebase aktualisieren
+    if (task.id && task.status !== newStatus) {
+      const updatedTask: Task = { ...task, status: newStatus };
+      this.taskService.updateTask(task.id, updatedTask).then(() => {
+        console.log(`Task "${task.title}" status updated to "${newStatus}"`);
+      }).catch(error => {
+        console.error('Error updating task status:', error);
+      });
+    }
+
     }
   }
 
