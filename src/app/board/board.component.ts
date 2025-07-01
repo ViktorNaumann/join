@@ -107,8 +107,8 @@ export class BoardComponent {
       const searchLower = this.searchTerm.toLowerCase();
       this.searchResults = this.taskList.filter(
         (task) =>
-          task.title.toLowerCase().includes(searchLower) ||
-          task.description?.toLowerCase().includes(searchLower)
+          task.title.toLowerCase().includes(searchLower) || // Suche im Titel
+          task.description?.toLowerCase().includes(searchLower) // Suche in der Beschreibung
       );
       this.showSearchResults = true;
     } else {

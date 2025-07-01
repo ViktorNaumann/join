@@ -31,11 +31,15 @@
               class="search-result-item"
               (click)="selectTaskFromSearch(task)"
             >
-              <div class="task-title">{{ task.title }}</div>
               <div class="task-status">{{ task.status }}</div>
+              <div class="task-title">{{ task.title }}</div>
               <div class="task-description">
                 {{ task.description | slice : 0 : 50 }}...
               </div>
+              <!-- Ohne Kürzung -->
+              <!-- <div class="task-description">
+                {{ task.description }}
+              </div> -->
             </div>
           </div>
         </div>
@@ -79,12 +83,17 @@
          <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
         } -->
 
-         <!-- NEU mit Datenbankabruf -->
-        @for (task of taskList; track $index) {
-          @if( task.status === 'to-do') {
-           <app-task [cdkDragData]="task" cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList" (subtaskForSelectedTask)="getSubtasks($event)"></app-task>
-          }
-        }
+        <!-- NEU mit Datenbankabruf -->
+        @for (task of taskList; track $index) { @if( task.status === 'to-do') {
+        <app-task
+          [cdkDragData]="task"
+          cdkDrag
+          (taskSelected)="openTaskDetail($event)"
+          [task]="task"
+          [subtaskList]="subtaskList"
+          (subtaskForSelectedTask)="getSubtasks($event)"
+        ></app-task>
+        } }
       </div>
     </div>
 
@@ -119,12 +128,18 @@
         <!-- @for (item of inprogress; track item) {
          <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
         } -->
-          <!-- NEU mit Datenbankabruf -->
-        @for (task of taskList; track $index) {
-          @if( task.status === 'in-progress') {
-           <app-task [cdkDragData]="task" cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList" (subtaskForSelectedTask)="getSubtasks($event)"></app-task>
-          }
-        }
+        <!-- NEU mit Datenbankabruf -->
+        @for (task of taskList; track $index) { @if( task.status ===
+        'in-progress') {
+        <app-task
+          [cdkDragData]="task"
+          cdkDrag
+          (taskSelected)="openTaskDetail($event)"
+          [task]="task"
+          [subtaskList]="subtaskList"
+          (subtaskForSelectedTask)="getSubtasks($event)"
+        ></app-task>
+        } }
       </div>
     </div>
 
@@ -161,12 +176,18 @@
          <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
         } -->
 
-         <!-- NEU mit Datenbankabruf -->
-        @for (task of taskList; track $index) {
-          @if( task.status === 'await-feedback') {
-           <app-task [cdkDragData]="task" cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList" (subtaskForSelectedTask)="getSubtasks($event)"></app-task>
-          }
-        }
+        <!-- NEU mit Datenbankabruf -->
+        @for (task of taskList; track $index) { @if( task.status ===
+        'await-feedback') {
+        <app-task
+          [cdkDragData]="task"
+          cdkDrag
+          (taskSelected)="openTaskDetail($event)"
+          [task]="task"
+          [subtaskList]="subtaskList"
+          (subtaskForSelectedTask)="getSubtasks($event)"
+        ></app-task>
+        } }
       </div>
     </div>
 
@@ -203,12 +224,17 @@
          <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
         } -->
 
-          <!-- NEU mit Datenbankabruf -->
-        @for (task of taskList; track $index) {
-          @if( task.status === 'done') {
-           <app-task [cdkDragData]="task" cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList" (subtaskForSelectedTask)="getSubtasks($event)"></app-task>
-          }
-        }
+        <!-- NEU mit Datenbankabruf -->
+        @for (task of taskList; track $index) { @if( task.status === 'done') {
+        <app-task
+          [cdkDragData]="task"
+          cdkDrag
+          (taskSelected)="openTaskDetail($event)"
+          [task]="task"
+          [subtaskList]="subtaskList"
+          (subtaskForSelectedTask)="getSubtasks($event)"
+        ></app-task>
+        } }
       </div>
     </div>
   </div>
@@ -217,13 +243,19 @@
 <!-- vorerst hier eingebaut, um daran arbeiten zu können-->
 
 <!-- Detailansicht für Task -->
-<div 
-class="task-overlay" 
-[@slideInOut]="animationDirection"
-(@slideInOut.done)="onOverlayAnimationDone($event)"
-[class.backgroundVisible]="backgroundVisible"
-*ngIf="backgroundVisible">
-  <app-task-details *ngIf="selectedTask" (closeTaskDetails)="closeDetailsOverlay($event)" [task]="selectedTask" [subtask]="subtaskForSelectedTask"></app-task-details>
+<div
+  class="task-overlay"
+  [@slideInOut]="animationDirection"
+  (@slideInOut.done)="onOverlayAnimationDone($event)"
+  [class.backgroundVisible]="backgroundVisible"
+  *ngIf="backgroundVisible"
+>
+  <app-task-details
+    *ngIf="selectedTask"
+    (closeTaskDetails)="closeDetailsOverlay($event)"
+    [task]="selectedTask"
+    [subtask]="subtaskForSelectedTask"
+  ></app-task-details>
 </div>
 
 <!-- Task Cards für das Board -->
