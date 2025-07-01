@@ -12,7 +12,7 @@
     margin: 0;
     @include inter700-fs61();
     color: var(--text-color-dark);
-    width: 920px; /* Gleiche Breite wie das Formular */
+    width: 920px;
     text-align: left;
   }
 }
@@ -114,13 +114,25 @@
     width: 136px;
     height: 56px;
     border-radius: 10px;
-    
+
     &.active {
-      background-color: var(--accent-primary-color);
       color: var(--text-color-light);
-      border-color: var(--accent-primary-color);
+      border-color: transparent;
     }
-    
+
+    &.active.urgent {
+      background-color: #FF3D00;
+      border-color: #FF3D00;
+    }
+    &.active.medium {
+      background-color: #FFA800;
+      border-color: #FFA800;
+    }
+    &.active.low {
+      background-color: #7AE229;
+      border-color: #7AE229;
+    }
+
     img {
       width: 20px;
       height: 20px;
