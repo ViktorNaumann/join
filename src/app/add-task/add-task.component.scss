@@ -323,10 +323,19 @@
     gap: 8px;
     align-items: center;
 
-    .cancel-icon,
+    .cancel-icon {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
     .confirm-icon {
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
       cursor: pointer;
       
       &:hover {
