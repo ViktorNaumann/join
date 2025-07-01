@@ -27,7 +27,7 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  width: 920px; /* 440px + 40px gap + 440px */
+  width: 920px;
 }
 
 .form-main {
@@ -48,7 +48,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  width: 440px; /* Explizite Breite setzen */
+  width: 440px;
 }
 
 .form-group {
@@ -447,8 +447,8 @@
   margin-top: 20px;
   
   .required-note {
-    @include inter400-fs12();
-    color: var(--text-color-medium);
+    @include inter400-fs16();
+    color: #000000;
     flex-shrink: 0;
     width: fit-content;
     
@@ -461,7 +461,7 @@
   .form-actions {
     display: flex;
     gap: 16px;
-    margin-left: 605px; /* 440px (form-left) + 41px (gap + divider) = exakte Position des form-right */
+    margin-left: 605px;
     
     .btn-clear {
       @include btn();
@@ -482,7 +482,6 @@
   }
 }
 
-// Selected contacts avatars
 .selected-contacts {
   display: flex;
   flex-wrap: wrap;
