@@ -3,16 +3,44 @@
     <div><h1>Board</h1></div>
     <div class="header-controls">
       <div class="search-input-container">
-        <input type="text" placeholder="Find Task" />
-        <div class="separator"></div>
-        <div class="search-icon-wrapper">
-          <img
-            src="assets/img/icons/search.png"
-            alt="Search"
-            class="search-icon"
+        <div class="search-wrapper">
+          <input
+            type="text"
+            placeholder="Find Task"
+            [(ngModel)]="searchTerm"
+            (input)="onSearchInput()"
+            (blur)="onSearchBlur()"
+            (focus)="onSearchInput()"
           />
+          <div class="separator"></div>
+          <div class="search-icon-wrapper">
+            <img
+              src="assets/img/icons/search.png"
+              alt="Search"
+              class="search-icon"
+            />
+          </div>
+
+          <!-- NEU: Dropdown mit Suchergebnissen -->
+          <div class="search-dropdown" *ngIf="showSearchResults">
+            <div *ngIf="searchResults.length === 0" class="no-results">
+              Keine Tasks gefunden
+            </div>
+            <div
+              *ngFor="let task of searchResults"
+              class="search-result-item"
+              (click)="selectTaskFromSearch(task)"
+            >
+              <div class="task-title">{{ task.title }}</div>
+              <div class="task-status">{{ task.status }}</div>
+              <div class="task-description">
+                {{ task.description | slice : 0 : 50 }}...
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
       <button>Add Task +</button>
     </div>
   </div>
@@ -44,19 +72,23 @@
         class="drop-list"
         (cdkDropListDropped)="drop($event)"
       >
-      @if (todo.length === 0) {
-          <div class="empty-column">No tasks To do</div>
+        @if (todo.length === 0) {
+        <div class="empty-column">No tasks To do</div>
         }
         <!-- @for (item of todo; track item) {
          <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
         } -->
 
-         <!-- NEU mit Datenbankabruf -->
-        @for (task of taskList; track $index) {
-          @if( task.status === 'to-do') {
-           <app-task [cdkDragData]="task" cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList"></app-task>
-          }
-        }
+        <!-- NEU mit Datenbankabruf -->
+        @for (task of taskList; track $index) { @if( task.status === 'to-do') {
+        <app-task
+          [cdkDragData]="task"
+          cdkDrag
+          (taskSelected)="openTaskDetail($event)"
+          [task]="task"
+          [subtaskList]="subtaskList"
+        ></app-task>
+        } }
       </div>
     </div>
 
@@ -85,18 +117,23 @@
         class="drop-list"
         (cdkDropListDropped)="drop($event)"
       >
-      @if (inprogress.length === 0) {
-          <div class="empty-column">No tasks To do</div>
+        @if (inprogress.length === 0) {
+        <div class="empty-column">No tasks To do</div>
         }
         <!-- @for (item of inprogress; track item) {
          <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
         } -->
-          <!-- NEU mit Datenbankabruf -->
-        @for (task of taskList; track $index) {
-          @if( task.status === 'in-progress') {
-           <app-task [cdkDragData]="task" cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList"></app-task>
-          }
-        }
+        <!-- NEU mit Datenbankabruf -->
+        @for (task of taskList; track $index) { @if( task.status ===
+        'in-progress') {
+        <app-task
+          [cdkDragData]="task"
+          cdkDrag
+          (taskSelected)="openTaskDetail($event)"
+          [task]="task"
+          [subtaskList]="subtaskList"
+        ></app-task>
+        } }
       </div>
     </div>
 
@@ -126,19 +163,24 @@
         class="drop-list"
         (cdkDropListDropped)="drop($event)"
       >
-      @if (awaitfeedback.length === 0) {
-          <div class="empty-column">No tasks To do</div>
+        @if (awaitfeedback.length === 0) {
+        <div class="empty-column">No tasks To do</div>
         }
         <!-- @for (item of awaitfeedback; track item) {
          <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
         } -->
 
-         <!-- NEU mit Datenbankabruf -->
-        @for (task of taskList; track $index) {
-          @if( task.status === 'await-feedback') {
-           <app-task [cdkDragData]="task" cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList"></app-task>
-          }
-        }
+        <!-- NEU mit Datenbankabruf -->
+        @for (task of taskList; track $index) { @if( task.status ===
+        'await-feedback') {
+        <app-task
+          [cdkDragData]="task"
+          cdkDrag
+          (taskSelected)="openTaskDetail($event)"
+          [task]="task"
+          [subtaskList]="subtaskList"
+        ></app-task>
+        } }
       </div>
     </div>
 
@@ -168,35 +210,41 @@
         class="drop-list"
         (cdkDropListDropped)="drop($event)"
       >
-      @if (done.length === 0) {
-          <div class="empty-column">No tasks To do</div>
+        @if (done.length === 0) {
+        <div class="empty-column">No tasks To do</div>
         }
         <!-- @for (item of done; track item) {
          <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
         } -->
 
-          <!-- NEU mit Datenbankabruf -->
-        @for (task of taskList; track $index) {
-          @if( task.status === 'done') {
-           <app-task [cdkDragData]="task" cdkDrag (taskSelected)="openTaskDetail($event)" [task]="task" [subtaskList]="subtaskList"></app-task>
-          }
-        }
+        <!-- NEU mit Datenbankabruf -->
+        @for (task of taskList; track $index) { @if( task.status === 'done') {
+        <app-task
+          [cdkDragData]="task"
+          cdkDrag
+          (taskSelected)="openTaskDetail($event)"
+          [task]="task"
+          [subtaskList]="subtaskList"
+        ></app-task>
+        } }
       </div>
     </div>
   </div>
 </section>
 
-
 <!-- vorerst hier eingebaut, um daran arbeiten zu können-->
 
 <!-- Detailansicht für Task -->
-<div 
-class="task-overlay" 
-[@slideInOut]="animationDirection"
-(@slideInOut.done)="onOverlayAnimationDone($event)"
-[class.backgroundVisible]="backgroundVisible"
-*ngIf="backgroundVisible">
-  <app-task-details (closeTaskDetails)="closeDetailsOverlay($event)"></app-task-details>
+<div
+  class="task-overlay"
+  [@slideInOut]="animationDirection"
+  (@slideInOut.done)="onOverlayAnimationDone($event)"
+  [class.backgroundVisible]="backgroundVisible"
+  *ngIf="backgroundVisible"
+>
+  <app-task-details
+    (closeTaskDetails)="closeDetailsOverlay($event)"
+  ></app-task-details>
 </div>
 
 <!-- Task Cards für das Board -->
