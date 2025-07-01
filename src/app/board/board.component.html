@@ -46,8 +46,15 @@
       @if (todo.length === 0) {
           <div class="empty-column">No tasks To do</div>
         }
-        @for (item of todo; track item) {
+        <!-- @for (item of todo; track item) {
          <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
+        } -->
+
+         <!-- NEU mit Datenbankabruf -->
+        @for (task of taskList; track $index) {
+          @if( task.status === 'to-do') {
+           <app-task cdkDrag (taskSelected)="openTaskDetail($event)" [taskList]="taskList" [subtaskList]="subtaskList"></app-task>
+          }
         }
       </div>
     </div>
@@ -79,8 +86,14 @@
       @if (inprogress.length === 0) {
           <div class="empty-column">No tasks To do</div>
         }
-        @for (item of inprogress; track item) {
+        <!-- @for (item of inprogress; track item) {
          <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
+        } -->
+          <!-- NEU mit Datenbankabruf -->
+        @for (task of taskList; track $index) {
+          @if( task.status === 'in-progress') {
+           <app-task cdkDrag (taskSelected)="openTaskDetail($event)" [taskList]="taskList" [subtaskList]="subtaskList"></app-task>
+          }
         }
       </div>
     </div>
@@ -113,8 +126,15 @@
       @if (awaitfeedback.length === 0) {
           <div class="empty-column">No tasks To do</div>
         }
-        @for (item of awaitfeedback; track item) {
+        <!-- @for (item of awaitfeedback; track item) {
          <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
+        } -->
+
+         <!-- NEU mit Datenbankabruf -->
+        @for (task of taskList; track $index) {
+          @if( task.status === 'await-feedback') {
+           <app-task cdkDrag (taskSelected)="openTaskDetail($event)" [taskList]="taskList" [subtaskList]="subtaskList"></app-task>
+          }
         }
       </div>
     </div>
@@ -147,8 +167,15 @@
       @if (done.length === 0) {
           <div class="empty-column">No tasks To do</div>
         }
-        @for (item of done; track item) {
+        <!-- @for (item of done; track item) {
          <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
+        } -->
+
+          <!-- NEU mit Datenbankabruf -->
+        @for (task of taskList; track $index) {
+          @if( task.status === 'done') {
+           <app-task cdkDrag (taskSelected)="openTaskDetail($event)" [taskList]="taskList" [subtaskList]="subtaskList"></app-task>
+          }
         }
       </div>
     </div>

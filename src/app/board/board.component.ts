@@ -14,6 +14,12 @@ import { Task } from '../services/task.service';
 import { TaskService } from '../services/task.service';
 import { CommonModule } from '@angular/common';
 
+//NEU Für Datenabruf
+import { Subtask } from '../services/task.service';
+import { Subscription } from 'rxjs';
+import { ContactService } from '../services/contact.service';
+import { Contact } from '../services/contact.service';
+
 @Component({
   selector: 'app-board',
   imports: [
@@ -67,6 +73,15 @@ export class BoardComponent {
   backgroundVisible = false;
   selectedTask?: Task;
 
+  //NEU Für den Datenabruf
+  unsubTask!: Subscription;
+  unsubSubtask!: Subscription;
+  unsubContact!: Subscription;
+  category ='technical'; //später dynamisch setzen
+  taskList: Task[] = [];
+  subtaskList: Subtask[] = [];
+  contactList: Contact[] = [];
+
   constructor(private taskService: TaskService) {}
   
     setAnimationDirection(width: number) {
@@ -119,4 +134,34 @@ export class BoardComponent {
       console.log('Details overlay closed');
     }
   }
+
+  //NEU für Datenabruf
+
+  ngOnInit(): void {
+    this.loadTasks();
+  }
+
+  loadTasks() {
+    this.unsubTask = this.taskService.getTasks().subscribe((tasks: Task[]) => {
+      this.taskList = tasks;
+      console.log('Tasks loaded:', this.taskList);
+      this.loadSubtasks();
+    });
+    return () => this.unsubTask.unsubscribe();
+  }
+ //um Subtasks zu laden, braucht man die Id der zugehörigen Task
+  loadSubtasks() {
+    for (const task of this.taskList) {
+      if (task.id) {
+        this.unsubSubtask = this.taskService.getSubtasks(task.id).subscribe(subtasks => {
+          this.subtaskList = subtasks;
+          console.log(`Subtasks für ${task.title}:`, subtasks);
+          console.log(subtasks.length)
+          console.log(subtasks[0].isCompleted)
+        });
+      }
+    };
+    return() => this.unsubSubtask.unsubscribe();
+  }
+
  }
