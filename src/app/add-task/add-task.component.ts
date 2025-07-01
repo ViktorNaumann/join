@@ -22,6 +22,12 @@ export class AddTaskComponent implements OnInit {
   subtaskInput: string = '';
   nextSubtaskId: number = 1;
   
+  formData = {
+    title: '',
+    description: '',
+    dueDate: ''
+  };
+  
   subtaskSuggestions = [
     'Contact Form',
     'Write legal Import'
@@ -190,5 +196,35 @@ export class AddTaskComponent implements OnInit {
     if (subtask) {
       subtask.completed = !subtask.completed;
     }
+  }
+
+  // Clear Form Method
+  clearForm() {
+    // Form-Daten zurücksetzen
+    this.formData = {
+      title: '',
+      description: '',
+      dueDate: ''
+    };
+    
+    // Priority zurücksetzen
+    this.selectedPriority = 'medium';
+    
+    // Kontakte zurücksetzen
+    this.selectedContacts = [];
+    
+    // Kategorie zurücksetzen
+    this.selectedCategory = '';
+    
+    // Subtasks zurücksetzen
+    this.subtasks = [];
+    this.subtaskInput = '';
+    this.nextSubtaskId = 1;
+    
+    // Dropdown-Zustände zurücksetzen
+    this.showContactDropdown = false;
+    this.showCategoryDropdown = false;
+    this.showSubtaskSuggestions = false;
+    this.showSubtaskConfirmation = false;
   }
 }
