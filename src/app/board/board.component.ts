@@ -127,6 +127,7 @@ export class BoardComponent {
 
   openTaskDetail(selectedTask: Task) {
     console.log('Task selected in board:', selectedTask);
+    this.selectedTask = selectedTask;
     this.backgroundVisible = true;
   }
 

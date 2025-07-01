@@ -192,7 +192,7 @@ class="task-overlay"
 (@slideInOut.done)="onOverlayAnimationDone($event)"
 [class.backgroundVisible]="backgroundVisible"
 *ngIf="backgroundVisible">
-  <app-task-details (closeTaskDetails)="closeDetailsOverlay($event)"></app-task-details>
+  <app-task-details *ngIf="selectedTask" (closeTaskDetails)="closeDetailsOverlay($event)" [task]="selectedTask"></app-task-details>
 </div>
 
 <!-- Task Cards für das Board -->
