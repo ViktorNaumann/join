@@ -281,8 +281,14 @@ export class BoardComponent {
     }
     return () => this.unsubSubtask.unsubscribe();
   }
+
   getSubtasks(subtaskList: Subtask[]) {
     this.subtaskForSelectedTask = subtaskList;
     console.log('Subtasks for selected task:', this.subtaskForSelectedTask);
+  }
+
+  getContactList(contactList: Contact[]) {
+    this.contactList = contactList;
+    console.log('Contacts for selected task:', this.contactList);
   }
  }

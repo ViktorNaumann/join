@@ -22,42 +22,19 @@ export class TaskComponent {
   // category ='technical'; //später dynamisch setzen
   // taskList: Task[] = [];
   // subtaskList: Subtask[] = [];
-  // contactList: Contact[] = [];
+  contactList: Contact[] = [];
   @Input() task!: Task;
   @Input() subtaskList: Subtask[] = [];
   @Output() taskSelected = new EventEmitter<Task>();
   @Output() subtaskForSelectedTask = new EventEmitter<Subtask[]>();
+  @Output() contacts = new EventEmitter<Contact[]>();
   seletectedTask?: Task;
 
   constructor(public taskService: TaskService, public contactService: ContactService){}
 
   ngOnInit(): void {
-    // this.loadTasks();
-
+    this.getContactList();
   }
-
-//   loadTasks() {
-//     this.unsubTask = this.taskService.getTasks().subscribe((tasks: Task[]) => {
-//       this.taskList = tasks;
-//       console.log('Tasks loaded:', this.taskList);
-//       this.loadSubtasks();
-//     });
-//     return () => this.unsubTask.unsubscribe();
-//   }
-//  //um Subtasks zu laden, braucht man die Id der zugehörigen Task
-//   loadSubtasks() {
-//     for (const task of this.taskList) {
-//       if (task.id) {
-//         this.unsubSubtask = this.taskService.getSubtasks(task.id).subscribe(subtasks => {
-//           this.subtaskList = subtasks;
-//           console.log(`Subtasks für ${task.title}:`, subtasks);
-//           console.log(subtasks.length)
-//           console.log(subtasks[0].isCompleted)
-//         });
-//       }
-//     };
-//     return() => this.unsubSubtask.unsubscribe();
-//   }
 
   getCompletedSubtasksCount(subtaskList: any[]): number {
     return Array.isArray(subtaskList) ? subtaskList.filter(el => el.isCompleted).length : 0;
@@ -75,9 +52,20 @@ export class TaskComponent {
       category: task.category,
       subtask: task.subtask,
     }   
-    // No need to assign subtaskList as an object, keep it as an array
     this.taskSelected.emit(this.seletectedTask);
     this.subtaskForSelectedTask.emit(this.subtaskList);
     console.log('Selected Task emitted:', this.seletectedTask);
+  }
+
+  //NEU - Kontakte anhand der IDs aus den Tasks geladen
+  async getContactList() {
+    if (this.task?.assignedTo?.length) {
+      for (let contactId of this.task.assignedTo) {
+        const contact = await this.contactService.getContactById(contactId);
+        if (contact) this.contactList.push(contact);
+        this.contacts.emit(this.contactList);
+        console.log('Das sind die Kontakte:', this.contactList);
+      }
+    }
   }
 }

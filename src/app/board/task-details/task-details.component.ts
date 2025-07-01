@@ -3,6 +3,8 @@ import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { Task, TaskService } from '../../services/task.service';
 import { Subtask } from '../../services/task.service';
 import { Timestamp } from '@angular/fire/firestore';
+import { ContactService } from '../../services/contact.service';
+import { Contact } from '../../services/contact.service';
 
 @Component({
   selector: 'app-task-details',
@@ -16,10 +18,11 @@ export class TaskDetailsComponent {
   @Output() closeTaskDetails = new EventEmitter<string>();
   @Input() task!: Task;
   @Input() subtask!: Subtask[];
+  @Input() contactList: Contact[] = [];
   showContent = true;
   category ='technical'; //später dynamisch setzen
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, public contactService: ContactService ) {}
 
   onClose() {
     console.log('Close button clicked');
