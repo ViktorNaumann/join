@@ -2,12 +2,13 @@ import { Injectable, inject } from '@angular/core';
 import {Firestore, collection, onSnapshot, addDoc, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Contact } from './contact.service';
+import { Timestamp } from '@angular/fire/firestore';
 
 export interface Task {
   id?: string;
   title: string;
   description?: string;
-  date: Date; //Firebase verarbeitet es als Timestamp, d.h. beim Auslesen muss man es wieder umwandeln
+  date: Date | Timestamp; //Firebase verarbeitet es als Timestamp, d.h. beim Auslesen muss man es wieder umwandeln
   priority: 'low' | 'medium' | 'urgent';
   status: 'to-do' | 'in-progress' | 'await-feedback' |'done';
   assignedTo?: string[];
@@ -113,4 +114,21 @@ export class TaskService {
       category: updatedTask.category,
     };
   }
+
+  convertDate(date: Timestamp | Date): string {
+    if(date instanceof Timestamp) {
+      return this.formatDate(date.toDate());
+    } else if (date instanceof Date) {
+      return this.formatDate(date);
+    }
+    return '';
+ }
+
+ formatDate(date: Date): string {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
 }
+
