@@ -176,6 +176,7 @@
   overflow: hidden;
   padding: 10px; // Innenabstand hinzufügen
   margin: 10px 0; // Außenabstand für bessere Trennung
+  gap: 15px;
 }
 
 .drop-box {
@@ -190,12 +191,11 @@
   cursor: pointer;
   background: white;
   font-size: 14px;
-  margin-bottom: 8px; // Abstand zwischen Items
   border-radius: 4px; // Abgerundete Ecken für Items
 
-  &:hover {
-    background-color: #f5f5f5; // Hover-Effekt für bessere UX
-  }
+  // &:hover {
+  //   background-color: #f5f5f5; // Hover-Effekt für bessere UX
+  // }
 }
 
 // .cdk-drag-preview {
