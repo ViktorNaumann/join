@@ -26,13 +26,15 @@ export class TaskComponent {
   @Input() task!: Task;
   @Input() subtaskList: Subtask[] = [];
   @Output() taskSelected = new EventEmitter<Task>();
+  @Output() subtaskForSelectedTask = new EventEmitter<Subtask[]>();
   seletectedTask?: Task;
 
-  constructor(public taskService: TaskService){}
+  constructor(public taskService: TaskService, public contactService: ContactService){}
 
-//   ngOnInit(): void {
-//     this.loadTasks();
-//   }
+  ngOnInit(): void {
+    // this.loadTasks();
+
+  }
 
 //   loadTasks() {
 //     this.unsubTask = this.taskService.getTasks().subscribe((tasks: Task[]) => {
@@ -73,7 +75,9 @@ export class TaskComponent {
       category: task.category,
       subtask: task.subtask,
     }   
+    // No need to assign subtaskList as an object, keep it as an array
     this.taskSelected.emit(this.seletectedTask);
+    this.subtaskForSelectedTask.emit(this.subtaskList);
     console.log('Selected Task emitted:', this.seletectedTask);
   }
 }

@@ -80,6 +80,7 @@ export class BoardComponent {
   category ='technical'; //später dynamisch setzen
   taskList: Task[] = [];
   subtaskList: Subtask[] = [];
+  subtaskForSelectedTask: Subtask[] = [];
   contactList: Contact[] = [];
 
   constructor(private taskService: TaskService) {}
@@ -219,5 +220,8 @@ export class BoardComponent {
     };
     return() => this.unsubSubtask.unsubscribe();
   }
-
+  getSubtasks(subtaskList: Subtask[]) {
+    this.subtaskForSelectedTask = subtaskList;
+    console.log('Subtasks for selected task:', this.subtaskForSelectedTask);
+  }
  }
