@@ -34,22 +34,28 @@
                 <td>Assigned To:</td>
             </tr>
             <tr>
-                <td>
-                    <div class="img-user-wrapper">
-                        <!-- <img class="img-user" src="assets/img/svg/person.svg" alt="User Image" [style.background-color]="contactService.getContactColor(contact.name) : '#d1d1d1'"> -->
-                        <img class="img-user" src="assets/img/svg/person.svg" alt="User Image">
-                        <!-- <p class="contact-initials">{{ contactService.getInitials(contact.name) }}</p> -->
-                        <p class="contact-initials">contact name</p>
-                    </div>
-                </td>
+                @for(contact of contactList; track $index) {
+                    <td class="column-contacts" *ngIf="contactList.length > 0">
+                        <div class="img-user-wrapper" *ngIf="contactList.length > 0" >
+                            
+                                <div class="img-user" [style.background-color]="contactService.getContactColor(contact.name)">
+                                    <p class="contact-initials">{{ contactService.getInitials(contact.name) }}</p>
+                                </div>
+                                <p class="contact-name">{{contact.name}}</p>
+                        </div>
+                    </td>
+                }
+            </tr>
+             <tr *ngIf="subtask && subtask.length > 0">
+                <td>Subtasks:</td>
             </tr>
             @for (subtask of subtask; track $index) {
-                <tr>
-                <td class="column-subtask-checkbox">
-                    <input id="subtask-cb" type="checkbox">
-                    <label for="subtask-cb">{{subtask.title}}</label>
-                </td>
-            </tr>
+                <tr *ngIf="subtask">
+                    <td class="column-subtask-checkbox">
+                        <input id="subtask-cb" type="checkbox">
+                        <label for="subtask-cb">{{subtask.title}}</label>
+                    </td>
+                </tr>
             }
         </table>
         <div class="btn-wrapper">

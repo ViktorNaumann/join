@@ -14,10 +14,14 @@
                 </div>
                 <div class="card-bottom-wrapper">
                     <div class="collaborators-wrapper">
-                        <div class="img-user-wrapper">
-                            <img class="img-user" src="assets/img/svg/person.svg" alt="User Image">
-                            <img class="img-user mrg" src="assets/img/svg/person.svg" alt="User Image">
-                            <img class="img-user mrg" src="assets/img/svg/person.svg" alt="User Image">
+                        <div class="img-user-wrapper" *ngIf="contactList.length > 0" >
+                            @for(contact of contactList; track $index) {
+
+                                <div class="img-user" [style.background-color]="contactService.getContactColor(contact.name)">
+                                    <p class="contact-initials">{{ contactService.getInitials(contact.name) }}</p>
+                                </div>
+                               
+                            }
                         </div>
                     </div>
                     <img src="assets/img/icons/prio-high.png" alt="Priority High Icon" class="card-priority" *ngIf="task.priority === 'urgent'">

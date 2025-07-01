@@ -7,6 +7,7 @@ import {
   doc,
   updateDoc,
   deleteDoc,
+  getDoc,
 } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
@@ -168,5 +169,15 @@ export class ContactService {
     const words = name.trim().split(' ');
     if (words.length === 1) return words[0][0].toUpperCase();
     return (words[0][0] + words[words.length - 1][0]).toUpperCase();
+  }
+  //NEU - Kontakte per ID abrufen z.B. für Tasks
+  async getContactById(contactId: string): Promise<Contact | null> {
+    const contactRef = this.getSingleContactsRef(contactId);
+    return getDoc(contactRef).then(snapshot => {
+      if (snapshot.exists()) {
+        return { id: snapshot.id, ...snapshot.data() } as Contact;
+      }
+      return null;
+    });
   }
 }
