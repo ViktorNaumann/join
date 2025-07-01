@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './add-task.component.scss'
 })
 export class AddTaskComponent {
+  selectedPriority: string = 'medium';
 
+  setPriority(priority: string) {
+    this.selectedPriority = priority;
+  }
 }

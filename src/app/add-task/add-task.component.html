@@ -30,9 +30,24 @@
           <div class="form-group">
             <label for="priority">Priority</label>
             <div class="priority-buttons">
-              <button type="button" class="priority-btn urgent">Urgent <img src="assets/img/svg/prio-high.svg" alt="Urgent"></button>
-              <button type="button" class="priority-btn medium active">Medium <img src="assets/img/svg/prio-medium.svg" alt="Medium"></button>
-              <button type="button" class="priority-btn low">Low <img src="assets/img/svg/prio-low.svg" alt="Low"></button>
+              <button type="button" 
+                      class="priority-btn urgent" 
+                      [class.active]="selectedPriority === 'urgent'"
+                      (click)="setPriority('urgent')">
+                Urgent <img src="assets/img/svg/prio-high.svg" alt="Urgent">
+              </button>
+              <button type="button" 
+                      class="priority-btn medium" 
+                      [class.active]="selectedPriority === 'medium'"
+                      (click)="setPriority('medium')">
+                Medium <img src="assets/img/svg/prio-medium.svg" alt="Medium">
+              </button>
+              <button type="button" 
+                      class="priority-btn low" 
+                      [class.active]="selectedPriority === 'low'"
+                      (click)="setPriority('low')">
+                Low <img src="assets/img/svg/prio-low.svg" alt="Low">
+              </button>
             </div>
           </div>
           
