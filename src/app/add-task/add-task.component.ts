@@ -82,15 +82,19 @@ export class AddTaskComponent implements OnInit {
       return; // Nicht öffnen wenn bereits in Bestätigungsmodus
     }
     
-    // Wenn bereits Text eingegeben wurde, direkt zur Bestätigung
-    if (this.subtaskInput && this.subtaskInput.trim()) {
-      this.showSubtaskConfirmation = true;
-      this.showSubtaskSuggestions = false;
-    } else {
-      // Ansonsten Vorschläge zeigen
-      this.showSubtaskSuggestions = true;
-      this.showContactDropdown = false;
-      this.showCategoryDropdown = false;
+    // Immer zuerst die Vorschläge zeigen, unabhängig vom Input-Inhalt
+    this.showSubtaskSuggestions = true;
+    this.showContactDropdown = false;
+    this.showCategoryDropdown = false;
+  }
+
+  onSubtaskInputClick() {
+    // Bei jedem Klick auf das Input-Feld:
+    // 1. Input leeren (falls noch nicht im Bestätigungsmodus)
+    // 2. Vorschläge anzeigen
+    if (!this.showSubtaskConfirmation) {
+      this.subtaskInput = '';
+      this.showSubtaskDropdown();
     }
   }
 
@@ -108,6 +112,7 @@ export class AddTaskComponent implements OnInit {
   cancelSubtask() {
     this.subtaskInput = '';
     this.showSubtaskConfirmation = false;
+    this.showSubtaskSuggestions = false;
   }
 
   selectContact(contact: Contact) {
@@ -168,8 +173,9 @@ export class AddTaskComponent implements OnInit {
         completed: false
       };
       this.subtasks.push(newSubtask);
-      this.subtaskInput = '';
+      this.subtaskInput = ''; // Input leeren
       this.showSubtaskConfirmation = false;
+      this.showSubtaskSuggestions = false;
     }
   }
 
