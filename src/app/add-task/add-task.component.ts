@@ -1,10 +1,11 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ContactService, Contact } from '../services/contact.service';
 
 @Component({
   selector: 'app-add-task',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
@@ -14,7 +15,17 @@ export class AddTaskComponent implements OnInit {
   selectedContacts: Contact[] = [];
   showContactDropdown: boolean = false;
   showCategoryDropdown: boolean = false;
+  showSubtaskSuggestions: boolean = false;
+  showSubtaskConfirmation: boolean = false;
   selectedCategory: string = '';
+  subtasks: { id: number; text: string; completed: boolean }[] = [];
+  subtaskInput: string = '';
+  nextSubtaskId: number = 1;
+  
+  subtaskSuggestions = [
+    'Contact Form',
+    'Write legal Import'
+  ];
   
   categories = [
     { value: 'technical-task', label: 'Technical Task', color: '#1FD7C1' },
@@ -30,9 +41,11 @@ export class AddTaskComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event) {
     const target = event.target as HTMLElement;
-    if (!target.closest('.dropdown')) {
+    if (!target.closest('.dropdown') && !target.closest('.subtask-input')) {
       this.showContactDropdown = false;
       this.showCategoryDropdown = false;
+      this.showSubtaskSuggestions = false;
+      // Bestätigung nicht automatisch schließen
     }
   }
 
@@ -48,12 +61,38 @@ export class AddTaskComponent implements OnInit {
 
   toggleContactDropdown() {
     this.showContactDropdown = !this.showContactDropdown;
-    this.showCategoryDropdown = false; // Schließe andere Dropdowns
+    this.showCategoryDropdown = false;
+    this.showSubtaskSuggestions = false;
   }
 
   toggleCategoryDropdown() {
     this.showCategoryDropdown = !this.showCategoryDropdown;
-    this.showContactDropdown = false; // Schließe andere Dropdowns
+    this.showContactDropdown = false;
+    this.showSubtaskSuggestions = false;
+  }
+
+  showSubtaskDropdown() {
+    if (!this.showSubtaskConfirmation) {
+      this.showSubtaskSuggestions = true;
+      this.showContactDropdown = false;
+      this.showCategoryDropdown = false;
+    }
+  }
+
+  selectSubtaskSuggestion(suggestion: string) {
+    this.subtaskInput = suggestion;
+    this.showSubtaskSuggestions = false;
+    this.showSubtaskConfirmation = true;
+  }
+
+  confirmSubtask() {
+    this.addSubtask();
+    this.showSubtaskConfirmation = false;
+  }
+
+  cancelSubtask() {
+    this.subtaskInput = '';
+    this.showSubtaskConfirmation = false;
   }
 
   selectContact(contact: Contact) {
@@ -103,5 +142,44 @@ export class AddTaskComponent implements OnInit {
 
   getContactColor(contact: Contact): string {
     return this.contactService.getContactColor(contact.name);
+  }
+
+  // Subtask Methods
+  addSubtask() {
+    if (this.subtaskInput && this.subtaskInput.trim()) {
+      const newSubtask = {
+        id: this.nextSubtaskId++,
+        text: this.subtaskInput.trim(),
+        completed: false
+      };
+      this.subtasks.push(newSubtask);
+      this.subtaskInput = '';
+      this.showSubtaskConfirmation = false;
+    }
+  }
+
+  deleteSubtask(id: number) {
+    this.subtasks = this.subtasks.filter(subtask => subtask.id !== id);
+  }
+
+  editSubtask(id: number, newText: string) {
+    const subtask = this.subtasks.find(s => s.id === id);
+    if (subtask && newText.trim()) {
+      subtask.text = newText.trim();
+    }
+  }
+
+  editSubtaskPrompt(id: number, currentText: string) {
+    const newText = prompt('Edit subtask:', currentText);
+    if (newText && newText.trim()) {
+      this.editSubtask(id, newText);
+    }
+  }
+
+  toggleSubtaskCompletion(id: number) {
+    const subtask = this.subtasks.find(s => s.id === id);
+    if (subtask) {
+      subtask.completed = !subtask.completed;
+    }
   }
 }

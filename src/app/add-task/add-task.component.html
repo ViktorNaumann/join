@@ -131,9 +131,87 @@
           
           <div class="form-group">
             <label for="subtasks">Subtasks</label>
-            <div class="subtask-input">
-              <input type="text" id="subtasks" placeholder="Add new subtask">
-              <img src="assets/img/icons/add.png" alt="Add" class="add-icon">
+            <div class="subtask-container">
+              <div class="subtask-input" [class.open]="showSubtaskSuggestions" [class.confirmation]="showSubtaskConfirmation">
+                <input 
+                  type="text" 
+                  id="subtasks" 
+                  name="subtaskInput"
+                  placeholder="Add new subtask"
+                  [(ngModel)]="subtaskInput"
+                  (click)="showSubtaskDropdown()"
+                  (keyup.enter)="showSubtaskConfirmation ? confirmSubtask() : addSubtask()"
+                  [readonly]="showSubtaskConfirmation">
+                
+                <!-- Normal Add Icon -->
+                <img 
+                  *ngIf="!showSubtaskConfirmation"
+                  src="assets/img/icons/add.png" 
+                  alt="Add" 
+                  class="add-icon"
+                  (click)="addSubtask()">
+                
+                <!-- Confirmation Icons -->
+                <div *ngIf="showSubtaskConfirmation" class="confirmation-icons">
+                  <img 
+                    src="assets/img/icons/close.png" 
+                    alt="Cancel" 
+                    class="cancel-icon"
+                    (click)="cancelSubtask()">
+                  <img 
+                    src="assets/img/icons/check-dark.png" 
+                    alt="Confirm" 
+                    class="confirm-icon"
+                    (click)="confirmSubtask()">
+                </div>
+                
+                <div class="subtask-suggestions" *ngIf="showSubtaskSuggestions">
+                  <div 
+                    class="suggestion-item" 
+                    *ngFor="let suggestion of subtaskSuggestions"
+                    (click)="selectSubtaskSuggestion(suggestion)">
+                    <span class="suggestion-text">{{ suggestion }}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="subtasks-list" *ngIf="subtasks.length > 0">
+                <div class="subtask-item" *ngFor="let subtask of subtasks">
+                  <div class="subtask-content">
+                    <img 
+                      *ngIf="subtask.completed"
+                      src="assets/img/icons/checkbox-checked.png" 
+                      alt="Completed"
+                      class="subtask-checkbox"
+                      (click)="toggleSubtaskCompletion(subtask.id)">
+                    <img 
+                      *ngIf="!subtask.completed"
+                      src="assets/img/icons/checkbox.png" 
+                      alt="Not completed"
+                      class="subtask-checkbox"
+                      (click)="toggleSubtaskCompletion(subtask.id)">
+                    
+                    <span 
+                      class="subtask-text"
+                      [class.completed]="subtask.completed">
+                      {{ subtask.text }}
+                    </span>
+                  </div>
+                  
+                  <div class="subtask-actions">
+                    <img 
+                      src="assets/img/icons/edit-single.png" 
+                      alt="Edit"
+                      class="action-icon"
+                      (click)="editSubtaskPrompt(subtask.id, subtask.text)">
+                    <img 
+                      src="assets/img/icons/delete.png" 
+                      alt="Delete"
+                      class="action-icon"
+                      (click)="deleteSubtask(subtask.id)">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
