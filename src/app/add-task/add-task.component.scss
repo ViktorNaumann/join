@@ -487,15 +487,16 @@
   .selected-contact-avatar {
     width: 32px;
     height: 32px;
-    border-radius: 50%;
+    border-radius: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #ffffff;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
     font-size: 12px;
-    font-weight: 500;
-    border: 2px solid white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
+    transition: border 0.2s ease;
     cursor: default;
     
     &:hover {
