@@ -72,7 +72,16 @@ export class AddTaskComponent implements OnInit {
   }
 
   showSubtaskDropdown() {
-    if (!this.showSubtaskConfirmation) {
+    if (this.showSubtaskConfirmation) {
+      return; // Nicht öffnen wenn bereits in Bestätigungsmodus
+    }
+    
+    // Wenn bereits Text eingegeben wurde, direkt zur Bestätigung
+    if (this.subtaskInput && this.subtaskInput.trim()) {
+      this.showSubtaskConfirmation = true;
+      this.showSubtaskSuggestions = false;
+    } else {
+      // Ansonsten Vorschläge zeigen
       this.showSubtaskSuggestions = true;
       this.showContactDropdown = false;
       this.showCategoryDropdown = false;

@@ -140,7 +140,7 @@
                   placeholder="Add new subtask"
                   [(ngModel)]="subtaskInput"
                   (click)="showSubtaskDropdown()"
-                  (keyup.enter)="showSubtaskConfirmation ? confirmSubtask() : addSubtask()"
+                  (keyup.enter)="showSubtaskConfirmation ? confirmSubtask() : (subtaskInput.trim() ? showSubtaskConfirmation = true : showSubtaskDropdown())"
                   [readonly]="showSubtaskConfirmation">
                 
                 <!-- Normal Add Icon -->
@@ -149,7 +149,7 @@
                   src="assets/img/icons/add.png" 
                   alt="Add" 
                   class="add-icon"
-                  (click)="addSubtask()">
+                  (click)="showSubtaskDropdown()">
                 
                 <!-- Confirmation Icons -->
                 <div *ngIf="showSubtaskConfirmation" class="confirmation-icons">
