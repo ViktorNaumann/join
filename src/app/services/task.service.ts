@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {Firestore, collection, onSnapshot, addDoc, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Contact } from './contact.service';
@@ -25,9 +25,9 @@ export interface Subtask {
   providedIn: 'root'
 })
 export class TaskService {
-
+  
   constructor(private firestore: Firestore) { }
-
+  
   getTasksRef() {
     return collection(this.firestore, 'tasks');
   }
@@ -56,9 +56,9 @@ export class TaskService {
     });
   }
 
-  getSubtasks(subColId: string): Observable<Subtask[]> {
+  getSubtasks(taskId: string): Observable<Subtask[]> {
     return new Observable(observer => {
-      const unsubscribe = onSnapshot(this.getSubtasksRef(subColId), snapshot => {
+      const unsubscribe = onSnapshot(this.getSubtasksRef(taskId), snapshot => {
         const subtasks: Subtask[] = [];
         snapshot.forEach(doc => {
           subtasks.push({ id: doc.id, ...doc.data() } as Subtask);
@@ -70,6 +70,7 @@ export class TaskService {
     });
   }
 
+  
   async addTask(newTask: Task): Promise<Task | null> {
     try {
       const tasksRef = this.getTasksRef();
