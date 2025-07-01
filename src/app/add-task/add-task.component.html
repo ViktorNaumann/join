@@ -98,9 +98,34 @@
           
           <div class="form-group">
             <label for="category">Category<span class="required">*</span></label>
-            <div class="dropdown">
-              <input type="text" id="category" placeholder="Select task category" readonly>
-              <img src="assets/img/icons/arrow-dropdown.png" alt="Dropdown" class="dropdown-arrow">
+            <div class="dropdown" [class.open]="showCategoryDropdown">
+              <input 
+                type="text" 
+                id="category" 
+                [value]="getCategoryText()" 
+                readonly
+                (click)="toggleCategoryDropdown()">
+              <img 
+                src="assets/img/icons/arrow-dropdown.png" 
+                alt="Dropdown" 
+                class="dropdown-arrow"
+                (click)="toggleCategoryDropdown()">
+              
+              <div class="dropdown-menu" *ngIf="showCategoryDropdown">
+                <div 
+                  class="category-item" 
+                  *ngFor="let category of categories"
+                  (click)="selectCategory(category)">
+                  
+                  <div class="category-info">
+                    <div 
+                      class="category-color"
+                      [style.background-color]="category.color">
+                    </div>
+                    <span class="category-name">{{ category.label }}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           

@@ -13,6 +13,13 @@ export class AddTaskComponent implements OnInit {
   contacts: Contact[] = [];
   selectedContacts: Contact[] = [];
   showContactDropdown: boolean = false;
+  showCategoryDropdown: boolean = false;
+  selectedCategory: string = '';
+  
+  categories = [
+    { value: 'technical-task', label: 'Technical Task', color: '#1FD7C1' },
+    { value: 'user-story', label: 'User Story', color: '#0038FF' }
+  ];
 
   constructor(private contactService: ContactService) {}
 
@@ -25,6 +32,7 @@ export class AddTaskComponent implements OnInit {
     const target = event.target as HTMLElement;
     if (!target.closest('.dropdown')) {
       this.showContactDropdown = false;
+      this.showCategoryDropdown = false;
     }
   }
 
@@ -40,6 +48,12 @@ export class AddTaskComponent implements OnInit {
 
   toggleContactDropdown() {
     this.showContactDropdown = !this.showContactDropdown;
+    this.showCategoryDropdown = false; // Schließe andere Dropdowns
+  }
+
+  toggleCategoryDropdown() {
+    this.showCategoryDropdown = !this.showCategoryDropdown;
+    this.showContactDropdown = false; // Schließe andere Dropdowns
   }
 
   selectContact(contact: Contact) {
@@ -51,6 +65,11 @@ export class AddTaskComponent implements OnInit {
     }
   }
 
+  selectCategory(category: any) {
+    this.selectedCategory = category.value;
+    this.showCategoryDropdown = false;
+  }
+
   isContactSelected(contact: Contact): boolean {
     return this.selectedContacts.some(c => c.id === contact.id);
   }
@@ -60,6 +79,22 @@ export class AddTaskComponent implements OnInit {
       return 'Select contacts to assign';
     }
     return this.selectedContacts.map(c => c.name).join(', ');
+  }
+
+  getCategoryText(): string {
+    if (!this.selectedCategory) {
+      return 'Select task category';
+    }
+    const category = this.categories.find(c => c.value === this.selectedCategory);
+    return category ? category.label : 'Select task category';
+  }
+
+  getCategoryColor(): string {
+    if (!this.selectedCategory) {
+      return '#ccc';
+    }
+    const category = this.categories.find(c => c.value === this.selectedCategory);
+    return category ? category.color : '#ccc';
   }
 
   getContactInitials(contact: Contact): string {
