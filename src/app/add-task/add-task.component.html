@@ -53,9 +53,46 @@
           
           <div class="form-group">
             <label for="assigned-to">Assigned to</label>
-            <div class="dropdown">
-              <input type="text" id="assigned-to" placeholder="Select contacts to assign" readonly>
-              <img src="assets/img/icons/arrow-dropdown.png" alt="Dropdown" class="dropdown-arrow">
+            <div class="dropdown" [class.open]="showContactDropdown">
+              <input 
+                type="text" 
+                id="assigned-to" 
+                [value]="getSelectedContactsText()" 
+                readonly
+                (click)="toggleContactDropdown()">
+              <img 
+                src="assets/img/icons/arrow-dropdown.png" 
+                alt="Dropdown" 
+                class="dropdown-arrow"
+                (click)="toggleContactDropdown()">
+              
+              <div class="dropdown-menu" *ngIf="showContactDropdown">
+                <div 
+                  class="contact-item" 
+                  *ngFor="let contact of contacts"
+                  (click)="selectContact(contact)">
+                  
+                  <div class="contact-info">
+                    <div 
+                      class="contact-avatar"
+                      [style.background-color]="getContactColor(contact)">
+                      {{ getContactInitials(contact) }}
+                    </div>
+                    <span class="contact-name">{{ contact.name }}</span>
+                  </div>
+                  
+                  <div class="contact-checkbox">
+                    <img 
+                      *ngIf="isContactSelected(contact)"
+                      src="assets/img/icons/checkbox-checked.png" 
+                      alt="Selected">
+                    <img 
+                      *ngIf="!isContactSelected(contact)"
+                      src="assets/img/icons/checkbox.png" 
+                      alt="Not selected">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           
