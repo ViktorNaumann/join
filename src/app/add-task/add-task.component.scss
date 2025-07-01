@@ -48,6 +48,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  width: 440px; /* Explizite Breite setzen */
 }
 
 .form-group {
@@ -441,22 +442,26 @@
 }
 
 .form-footer {
-  @include flex-between();
+  display: flex;
   align-items: flex-end;
   margin-top: 20px;
   
   .required-note {
     @include inter400-fs12();
     color: var(--text-color-medium);
+    flex-shrink: 0;
+    width: fit-content;
     
     .required {
       color: var(--text-color-error);
+      vertical-align: top;
     }
   }
   
   .form-actions {
     display: flex;
     gap: 16px;
+    margin-left: 605px; /* 440px (form-left) + 41px (gap + divider) = exakte Position des form-right */
     
     .btn-clear {
       @include btn();
