@@ -134,10 +134,7 @@ export class AddTaskComponent implements OnInit {
   }
 
   getSelectedContactsText(): string {
-    if (this.selectedContacts.length === 0) {
-      return 'Select contacts to assign';
-    }
-    return this.selectedContacts.map(c => c.name).join(', ');
+    return 'Select contacts to assign';
   }
 
   getCategoryText(): string {
