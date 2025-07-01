@@ -43,11 +43,17 @@ export class TaskComponent {
     for (const task of this.taskList) {
       if (task.id) {
         this.unsubSubtask = this.taskService.getSubtasks(task.id).subscribe(subtasks => {
+          this.subtaskList = subtasks;
           console.log(`Subtasks für ${task.title}:`, subtasks);
+          console.log(subtasks.length)
+          console.log(subtasks[0].isCompleted)
         });
       }
     };
     return() => this.unsubSubtask.unsubscribe();
   }
-
+  
+  getCompletedSubtasksCount(subtaskList: any[]): number {
+    return Array.isArray(subtaskList) ? subtaskList.filter(el => el.isCompleted).length : 0;
+  }
 }

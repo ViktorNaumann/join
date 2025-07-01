@@ -10,10 +10,11 @@
                 <p>{{task.description}}</p>
                 <div class="subtask-wrapper">
                     <div class="subtask-bar-default"></div>
-                    <!-- <div class="subtask-bar-done"></div> -->
-                     @for (subtask of subtaskList; track $index) {
-                    <span>  {{subtaskList.length}} Subtasks</span>
-                     }
+                    <span class="subtask-status">
+                        <p></p>
+                    </span>
+                     <span>{{ getCompletedSubtasksCount(subtaskList) }}</span>
+                    <span> / {{subtaskList.length}} Subtasks</span>
                 </div>
                 <div class="card-bottom-wrapper">
                     <div class="collaborators-wrapper">
