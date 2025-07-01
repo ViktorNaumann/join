@@ -2,12 +2,13 @@ import { Injectable, inject } from '@angular/core';
 import {Firestore, collection, onSnapshot, addDoc, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Contact } from './contact.service';
+import { Timestamp } from '@angular/fire/firestore';
 
 export interface Task {
   id?: string;
   title: string;
   description?: string;
-  date: Date; //Firebase verarbeitet es als Timestamp, d.h. beim Auslesen muss man es wieder umwandeln
+  date: Date | Timestamp; //Firebase verarbeitet es als Timestamp, d.h. beim Auslesen muss man es wieder umwandeln
   priority: 'low' | 'medium' | 'urgent';
   status: 'to-do' | 'in-progress' | 'await-feedback' |'done';
   assignedTo?: string[];
@@ -85,13 +86,49 @@ export class TaskService {
   }
 
   async addSubtask(subColId: string, subtask: Subtask): Promise<Subtask | null> {
-  try {
-    const subtasksRef = this.getSubtasksRef(subColId);
-    const docRef = await addDoc(subtasksRef, subtask);
-    return { id: docRef.id, ...subtask };
-  } catch (error) {
-    console.error('Error adding subtask:', error);
-    return null;
+    try {
+      const subtasksRef = this.getSubtasksRef(subColId);
+      const docRef = await addDoc(subtasksRef, subtask);
+      return { id: docRef.id, ...subtask };
+    } catch (error) {
+      console.error('Error adding subtask:', error);
+      return null;
+    }
+  }
+
+  async updateTask(docId: string, updatedTask: Task) {
+    let docRef = this.getSingleTaskRef(docId);
+    await updateDoc(docRef, this.getCleanJson(updatedTask)).catch((err) => {
+      console.error(err);
+    });
+  }
+
+  getCleanJson(updatedTask: Task) {
+    return {
+      title: updatedTask.title,
+      description: updatedTask.description,
+      date: updatedTask.date,
+      priority: updatedTask.priority,
+      status: updatedTask.status,
+      assignedTo: updatedTask.assignedTo,
+      category: updatedTask.category,
+    };
+  }
+
+  convertDate(date: Timestamp | Date): string {
+    if(date instanceof Timestamp) {
+      return this.formatDate(date.toDate());
+    } else if (date instanceof Date) {
+      return this.formatDate(date);
+    }
+    return '';
+ }
+
+ formatDate(date: Date): string {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
   }
 }
-}
+

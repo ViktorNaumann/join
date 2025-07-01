@@ -1,6 +1,6 @@
 <div class="content-wrapper" *ngIf="showContent">
     <div class="wrapper-top">
-        <p class="category-flag" [style.background-color]="category == 'user' ? '#0038ff': '#1fd7c1'">category type</p>
+        <p class="category-flag" [style.background-color]="task.category == 'user' ? '#0038ff': '#1fd7c1'">{{task.category}}</p>
         <button class="btn-close" (click)="onClose()" >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_331509_883" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
@@ -19,7 +19,7 @@
         <table>
             <tr>
                 <td>Due date:</td>
-                <td>{{ task.date | date }}</td>
+                <td>{{ convertDate(task.date) }}</td>
             </tr>
             <tr>
                 <td>Priority:</td>
@@ -34,21 +34,29 @@
                 <td>Assigned To:</td>
             </tr>
             <tr>
-                <td>
-                    <div class="img-user-wrapper">
-                        <!-- <img class="img-user" src="assets/img/svg/person.svg" alt="User Image" [style.background-color]="contactService.getContactColor(contact.name) : '#d1d1d1'"> -->
-                        <img class="img-user" src="assets/img/svg/person.svg" alt="User Image">
-                        <!-- <p class="contact-initials">{{ contactService.getInitials(contact.name) }}</p> -->
-                        <p class="contact-initials">contact name</p>
-                    </div>
-                </td>
+                @for(contact of contactList; track $index) {
+                    <td class="column-contacts" *ngIf="contactList.length > 0">
+                        <div class="img-user-wrapper" *ngIf="contactList.length > 0" >
+                            
+                                <div class="img-user" [style.background-color]="contactService.getContactColor(contact.name)">
+                                    <p class="contact-initials">{{ contactService.getInitials(contact.name) }}</p>
+                                </div>
+                                <p class="contact-name">{{contact.name}}</p>
+                        </div>
+                    </td>
+                }
             </tr>
-            <tr>
-                <td>
-                    <input id="subtask-cb" type="checkbox">
-                    <label for="subtask-cb">Subtask name</label>
-                </td>
+             <tr *ngIf="subtask && subtask.length > 0">
+                <td>Subtasks:</td>
             </tr>
+            @for (subtask of subtask; track $index) {
+                <tr *ngIf="subtask">
+                    <td class="column-subtask-checkbox">
+                        <input id="subtask-cb" type="checkbox">
+                        <label for="subtask-cb">{{subtask.title}}</label>
+                    </td>
+                </tr>
+            }
         </table>
         <div class="btn-wrapper">
             <button class="btn-delete">
