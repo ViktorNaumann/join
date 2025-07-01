@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
 import { Contact } from '../../services/contact.service';
 import { TaskService } from '../../services/task.service';
@@ -23,6 +23,8 @@ export class TaskComponent {
   taskList: Task[] = [];
   subtaskList: Subtask[] = [];
   contactList: Contact[] = [];
+  @Output() taskSelected = new EventEmitter<Task>();
+  seletectedTask?: Task;
 
   constructor(public taskService: TaskService){}
 
@@ -52,8 +54,24 @@ export class TaskComponent {
     };
     return() => this.unsubSubtask.unsubscribe();
   }
-  
+
   getCompletedSubtasksCount(subtaskList: any[]): number {
     return Array.isArray(subtaskList) ? subtaskList.filter(el => el.isCompleted).length : 0;
+  }
+
+  openTaskDetails(task: Task) {
+    this.seletectedTask = {
+      id: task.id,
+      title: task.title,
+      description: task.description,
+      date: task.date,
+      priority: task.priority,
+      status: task.status,
+      assignedTo: task.assignedTo,
+      category: task.category,
+      subtask: task.subtask,
+    }   
+    this.taskSelected.emit(this.seletectedTask);
+    console.log('Selected Task emitted:', this.seletectedTask);
   }
 }

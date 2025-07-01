@@ -245,20 +245,13 @@
   width: 100%;
   max-width: 1440px;
   height: 100%;
-  // background-color: rgba(0, 0, 0, 0);
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.5
-  ); //später wieder auf 0 setzen und an visible knüpfen
+  background-color: rgba(0, 0, 0, 0);
   display: flex; //hier gern auf none setzen
   justify-content: center;
   align-items: center;
   z-index: 1000;
   transition: background-color 300ms ease-in-out;
-
-  // &.backgroundVisible {
-  //   background-color: rgba(0, 0, 0, 0.5);
-  // }
+  &.backgroundVisible {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 }

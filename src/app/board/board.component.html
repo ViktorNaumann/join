@@ -48,7 +48,7 @@
         }
         @for (item of todo; track item) {
         <!-- <div class="drop-box" cdkDrag>{{ item }}</div> -->
-         <app-task cdkDrag></app-task>
+         <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
         }
       </div>
     </div>
@@ -82,7 +82,7 @@
         }
         @for (item of inprogress; track item) {
         <!-- <div class="drop-box" cdkDrag>{{ item }}</div> -->
-         <app-task cdkDrag></app-task>
+         <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
         }
       </div>
     </div>
@@ -117,7 +117,7 @@
         }
         @for (item of awaitfeedback; track item) {
         <!-- <div class="drop-box" cdkDrag>{{ item }}</div> -->
-         <app-task cdkDrag></app-task>
+         <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
         }
       </div>
     </div>
@@ -152,7 +152,7 @@
         }
         @for (item of done; track item) {
         <!-- <div class="drop-box" cdkDrag>{{ item }}</div> -->
-         <app-task cdkDrag></app-task>
+         <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
         }
       </div>
     </div>
@@ -163,13 +163,14 @@
 <!-- vorerst hier eingebaut, um daran arbeiten zu können-->
 
 <!-- Detailansicht für Task -->
-<!-- <div 
+<div 
 class="task-overlay" 
 [@slideInOut]="animationDirection"
 (@slideInOut.done)="onOverlayAnimationDone($event)"
-[class.backgroundVisible]="backgroundVisible">
-  <app-task-details></app-task-details>
-</div> -->
+[class.backgroundVisible]="backgroundVisible"
+*ngIf="backgroundVisible">
+  <app-task-details (closeTaskDetails)="closeDetailsOverlay($event)"></app-task-details>
+</div>
 
 <!-- Task Cards für das Board -->
-<!-- <app-task></app-task> -->
+<!-- <app-task (taskSelected)="openTaskDetail($event)"></app-task> -->

@@ -1,5 +1,5 @@
 @for (task of taskList; track $index) {
-    <div class="card-layout">
+    <div class="card-layout" (click)="openTaskDetails(task)">
         <div class="wrapper-top">
             <p class="category-flag-card" [style.background-color]="category == 'user' ? '#0038ff': '#1fd7c1'">category type</p>
         </div>
@@ -10,11 +10,7 @@
                 <p>{{task.description}}</p>
                 <div class="subtask-wrapper">
                     <div class="subtask-bar-default"></div>
-                    <span class="subtask-status">
-                        <p></p>
-                    </span>
-                     <span>{{ getCompletedSubtasksCount(subtaskList) }}</span>
-                    <span> / {{subtaskList.length}} Subtasks</span>
+                    <span>{{ getCompletedSubtasksCount(subtaskList) }} / {{subtaskList.length}} Subtasks</span>
                 </div>
                 <div class="card-bottom-wrapper">
                     <div class="collaborators-wrapper">

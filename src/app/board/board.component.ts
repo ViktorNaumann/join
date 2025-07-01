@@ -10,6 +10,9 @@ import {
   CdkDrag,
   CdkDropList,
 } from '@angular/cdk/drag-drop';
+import { Task } from '../services/task.service';
+import { TaskService } from '../services/task.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-board',
@@ -17,7 +20,9 @@ import {
     TaskComponent,
     TaskDetailsComponent,
     CdkDropList, 
-    CdkDrag],
+    CdkDrag,
+    CommonModule
+  ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -60,6 +65,9 @@ import {
 export class BoardComponent {
   animationDirection: 'right' | 'bottom' = 'right';
   backgroundVisible = false;
+  selectedTask?: Task;
+
+  constructor(private taskService: TaskService) {}
   
     setAnimationDirection(width: number) {
       this.animationDirection = width < 1000 ? 'bottom' : 'right';
@@ -99,4 +107,16 @@ export class BoardComponent {
       );
     }
   }
-}
+
+  openTaskDetail(selectedTask: Task) {
+    console.log('Task selected in board:', selectedTask);
+    this.backgroundVisible = true;
+  }
+
+  closeDetailsOverlay(event: string) {
+    if (event === 'close') {
+      this.backgroundVisible = false;
+      console.log('Details overlay closed');
+    }
+  }
+ }
