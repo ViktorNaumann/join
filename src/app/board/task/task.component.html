@@ -1,7 +1,7 @@
 @for (task of taskList; track $index) {
     <div class="card-layout" (click)="openTaskDetails(task)">
         <div class="wrapper-top">
-            <p class="category-flag-card" [style.background-color]="category == 'user' ? '#0038ff': '#1fd7c1'">category type</p>
+            <p class="category-flag-card" [style.background-color]="task.category == 'user' ? '#0038ff': '#1fd7c1'">category type</p>
         </div>
         <!-- Hier Liste von Tasks reinrendern lassen -->
         
