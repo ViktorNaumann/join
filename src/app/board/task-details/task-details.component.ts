@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Task } from '../../services/task.service';
 
 @Component({
   selector: 'app-task-details',
@@ -11,6 +12,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class TaskDetailsComponent {
   @Output() closeTaskDetails = new EventEmitter<string>();
+  @Input() task!: Task;
   showContent = true;
   category ='technical'; //später dynamisch setzen
 

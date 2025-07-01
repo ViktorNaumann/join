@@ -1,14 +1,14 @@
 @for (task of taskList; track $index) {
     <div class="card-layout" (click)="openTaskDetails(task)">
         <div class="wrapper-top">
-            <p class="category-flag-card" [style.background-color]="task.category == 'user' ? '#0038ff': '#1fd7c1'">category type</p>
+            <p class="category-flag-card" [style.background-color]="task.category == 'user' ? '#0038ff': '#1fd7c1'">{{task.category}}</p>
         </div>
         <!-- Hier Liste von Tasks reinrendern lassen -->
         
                 <div class="task-card">
                 <h1>{{task.title}}</h1>
                 <p>{{task.description}}</p>
-                <div class="subtask-wrapper">
+                <div class="subtask-wrapper" *ngIf="subtaskList && subtaskList.length > 0">
                     <div class="subtask-bar-default"></div>
                     <span>{{ getCompletedSubtasksCount(subtaskList) }} / {{subtaskList.length}} Subtasks</span>
                 </div>
@@ -20,7 +20,9 @@
                             <img class="img-user mrg" src="assets/img/svg/person.svg" alt="User Image">
                         </div>
                     </div>
-                    <img class="card-priority" src="assets/img/icons/prio-medium.png" alt="Priority Icon">
+                    <img src="assets/img/icons/prio-high.png" alt="Priority High Icon" class="card-priority" *ngIf="task.priority === 'urgent'">
+                    <img src="assets/img/icons/prio-medium.png" alt="Priority Medium Icon" class="card-priority" *ngIf="task.priority === 'medium'">
+                    <img src="assets/img/icons/prio-low.png" alt="Priority Low Icon" class="card-priority" *ngIf="task.priority === 'low'">
                 </div>
             </div>
     </div>

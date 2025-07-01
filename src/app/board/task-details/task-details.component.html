@@ -14,18 +14,20 @@
     </div>
     <!-- Hier Liste von Tasks reinrendern lassen -->
     <div class="task-content">
-        <h1>Title of task</h1>
-        <p>Description about the task</p>
+        <h1>{{ task.title }}</h1>
+        <p>{{ task.description }}</p>
         <table>
             <tr>
                 <td>Due date:</td>
-                <td>2023-10-01</td>
+                <td>{{ task.date | date }}</td>
             </tr>
             <tr>
                 <td>Priority:</td>
                 <td>
-                    Medium
-                    <img src="assets/img/icons/prio-medium.png" alt="Priority Icon">
+                    {{ task.priority }}
+                    <img src="assets/img/icons/prio-high.png" alt="Priority High Icon" *ngIf="task.priority === 'urgent'">
+                    <img src="assets/img/icons/prio-medium.png" alt="Priorit Medium Icon" *ngIf="task.priority === 'medium'">
+                    <img src="assets/img/icons/prio-low.png" alt="Priority Low Icon" *ngIf="task.priority === 'low'">
                 </td>
             </tr>
             <tr>
