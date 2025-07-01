@@ -47,7 +47,6 @@
           <div class="empty-column">No tasks To do</div>
         }
         @for (item of todo; track item) {
-        <!-- <div class="drop-box" cdkDrag>{{ item }}</div> -->
          <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
         }
       </div>
@@ -81,7 +80,6 @@
           <div class="empty-column">No tasks To do</div>
         }
         @for (item of inprogress; track item) {
-        <!-- <div class="drop-box" cdkDrag>{{ item }}</div> -->
          <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
         }
       </div>
@@ -116,7 +114,6 @@
           <div class="empty-column">No tasks To do</div>
         }
         @for (item of awaitfeedback; track item) {
-        <!-- <div class="drop-box" cdkDrag>{{ item }}</div> -->
          <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
         }
       </div>
@@ -151,7 +148,6 @@
           <div class="empty-column">No tasks To do</div>
         }
         @for (item of done; track item) {
-        <!-- <div class="drop-box" cdkDrag>{{ item }}</div> -->
          <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
         }
       </div>
