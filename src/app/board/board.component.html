@@ -267,6 +267,7 @@
     *ngIf="selectedTask"
     (closeTaskDetails)="closeDetailsOverlay($event)"
     (editTask)="openEditOverlay($event)"
+    (subtaskChanged)="onSubtaskUpdate($event)"
     [task]="selectedTask"
     [subtask]="subtaskForSelectedTask"
     [contactList]="contactList"
