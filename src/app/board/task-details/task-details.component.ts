@@ -5,17 +5,20 @@ import { Subtask } from '../../services/task.service';
 import { Timestamp } from '@angular/fire/firestore';
 import { ContactService } from '../../services/contact.service';
 import { Contact } from '../../services/contact.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-task-details',
   imports: [
-    CommonModule
+    CommonModule,
+    RouterLink
   ],
   templateUrl: './task-details.component.html',
   styleUrl: './task-details.component.scss'
 })
 export class TaskDetailsComponent {
   @Output() closeTaskDetails = new EventEmitter<string>();
+  @Output() editTask = new EventEmitter<Task>();
   @Input() task!: Task;
   @Input() subtask!: Subtask[];
   @Input() contactList: Contact[] = [];
@@ -33,4 +36,15 @@ export class TaskDetailsComponent {
     return this.taskService.convertDate(date);
  }
 
+  openEditTask() {
+    console.log('Edit button clicked', this.task);
+    this.editTask.emit(this.task);
+   }
+
+  deleteTask() {
+    if(this.task.id) {
+      this.taskService.deleteTask(this.task.id);
+      this.onClose();
+    }
+  }
 }

@@ -149,6 +149,7 @@ export class ContactService {
     this.showFormSubject.next(false);
     this.editContactSubject.next(null); //NEU
   }
+  
   async deleteContact(docId: string) {
     await deleteDoc(this.getSingleContactsRef(docId)).catch((err) => {
       console.log(err);

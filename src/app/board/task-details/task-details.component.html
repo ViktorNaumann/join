@@ -67,7 +67,7 @@
                 </td>
             </tr>
         </table>
-        <div class="btn-wrapper">
+        <div class="btn-wrapper" (click)="deleteTask()">
             <button class="btn-delete">
                 <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_75592_9951" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
@@ -80,7 +80,7 @@
                 Delete
             </button>
             <div class="separator"></div>
-            <button class="btn-edit">
+            <button class="btn-edit" routerLink="/add-task" (click)="openEditTask()">
                 <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_75592_8413" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="33" height="33">
                     <rect x="0.394531" y="0.80835" width="32" height="32" fill="#D9D9D9"/>
