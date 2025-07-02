@@ -57,6 +57,11 @@ $form-padding: clamp(20px, calc(2vw + 10px), 40px);
   border-radius: 0 0 $border-radius $border-radius;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+
+  &.error {
+    border-color: var(--text-color-error);
+    background-color: rgba(255, 61, 0, 0.1);
+  }
 }
 
 %menu-item-base {
@@ -280,6 +285,54 @@ $form-padding: clamp(20px, calc(2vw + 10px), 40px);
     cursor: default;
     
     &:hover { transform: scale(1.1); transition: transform 0.2s ease; }
+  }
+}
+
+// Error States and Validation Messages
+.error-message {
+  color: #FF4A4A;
+  font-size: 12px;
+  margin-top: 4px;
+  @include inter400-fs16();
+  font-size: 12px;
+}
+
+input.error, textarea.error {
+  border-color: #FF4A4A !important;
+  
+  &:focus {
+    border-color: #FF4A4A !important;
+    box-shadow: 0 0 0 2px rgba(255, 74, 74, 0.1);
+  }
+}
+
+// Success Message
+.success-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #4CAF50;
+  color: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  text-align: center;
+  
+  .success-content {
+    @include flex-column;
+    gap: 8px;
+    
+    span:first-child {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    .redirect-text {
+      font-size: 14px;
+      opacity: 0.9;
+    }
   }
 }
 
