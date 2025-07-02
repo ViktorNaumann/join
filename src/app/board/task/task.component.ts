@@ -40,6 +40,12 @@ export class TaskComponent {
     return Array.isArray(subtaskList) ? subtaskList.filter(el => el.isCompleted).length : 0;
   }
 
+  percentageCompleted(subtaskList: Subtask[]): number {
+    if (!subtaskList || subtaskList.length === 0) return 0;
+    const completed = this.getCompletedSubtasksCount(subtaskList);
+    return Math.round((completed / subtaskList.length) * 100);
+  }
+
   openTaskDetails(task: Task) {
     this.seletectedTask = {
       id: task.id,

@@ -109,7 +109,6 @@
               </div>
             </div>
             
-            <!-- Selected contacts avatars -->
             <div class="selected-contacts" *ngIf="selectedContacts.length > 0">
               <div 
                 class="selected-contact-avatar"
@@ -168,7 +167,6 @@
                   (keyup.enter)="showSubtaskConfirmation ? confirmSubtask() : (subtaskInput.trim() ? showSubtaskConfirmation = true : showSubtaskDropdown())"
                   [readonly]="showSubtaskConfirmation">
                 
-                <!-- Normal Add Icon -->
                 <img 
                   *ngIf="!showSubtaskConfirmation"
                   src="assets/img/icons/add.png" 
@@ -176,7 +174,6 @@
                   class="add-icon"
                   (click)="showSubtaskDropdown()">
                 
-                <!-- Confirmation Icons -->
                 <div *ngIf="showSubtaskConfirmation" class="confirmation-icons">
                   <img 
                     src="assets/img/icons/close.png" 

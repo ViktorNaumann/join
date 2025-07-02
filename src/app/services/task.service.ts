@@ -103,6 +103,12 @@ export class TaskService {
     });
   }
 
+  async deleteTask(docId: string) {
+    await deleteDoc(this.getSingleTaskRef(docId)).catch((err) => {
+      console.log(err);
+    });
+  }
+
   getCleanJson(updatedTask: Task) {
     return {
       title: updatedTask.title,

@@ -226,6 +226,10 @@ export class BoardComponent {
       }
     }
   }
+  
+  openEditOverlay(task: Task) {
+    console.log('Edit task overlay opened for:', task);
+  }
 
   openTaskDetail(selectedTask: Task) {
     console.log('Task selected in board:', selectedTask);
