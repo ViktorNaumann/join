@@ -83,6 +83,7 @@
         id="todoList"
         [cdkDropListConnectedTo]="[inprogressList, awaitfeedbackList, doneList]"
         class="drop-list"
+        [class.drop-list-empty]="todo.length === 0"
         (cdkDropListDropped)="drop($event)"
       >
         @if (todo.length === 0) {
@@ -130,6 +131,7 @@
         [cdkDropListData]="inprogress"
         [cdkDropListConnectedTo]="[todoList, awaitfeedbackList, doneList]"
         class="drop-list"
+        [class.drop-list-empty]="inprogress.length === 0"
         (cdkDropListDropped)="drop($event)"
       >
         @if (inprogress.length === 0) {
@@ -178,6 +180,7 @@
         id="awaitfeedbackList"
         [cdkDropListConnectedTo]="[todoList, inprogressList, doneList]"
         class="drop-list"
+        [class.drop-list-empty]="awaitfeedback.length === 0"
         (cdkDropListDropped)="drop($event)"
       >
         @if (awaitfeedback.length === 0) {
@@ -227,6 +230,7 @@
         id="doneList"
         [cdkDropListConnectedTo]="[todoList, inprogressList, awaitfeedbackList]"
         class="drop-list"
+        [class.drop-list-empty]="done.length === 0"
         (cdkDropListDropped)="drop($event)"
       >
         @if (done.length === 0) {
