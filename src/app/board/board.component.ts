@@ -110,12 +110,29 @@ export class BoardComponent {
           task.title.toLowerCase().includes(searchLower) || // Suche im Titel
           task.description?.toLowerCase().includes(searchLower) // Suche in der Beschreibung
       );
-      this.showSearchResults = true;
+      // this.showSearchResults = true;
     } else {
-      this.searchResults = [];
-      this.showSearchResults = false;
+      // NEU: Wenn leer, alle Tasks anzeigen
+      this.searchResults = [...this.taskList]
+
+      // this.searchResults = [];
+      // this.showSearchResults = false;
     }
+    //NEU
+    this.showSearchResults = true;
   }
+
+
+  // NEU: Beim Focus alle Tasks anzeigen
+  onSearchFocus() {
+    if (this.searchTerm.trim().length === 0) {
+      this.searchResults = [...this.taskList];
+    } else {
+      this.onSearchInput(); // Normale Suchlogik wenn bereits Text eingegeben
+    }
+    this.showSearchResults = true;
+  }
+
 
   // NEU: Task aus Suchergebnissen auswählen
   selectTaskFromSearch(task: Task) {
