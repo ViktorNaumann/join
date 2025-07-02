@@ -11,6 +11,10 @@
     @include inter700-fs61;
   }
 
+  .add-icon {
+    display: none;
+  }
+
   .header-controls {
     display: flex;
     gap: 10px;
@@ -65,6 +69,7 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
 
+        // Erst mal deaktiviert!
         // &:hover {
         //   background-color: #f0f0f0;
         // }
@@ -98,10 +103,10 @@
 
 .task-columns {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: flex-start;
   gap: 20px;
-  padding: 0 20px;
+  padding: 0 clamp(20px, calc(2vw + 10px), 40px);
   @include inter400-fs12;
 }
 
@@ -363,4 +368,229 @@ app-task {
   text-align: center;
   color: #999;
   font-style: italic;
+}
+
+// ===================
+// Responsive Overrides
+// ===================
+
+@media (max-width: 1320px) {
+  .layout-container {
+    height: 100vh; // Begrenzt die Container-Höhe auf den Viewport
+    overflow-y: auto; // Aktiviert vertikales Scrollen
+    display: flex;
+    flex-direction: column;
+  }
+
+  .board-header {
+    flex-shrink: 0; // Header soll nicht schrumpfen
+  }
+
+  .task-columns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 0 20px 40px 20px;
+
+    max-width: 90vw; // Schrumpft automatisch mit dem Bildschirm
+    margin: 0 auto; // Zentriert den Container
+    width: 90%; // Nimmt verfügbare Breite
+  }
+
+  .column {
+    flex: 0 0 calc(50% - 10px); // Genau 50% minus halber Gap
+    width: auto; // Auto-Breite basierend auf Flex-Basis
+    min-width: 220px;
+    max-width: 300px;
+  }
+
+  .drop-list {
+    width: 100%; // Drop-Liste passt sich der Column-Breite an
+    max-width: 280px; // Maximale Breite für Drop-Liste
+    min-height: 400px; // Reduzierte Mindesthöhe für besseres Wrapping
+  }
+}
+
+@media (max-width: 1000px) {
+  .task-columns {
+    flex-wrap: nowrap; // Verhindert Umbruch
+    gap: 0; // Kleinerer Gap für mehr Platz
+    padding: 0;
+    font-size: 0.65rem;
+    max-width: 100vw;
+
+    .icon-container {
+      img {
+        width: 18px;
+        height: 18px;
+        transition: opacity 0.3s ease;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .column {
+    flex: 0 0 auto; // Verhindert Wachsen/Schrumpfen
+    width: 210px; // Feste, schmalere Breite
+    min-width: 200px;
+    max-width: 220px;
+  }
+
+  .drop-list {
+    min-height: 500px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    padding: 8px;
+    margin: 10px 0;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 850px) {
+  .task-columns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 0 16px;
+    max-width: 100%;
+  }
+
+  .column {
+    flex: 0 0 calc(50% - 8px); // Genau 50% minus halber Gap
+    width: calc(50% - 8px); // Explizite Breite für besseren Umbruch
+    min-width: 180px;
+    max-width: 250px;
+  }
+
+  .drop-list {
+    width: 100%; // Passt sich der Column-Breite an
+    max-width: 100%; // Nutzt die verfügbare Column-Breite
+    min-height: 400px; // Etwas niedriger für kleinere Screens
+    gap: 10px; // Kleinerer Gap zwischen den Tasks
+  }
+}
+
+@media (max-width: 600px) {
+  .board-header {
+    height: auto;
+    gap: 20px;
+    padding: 20px;
+
+    flex-shrink: 0;
+
+    .header-headline {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      gap: 12px;
+
+      .add-icon {
+        display: unset;
+        width: 38px;
+        height: 38px;
+        flex-shrink: 0; // Verhindert Schrumpfen des Icons
+      }
+    }
+
+    .add-icon {
+      display: unset;
+    }
+
+    .header-controls {
+      > button {
+        display: none;
+      }
+    }
+  }
+
+  .task-columns {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .column {
+    flex: none;
+    width: 100%;
+    max-width: 320px;
+    min-width: unset;
+  }
+
+  .drop-list {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .layout-container {
+    height: calc(
+      100vh - 170px
+    ); // Viewport minus App-Header minus Mobile-Sidebar
+    max-height: calc(100vh - 170px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+
+  .task-columns {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+    padding: 0 20px 20px 20px; // Padding anstatt margin-bottom
+  }
+
+  .column {
+    flex: none;
+    width: 100%;
+    max-width: 320px;
+    min-width: unset;
+  }
+
+  .drop-list {
+    width: 100%;
+    max-width: 320px;
+    min-height: 300px; // Reduziert für besseres Scrolling
+  }
+}
+
+@media (max-width: 450px) {
+  .board-header {
+    flex-direction: column;
+
+    .header-headline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 12px;
+    }
+
+    .header-controls {
+      width: 100%;
+      gap: 0; // Kein Gap da nur noch Search-Input sichtbar
+
+      > button {
+        display: none;
+      }
+
+      .search-input-container {
+        width: 100%;
+        max-width: none; // Maximale Breite entfernen
+
+        input {
+          width: 100%; // Input nutzt volle Container-Breite
+          box-sizing: border-box; // Padding wird in die Breite eingerechnet
+        }
+      }
+    }
+  }
 }
