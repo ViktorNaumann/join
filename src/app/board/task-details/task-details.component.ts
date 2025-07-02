@@ -5,13 +5,12 @@ import { Subtask } from '../../services/task.service';
 import { Timestamp } from '@angular/fire/firestore';
 import { ContactService } from '../../services/contact.service';
 import { Contact } from '../../services/contact.service';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-details',
   imports: [
-    CommonModule,
-    RouterLink
+    CommonModule
   ],
   templateUrl: './task-details.component.html',
   styleUrl: './task-details.component.scss'
@@ -24,7 +23,7 @@ export class TaskDetailsComponent {
   @Input() contactList: Contact[] = [];
   showContent = true;
   
-  constructor(private taskService: TaskService, public contactService: ContactService ) {}
+  constructor(private taskService: TaskService, public contactService: ContactService, private router: Router ) {}
 
   onClose() {
     console.log('Close button clicked');
@@ -38,6 +37,10 @@ export class TaskDetailsComponent {
 
   openEditTask() {
     console.log('Edit button clicked', this.task);
+    // Task im Service für das Bearbeiten speichern
+    this.taskService.setEditingTask(this.task);
+    // Zu add-task navigieren
+    this.router.navigate(['/add-task']);
     this.editTask.emit(this.task);
    }
 

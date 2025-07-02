@@ -29,6 +29,11 @@ export class AddTaskComponent implements OnInit {
   showDateError: boolean = false;
   showSuccessMessage: boolean = false;
   
+  // Neue Eigenschaften für das Bearbeiten
+  isEditingMode: boolean = false;
+  editingTaskId: string | undefined;
+  originalTaskStatus: 'to-do' | 'in-progress' | 'await-feedback' | 'done' = 'to-do';
+  
   formData = {
     title: '',
     description: '',
@@ -51,6 +56,77 @@ export class AddTaskComponent implements OnInit {
     this.loadContacts();
   }
 
+  loadContacts() {
+    this.contactService.getContacts().subscribe(contacts => {
+      this.contacts = contacts;
+      console.log('Contacts loaded:', this.contacts);
+      // Erst nach dem Laden der Kontakte die Edit-Task laden
+      this.loadEditingTask();
+    });
+  }
+
+  loadEditingTask() {
+    const editingTask = this.taskService.getEditingTask();
+    if (editingTask) {
+      this.isEditingMode = true;
+      this.editingTaskId = editingTask.id;
+      this.populateFormWithTaskData(editingTask);
+      // Task aus dem Service entfernen nach dem Laden
+      this.taskService.clearEditingTask();
+    }
+  }
+
+  async populateFormWithTaskData(task: any) {
+    // Grunddaten setzen
+    this.formData.title = task.title || '';
+    this.formData.description = task.description || '';
+    
+    // Ursprünglichen Status speichern
+    this.originalTaskStatus = task.status || 'to-do';
+    
+    // Datum konvertieren und setzen
+    if (task.date) {
+      let dateValue: Date;
+      if (task.date.toDate) {
+        // Firebase Timestamp
+        dateValue = task.date.toDate();
+      } else if (task.date instanceof Date) {
+        dateValue = task.date;
+      } else {
+        dateValue = new Date(task.date);
+      }
+      this.formData.dueDate = dateValue.toISOString().split('T')[0];
+    }
+    
+    // Priorität setzen
+    this.selectedPriority = task.priority || 'medium';
+    
+    // Kategorie setzen
+    this.selectedCategory = task.category || '';
+    
+    // Zugewiesene Kontakte laden
+    if (task.assignedTo && task.assignedTo.length > 0) {
+      console.log('Task assignedTo:', task.assignedTo);
+      console.log('Available contacts:', this.contacts);
+      this.selectedContacts = this.contacts.filter(contact => 
+        task.assignedTo.includes(contact.id)
+      );
+      console.log('Selected contacts after filtering:', this.selectedContacts);
+    }
+    
+    // Subtasks laden falls vorhanden
+    if (task.id) {
+      this.taskService.getSubtasks(task.id).subscribe(subtasks => {
+        this.subtasks = subtasks.map((subtask, index) => ({
+          id: index + 1,
+          text: subtask.title,
+          completed: subtask.isCompleted
+        }));
+        this.nextSubtaskId = this.subtasks.length + 1;
+      });
+    }
+  }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event) {
     const target = event.target as HTMLElement;
@@ -59,12 +135,6 @@ export class AddTaskComponent implements OnInit {
       this.showCategoryDropdown = false;
       this.showSubtaskSuggestions = false;
     }
-  }
-
-  loadContacts() {
-    this.contactService.getContacts().subscribe(contacts => {
-      this.contacts = contacts;
-    });
   }
 
   setPriority(priority: string) {
@@ -223,6 +293,10 @@ export class AddTaskComponent implements OnInit {
     this.showCategoryError = false;
     this.showDateError = false;
     this.showSuccessMessage = false;
+    // Bearbeitungsfelder zurücksetzen
+    this.isEditingMode = false;
+    this.editingTaskId = undefined;
+    this.originalTaskStatus = 'to-do';
   }
 
   async createTask() {
@@ -254,38 +328,72 @@ export class AddTaskComponent implements OnInit {
     this.isCreatingTask = true;
 
     try {
-      const newTask: Task = {
-        title: this.formData.title.trim(),
-        description: this.formData.description?.trim() || '',
-        date: new Date(this.formData.dueDate),
-        priority: this.selectedPriority as 'low' | 'medium' | 'urgent',
-        status: 'to-do',
-        assignedTo: this.selectedContacts.map(contact => contact.id).filter(id => id !== undefined) as string[],
-        category: this.selectedCategory as 'technical' | 'user'
-      };
-      const savedTask = await this.taskService.addTask(newTask);
-      
-      if (savedTask) {
-        if (this.subtasks.length > 0 && savedTask.id) {
-          for (const subtask of this.subtasks) {
-            await this.taskService.addSubtask(savedTask.id, {
-              title: subtask.text,
-              isCompleted: subtask.completed
-            });
-          }
-        }
-        this.showSuccessMessage = true;
-        setTimeout(() => {
-          this.clearForm();
-          this.router.navigate(['/board']);
-        }, 2000);
+      if (this.isEditingMode && this.editingTaskId) {
+        // Task bearbeiten
+        await this.updateTask();
       } else {
-        console.error('Fehler beim Erstellen der Task');
+        // Neue Task erstellen
+        await this.addNewTask();
       }
+      
+      this.showSuccessMessage = true;
+      setTimeout(() => {
+        this.clearForm();
+        this.router.navigate(['/board']);
+      }, 2000);
     } catch (error) {
-      console.error('Fehler beim Erstellen der Task:', error);
+      console.error('Fehler beim Erstellen/Bearbeiten der Task:', error);
     } finally {
       this.isCreatingTask = false;
+    }
+  }
+
+  async addNewTask() {
+    const newTask: Task = {
+      title: this.formData.title.trim(),
+      description: this.formData.description?.trim() || '',
+      date: new Date(this.formData.dueDate),
+      priority: this.selectedPriority as 'low' | 'medium' | 'urgent',
+      status: 'to-do',
+      assignedTo: this.selectedContacts.map(contact => contact.id).filter(id => id !== undefined) as string[],
+      category: this.selectedCategory as 'technical' | 'user'
+    };
+    const savedTask = await this.taskService.addTask(newTask);
+    
+    if (savedTask && this.subtasks.length > 0 && savedTask.id) {
+      for (const subtask of this.subtasks) {
+        await this.taskService.addSubtask(savedTask.id, {
+          title: subtask.text,
+          isCompleted: subtask.completed
+        });
+      }
+    }
+  }
+
+  async updateTask() {
+    if (!this.editingTaskId) return;
+
+    const updatedTask: Task = {
+      id: this.editingTaskId,
+      title: this.formData.title.trim(),
+      description: this.formData.description?.trim() || '',
+      date: new Date(this.formData.dueDate),
+      priority: this.selectedPriority as 'low' | 'medium' | 'urgent',
+      status: this.originalTaskStatus, // Ursprünglichen Status beibehalten
+      assignedTo: this.selectedContacts.map(contact => contact.id).filter(id => id !== undefined) as string[],
+      category: this.selectedCategory as 'technical' | 'user'
+    };
+
+    await this.taskService.updateTask(this.editingTaskId, updatedTask);
+    
+    // Subtasks aktualisieren (vereinfacht - in einer echten App würde man bestehende Subtasks berücksichtigen)
+    if (this.subtasks.length > 0) {
+      for (const subtask of this.subtasks) {
+        await this.taskService.addSubtask(this.editingTaskId, {
+          title: subtask.text,
+          isCompleted: subtask.completed
+        });
+      }
     }
   }
 

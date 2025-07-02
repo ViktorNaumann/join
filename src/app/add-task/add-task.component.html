@@ -1,11 +1,11 @@
 <section class="layout-container">
   <div class="add-task-header">
-    <h1>Add Task</h1>
+    <h1>{{ isEditingMode ? 'Edit Task' : 'Add Task' }}</h1>
   </div>
   
   <div class="success-message" *ngIf="showSuccessMessage">
     <div class="success-content">
-      <span>✓ Task successfully created!</span>
+      <span>✓ Task successfully {{ isEditingMode ? 'updated' : 'created' }}!</span>
       <span class="redirect-text">Redirecting to board...</span>
     </div>
   </div>
@@ -265,7 +265,7 @@
         <div class="form-actions">
           <button type="button" class="btn-clear" (click)="clearForm()" [disabled]="isCreatingTask">Clear</button>
           <button type="submit" class="btn-create" [disabled]="isCreatingTask">
-            {{ isCreatingTask ? 'Creating...' : 'Create Task' }}
+            {{ isCreatingTask ? (isEditingMode ? 'Updating...' : 'Creating...') : (isEditingMode ? 'Update Task' : 'Create Task') }}
           </button>
         </div>
       </div>

@@ -26,6 +26,8 @@ export interface Subtask {
   providedIn: 'root'
 })
 export class TaskService {
+  // Neue Variable für die zu bearbeitende Task
+  private editingTask: Task | null = null;
   
   constructor(private firestore: Firestore) { }
   
@@ -135,6 +137,19 @@ export class TaskService {
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
+  }
+
+  // Neue Methoden für das Bearbeiten von Tasks
+  setEditingTask(task: Task) {
+    this.editingTask = task;
+  }
+
+  getEditingTask(): Task | null {
+    return this.editingTask;
+  }
+
+  clearEditingTask() {
+    this.editingTask = null;
   }
 }
 
