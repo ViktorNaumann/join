@@ -17,6 +17,7 @@
     }
     @media(min-width: 1000px) {
         max-width: 550px;
+        height: 820px;
     }
     @media(max-width: 450px) {
         width: 95%;
@@ -28,7 +29,7 @@
     height: auto;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
 }
 
 .wrapper-top {
@@ -97,9 +98,16 @@
 
 table {
     gap: 24px;
+    width: 100%;
+    border-collapse: collapse;
     tr {
         height: 48px;
     }
+}
+
+.priority-column {
+    display: flex;
+    gap: 16px;
 }
 
 .img-user-wrapper {
@@ -109,8 +117,8 @@ table {
     .img-user{
         background-color: var(--background-default-light);
         border-radius: 50%;
-        width: 40px;
-        height: 40px;
+        width: 32px;
+        height: 32px;
         @include flex-center();
     }
 }
@@ -120,12 +128,36 @@ table {
     color: var(--text-color-light);
 }
 
+.subtask-list {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; 
+    height: 120px;
+}
+
 .column-subtask-checkbox {
     display: flex;
     gap: 16px;
 }
 
+.contact-list {
+    height: 120px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; 
+}
+
 .column-contacts {
     display: flex;
     height: 48px;
+}
+
+.contact-item, .subtask-item {
+    display: flex;
+    align-items: center;
+    gap: 16px; 
 }

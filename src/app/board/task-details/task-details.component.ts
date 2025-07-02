@@ -20,8 +20,7 @@ export class TaskDetailsComponent {
   @Input() subtask!: Subtask[];
   @Input() contactList: Contact[] = [];
   showContent = true;
-  category ='technical'; //später dynamisch setzen
-
+  
   constructor(private taskService: TaskService, public contactService: ContactService ) {}
 
   onClose() {
