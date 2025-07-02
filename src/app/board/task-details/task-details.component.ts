@@ -6,11 +6,13 @@ import { Timestamp } from '@angular/fire/firestore';
 import { ContactService } from '../../services/contact.service';
 import { Contact } from '../../services/contact.service';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-task-details',
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   templateUrl: './task-details.component.html',
   styleUrl: './task-details.component.scss'
@@ -18,6 +20,7 @@ import { Router } from '@angular/router';
 export class TaskDetailsComponent {
   @Output() closeTaskDetails = new EventEmitter<string>();
   @Output() editTask = new EventEmitter<Task>();
+  @Output() subtaskChanged = new EventEmitter<Subtask[]>();
   @Input() task!: Task;
   @Input() subtask!: Subtask[];
   @Input() contactList: Contact[] = [];
@@ -49,5 +52,21 @@ export class TaskDetailsComponent {
       this.taskService.deleteTask(this.task.id);
       this.onClose();
     }
+  }
+
+  onSubtaskToggle(subtask: Subtask) {
+    subtask.isCompleted = !subtask.isCompleted;
+
+    if (!this.task.id || !subtask.id) {
+      console.error('Missing task ID or subtask ID.');
+      return;
+    }
+
+    this.taskService.updateSubtask(this.task.id, subtask.id, subtask).then(() => {
+      console.log('Subtask updated successfully');
+      this.subtaskChanged.emit(this.subtask); 
+    }).catch((error) => {
+      console.error('Error updating subtask:', error);
+    });
   }
 }

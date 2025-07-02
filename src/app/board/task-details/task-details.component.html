@@ -1,6 +1,6 @@
 <div class="content-wrapper" *ngIf="showContent">
     <div class="wrapper-top">
-        <p class="category-flag" [style.background-color]="task.category == 'user' ? '#0038ff': '#1fd7c1'">{{task.category}}</p>
+        <p class="category-flag" [style.background-color]="task.category == 'user story' ? '#0038ff': '#1fd7c1'">{{task.category}}</p>
         <button class="btn-close" (click)="onClose()" >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_331509_883" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
@@ -59,8 +59,8 @@
                     <div class="subtask-list">
                         @for (subtask of subtask; track $index) {
                             <div class="subtask-item">
-                                <input [id]="'subtask-cb-' + $index" type="checkbox">
-                                <label [for]="'subtask-cb-' + $index">{{ subtask.title }}</label>
+                                <input [id]="'subtask-cb' + $index" type="checkbox" [(ngModel)]="subtask.isCompleted" (change)="onSubtaskToggle(subtask)">
+                                <label [for]="'subtask-cb' + $index">{{ subtask.title }}</label>
                             </div>
                         }
                     </div>
@@ -80,7 +80,7 @@
                 Delete
             </button>
             <div class="separator"></div>
-            <button class="btn-edit" (click)="openEditTask()">>
+            <button class="btn-edit" (click)="openEditTask()">
                 <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_75592_8413" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="33" height="33">
                     <rect x="0.394531" y="0.80835" width="32" height="32" fill="#D9D9D9"/>

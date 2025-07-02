@@ -28,7 +28,7 @@ export class TaskComponent {
   @Output() taskSelected = new EventEmitter<Task>();
   @Output() subtaskForSelectedTask = new EventEmitter<Subtask[]>();
   @Output() contacts = new EventEmitter<Contact[]>();
-  seletectedTask?: Task;
+  selectedTask?: Task;
 
   constructor(public taskService: TaskService, public contactService: ContactService){}
 
@@ -47,20 +47,10 @@ export class TaskComponent {
   }
 
   openTaskDetails(task: Task) {
-    this.seletectedTask = {
-      id: task.id,
-      title: task.title,
-      description: task.description,
-      date: task.date,
-      priority: task.priority,
-      status: task.status,
-      assignedTo: task.assignedTo,
-      category: task.category,
-      subtask: task.subtask,
-    }   
-    this.taskSelected.emit(this.seletectedTask);
+    this.selectedTask = task; 
+    this.taskSelected.emit(this.selectedTask);
     this.subtaskForSelectedTask.emit(this.subtaskList);
-    console.log('Selected Task emitted:', this.seletectedTask);
+    console.log('Selected Task emitted:', this.selectedTask);
   }
 
   //NEU - Kontakte anhand der IDs aus den Tasks geladen
@@ -69,9 +59,9 @@ export class TaskComponent {
       for (let contactId of this.task.assignedTo) {
         const contact = await this.contactService.getContactById(contactId);
         if (contact) this.contactList.push(contact);
-        this.contacts.emit(this.contactList);
         console.log('Das sind die Kontakte:', this.contactList);
       }
+       this.contacts.emit(this.contactList);
     }
   }
 }
