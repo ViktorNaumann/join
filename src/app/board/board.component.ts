@@ -96,7 +96,7 @@ export class BoardComponent {
   category = 'technical'; //später dynamisch setzen
   taskList: Task[] = [];
   subtaskList: Subtask[] = [];
-  subtaskForSelectedTask: Subtask[] = [];
+  // subtaskForSelectedTask: Subtask[] = [];
   contactList: Contact[] = [];
   subtasksByTaskId: { [taskId: string]: Subtask[] } = {};
 
@@ -313,10 +313,10 @@ export class BoardComponent {
     }
   }
 
-  getSubtasks(subtaskList: Subtask[]) {
-    this.subtaskForSelectedTask = subtaskList;
-    console.log('Subtasks for selected task:', this.subtaskForSelectedTask);
-  }
+  // getSubtasks(subtaskList: Subtask[]) {
+  //   this.subtaskForSelectedTask = subtaskList;
+  //   console.log('Subtasks for selected task:', this.subtaskForSelectedTask);
+  // }
   //Zum Test
   getSubtasksForSelectedTask() {
     if (this.selectedTask?.id) {

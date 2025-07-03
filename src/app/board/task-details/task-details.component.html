@@ -51,15 +51,15 @@
                     </div>
                 </td>
             </tr>
-             <tr *ngIf="subtask && subtask.length > 0">
+             <tr *ngIf="subtasks">
                 <td>Subtasks:</td>
             </tr>
             <tr>
                 <td colspan="2">
                     <div class="subtask-list">
-                        @for (subtask of subtask; track $index) {
+                        @for (subtask of subtasks; track $index) {
                             <div class="subtask-item">
-                                <input [id]="'subtask-cb' + $index" type="checkbox" (change)="onSubtaskToggle(subtask)">
+                                <input [id]="'subtask-cb' + $index" type="checkbox"  (change)="onSubtaskToggle(subtask)" [(ngModel)]="subtask.isCompleted">
                                 <label [for]="'subtask-cb' + $index">{{ subtask.title }}</label>
                             </div>
                         }

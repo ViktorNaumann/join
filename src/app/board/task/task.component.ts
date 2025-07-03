@@ -26,7 +26,7 @@ export class TaskComponent {
   @Input() task!: Task;
   @Input() subtaskList: Subtask[] = [];
   @Output() taskSelected = new EventEmitter<Task>();
-  @Output() subtaskForSelectedTask = new EventEmitter<Subtask[]>();
+  // @Output() subtaskForSelectedTask = new EventEmitter<Subtask[]>();
   @Output() contacts = new EventEmitter<Contact[]>();
   selectedTask?: Task;
 
@@ -49,7 +49,7 @@ export class TaskComponent {
   openTaskDetails(task: Task) {
     this.selectedTask = task; 
     this.taskSelected.emit(this.selectedTask);
-    this.subtaskForSelectedTask.emit(this.subtaskList);
+    // this.subtaskForSelectedTask.emit(this.subtaskList);
     console.log('Selected Task emitted:', this.selectedTask);
   }
 

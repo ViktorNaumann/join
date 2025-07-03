@@ -101,7 +101,6 @@
           (taskSelected)="openTaskDetail($event)"
           [task]="task"
           [subtaskList]="getSubtasksForTask(task.id)"
-          (subtaskForSelectedTask)="getSubtasks($event)"
           (contacts)="getContactList($event)"
         ></app-task>
         } }
@@ -149,7 +148,6 @@
           (taskSelected)="openTaskDetail($event)"
           [task]="task"
           [subtaskList]="getSubtasksForTask(task.id)"
-          (subtaskForSelectedTask)="getSubtasks($event)"
           (contacts)="getContactList($event)"
         ></app-task>
         } }
@@ -199,7 +197,6 @@
           (taskSelected)="openTaskDetail($event)"
           [task]="task"
           [subtaskList]="getSubtasksForTask(task.id)"
-          (subtaskForSelectedTask)="getSubtasks($event)"
           (contacts)="getContactList($event)"
         ></app-task>
         } }
@@ -248,7 +245,6 @@
           (taskSelected)="openTaskDetail($event)"
           [task]="task"
           [subtaskList]="getSubtasksForTask(task.id)"
-          (subtaskForSelectedTask)="getSubtasks($event)"
           (contacts)="getContactList($event)"
         ></app-task>
         } }
@@ -273,7 +269,6 @@
     (editTask)="openEditOverlay($event)"
     (subtaskChanged)="onSubtaskUpdate($event)"
     [task]="selectedTask"
-    [subtask]="subtaskForSelectedTask"
     [contactList]="contactList"
   ></app-task-details>
 </div>

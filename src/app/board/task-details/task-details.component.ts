@@ -22,7 +22,7 @@ export class TaskDetailsComponent {
   @Output() editTask = new EventEmitter<Task>();
   @Output() subtaskChanged = new EventEmitter<Subtask[]>();
   @Input() task!: Task;
-  @Input() subtask!: Subtask[];
+  // @Input() subtask!: Subtask[];
   @Input() contactList: Contact[] = [];
   showContent = true;
   subtasks: Subtask[] = [];
@@ -61,21 +61,47 @@ export class TaskDetailsComponent {
     }
   }
 
-  onSubtaskToggle(subtask: Subtask) {
-    subtask.isCompleted = !subtask.isCompleted;
-    console.log('Subtask toggled:', subtask.isCompleted);
-    if (!this.task.id || !subtask.id) {
-      console.error('Missing task ID or subtask ID.');
-      return;
-    }
+  // onSubtaskToggle(subtask: Subtask) {
+  //   subtask.isCompleted = !subtask.isCompleted;
+  //   console.log('Subtask toggled:', subtask.isCompleted);
+  //   if (!this.task.id || !subtask.id) {
+  //     console.error('Missing task ID or subtask ID.');
+  //     return;
+  //   }
 
-    this.taskService.updateSubtask(this.task.id, subtask.id, subtask).then(() => {
-      console.log('Subtask updated successfully');
-      this.subtaskChanged.emit(this.subtask); 
-    }).catch((error) => {
-      console.error('Error updating subtask:', error);
-    });
-  }
+  //   this.taskService.updateSubtask(this.task.id, subtask.id, subtask).then(() => {
+  //     console.log('Subtask updated successfully');
+  //     this.subtaskChanged.emit(this.subtask); 
+  //   }).catch((error) => {
+  //     console.error('Error updating subtask:', error);
+  //   });
+  // }
+
+//   onSubtaskToggle(isCompleted: boolean, subtask: Subtask) {
+//   subtask.isCompleted = isCompleted; // Wert ist schon gesetzt durch ngModel
+//   if (!this.task.id || !subtask.id) {
+//     console.error('Missing task ID or subtask ID.');
+//     return;
+//   }
+//   this.taskService.updateSubtask(this.task.id, subtask.id, subtask).then(() => {
+//     console.log('Subtask updated successfully');
+//     this.subtaskChanged.emit(this.subtasks); 
+//   }).catch(error => {
+//     console.error('Error updating subtask:', error);
+//   });
+// }
+
+onSubtaskToggle(subtask: Subtask) {
+  if (!this.task.id || !subtask.id) return;
+
+  this.taskService.updateSubtask(this.task.id, subtask.id, subtask).then(() => {
+    console.log('Subtask updated successfully');
+    this.subtaskChanged.emit(this.subtasks);
+  }).catch(error => {
+    console.error('Error updating subtask:', error);
+  });
+}
+
   loadSubtasks() {
     if (this.task?.id) {
       this.taskService.getSubtasks(this.task.id).subscribe((subtasks: Subtask[]) => {
