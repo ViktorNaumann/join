@@ -61,36 +61,6 @@ export class TaskDetailsComponent {
     }
   }
 
-  // onSubtaskToggle(subtask: Subtask) {
-  //   subtask.isCompleted = !subtask.isCompleted;
-  //   console.log('Subtask toggled:', subtask.isCompleted);
-  //   if (!this.task.id || !subtask.id) {
-  //     console.error('Missing task ID or subtask ID.');
-  //     return;
-  //   }
-
-  //   this.taskService.updateSubtask(this.task.id, subtask.id, subtask).then(() => {
-  //     console.log('Subtask updated successfully');
-  //     this.subtaskChanged.emit(this.subtask); 
-  //   }).catch((error) => {
-  //     console.error('Error updating subtask:', error);
-  //   });
-  // }
-
-//   onSubtaskToggle(isCompleted: boolean, subtask: Subtask) {
-//   subtask.isCompleted = isCompleted; // Wert ist schon gesetzt durch ngModel
-//   if (!this.task.id || !subtask.id) {
-//     console.error('Missing task ID or subtask ID.');
-//     return;
-//   }
-//   this.taskService.updateSubtask(this.task.id, subtask.id, subtask).then(() => {
-//     console.log('Subtask updated successfully');
-//     this.subtaskChanged.emit(this.subtasks); 
-//   }).catch(error => {
-//     console.error('Error updating subtask:', error);
-//   });
-// }
-
 onSubtaskToggle(subtask: Subtask) {
   if (!this.task.id || !subtask.id) return;
 

@@ -87,9 +87,9 @@ export class TaskService {
     }
   }
 
-  async addSubtask(subColId: string, subtask: Subtask): Promise<Subtask | null> {
+  async addSubtask(ColId: string, subtask: Subtask): Promise<Subtask | null> {
     try {
-      const subtasksRef = this.getSubtasksRef(subColId);
+      const subtasksRef = this.getSubtasksRef(ColId);
       const docRef = await addDoc(subtasksRef, subtask);
       return { id: docRef.id, ...subtask };
     } catch (error) {

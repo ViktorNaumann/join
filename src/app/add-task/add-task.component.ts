@@ -118,7 +118,7 @@ export class AddTaskComponent implements OnInit {
     if (task.id) {
       this.taskService.getSubtasks(task.id).subscribe(subtasks => {
         this.subtasks = subtasks.map((subtask, index) => ({
-          id: index + 1,
+          id: typeof subtask.id === 'number' ? subtask.id : index + 1, //NEU eigentlich muss aber nur die Id der Subcollection genutzt werden
           text: subtask.title,
           completed: subtask.isCompleted
         }));
@@ -387,11 +387,12 @@ export class AddTaskComponent implements OnInit {
     await this.taskService.updateTask(this.editingTaskId, updatedTask);
     
     // Subtasks aktualisieren (vereinfacht - in einer echten App würde man bestehende Subtasks berücksichtigen)
-    if (this.subtasks.length > 0) {
+    if (this.subtasks.length > 0 && this.editingTaskId) {
       for (const subtask of this.subtasks) {
         await this.taskService.updateSubtask(
           this.editingTaskId,
-          this.taskService.getSubtasksRef(this.editingTaskId).id,{
+          subtask.id.toString(), //NEU
+          {
           title: subtask.text,
           isCompleted: subtask.completed
         });
