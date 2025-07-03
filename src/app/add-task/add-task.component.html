@@ -48,7 +48,8 @@
               name="dueDate"
               [(ngModel)]="formData.dueDate"
               (change)="onDateSelect()"
-              [class.error]="showDateError">
+              [class.error]="showDateError"
+              [min]="getTodayDate()">
             <div class="error-message" *ngIf="showDateError">
               This field is required
             </div>
