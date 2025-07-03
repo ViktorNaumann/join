@@ -16,7 +16,25 @@
           placeholder="Find Task"
           [(ngModel)]="searchTerm"
           (input)="onSearchInput()"
+          #searchInput
         />
+
+        
+        <!-- NEU -->
+        @if (searchTerm.trim()) {
+        <div
+          class="clear-search-wrapper"
+          (click)="clearSearch(); searchInput.focus()"
+        >
+          <img
+            src="assets/img/icons/close.png"
+            alt="Clear search"
+            class="clear-search-icon"
+          />
+        </div>
+        }
+
+
         <div class="separator"></div>
         <div class="search-icon-wrapper">
           <img

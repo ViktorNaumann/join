@@ -22,7 +22,10 @@
 
     .search-input-container {
       position: relative;
-      width: 250px;
+      display: flex;
+      align-items: center;
+      width: 251px;
+      height: 51px;
       cursor: pointer;
 
       input {
@@ -69,14 +72,39 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
 
-        // Erst mal deaktiviert!
-        // &:hover {
-        //   background-color: #f0f0f0;
-        // }
-
         .search-icon {
           width: 16px;
           height: 16px;
+        }
+      }
+
+      .clear-search-wrapper {
+        position: absolute;
+        right: 50px; // Links vom Separator positioniert
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 2;
+
+        .clear-search-icon {
+          width: 14px;
+          height: 14px;
+          opacity: 0.5;
+          transition: opacity 0.2s ease, transform 0.1s ease;
+
+          &:hover {
+            opacity: 0.8;
+            transform: scale(1.1);
+          }
+
+          &:active {
+            transform: scale(0.95);
+          }
         }
       }
     }

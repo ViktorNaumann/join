@@ -126,6 +126,10 @@ export class BoardComponent {
     );
   }
 
+  clearSearch(){
+    this.searchTerm = '';
+  }
+
   setAnimationDirection(width: number) {
     this.animationDirection = width < 1000 ? 'bottom' : 'right';
   }
