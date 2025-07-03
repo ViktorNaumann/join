@@ -356,7 +356,7 @@ export class AddTaskComponent implements OnInit {
       priority: this.selectedPriority as 'low' | 'medium' | 'urgent',
       status: 'to-do',
       assignedTo: this.selectedContacts.map(contact => contact.id).filter(id => id !== undefined) as string[],
-      category: this.selectedCategory as 'technical' | 'user'
+      category: this.selectedCategory as 'technical' | 'user story'
     };
     const savedTask = await this.taskService.addTask(newTask);
     
@@ -381,7 +381,7 @@ export class AddTaskComponent implements OnInit {
       priority: this.selectedPriority as 'low' | 'medium' | 'urgent',
       status: this.originalTaskStatus, // Ursprünglichen Status beibehalten
       assignedTo: this.selectedContacts.map(contact => contact.id).filter(id => id !== undefined) as string[],
-      category: this.selectedCategory as 'technical' | 'user'
+      category: this.selectedCategory as 'technical' | 'user story'
     };
 
     await this.taskService.updateTask(this.editingTaskId, updatedTask);
@@ -389,7 +389,9 @@ export class AddTaskComponent implements OnInit {
     // Subtasks aktualisieren (vereinfacht - in einer echten App würde man bestehende Subtasks berücksichtigen)
     if (this.subtasks.length > 0) {
       for (const subtask of this.subtasks) {
-        await this.taskService.addSubtask(this.editingTaskId, {
+        await this.taskService.updateSubtask(
+          this.editingTaskId,
+          this.taskService.getSubtasksRef(this.editingTaskId).id,{
           title: subtask.text,
           isCompleted: subtask.completed
         });
@@ -413,5 +415,10 @@ export class AddTaskComponent implements OnInit {
     if (this.formData.dueDate) {
       this.showDateError = false;
     }
+  }
+
+  getTodayDate(): string {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
   }
 }

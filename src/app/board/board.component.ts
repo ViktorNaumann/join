@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, ViewEncapsulation, Input } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import {
   trigger,
@@ -38,7 +38,7 @@ import { FormsModule } from '@angular/forms';
     CdkDropList,
     CdkDrag,
     CommonModule,
-    FormsModule,
+    FormsModule
   ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
@@ -96,8 +96,9 @@ export class BoardComponent {
   category = 'technical'; //später dynamisch setzen
   taskList: Task[] = [];
   subtaskList: Subtask[] = [];
-  subtaskForSelectedTask: Subtask[] = [];
+  // subtaskForSelectedTask: Subtask[] = [];
   contactList: Contact[] = [];
+  subtasksByTaskId: { [taskId: string]: Subtask[] } = {};
 
   constructor(private taskService: TaskService) {}
 
@@ -288,28 +289,57 @@ export class BoardComponent {
   }
   //um Subtasks zu laden, braucht man die Id der zugehörigen Task
   loadSubtasks() {
+    // for (const task of this.taskList) {
+    //   if (task.id) {
+    //     this.unsubSubtask = this.taskService
+    //       .getSubtasks(task.id)
+    //       .subscribe((subtasks) => {
+    //         this.subtaskList = subtasks;
+    //         console.log(`Subtasks für ${task.title}:`, subtasks);
+    //         console.log(subtasks.length);
+    //         console.log(subtasks[0].isCompleted);
+    //       });
+    //   }
+    // }
     for (const task of this.taskList) {
       if (task.id) {
-        this.unsubSubtask = this.taskService
+        this.taskService
           .getSubtasks(task.id)
           .subscribe((subtasks) => {
-            this.subtaskList = subtasks;
+            this.subtasksByTaskId[task.id!] = subtasks;
             console.log(`Subtasks für ${task.title}:`, subtasks);
-            console.log(subtasks.length);
-            console.log(subtasks[0].isCompleted);
           });
       }
     }
-    return () => this.unsubSubtask.unsubscribe();
   }
 
-  getSubtasks(subtaskList: Subtask[]) {
-    this.subtaskForSelectedTask = subtaskList;
-    console.log('Subtasks for selected task:', this.subtaskForSelectedTask);
+  // getSubtasks(subtaskList: Subtask[]) {
+  //   this.subtaskForSelectedTask = subtaskList;
+  //   console.log('Subtasks for selected task:', this.subtaskForSelectedTask);
+  // }
+  //Zum Test
+  getSubtasksForSelectedTask() {
+    if (this.selectedTask?.id) {
+      return this.subtasksByTaskId[this.selectedTask.id] || [];
+    }
+    return [];
+  }
+
+  // NEU: Methode um Subtasks für eine bestimmte Task zu bekommen
+  getSubtasksForTask(taskId: string | undefined): Subtask[] {
+    if (!taskId) {
+      return [];
+    }
+    return this.subtasksByTaskId[taskId] || [];
   }
 
   getContactList(contactList: Contact[]) {
     this.contactList = contactList;
     console.log('Contacts for selected task:', this.contactList);
   }
+
+  onSubtaskUpdate(updatedSubtasks: Subtask[]) {
+  this.subtaskList = [...updatedSubtasks];
+
+}
  }

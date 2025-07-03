@@ -12,7 +12,7 @@ export interface Task {
   priority: 'low' | 'medium' | 'urgent';
   status: 'to-do' | 'in-progress' | 'await-feedback' |'done';
   assignedTo?: string[];
-  category: 'technical' | 'user';
+  category: 'technical' | 'user story';
   subtask?: Subtask[];
 }
 //Subtasks Interface als Subcollection für jede Task, dann vergibt Firebase autom. eine Id
@@ -105,22 +105,37 @@ export class TaskService {
     });
   }
 
+  async updateSubtask(taskId: string, subtaskId: string, updatedSubtask: Subtask) {
+    const docRef = doc(this.firestore, `tasks/${taskId}/subtasks/${subtaskId}`);
+    await updateDoc(docRef, this.getCleanJson(updatedSubtask)).catch((err) => {
+      console.error(err);
+    });
+  }
+
   async deleteTask(docId: string) {
     await deleteDoc(this.getSingleTaskRef(docId)).catch((err) => {
       console.log(err);
     });
   }
 
-  getCleanJson(updatedTask: Task) {
-    return {
-      title: updatedTask.title,
-      description: updatedTask.description,
-      date: updatedTask.date,
-      priority: updatedTask.priority,
-      status: updatedTask.status,
-      assignedTo: updatedTask.assignedTo,
-      category: updatedTask.category,
-    };
+  getCleanJson(updated: Task | Subtask) {
+    if ('category' in updated) {
+      return {
+        title: updated.title,
+        description: updated.description,
+        date: updated.date,
+        priority: updated.priority,
+        status: updated.status,
+        assignedTo: updated.assignedTo,
+        category: updated.category,
+      };
+    } else if ('isCompleted' in updated) {
+      return {
+        title: updated.title,
+        isCompleted: updated.isCompleted
+      };
+    }
+    return {};
   }
 
   convertDate(date: Timestamp | Date): string {
