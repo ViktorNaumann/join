@@ -302,15 +302,15 @@ export class BoardComponent {
     //   }
     // }
     for (const task of this.taskList) {
-    if (task.id) {
-      this.taskService
-        .getSubtasks(task.id)
-        .subscribe((subtasks) => {
-          this.subtasksByTaskId[task.id!] = subtasks;
-        });
+      if (task.id) {
+        this.taskService
+          .getSubtasks(task.id)
+          .subscribe((subtasks) => {
+            this.subtasksByTaskId[task.id!] = subtasks;
+            console.log(`Subtasks für ${task.title}:`, subtasks);
+          });
+      }
     }
-  }
-    return () => this.unsubSubtask.unsubscribe();
   }
 
   getSubtasks(subtaskList: Subtask[]) {
@@ -323,6 +323,14 @@ export class BoardComponent {
       return this.subtasksByTaskId[this.selectedTask.id] || [];
     }
     return [];
+  }
+
+  // NEU: Methode um Subtasks für eine bestimmte Task zu bekommen
+  getSubtasksForTask(taskId: string | undefined): Subtask[] {
+    if (!taskId) {
+      return [];
+    }
+    return this.subtasksByTaskId[taskId] || [];
   }
 
   getContactList(contactList: Contact[]) {

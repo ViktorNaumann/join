@@ -100,7 +100,7 @@
           cdkDrag
           (taskSelected)="openTaskDetail($event)"
           [task]="task"
-          [subtaskList]="subtaskList"
+          [subtaskList]="getSubtasksForTask(task.id)"
           (subtaskForSelectedTask)="getSubtasks($event)"
           (contacts)="getContactList($event)"
         ></app-task>
@@ -148,7 +148,7 @@
           cdkDrag
           (taskSelected)="openTaskDetail($event)"
           [task]="task"
-          [subtaskList]="subtaskList"
+          [subtaskList]="getSubtasksForTask(task.id)"
           (subtaskForSelectedTask)="getSubtasks($event)"
           (contacts)="getContactList($event)"
         ></app-task>
@@ -198,7 +198,7 @@
           cdkDrag
           (taskSelected)="openTaskDetail($event)"
           [task]="task"
-          [subtaskList]="subtaskList"
+          [subtaskList]="getSubtasksForTask(task.id)"
           (subtaskForSelectedTask)="getSubtasks($event)"
           (contacts)="getContactList($event)"
         ></app-task>
@@ -247,7 +247,7 @@
           cdkDrag
           (taskSelected)="openTaskDetail($event)"
           [task]="task"
-          [subtaskList]="subtaskList"
+          [subtaskList]="getSubtasksForTask(task.id)"
           (subtaskForSelectedTask)="getSubtasks($event)"
           (contacts)="getContactList($event)"
         ></app-task>
