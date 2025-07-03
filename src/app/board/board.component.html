@@ -11,46 +11,19 @@
 
     <div class="header-controls">
       <div class="search-input-container">
-        <div class="search-wrapper">
-          <input
-            type="text"
-            placeholder="Find Task"
-            [(ngModel)]="searchTerm"
-            (input)="onSearchInput()"
-            (blur)="onSearchBlur()"
-            (focus)="onSearchInput()"
+        <input
+          type="text"
+          placeholder="Find Task"
+          [(ngModel)]="searchTerm"
+          (input)="onSearchInput()"
+        />
+        <div class="separator"></div>
+        <div class="search-icon-wrapper">
+          <img
+            src="assets/img/icons/search.png"
+            alt="Search"
+            class="search-icon"
           />
-          <div class="separator"></div>
-          <div class="search-icon-wrapper">
-            <img
-              src="assets/img/icons/search.png"
-              alt="Search"
-              class="search-icon"
-            />
-          </div>
-
-          <!-- NEU: Dropdown mit Suchergebnissen -->
-          <div class="search-dropdown" *ngIf="showSearchResults">
-            <div *ngIf="searchResults.length === 0" class="no-results">
-              Keine Tasks gefunden
-            </div>
-            <div
-              *ngFor="let task of searchResults"
-              class="search-result-item"
-              (click)="selectTaskFromSearch(task)"
-            >
-              <!-- <div class="task-status">{{ task.status }}</div> -->
-              <div class="task-title">{{ task.title }}</div>
-              <div class="task-description">
-                {{ task.description | slice : 0 : 50 }}...
-              </div>
-
-              <!-- NEU: Status Badge hinzugefügt für bessere Übersicht -->
-              <div class="task-status-badge" [class]="'status-' + task.status">
-                {{ task.status | titlecase }}
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -83,18 +56,15 @@
         id="todoList"
         [cdkDropListConnectedTo]="[inprogressList, awaitfeedbackList, doneList]"
         class="drop-list"
-        [class.drop-list-empty]="todo.length === 0"
+        [class.drop-list-empty]="getFilteredTasks('to-do').length === 0"
         (cdkDropListDropped)="drop($event)"
       >
-        @if (todo.length === 0) {
-        <div class="empty-column">No tasks To do</div>
-        }
-        <!-- @for (item of todo; track item) {
-         <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
-        } -->
-
-        <!-- NEU mit Datenbankabruf -->
-        @for (task of taskList; track $index) { @if( task.status === 'to-do') {
+        @if (getFilteredTasks('to-do').length === 0) {
+        <div class="empty-column">
+          @if (searchTerm.trim()) { No matching tasks found } @else { No tasks
+          To do }
+        </div>
+        } @for (task of getFilteredTasks('to-do'); track task.id) {
         <app-task
           [cdkDragData]="task"
           cdkDrag
@@ -103,7 +73,7 @@
           [subtaskList]="getSubtasksForTask(task.id)"
           (contacts)="getContactList($event)"
         ></app-task>
-        } }
+        }
       </div>
     </div>
 
@@ -130,18 +100,15 @@
         [cdkDropListData]="inprogress"
         [cdkDropListConnectedTo]="[todoList, awaitfeedbackList, doneList]"
         class="drop-list"
-        [class.drop-list-empty]="inprogress.length === 0"
+        [class.drop-list-empty]="getFilteredTasks('in-progress').length === 0"
         (cdkDropListDropped)="drop($event)"
       >
-        @if (inprogress.length === 0) {
-        <div class="empty-column">No tasks in progress</div>
-        }
-        <!-- @for (item of inprogress; track item) {
-         <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
-        } -->
-        <!-- NEU mit Datenbankabruf -->
-        @for (task of taskList; track $index) { @if( task.status ===
-        'in-progress') {
+        @if (getFilteredTasks('in-progress').length === 0) {
+        <div class="empty-column">
+          @if (searchTerm.trim()) { No matching tasks found } @else { No tasks
+          in progress }
+        </div>
+        } @for (task of getFilteredTasks('in-progress'); track task.id) {
         <app-task
           [cdkDragData]="task"
           cdkDrag
@@ -150,7 +117,7 @@
           [subtaskList]="getSubtasksForTask(task.id)"
           (contacts)="getContactList($event)"
         ></app-task>
-        } }
+        }
       </div>
     </div>
 
@@ -178,19 +145,17 @@
         id="awaitfeedbackList"
         [cdkDropListConnectedTo]="[todoList, inprogressList, doneList]"
         class="drop-list"
-        [class.drop-list-empty]="awaitfeedback.length === 0"
+        [class.drop-list-empty]="
+          getFilteredTasks('await-feedback').length === 0
+        "
         (cdkDropListDropped)="drop($event)"
       >
-        @if (awaitfeedback.length === 0) {
-        <div class="empty-column">No tasks for feedback</div>
-        }
-        <!-- @for (item of awaitfeedback; track item) {
-         <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
-        } -->
-
-        <!-- NEU mit Datenbankabruf -->
-        @for (task of taskList; track $index) { @if( task.status ===
-        'await-feedback') {
+        @if (getFilteredTasks('await-feedback').length === 0) {
+        <div class="empty-column">
+          @if (searchTerm.trim()) { No matching tasks found } @else { No tasks
+          for feedback }
+        </div>
+        } @for (task of getFilteredTasks('await-feedback'); track task.id) {
         <app-task
           [cdkDragData]="task"
           cdkDrag
@@ -199,25 +164,13 @@
           [subtaskList]="getSubtasksForTask(task.id)"
           (contacts)="getContactList($event)"
         ></app-task>
-        } }
+        }
       </div>
     </div>
 
     <div class="column">
       <div class="column-header">
         <h2>Done</h2>
-        <!-- <div class="icon-container">
-          <img
-            class="default-icon"
-            src="assets/img/icons/add-box.png"
-            alt="Add new task"
-          />
-          <img
-            class="hover-icon"
-            src="assets/img/icons/add-box-hover.png"
-            alt="Add new task"
-          />
-        </div> -->
       </div>
 
       <div
@@ -227,18 +180,15 @@
         id="doneList"
         [cdkDropListConnectedTo]="[todoList, inprogressList, awaitfeedbackList]"
         class="drop-list"
-        [class.drop-list-empty]="done.length === 0"
+        [class.drop-list-empty]="getFilteredTasks('done').length === 0"
         (cdkDropListDropped)="drop($event)"
       >
-        @if (done.length === 0) {
-        <div class="empty-column">No tasks done</div>
-        }
-        <!-- @for (item of done; track item) {
-         <app-task cdkDrag (taskSelected)="openTaskDetail($event)"></app-task>
-        } -->
-
-        <!-- NEU mit Datenbankabruf -->
-        @for (task of taskList; track $index) { @if( task.status === 'done') {
+        @if (getFilteredTasks('done').length === 0) {
+        <div class="empty-column">
+          @if (searchTerm.trim()) { No matching tasks found } @else { No tasks
+          done }
+        </div>
+        } @for (task of getFilteredTasks('done'); track task.id) {
         <app-task
           [cdkDragData]="task"
           cdkDrag
@@ -247,7 +197,7 @@
           [subtaskList]="getSubtasksForTask(task.id)"
           (contacts)="getContactList($event)"
         ></app-task>
-        } }
+        }
       </div>
     </div>
   </div>

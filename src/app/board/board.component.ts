@@ -1,4 +1,9 @@
-import { Component, EventEmitter, ViewEncapsulation, Input } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  ViewEncapsulation,
+  Input,
+} from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import {
   trigger,
@@ -38,7 +43,7 @@ import { FormsModule } from '@angular/forms';
     CdkDropList,
     CdkDrag,
     CommonModule,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
@@ -84,10 +89,8 @@ export class BoardComponent {
   backgroundVisible = false;
   selectedTask?: Task;
 
-  // NEU Suchfunktion
+  // Suchfunktion
   searchTerm: string = '';
-  searchResults: Task[] = [];
-  showSearchResults: boolean = false;
 
   // Datenabruf
   unsubTask!: Subscription;
@@ -102,58 +105,25 @@ export class BoardComponent {
 
   constructor(private taskService: TaskService) {}
 
-  // NEU: Suchfunktion
-  onSearchInput() {
-    if (this.searchTerm.trim().length > 0) {
-      const searchLower = this.searchTerm.toLowerCase();
-      this.searchResults = this.taskList.filter(
-        (task) =>
-          task.title.toLowerCase().includes(searchLower) || // Suche im Titel
-          task.description?.toLowerCase().includes(searchLower) // Suche in der Beschreibung
-      );
-      // this.showSearchResults = true;
-    } else {
-      // NEU: Wenn leer, alle Tasks anzeigen
-      this.searchResults = [...this.taskList]
+  // Suchfunktion (geändert)
+  onSearchInput() {}
 
-      // this.searchResults = [];
-      // this.showSearchResults = false;
+  // Neue Methode: Filtert Tasks basierend auf Suchbegriff
+  getFilteredTasks(status: string): Task[] {
+    const tasksForStatus = this.taskList.filter(
+      (task) => task.status === status
+    );
+
+    if (!this.searchTerm.trim()) {
+      return tasksForStatus; // Alle Tasks anzeigen wenn kein Suchbegriff
     }
-    //NEU
-    this.showSearchResults = true;
-  }
 
-
-  // NEU: Beim Focus alle Tasks anzeigen
-  onSearchFocus() {
-    if (this.searchTerm.trim().length === 0) {
-      this.searchResults = [...this.taskList];
-    } else {
-      this.onSearchInput(); // Normale Suchlogik wenn bereits Text eingegeben
-    }
-    this.showSearchResults = true;
-  }
-
-
-  // NEU: Task aus Suchergebnissen auswählen
-  selectTaskFromSearch(task: Task) {
-    this.openTaskDetail(task);
-    this.clearSearch();
-  }
-
-  // NEU: Suche zurücksetzen
-  clearSearch() {
-    this.searchTerm = '';
-    this.searchResults = [];
-    this.showSearchResults = false;
-  }
-
-  // NEU: Dropdown schließen beim Klick außerhalb
-  onSearchBlur() {
-    // Kleine Verzögerung, damit Click-Event auf Suchergebnis noch funktioniert
-    setTimeout(() => {
-      this.showSearchResults = false;
-    }, 200);
+    const searchLower = this.searchTerm.toLowerCase();
+    return tasksForStatus.filter(
+      (task) =>
+        task.title.toLowerCase().includes(searchLower) ||
+        task.description?.toLowerCase().includes(searchLower)
+    );
   }
 
   setAnimationDirection(width: number) {
@@ -227,7 +197,7 @@ export class BoardComponent {
       }
     }
   }
-  
+
   openEditOverlay(task: Task) {
     console.log('Edit task overlay opened for:', task);
   }
@@ -303,12 +273,10 @@ export class BoardComponent {
     // }
     for (const task of this.taskList) {
       if (task.id) {
-        this.taskService
-          .getSubtasks(task.id)
-          .subscribe((subtasks) => {
-            this.subtasksByTaskId[task.id!] = subtasks;
-            console.log(`Subtasks für ${task.title}:`, subtasks);
-          });
+        this.taskService.getSubtasks(task.id).subscribe((subtasks) => {
+          this.subtasksByTaskId[task.id!] = subtasks;
+          console.log(`Subtasks für ${task.title}:`, subtasks);
+        });
       }
     }
   }
@@ -339,7 +307,6 @@ export class BoardComponent {
   }
 
   onSubtaskUpdate(updatedSubtasks: Subtask[]) {
-  this.subtaskList = [...updatedSubtasks];
-
+    this.subtaskList = [...updatedSubtasks];
+  }
 }
- }
