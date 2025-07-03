@@ -25,11 +25,14 @@ export class TaskDetailsComponent {
   @Input() subtask!: Subtask[];
   @Input() contactList: Contact[] = [];
   showContent = true;
+  subtasks: Subtask[] = [];
   
   constructor(private taskService: TaskService, public contactService: ContactService, private router: Router ) {}
 
   ngOnInit(): void {
     this.loadAssignedContacts();
+    this.loadSubtasks();
+    console.log('Task im Detail-Overlay', this.task);
   }
 
   onClose() {
@@ -60,7 +63,7 @@ export class TaskDetailsComponent {
 
   onSubtaskToggle(subtask: Subtask) {
     subtask.isCompleted = !subtask.isCompleted;
-
+    console.log('Subtask toggled:', subtask.isCompleted);
     if (!this.task.id || !subtask.id) {
       console.error('Missing task ID or subtask ID.');
       return;
@@ -72,6 +75,14 @@ export class TaskDetailsComponent {
     }).catch((error) => {
       console.error('Error updating subtask:', error);
     });
+  }
+  loadSubtasks() {
+    if (this.task?.id) {
+      this.taskService.getSubtasks(this.task.id).subscribe((subtasks: Subtask[]) => {
+        this.subtasks = subtasks;
+        console.log('Geladene Subtasks:', this.subtasks);
+      });
+    }
   }
 
   async loadAssignedContacts() {
