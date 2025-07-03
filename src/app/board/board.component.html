@@ -19,7 +19,6 @@
           #searchInput
         />
 
-        
         <!-- NEU -->
         @if (searchTerm.trim()) {
         <div
@@ -33,7 +32,6 @@
           />
         </div>
         }
-
 
         <div class="separator"></div>
         <div class="search-icon-wrapper">
@@ -85,7 +83,9 @@
         } @for (task of getFilteredTasks('to-do'); track task.id) {
         <app-task
           [cdkDragData]="task"
+          [cdkDragStartDelay]="250"
           cdkDrag
+          
           (taskSelected)="openTaskDetail($event)"
           [task]="task"
           [subtaskList]="getSubtasksForTask(task.id)"
@@ -129,7 +129,9 @@
         } @for (task of getFilteredTasks('in-progress'); track task.id) {
         <app-task
           [cdkDragData]="task"
+          [cdkDragStartDelay]="250"
           cdkDrag
+          
           (taskSelected)="openTaskDetail($event)"
           [task]="task"
           [subtaskList]="getSubtasksForTask(task.id)"
@@ -176,7 +178,9 @@
         } @for (task of getFilteredTasks('await-feedback'); track task.id) {
         <app-task
           [cdkDragData]="task"
+          [cdkDragStartDelay]="250"
           cdkDrag
+          
           (taskSelected)="openTaskDetail($event)"
           [task]="task"
           [subtaskList]="getSubtasksForTask(task.id)"
@@ -209,7 +213,9 @@
         } @for (task of getFilteredTasks('done'); track task.id) {
         <app-task
           [cdkDragData]="task"
+          [cdkDragStartDelay]="250"
           cdkDrag
+          
           (taskSelected)="openTaskDetail($event)"
           [task]="task"
           [subtaskList]="getSubtasksForTask(task.id)"

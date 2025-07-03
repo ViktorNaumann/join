@@ -108,6 +108,10 @@ export class BoardComponent {
   // Suchfunktion (geändert)
   onSearchInput() {}
 
+
+
+
+
   // Neue Methode: Filtert Tasks basierend auf Suchbegriff
   getFilteredTasks(status: string): Task[] {
     const tasksForStatus = this.taskList.filter(
@@ -126,7 +130,7 @@ export class BoardComponent {
     );
   }
 
-  clearSearch(){
+  clearSearch() {
     this.searchTerm = '';
   }
 
