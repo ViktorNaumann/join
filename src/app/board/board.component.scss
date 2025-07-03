@@ -167,7 +167,7 @@
 }
 
 .empty-column {
-  width: 80%;
+  width: 95%;
   @include flex-center;
   text-align: center;
   border: dashed 1px #ccc;
@@ -179,18 +179,6 @@
   opacity: 0.9;
   @include inter400-fs14;
 }
-
-// .drop-list {
-//   min-height: 500px;
-//   width: 300px;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   overflow: hidden;
-//   padding: 10px;
-//   margin: 10px 0;
-//   gap: 15px;
-// }
 
 .drop-list {
   min-height: 500px;
@@ -441,6 +429,14 @@ app-task {
     width: 210px; // Feste, schmalere Breite
     min-width: 200px;
     max-width: 220px;
+  }
+
+  //TODO:
+
+  .empty-column {
+    width: 85%;
+    // margin: 0 auto;
+    // padding: 20px;
   }
 
   .drop-list {
