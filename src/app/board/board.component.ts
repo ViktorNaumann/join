@@ -108,18 +108,20 @@ export class BoardComponent {
   // Suchfunktion (geändert)
   onSearchInput() {}
 
-
-
-
-
-  // Neue Methode: Filtert Tasks basierend auf Suchbegriff
+  // Filterung aus sortierten Arrays
   getFilteredTasks(status: string): Task[] {
-    const tasksForStatus = this.taskList.filter(
-      (task) => task.status === status
-    );
+    // Mapping für bessere Lesbarkeit
+    const statusArrayMap: { [key: string]: Task[] } = {
+      'to-do': this.todo,
+      'in-progress': this.inprogress,
+      'await-feedback': this.awaitfeedback,
+      done: this.done,
+    };
+
+    const tasksForStatus = statusArrayMap[status] || [];
 
     if (!this.searchTerm.trim()) {
-      return tasksForStatus; // Alle Tasks anzeigen wenn kein Suchbegriff
+      return tasksForStatus;
     }
 
     const searchLower = this.searchTerm.toLowerCase();
@@ -128,6 +130,33 @@ export class BoardComponent {
         task.title.toLowerCase().includes(searchLower) ||
         task.description?.toLowerCase().includes(searchLower)
     );
+  }
+
+  // Erweiterte Sortier-Methode mit verschiedenen Optionen
+  private sortTasksByDueDate(tasks: Task[], ascending: boolean = true): Task[] {
+    return tasks.sort((a, b) => {
+      const dateA = this.getDateValue(a.date);
+      const dateB = this.getDateValue(b.date);
+
+      if (ascending) {
+        return dateA - dateB; // Nächstes Datum zuerst
+      } else {
+        return dateB - dateA; // Spätestes Datum zuerst
+      }
+    });
+  }
+
+  // NEU: Hilfsmethode um Date-Werte zu extrahieren (Firebase Timestamp oder Date)
+  private getDateValue(date: Date | any): number {
+    if (date && typeof date.toDate === 'function') {
+      // Firebase Timestamp
+      return date.toDate().getTime();
+    } else if (date instanceof Date) {
+      return date.getTime();
+    } else if (typeof date === 'string') {
+      return new Date(date).getTime();
+    }
+    return Number.MAX_SAFE_INTEGER; // Tasks ohne Datum kommen ans Ende
   }
 
   clearSearch() {
@@ -204,6 +233,15 @@ export class BoardComponent {
           });
       }
     }
+
+    // Nach dem Drop die betroffenen Arrays neu sortieren
+    if (event.previousContainer !== event.container) {
+      // Arrays neu sortieren nach Status-Änderung
+      this.todo = this.sortTasksByDueDate(this.todo);
+      this.inprogress = this.sortTasksByDueDate(this.inprogress);
+      this.awaitfeedback = this.sortTasksByDueDate(this.awaitfeedback);
+      this.done = this.sortTasksByDueDate(this.done);
+    }
   }
 
   openEditOverlay(task: Task) {
@@ -260,6 +298,12 @@ export class BoardComponent {
             );
         }
       }
+
+      // NEU: Arrays nach Fälligkeitsdatum sortieren
+      this.todo = this.sortTasksByDueDate(this.todo);
+      this.inprogress = this.sortTasksByDueDate(this.inprogress);
+      this.awaitfeedback = this.sortTasksByDueDate(this.awaitfeedback);
+      this.done = this.sortTasksByDueDate(this.done);
 
       this.loadSubtasks();
     });
