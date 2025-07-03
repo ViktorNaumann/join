@@ -28,6 +28,10 @@ export class TaskDetailsComponent {
   
   constructor(private taskService: TaskService, public contactService: ContactService, private router: Router ) {}
 
+  ngOnInit(): void {
+    this.loadAssignedContacts();
+  }
+
   onClose() {
     console.log('Close button clicked');
     this.showContent = false;
@@ -68,5 +72,18 @@ export class TaskDetailsComponent {
     }).catch((error) => {
       console.error('Error updating subtask:', error);
     });
+  }
+
+  async loadAssignedContacts() {
+    if (this.task?.assignedTo?.length) {
+      this.contactList = [];
+      for (let contactId of this.task.assignedTo) {
+        const contact = await this.contactService.getContactById(contactId);
+        if (contact) {
+          this.contactList.push(contact);
+        }
+      }
+      console.log('Geladene Kontakte in Detailansicht:', this.contactList);
+    }
   }
 }
