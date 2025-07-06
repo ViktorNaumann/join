@@ -112,6 +112,13 @@ export class TaskService {
     });
   }
 
+  async deleteSubtask(taskId: string, subtaskId: string) {
+    const docRef = doc(this.firestore, `tasks/${taskId}/subtasks/${subtaskId}`);
+    await deleteDoc(docRef).catch((err) => {
+      console.error('Error deleting subtask:', err);
+    });
+  }
+
   async deleteTask(docId: string) {
     await deleteDoc(this.getSingleTaskRef(docId)).catch((err) => {
       console.log(err);

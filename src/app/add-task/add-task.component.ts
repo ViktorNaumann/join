@@ -20,7 +20,7 @@ export class AddTaskComponent implements OnInit {
   showSubtaskSuggestions: boolean = false;
   showSubtaskConfirmation: boolean = false;
   selectedCategory: string = '';
-  subtasks: { id: number; text: string; completed: boolean }[] = [];
+  subtasks: { id: string | number; text: string; completed: boolean }[] = [];
   subtaskInput: string = '';
   nextSubtaskId: number = 1;
   isCreatingTask: boolean = false;
@@ -33,6 +33,7 @@ export class AddTaskComponent implements OnInit {
   isEditingMode: boolean = false;
   editingTaskId: string | undefined;
   originalTaskStatus: 'to-do' | 'in-progress' | 'await-feedback' | 'done' = 'to-do';
+  originalSubtasks: { id: string | number; text: string; completed: boolean }[] = [];
   
   formData = {
     title: '',
@@ -117,11 +118,13 @@ export class AddTaskComponent implements OnInit {
     // Subtasks laden falls vorhanden
     if (task.id) {
       this.taskService.getSubtasks(task.id).subscribe(subtasks => {
-        this.subtasks = subtasks.map((subtask, index) => ({
-          id: typeof subtask.id === 'number' ? subtask.id : index + 1, //NEU eigentlich muss aber nur die Id der Subcollection genutzt werden
+        this.subtasks = subtasks.map((subtask) => ({
+          id: subtask.id || '', // Firebase-ID beibehalten
           text: subtask.title,
           completed: subtask.isCompleted
         }));
+        // Kopie der ursprünglichen Subtasks speichern
+        this.originalSubtasks = [...this.subtasks];
         this.nextSubtaskId = this.subtasks.length + 1;
       });
     }
@@ -236,7 +239,7 @@ export class AddTaskComponent implements OnInit {
   addSubtask() {
     if (this.subtaskInput && this.subtaskInput.trim()) {
       const newSubtask = {
-        id: this.nextSubtaskId++,
+        id: this.nextSubtaskId++, // Für neue Subtasks verwenden wir erstmal numerische IDs
         text: this.subtaskInput.trim(),
         completed: false
       };
@@ -247,25 +250,25 @@ export class AddTaskComponent implements OnInit {
     }
   }
 
-  deleteSubtask(id: number) {
+  deleteSubtask(id: string | number) {
     this.subtasks = this.subtasks.filter(subtask => subtask.id !== id);
   }
 
-  editSubtask(id: number, newText: string) {
+  editSubtask(id: string | number, newText: string) {
     const subtask = this.subtasks.find(s => s.id === id);
     if (subtask && newText.trim()) {
       subtask.text = newText.trim();
     }
   }
 
-  editSubtaskPrompt(id: number, currentText: string) {
+  editSubtaskPrompt(id: string | number, currentText: string) {
     const newText = prompt('Edit subtask:', currentText);
     if (newText && newText.trim()) {
       this.editSubtask(id, newText);
     }
   }
 
-  toggleSubtaskCompletion(id: number) {
+  toggleSubtaskCompletion(id: string | number) {
     const subtask = this.subtasks.find(s => s.id === id);
     if (subtask) {
       subtask.completed = !subtask.completed;
@@ -297,6 +300,7 @@ export class AddTaskComponent implements OnInit {
     this.isEditingMode = false;
     this.editingTaskId = undefined;
     this.originalTaskStatus = 'to-do';
+    this.originalSubtasks = [];
   }
 
   async createTask() {
@@ -386,16 +390,39 @@ export class AddTaskComponent implements OnInit {
 
     await this.taskService.updateTask(this.editingTaskId, updatedTask);
     
-    // Subtasks aktualisieren (vereinfacht - in einer echten App würde man bestehende Subtasks berücksichtigen)
-    if (this.subtasks.length > 0 && this.editingTaskId) {
+    // Subtasks verwalten
+    if (this.editingTaskId) {
+      // Gelöschte Subtasks finden und entfernen
+      const deletedSubtasks = this.originalSubtasks.filter(original => 
+        typeof original.id === 'string' && 
+        original.id.length > 0 &&
+        !this.subtasks.some(current => current.id === original.id)
+      );
+      
+      for (const deletedSubtask of deletedSubtasks) {
+        if (typeof deletedSubtask.id === 'string') {
+          await this.taskService.deleteSubtask(this.editingTaskId, deletedSubtask.id);
+        }
+      }
+      
+      // Bestehende und neue Subtasks aktualisieren/hinzufügen
       for (const subtask of this.subtasks) {
-        await this.taskService.updateSubtask(
-          this.editingTaskId,
-          subtask.id.toString(), //NEU
-          {
-          title: subtask.text,
-          isCompleted: subtask.completed
-        });
+        if (typeof subtask.id === 'string' && subtask.id.length > 0) {
+          // Bestehende Subtask aktualisieren
+          await this.taskService.updateSubtask(
+            this.editingTaskId,
+            subtask.id,
+            {
+              title: subtask.text,
+              isCompleted: subtask.completed
+            });
+        } else {
+          // Neue Subtask hinzufügen
+          await this.taskService.addSubtask(this.editingTaskId, {
+            title: subtask.text,
+            isCompleted: subtask.completed
+          });
+        }
       }
     }
   }
