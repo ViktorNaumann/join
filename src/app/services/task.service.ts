@@ -166,5 +166,11 @@ export class TaskService {
   clearEditingTask() {
     this.editingTask = null;
   }
+
+  //NEU - Erster Buchstabe für Strings groß
+  capitalize(text: string | undefined): string {
+    if (!text || undefined) return '';
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
 }
 

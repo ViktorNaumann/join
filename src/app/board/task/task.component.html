@@ -8,8 +8,8 @@
     </p>
   </div>
   <div class="task-card">
-    <h1>{{ task.title }}</h1>
-    <p class="task-description">{{ task.description }}</p>
+    <h1>{{ taskService.capitalize(task.title) }}</h1>
+    <p class="task-description">{{ taskService.capitalize(task.description) }}</p>
     <div class="subtask-wrapper" *ngIf="subtaskList && subtaskList.length > 0">
       <div class="subtask-bar-default">
         <div class="subtask-bar-fill" [ngStyle]="{ width: percentageCompleted(subtaskList) + '%' }"></div>

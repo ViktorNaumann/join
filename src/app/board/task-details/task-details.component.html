@@ -14,8 +14,8 @@
     </div>
     <!-- Hier Liste von Tasks reinrendern lassen -->
     <div class="task-content">
-        <h1>{{ task.title }}</h1>
-        <p>{{ task.description }}</p>
+        <h1>{{ taskService.capitalize(task.title) }}</h1>
+        <p>{{ taskService.capitalize(task.description) }}</p>
         <table>
             <tr>
                 <td>Due date:</td>

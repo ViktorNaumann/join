@@ -27,7 +27,7 @@ export class TaskDetailsComponent {
   showContent = true;
   subtasks: Subtask[] = [];
   
-  constructor(private taskService: TaskService, public contactService: ContactService, private router: Router ) {}
+  constructor(public taskService: TaskService, public contactService: ContactService, private router: Router ) {}
 
   ngOnInit(): void {
     this.loadAssignedContacts();
