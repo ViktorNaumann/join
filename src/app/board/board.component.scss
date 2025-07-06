@@ -148,6 +148,7 @@
   @include inter400-fs12;
 }
 
+//TODO:
 .column {
   display: flex;
   flex-direction: column;
@@ -383,7 +384,7 @@ app-task:last-child {
     max-width: 300px;
   }
 
-  
+  //TODO:
   .drop-list {
     width: 100%; // Drop-Liste passt sich der Column-Breite an
     max-width: 280px; // Maximale Breite für Drop-Liste
@@ -434,31 +435,6 @@ app-task:last-child {
     padding: 8px;
     margin: 10px 0;
     gap: 12px;
-
-    overflow-y: auto !important;  // ← DIESE ZEILE FEHLTE KOMPLETT!
-    overflow-x: hidden !important; // ← DIESE ZEILE FEHLTE KOMPLETT!
-
-    // Scrollbar für kleinere Screens
-    scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
-    
-    &::-webkit-scrollbar {
-      width: 4px; // Schmalere Scrollbar für kleinere Screens
-    }
-    
-    &::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.05);
-      border-radius: 2px;
-    }
-    
-    &::-webkit-scrollbar-thumb {
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 2px;
-      
-      &:hover {
-        background: rgba(0, 0, 0, 0.4);
-      }
-    }
   }
 }
 
@@ -486,31 +462,6 @@ app-task:last-child {
     min-height: 400px; // Etwas niedriger für kleinere Screens
     max-height: calc(100vh - 280px);
     gap: 10px;
-
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-
-    scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.05);
-    
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-    
-    &::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.05);
-      border-radius: 3px;
-    }
-    
-    &::-webkit-scrollbar-thumb {
-      background: rgba(0, 0, 0, 0.2);
-      border-radius: 3px;
-      
-      &:hover {
-        background: rgba(0, 0, 0, 0.3);
-      }
-    }
-  
   }
 }
 
