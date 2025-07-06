@@ -82,8 +82,8 @@ onSubtaskToggle(subtask: Subtask) {
   }
 
   async loadAssignedContacts() {
+    this.contactList = [];
     if (this.task?.assignedTo?.length) {
-      this.contactList = [];
       for (let contactId of this.task.assignedTo) {
         const contact = await this.contactService.getContactById(contactId);
         if (contact) {

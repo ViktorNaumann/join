@@ -11,9 +11,10 @@
     border-radius: 30px;
     gap: 24px;
     padding: clamp(16px, calc(2.86vw + 6.85px), 48px);
+    position: relative;
     @include inter400-fs20();
     h1 {
-        @include inter700-fs61();
+        @include inter700-fs47();
     }
     @media(min-width: 1000px) {
         max-width: 550px;
@@ -83,6 +84,9 @@
 }
 
 .btn-wrapper {
+    position: absolute;
+    bottom: clamp(16px, calc(2.86vw + 6.85px), 48px);
+    right: clamp(16px, calc(2.86vw + 6.85px), 48px);;
     width: 100%;
     height: fit-content;
     display: flex;

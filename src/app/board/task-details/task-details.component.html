@@ -37,7 +37,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <div class="contact-list">
+                    <div class="contact-list" [style.flex]="subtasks.length <= 0 ? '1' : 'unset'" [style.height]="subtasks.length <= 0 ? 'auto' : '140px'">
                         @for (contact of contactList; track $index) {
                             <div class="contact-item">
                                 <div class="img-user-wrapper">
@@ -51,7 +51,7 @@
                     </div>
                 </td>
             </tr>
-             <tr *ngIf="subtasks">
+             <tr *ngIf="subtasks.length > 0">
                 <td>Subtasks:</td>
             </tr>
             <tr>
