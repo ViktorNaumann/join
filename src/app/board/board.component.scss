@@ -1,5 +1,12 @@
 @import "./../../styles.scss";
 
+.layout-container {
+  height: calc(100vh - 80px); // Abzüglich der Sidebar-Höhe
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
 .board-header {
   @include flex-between();
   width: 100%;
@@ -130,6 +137,9 @@
 }
 
 .task-columns {
+  flex: 1;
+  overflow: hidden;
+
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -208,16 +218,41 @@
   @include inter400-fs14;
 }
 
+//NOTE:
 .drop-list {
   min-height: 500px;
+  max-height: calc(100vh - 300px);
   width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding: 10px;
   margin: 10px 0;
   gap: 15px;
+
+  // Scrollbar styling (optional)
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.05);
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+  }
 }
 
 // CDK Drag & Drop Styles
@@ -324,13 +359,6 @@ app-task:last-child {
 // ===================
 
 @media (max-width: 1320px) {
-  .layout-container {
-    height: 100vh; // Begrenzt die Container-Höhe auf den Viewport
-    overflow-y: auto; // Aktiviert vertikales Scrollen
-    display: flex;
-    flex-direction: column;
-  }
-
   .board-header {
     flex-shrink: 0; // Header soll nicht schrumpfen
   }
@@ -355,6 +383,7 @@ app-task:last-child {
     max-width: 300px;
   }
 
+  
   .drop-list {
     width: 100%; // Drop-Liste passt sich der Column-Breite an
     max-width: 280px; // Maximale Breite für Drop-Liste
@@ -387,7 +416,6 @@ app-task:last-child {
     max-width: 220px;
   }
 
-  //TODO:
 
   .empty-column {
     width: 85%;
@@ -395,16 +423,42 @@ app-task:last-child {
     // padding: 20px;
   }
 
+  //TODO:
   .drop-list {
     min-height: 500px;
+    max-height: calc(100vh - 250px);
     width: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: hidden;
     padding: 8px;
     margin: 10px 0;
     gap: 12px;
+
+    overflow-y: auto !important;  // ← DIESE ZEILE FEHLTE KOMPLETT!
+    overflow-x: hidden !important; // ← DIESE ZEILE FEHLTE KOMPLETT!
+
+    // Scrollbar für kleinere Screens
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
+    
+    &::-webkit-scrollbar {
+      width: 4px; // Schmalere Scrollbar für kleinere Screens
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 2px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 2px;
+      
+      &:hover {
+        background: rgba(0, 0, 0, 0.4);
+      }
+    }
   }
 }
 
@@ -427,10 +481,36 @@ app-task:last-child {
   }
 
   .drop-list {
-    width: 100%; // Passt sich der Column-Breite an
+    width: 100%;
     max-width: 100%; // Nutzt die verfügbare Column-Breite
     min-height: 400px; // Etwas niedriger für kleinere Screens
-    gap: 10px; // Kleinerer Gap zwischen den Tasks
+    max-height: calc(100vh - 280px);
+    gap: 10px;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.05);
+    
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 3px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 3px;
+      
+      &:hover {
+        background: rgba(0, 0, 0, 0.3);
+      }
+    }
+  
   }
 }
 
