@@ -34,7 +34,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  p {
+  .task-description {
     color: var(--background-default-dark);
   }
   span {
@@ -66,13 +66,11 @@
   }
 }
 
-.mrg {
-  margin-left: -16px;
-}
-
 .card-bottom-wrapper {
+  width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   .card-priority {
     width: 25px;
     height: 25px;
@@ -176,25 +174,40 @@ table {
 }
 
 .collaborators-wrapper {
-  width: 100%;
+ flex: 1;
+ max-width: 85%;
 }
 
 .img-user-wrapper {
   display: flex;
   align-items: center;
-  gap: 8px;
+  position: relative;
   .img-user {
     background-color: var(--background-default-light);
     border-radius: 50%;
+    border: 2px solid var(--background-light);
     width: 32px;
     height: 32px;
     @include flex-center();
+    margin-left: -8px; 
+    &:first-child {
+      margin-left: 0;
+    }
+    z-index: 1;
+    position: relative;
+    &.more-count {
+      background-color:var(--background-default-dark);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: bold;
+      cursor: default;
+    }
   }
 }
 
 .contact-initials {
   @include inter400-fs12;
-  color: var(--text-color-light);
+  color: var(--text-color-light, white);
 }
 
 // ===================

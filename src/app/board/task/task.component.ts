@@ -64,4 +64,8 @@ export class TaskComponent {
        this.contacts.emit(this.contactList);
     }
   }
+  //NEU - Array mit den restlichen Kontakten übergeben und Namen rausgefiltert
+  getRemainingContactNames(remainingContacts: Contact[]): string {
+    return remainingContacts.map(contact => contact.name).join(', ');
+  }
 }
