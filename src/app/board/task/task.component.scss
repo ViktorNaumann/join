@@ -174,8 +174,8 @@ table {
 }
 
 .collaborators-wrapper {
- flex: 1;
- max-width: 85%;
+  flex: 1;
+  max-width: 85%;
 }
 
 .img-user-wrapper {
@@ -189,14 +189,14 @@ table {
     width: 32px;
     height: 32px;
     @include flex-center();
-    margin-left: -8px; 
+    margin-left: -8px;
     &:first-child {
       margin-left: 0;
     }
     z-index: 1;
     position: relative;
     &.more-count {
-      background-color:var(--background-default-dark);
+      background-color: var(--background-default-dark);
       color: white;
       font-size: 0.75rem;
       font-weight: bold;
@@ -214,9 +214,9 @@ table {
 // Responsive Overrides
 // ===================
 
-@media (max-width: 1000px) {
+@media (max-width: 1455px) {
   .card-layout {
-    width: 190px;
+    width: 230px;
     height: 220px;
     border-radius: 24px;
     gap: 16px;
@@ -233,5 +233,39 @@ table {
       border-radius: 8px;
       font-size: 0.75rem;
     }
+  }
+}
+
+@media (max-width: 1350px){
+  .card-layout{
+    width: 190px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .card-layout {
+    width: 190px;
+    // height: 220px;
+    border-radius: 24px;
+    gap: 16px;
+    padding: 16px 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+    font-size: 0.85rem;
+
+    h1 {
+      font-size: 0.9rem;
+    }
+
+    .category-flag-card {
+      padding: 3px 6px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+    }
+  }
+}
+
+@media (max-width: 890px){
+  .card-layout{
+    width: 170px;
   }
 }

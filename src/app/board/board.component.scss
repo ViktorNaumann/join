@@ -221,8 +221,8 @@
 
 //NOTE:
 .drop-list {
-  min-height: 500px;
-  max-height: calc(100vh - 300px);
+  min-height: 100px;
+  max-height: calc(100vh - 350px);
   width: 300px;
   display: flex;
   flex-direction: column;
@@ -236,20 +236,20 @@
   // Scrollbar styling (optional)
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.05);
-  
+
   &::-webkit-scrollbar {
     width: 6px;
   }
-  
+
   &::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.05);
     border-radius: 3px;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 3px;
-    
+
     &:hover {
       background: rgba(0, 0, 0, 0.3);
     }
@@ -359,44 +359,48 @@ app-task:last-child {
 // Responsive Overrides
 // ===================
 
-@media (max-width: 1320px) {
-  .board-header {
-    flex-shrink: 0; // Header soll nicht schrumpfen
-  }
-
+@media (max-width: 1455px) {
   .task-columns {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-    gap: 20px;
+    gap: 30px;
     padding: 0 20px 40px 20px;
-
-    max-width: 90vw; // Schrumpft automatisch mit dem Bildschirm
-    margin: 0 auto; // Zentriert den Container
-    width: 90%; // Nimmt verfügbare Breite
   }
 
   .column {
-    flex: 0 0 calc(50% - 10px); // Genau 50% minus halber Gap
+    flex: 0 0 calc(25% - 12px); // Vier Spalten mit etwas Abstand
     width: auto; // Auto-Breite basierend auf Flex-Basis
-    min-width: 220px;
-    max-width: 300px;
+    min-width: 200px;
   }
 
-  //TODO:
   .drop-list {
     width: 100%; // Drop-Liste passt sich der Column-Breite an
-    max-width: 280px; // Maximale Breite für Drop-Liste
-    min-height: 400px; // Reduzierte Mindesthöhe für besseres Wrapping
+  }
+}
+
+@media (max-width: 1350px) {
+  .task-columns {
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  .column {
+    min-width: 150px;
+    max-width: 220px;
+    width: auto;
+  }
+
+  .drop-list {
+    width: 100%;
   }
 }
 
 @media (max-width: 1000px) {
   .task-columns {
     flex-wrap: nowrap; // Verhindert Umbruch
-    gap: 0; // Kleinerer Gap für mehr Platz
-    padding: 0;
+    gap: 0;
+    padding-left: 8px;
     font-size: 0.65rem;
     max-width: 100vw;
 
@@ -412,23 +416,15 @@ app-task:last-child {
 
   .column {
     flex: 0 0 auto; // Verhindert Wachsen/Schrumpfen
-    width: 210px; // Feste, schmalere Breite
-    min-width: 200px;
+    // width: 180px;
+    min-width: 180px;
     max-width: 220px;
   }
 
-
-  .empty-column {
-    width: 85%;
-    // margin: 0 auto;
-    // padding: 20px;
-  }
-
-  //TODO:
   .drop-list {
     min-height: 500px;
-    max-height: calc(100vh - 250px);
-    width: 250px;
+    max-height: calc(100vh - 430px);
+    width: 220px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -438,39 +434,51 @@ app-task:last-child {
   }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 890px) {
   .task-columns {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 0 16px;
+    // display: flex;
+    // justify-content: flex-start;
+    // align-items: flex-start;
+    gap: 8px;
     max-width: 100%;
   }
 
   .column {
-    flex: 0 0 calc(50% - 8px); // Genau 50% minus halber Gap
-    width: calc(50% - 8px); // Explizite Breite für besseren Umbruch
+    flex: 0 0 auto;
+    width: 200px;
     min-width: 180px;
     max-width: 250px;
   }
 
   .drop-list {
     width: 100%;
-    max-width: 100%; // Nutzt die verfügbare Column-Breite
-    min-height: 400px; // Etwas niedriger für kleinere Screens
-    max-height: calc(100vh - 280px);
-    gap: 10px;
+    max-width: 100%;
+    min-height: 400px;
+    max-height: calc(100vh - 430px);
+    gap: 12px;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 830px) {
+  .layout-container {
+    // height: 100vh;
+    // max-height: 100vh;
+
+    height: calc(
+      100vh - 80px
+    ); // Sidebar-Höhe abziehen (wie in der Basis-Regel)
+    max-height: calc(100vh - 80px); // Gleiche Berechnung für max-height
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+
   .board-header {
     height: auto;
-    gap: 20px;
     padding: 20px;
-
     flex-shrink: 0;
 
     .header-headline {
@@ -478,7 +486,7 @@ app-task:last-child {
       justify-content: flex-start;
       align-items: center;
       width: 100%;
-      // gap: 50px;
+      gap: 8px;
 
       .add-icon {
         display: unset;
@@ -499,29 +507,33 @@ app-task:last-child {
     }
   }
 
-  .layout-container {
-    height: calc(
-      100vh - 170px
-    ); // Viewport minus App-Header minus Mobile-Sidebar
-    max-height: calc(100vh - 170px);
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-  }
-
   .task-columns {
+    width: 100%;
+    flex: 1;
+    overflow-y: visible;
+    padding: 0 20px 120px 20px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
     align-items: center;
     gap: 20px;
-    flex: 1;
-    padding: 0 20px 20px 20px; // Padding anstatt margin-bottom
+  }
+
+  .column {
+    flex: none;
+    width: 100%;
+    min-width: 100%;
+    max-width: none;
+    overflow: visible; // Wichtig für die erweiterte drop-list
+    margin-bottom: 20px;
   }
 
   .drop-list {
     width: max-content; // Breite passt sich dem Inhalt an
     min-width: 100%;
     max-width: calc(100vw - 40px); // Maximale Breite = Viewport - Padding
-    min-height: 300px;
+    min-height: 200px;
+    max-height: 300px;
 
     display: flex !important;
     flex-direction: row !important;
@@ -531,41 +543,34 @@ app-task:last-child {
 
     overflow-x: auto;
     overflow-y: hidden;
-    gap: 50px;
+    gap: 22px;
     padding: 10px;
 
+    //NOTE:
     // Scrollbar wird nur bei Bedarf angezeigt
-    // scrollbar-width: thin;
-    // scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
 
-    // Scrollbar komplett verstecken
-    scrollbar-width: none; // Firefox
-    -ms-overflow-style: none; // Internet Explorer und Edge
+    // Scrollbar verstecken
+    // scrollbar-width: none; // Firefox
+    // -ms-overflow-style: none; // Internet Explorer und Edge
 
     // Webkit-basierte Browser (Chrome, Safari, etc.)
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    // &::-webkit-scrollbar {
+    //   display: none;
+    // }
 
     // Klasse für leere Listen
     &.drop-list-empty {
-      min-height: auto;
+      min-height: 100px;
       height: auto;
-      padding: 5px 10px; // Reduziertes Padding
+      padding: 5px 10px;
     }
   }
 
   .drop-list app-task {
     flex: 0 0 160px; // Feste Breite, kein Wachsen/Schrumpfen
     width: 160px;
-  }
-
-  .column {
-    flex: none;
-    width: auto;
-    min-width: 100%;
-    max-width: none;
-    overflow: visible; // Wichtig für die erweiterte drop-list
   }
 }
 
