@@ -76,8 +76,7 @@ header {
   }
 }
 
-//NEU Smartphone Menü
-.mobile-menu-links {
+.user-menu-links {
   position: absolute;
   top: 42px;
   right: 0;
@@ -104,6 +103,21 @@ header {
       background-color: #2a3d59;
     }
   }
+
+  .mobile-help-link {
+    display: none;
+  }
+}
+
+// ===================
+// Responsive Overrides
+// ===================
+
+@media (max-width: 600px){
+.header-content {
+  margin-left: 0;
+  margin-right: 8px;
+}
 }
 
 @media (max-width: 1000px) {
@@ -123,7 +137,9 @@ header {
     padding-right: 0;
     gap: 0;
   }
-  .mobile-menu-links {
-    display: flex
+  .user-menu-links {
+    .mobile-help-link {
+      display: block;
+    }
   }
 }
