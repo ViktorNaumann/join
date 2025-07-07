@@ -47,7 +47,7 @@ export class TaskDetailsComponent {
     console.log('Edit button clicked', this.task);
     this.taskService.setEditingTask(this.task);
     this.editTask.emit(this.task);
-   }
+  }
 
   deleteTask() {
     if(this.task.id) {
