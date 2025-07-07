@@ -19,7 +19,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class TaskDetailsComponent {
   @Output() closeTaskDetails = new EventEmitter<string>();
-  @Output() editTask = new EventEmitter<Task>();
+  // @Output() editTask = new EventEmitter<Task>();
+  @Output() editTask = new EventEmitter<string>();
   @Output() subtaskChanged = new EventEmitter<Subtask[]>();
   @Input() task!: Task;
   // @Input() subtask!: Subtask[];
@@ -51,7 +52,7 @@ export class TaskDetailsComponent {
     this.taskService.setEditingTask(this.task);
     // *Zu add-task navigieren
     this.router.navigate(['/add-task']);
-    this.editTask.emit(this.task);
+    this.editTask.emit("open");
    }
 
   deleteTask() {

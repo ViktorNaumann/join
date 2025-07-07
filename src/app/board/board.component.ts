@@ -34,6 +34,8 @@ import { Contact } from '../services/contact.service';
 
 // NEU - Suchfunktion
 import { FormsModule } from '@angular/forms';
+import { AddTaskComponent } from '../add-task/add-task.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -44,6 +46,7 @@ import { FormsModule } from '@angular/forms';
     CdkDrag,
     CommonModule,
     FormsModule,
+    AddTaskComponent,
   ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
@@ -86,9 +89,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class BoardComponent {
   animationDirection: 'right' | 'bottom' = 'right';
-  backgroundVisible = false;
+  backgroundVisible = false; //später wieder false setzen
+  showTaskDetails = false;
+  showAddOrEditTask: boolean = false; //später wieder false setzen
   selectedTask?: Task;
-
   // Suchfunktion
   searchTerm: string = '';
 
@@ -96,14 +100,14 @@ export class BoardComponent {
   unsubTask!: Subscription;
   unsubSubtask!: Subscription;
   unsubContact!: Subscription;
-  category = 'technical'; //später dynamisch setzen
+  // category = 'technical'; //später dynamisch setzen
   taskList: Task[] = [];
   subtaskList: Subtask[] = [];
   // subtaskForSelectedTask: Subtask[] = [];
   contactList: Contact[] = [];
   subtasksByTaskId: { [taskId: string]: Subtask[] } = {};
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, private router: Router) {}
 
   // Suchfunktion (geändert)
   onSearchInput() {}
@@ -244,22 +248,41 @@ export class BoardComponent {
     }
   }
 
-  openEditOverlay(task: Task) {
-    console.log('Edit task overlay opened for:', task);
+  openAddOrEditOverlay(event:string) {
+    const isSmallScreen = window.innerWidth < 1000;
+    if (event === 'open') {
+      if (isSmallScreen) {
+        this.router.navigate(['/add-task']); // oder z.B. /add-task
+      } else {
+        this.selectedTask = undefined;
+        this.showTaskDetails = false;
+        this.showAddOrEditTask = true;
+      }
+    } else if (event === 'edit') {
+      this.showTaskDetails = false;
+      this.showAddOrEditTask = true;
   }
+  this.backgroundVisible = true;
+}
 
   openTaskDetail(selectedTask: Task) {
     console.log('Task selected in board:', selectedTask);
     this.selectedTask = selectedTask;
+    this.showTaskDetails = true;
+    this.showAddOrEditTask = false;
     this.backgroundVisible = true;
   }
 
   closeDetailsOverlay(event: string) {
-    if (event === 'close') {
-      this.backgroundVisible = false;
-      console.log('Details overlay closed');
-    }
+   if(event === 'close') {
+    this.backgroundVisible = false;
+    this.showTaskDetails = false;
+    this.showAddOrEditTask = false;
+    this.selectedTask = undefined;
+   }
   }
+
+
 
   //NEU für Datenabruf
 
