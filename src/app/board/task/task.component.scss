@@ -242,6 +242,12 @@ table {
   }
 }
 
+@media (max-width: 1170px){
+  .card-layout{
+    width: 170px;
+  }
+}
+
 @media (max-width: 1000px) {
   .card-layout {
     width: 190px;

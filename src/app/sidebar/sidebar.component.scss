@@ -126,6 +126,16 @@
   }
 }
 
+// ===================
+// Responsive Overrides
+// ===================
+
+@media (max-width: 1170px){
+  .sidebar {
+  width: 180px;
+  }
+}
+
 @media (max-width: 1000px) {
   .sidebar {
     position: fixed;

@@ -396,6 +396,16 @@ app-task:last-child {
   }
 }
 
+@media (max-width: 1170px){
+  .task-columns {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 0 0px 40px 0px;
+  }
+}
+
 @media (max-width: 1000px) {
   .task-columns {
     flex-wrap: nowrap; // Verhindert Umbruch
