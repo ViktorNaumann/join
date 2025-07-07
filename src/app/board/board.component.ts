@@ -262,7 +262,7 @@ export class BoardComponent {
       if (isSmallScreen) {
         this.router.navigate(['/add-task']); // oder z.B. /add-task
       } else {
-        this.selectedTask = undefined;
+        // selectedTask NICHT auf undefined setzen, damit sie an Add-Task weitergegeben werden kann
         this.showTaskDetails = false;
         this.showAddOrEditTask = true;
       }
@@ -271,13 +271,13 @@ export class BoardComponent {
   this.backgroundVisible = true;
 }
 
-  openTaskDetail(selectedTask: Task) {
+   openTaskDetail(selectedTask: Task) {
     console.log('Task selected in board:', selectedTask);
     this.selectedTask = selectedTask;
     this.showTaskDetails = true;
     this.showAddOrEditTask = false;
     this.backgroundVisible = true;
-  }
+}
 
   closeDetailsOverlay(event: string) {
    if(event === 'close' || 'added') {
@@ -285,6 +285,7 @@ export class BoardComponent {
     this.showTaskDetails = false;
     this.showAddOrEditTask = false;
     this.selectedTask = undefined;
+    this.taskService.clearEditingTask();
    }
   }
 

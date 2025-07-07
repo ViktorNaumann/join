@@ -28,7 +28,7 @@ export interface Subtask {
 export class TaskService {
   // Neue Variable für die zu bearbeitende Task
   private editingTask: Task | null = null;
-  
+
   constructor(private firestore: Firestore) { }
   
   getTasksRef() {

@@ -277,7 +277,8 @@
   [class.backgroundVisible]="backgroundVisible"
   *ngIf="backgroundVisible"
 >
-  <div class="content-wrapper" *ngIf="showAddOrEditTask">
+  <div class="max-width-container">
+    <div class="content-wrapper" *ngIf="showAddOrEditTask">
     <div class="close-btn-wrapper">
       <button class="btn-close" (click)="closeDetailsOverlay('close')">
         <svg
@@ -320,4 +321,5 @@
     [task]="selectedTask"
     [contactList]="contactList"
   ></app-task-details>
+  </div>
 </div>
