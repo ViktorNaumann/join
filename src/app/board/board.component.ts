@@ -262,7 +262,7 @@ export class BoardComponent {
       if (isSmallScreen) {
         this.router.navigate(['/add-task']); // oder z.B. /add-task
       } else {
-        this.selectedTask = undefined;
+        // selectedTask NICHT auf undefined setzen, damit sie an Add-Task weitergegeben werden kann
         this.showTaskDetails = false;
         this.showAddOrEditTask = true;
       }
@@ -391,4 +391,10 @@ export class BoardComponent {
   onSubtaskUpdate(updatedSubtasks: Subtask[]) {
     this.subtaskList = [...updatedSubtasks];
   }
+
+  // TEST
+  // Track-by-Funktion für bessere Performance hinzufügen
+trackByTaskId(index: number, task: Task): string | undefined {
+  return task.id;
+}
 }

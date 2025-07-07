@@ -19,8 +19,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class TaskDetailsComponent {
   @Output() closeTaskDetails = new EventEmitter<string>();
-  @Output() editTask = new EventEmitter<Task>();
-  // @Output() editTask = new EventEmitter<string>();
+  // @Output() editTask = new EventEmitter<Task>();
+  @Output() editTask = new EventEmitter<string>();
   @Output() subtaskChanged = new EventEmitter<Subtask[]>();
   @Input() task!: Task;
   @Input() contactList: Contact[] = [];
@@ -43,13 +43,22 @@ export class TaskDetailsComponent {
     return this.taskService.convertDate(date);
  }
 
-  openEditTask() {
+  openEditTask(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
     console.log('Edit button clicked', this.task);
+    // Task im Service für das Bearbeiten speichern
     this.taskService.setEditingTask(this.task);
-    this.editTask.emit(this.task);
-  }
+    this.editTask.emit("edit");
+   }
 
-  deleteTask() {
+  deleteTask(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
     if(this.task.id) {
       this.taskService.deleteTask(this.task.id);
       this.onClose();
