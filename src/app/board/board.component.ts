@@ -390,4 +390,10 @@ export class BoardComponent {
   onSubtaskUpdate(updatedSubtasks: Subtask[]) {
     this.subtaskList = [...updatedSubtasks];
   }
+
+  // TEST
+  // Track-by-Funktion für bessere Performance hinzufügen
+trackByTaskId(index: number, task: Task): string | undefined {
+  return task.id;
+}
 }
