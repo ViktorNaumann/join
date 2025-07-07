@@ -271,13 +271,13 @@ export class BoardComponent {
   this.backgroundVisible = true;
 }
 
-  openTaskDetail(selectedTask: Task) {
+   openTaskDetail(selectedTask: Task) {
     console.log('Task selected in board:', selectedTask);
     this.selectedTask = selectedTask;
     this.showTaskDetails = true;
     this.showAddOrEditTask = false;
     this.backgroundVisible = true;
-  }
+}
 
   closeDetailsOverlay(event: string) {
    if(event === 'close' || 'added') {
