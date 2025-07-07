@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ContactService, Contact } from '../services/contact.service';
@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
   styleUrl: './add-task.component.scss'
 })
 export class AddTaskComponent implements OnInit {
+  @Output() taskAdded = new EventEmitter<string>
+
   selectedPriority: string = 'medium';
   contacts: Contact[] = [];
   selectedContacts: Contact[] = [];
@@ -339,6 +341,7 @@ export class AddTaskComponent implements OnInit {
         // Neue Task erstellen
         await this.addNewTask();
       }
+      this.taskAdded.emit('added');
       
       this.showSuccessMessage = true;
       setTimeout(() => {

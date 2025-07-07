@@ -48,11 +48,11 @@ export class TaskDetailsComponent {
 
   openEditTask() {
     console.log('Edit button clicked', this.task);
-    // *Task im Service für das Bearbeiten speichern
-    this.taskService.setEditingTask(this.task);
-    // *Zu add-task navigieren
-    this.router.navigate(['/add-task']);
-    this.editTask.emit("open");
+    // // *Task im Service für das Bearbeiten speichern
+    // this.taskService.setEditingTask(this.task);
+    // // *Zu add-task navigieren
+    // this.router.navigate(['/add-task']);
+    this.editTask.emit("edit");
    }
 
   deleteTask() {
