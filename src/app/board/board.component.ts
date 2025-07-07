@@ -285,6 +285,7 @@ export class BoardComponent {
     this.showTaskDetails = false;
     this.showAddOrEditTask = false;
     this.selectedTask = undefined;
+    this.taskService.clearEditingTask();
    }
   }
 

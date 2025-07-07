@@ -19,11 +19,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class TaskDetailsComponent {
   @Output() closeTaskDetails = new EventEmitter<string>();
-  // @Output() editTask = new EventEmitter<Task>();
-  @Output() editTask = new EventEmitter<string>();
+  @Output() editTask = new EventEmitter<Task>();
+  // @Output() editTask = new EventEmitter<string>();
   @Output() subtaskChanged = new EventEmitter<Subtask[]>();
   @Input() task!: Task;
-  // @Input() subtask!: Subtask[];
   @Input() contactList: Contact[] = [];
   showContent = true;
   subtasks: Subtask[] = [];
@@ -33,11 +32,9 @@ export class TaskDetailsComponent {
   ngOnInit(): void {
     this.loadAssignedContacts();
     this.loadSubtasks();
-    console.log('Task im Detail-Overlay', this.task);
   }
 
   onClose() {
-    console.log('Close button clicked');
     this.showContent = false;
     this.closeTaskDetails.emit('close');
   }
@@ -48,11 +45,8 @@ export class TaskDetailsComponent {
 
   openEditTask() {
     console.log('Edit button clicked', this.task);
-    // // *Task im Service für das Bearbeiten speichern
-    // this.taskService.setEditingTask(this.task);
-    // // *Zu add-task navigieren
-    // this.router.navigate(['/add-task']);
-    this.editTask.emit("edit");
+    this.taskService.setEditingTask(this.task);
+    this.editTask.emit(this.task);
    }
 
   deleteTask() {
