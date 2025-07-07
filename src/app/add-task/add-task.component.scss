@@ -245,7 +245,7 @@ $small-mobile-breakpoint: 480px;
 
 .priority-buttons {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   width: 100%;
   
   @media (max-width: $mobile-breakpoint) {
@@ -282,9 +282,12 @@ $small-mobile-breakpoint: 480px;
       &.urgent { background-color: #FF3D00; border-color: #FF3D00; }
       &.medium { background-color: #FFA800; border-color: #FFA800; }
       &.low { background-color: #7AE229; border-color: #7AE229; }
+      & svg path{
+        fill: var(--background-light)
+      }
     }
 
-    img { 
+    svg { 
       width: 20px; 
       height: 20px;
       

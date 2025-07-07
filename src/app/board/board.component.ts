@@ -259,8 +259,14 @@ export class BoardComponent {
         this.showAddOrEditTask = true;
       }
     } else if (event === 'edit') {
-      this.showTaskDetails = false;
-      this.showAddOrEditTask = true;
+      if (isSmallScreen) {
+        this.router.navigate(['/add-task']); // oder z.B. /add-task
+      } else {
+        this.selectedTask = undefined;
+        this.showTaskDetails = false;
+        this.showAddOrEditTask = true;
+      }
+      
   }
   this.backgroundVisible = true;
 }
@@ -274,7 +280,7 @@ export class BoardComponent {
   }
 
   closeDetailsOverlay(event: string) {
-   if(event === 'close') {
+   if(event === 'close' || 'added') {
     this.backgroundVisible = false;
     this.showTaskDetails = false;
     this.showAddOrEditTask = false;
