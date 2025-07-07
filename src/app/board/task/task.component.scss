@@ -3,7 +3,8 @@
 //für die kleine Ansicht im Board?
 .card-layout {
   width: 250px;
-  height: 265px;
+  height: fit-content;
+  min-height: 200px;
   background-color: var(--background-light);
   display: flex;
   flex-direction: column;
@@ -12,7 +13,7 @@
   gap: 24px;
   padding: 24px 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
+  cursor: grab;
   @include inter400-fs16();
   h1 {
     @include inter700-fs16();
@@ -217,7 +218,8 @@ table {
 @media (max-width: 1455px) {
   .card-layout {
     width: 230px;
-    height: 220px;
+    height: fit-content;
+    min-height: 180px;
     border-radius: 24px;
     gap: 16px;
     padding: 16px 12px;
@@ -251,7 +253,8 @@ table {
 @media (max-width: 1000px) {
   .card-layout {
     width: 190px;
-    // height: 220px;
+    height: fit-content;
+    min-height: 160px;
     border-radius: 24px;
     gap: 16px;
     padding: 16px 12px;
@@ -272,6 +275,13 @@ table {
 
 @media (max-width: 890px){
   .card-layout{
+    width: 180px;
+  }
+}
+
+@media (max-width: 830px){
+  .card-layout{
     width: 170px;
+    height: 200px;
   }
 }

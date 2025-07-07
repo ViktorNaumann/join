@@ -219,9 +219,8 @@
   @include inter400-fs14;
 }
 
-//NOTE:
 .drop-list {
-  min-height: 100px;
+  height: 700px;
   max-height: calc(100vh - 350px);
   width: 300px;
   display: flex;
@@ -258,12 +257,8 @@
 
 // CDK Drag & Drop Styles
 .cdk-drag-preview {
-  transform: rotate(5deg);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-  z-index: 1000;
-  border: none !important;
-  background: white !important;
-  border-radius: 30px;
+  // transform: rotate(5deg);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.9);
   overflow: hidden;
 }
 
@@ -277,10 +272,7 @@
 
 // Task-spezifische Drag-Styles
 app-task {
-  cursor: grab;
-
-  // transition: box-shadow 0.2s ease;
-
+  cursor: grab !important;
   transform-origin: center center;
   border-radius: 30px;
 
@@ -289,20 +281,13 @@ app-task {
 
   // Kippen der Task-Karte beim längeren Drücken
   &:active:not(.cdk-drag-dragging) {
-    transform: rotate(3deg) translateY(-1px);
+    transform: rotate(5deg);
     transition: transform 0.3s ease 250ms; // Delay simuliert das CDK-Delay
   }
 
-  // Während des aktiven Ziehens (CDK übernimmt nach 250ms)
+  // Während des Ziehens
   &.cdk-drag-dragging {
-    cursor: grabbing;
-    opacity: 0.8;
-    transform: rotate(5deg) scale(1.05) translateY(-5px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-
-    // transition: none !important;
-    transition: box-shadow 0.1s ease, opacity 0.1s ease;
+    cursor: grabbing !important;
   }
 
   // Deaktivierter Zustand
@@ -330,10 +315,17 @@ app-task {
     border-radius: 10px;
   }
 
+  // OPTIONAL:
   &.cdk-drop-list-dragging {
-    // background-color: #f9f9f9;
-    // border: 1px dashed rgba(0, 0, 0, 0.2);
-    // border-radius: 10px;
+  // background-color: #f5f5f5; // Leicht grauer Hintergrund
+  // border: 1px dashed rgba(0, 0, 0, 0.3); // Gestrichelte Umrandung
+  // opacity: 0.8; // Leicht transparent
+  
+  // Oder: Liste weniger prominent machen
+  // filter: brightness(0.9);
+  
+  // Oder: Zeigen dass ein Element "fehlt"
+  // box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -442,7 +434,7 @@ app-task:last-child {
   }
 
   .drop-list {
-    min-height: 500px;
+    height: 600px;
     max-height: calc(100vh - 430px);
     width: 220px;
     display: flex;
@@ -473,7 +465,7 @@ app-task:last-child {
   .drop-list {
     width: 100%;
     max-width: 100%;
-    min-height: 400px;
+    height: 600px;
     max-height: calc(100vh - 430px);
     gap: 12px;
   }
@@ -531,7 +523,7 @@ app-task:last-child {
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center;
-    gap: 20px;
+    gap: 8px;
 
     min-height: calc(100vh - 140px);
   }
@@ -542,7 +534,7 @@ app-task:last-child {
     min-width: 100%;
     max-width: none;
     overflow: visible; // Wichtig für die erweiterte drop-list
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
   }
 
   .drop-list {
@@ -550,7 +542,7 @@ app-task:last-child {
     min-width: 100%;
     max-width: calc(100vw - 40px); // Maximale Breite = Viewport - Padding
     min-height: 200px;
-    max-height: 300px;
+    max-height: 250px;
 
     display: flex !important;
     flex-direction: row !important;
@@ -561,7 +553,7 @@ app-task:last-child {
     overflow-x: auto;
     overflow-y: hidden;
     gap: 22px;
-    padding: 10px;
+    // padding: 10px;
 
     //NOTE:
     // Scrollbar wird nur bei Bedarf angezeigt
