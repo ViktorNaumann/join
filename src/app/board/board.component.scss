@@ -268,7 +268,7 @@
 }
 
 .cdk-drag-placeholder {
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 .cdk-drag-animating {
@@ -324,16 +324,16 @@ app-task {
   transition: all 0.2s ease;
 
   &.cdk-drop-list-receiving {
-    background-color: #f0f8ff;
-    border: 1px dashed var(--accent-primary-color);
+    background-color: #f9f9f9;
+    border: 1px dashed rgba(0, 0, 0, 0.2);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
   }
 
   &.cdk-drop-list-dragging {
     // background-color: #f9f9f9;
-    border: 1px dashed rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
+    // border: 1px dashed rgba(0, 0, 0, 0.2);
+    // border-radius: 10px;
   }
 }
 
