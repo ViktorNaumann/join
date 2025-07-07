@@ -30,15 +30,20 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 1000;
   transition: background-color 300ms ease-in-out;
 
   &.backgroundVisible {
     background-color: rgba(0, 0, 0, 0.5);
   }
+}
+
+.max-width-container {
+  max-width: 1672px;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .toast-message {

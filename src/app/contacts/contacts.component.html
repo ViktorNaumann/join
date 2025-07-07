@@ -25,10 +25,12 @@
   (@slideInOut.done)="onOverlayAnimationDone($event)"
   [class.backgroundVisible]="backgroundVisible"
 >
-  <app-contact-form
+  <div class="max-width-container">
+    <app-contact-form
     (addedContact)="onContactAdded($event)"
     (closeOverlay)="removeBackground($event)"
   ></app-contact-form>
+  </div>
 </div>
 
 <div
