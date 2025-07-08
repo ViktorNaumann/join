@@ -13,9 +13,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AddTaskComponent implements OnInit {
   @Output() taskAdded = new EventEmitter<string>;
-  @Output() closeOverlay = new EventEmitter<void>(); // Neues Event für Overlay schließen
+  @Output() closeOverlay = new EventEmitter<void>();
   @Input() defaultStatus = '';
-  @Input() isOverlayMode = false; // Neue Property um Overlay-Modus zu erkennen
+  @Input() isOverlayMode = false;
 
   selectedPriority: string = 'medium';
   contacts: Contact[] = [];
@@ -37,7 +37,6 @@ export class AddTaskComponent implements OnInit {
   showDateError: boolean = false;
   showSuccessMessage: boolean = false;
   
-  // Neue Eigenschaften für das Bearbeiten
   isEditingMode: boolean = false;
   editingTaskId: string | undefined;
   originalTaskStatus: 'to-do' | 'in-progress' | 'await-feedback' | 'done' = 'to-do';
@@ -90,24 +89,17 @@ export class AddTaskComponent implements OnInit {
       this.isEditingMode = true;
       this.editingTaskId = editingTask.id;
       this.populateFormWithTaskData(editingTask);
-      // Task aus dem Service entfernen nach dem Laden
       this.taskService.clearEditingTask();
     }
   }
 
   async populateFormWithTaskData(task: any) {
-    // Grunddaten setzen
     this.formData.title = task.title || '';
     this.formData.description = task.description || '';
-    
-    // Ursprünglichen Status speichern
     this.originalTaskStatus = task.status || 'to-do';
-    
-    // Datum konvertieren und setzen
     if (task.date) {
       let dateValue: Date;
       if (task.date.toDate) {
-        // Firebase Timestamp
         dateValue = task.date.toDate();
       } else if (task.date instanceof Date) {
         dateValue = task.date;
@@ -116,14 +108,8 @@ export class AddTaskComponent implements OnInit {
       }
       this.formData.dueDate = dateValue.toISOString().split('T')[0];
     }
-    
-    // Priorität setzen
     this.selectedPriority = task.priority || 'medium';
-    
-    // Kategorie setzen
     this.selectedCategory = task.category || '';
-    
-    // Zugewiesene Kontakte laden
     if (task.assignedTo && task.assignedTo.length > 0) {
       console.log('Task assignedTo:', task.assignedTo);
       console.log('Available contacts:', this.contacts);
@@ -132,16 +118,13 @@ export class AddTaskComponent implements OnInit {
       );
       console.log('Selected contacts after filtering:', this.selectedContacts);
     }
-    
-    // Subtasks laden falls vorhanden
     if (task.id) {
       this.taskService.getSubtasks(task.id).subscribe(subtasks => {
         this.subtasks = subtasks.map((subtask) => ({
-          id: subtask.id || '', // Firebase-ID beibehalten
+          id: subtask.id || '',
           text: subtask.title,
           completed: subtask.isCompleted
         }));
-        // Kopie der ursprünglichen Subtasks speichern
         this.originalSubtasks = [...this.subtasks];
         this.nextSubtaskId = this.subtasks.length + 1;
       });
@@ -268,7 +251,7 @@ export class AddTaskComponent implements OnInit {
   addSubtask() {
     if (this.subtaskInput && this.subtaskInput.trim()) {
       const newSubtask = {
-        id: this.nextSubtaskId++, // Für neue Subtasks verwenden wir erstmal numerische IDs
+        id: this.nextSubtaskId++,
         text: this.subtaskInput.trim(),
         completed: false
       };
@@ -293,8 +276,6 @@ export class AddTaskComponent implements OnInit {
   editSubtaskPrompt(id: string | number, currentText: string) {
     this.editingSubtaskId = id;
     this.editingSubtaskText = currentText;
-    
-    // Focus the input field after a short delay to ensure DOM is updated
     setTimeout(() => {
       const inputElement = document.querySelector('.subtask-edit-input') as HTMLInputElement;
       if (inputElement) {
@@ -310,7 +291,6 @@ export class AddTaskComponent implements OnInit {
       this.editSubtask(this.editingSubtaskId, this.editingSubtaskText.trim());
       this.cancelSubtaskEdit();
     } else if (this.editingSubtaskId !== null && !this.editingSubtaskText.trim()) {
-      // If the text is empty, cancel the edit instead of saving
       this.cancelSubtaskEdit();
     }
   }
@@ -358,7 +338,6 @@ export class AddTaskComponent implements OnInit {
     this.showCategoryError = false;
     this.showDateError = false;
     this.showSuccessMessage = false;
-    // Bearbeitungsfelder zurücksetzen
     this.isEditingMode = false;
     this.editingTaskId = undefined;
     this.originalTaskStatus = 'to-do';
@@ -396,10 +375,8 @@ export class AddTaskComponent implements OnInit {
 
     try {
       if (this.isEditingMode && this.editingTaskId) {
-        // Task bearbeiten
         await this.updateTask();
       } else {
-        // Neue Task erstellen
         await this.addNewTask();
       }
       this.taskAdded.emit('added');
@@ -450,32 +427,25 @@ export class AddTaskComponent implements OnInit {
       description: this.formData.description?.trim() || '',
       date: new Date(this.formData.dueDate),
       priority: this.selectedPriority as 'low' | 'medium' | 'urgent',
-      status: this.originalTaskStatus, // Ursprünglichen Status beibehalten
+      status: this.originalTaskStatus,
       assignedTo: this.selectedContacts.map(contact => contact.id).filter(id => id !== undefined) as string[],
       category: this.selectedCategory as 'technical' | 'user story'
     };
 
     await this.taskService.updateTask(this.editingTaskId, updatedTask);
-    
-    // Subtasks verwalten
     if (this.editingTaskId) {
-      // Gelöschte Subtasks finden und entfernen
       const deletedSubtasks = this.originalSubtasks.filter(original => 
         typeof original.id === 'string' && 
         original.id.length > 0 &&
         !this.subtasks.some(current => current.id === original.id)
       );
-      
       for (const deletedSubtask of deletedSubtasks) {
         if (typeof deletedSubtask.id === 'string') {
           await this.taskService.deleteSubtask(this.editingTaskId, deletedSubtask.id);
         }
       }
-      
-      // Bestehende und neue Subtasks aktualisieren/hinzufügen
       for (const subtask of this.subtasks) {
         if (typeof subtask.id === 'string' && subtask.id.length > 0) {
-          // Bestehende Subtask aktualisieren
           await this.taskService.updateSubtask(
             this.editingTaskId,
             subtask.id,
@@ -484,7 +454,6 @@ export class AddTaskComponent implements OnInit {
               isCompleted: subtask.completed
             });
         } else {
-          // Neue Subtask hinzufügen
           await this.taskService.addSubtask(this.editingTaskId, {
             title: subtask.text,
             isCompleted: subtask.completed
@@ -517,7 +486,6 @@ export class AddTaskComponent implements OnInit {
     return today.toISOString().split('T')[0];
   }
 
-  // Neue Methode zum Schließen des Overlays
   closeOverlayMode() {
     this.closeOverlay.emit();
   }
