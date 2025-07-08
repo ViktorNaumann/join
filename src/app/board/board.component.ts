@@ -1,19 +1,12 @@
-import {
-  Component,
-  EventEmitter,
-  ViewEncapsulation,
-  Input,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import {
   trigger,
-  state,
   style,
   transition,
   animate,
   AnimationEvent,
 } from '@angular/animations';
-import { Observable } from 'rxjs';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import {
   CdkDragDrop,
@@ -26,13 +19,11 @@ import { Task } from '../services/task.service';
 import { TaskService } from '../services/task.service';
 import { CommonModule } from '@angular/common';
 
-// Datenabruf
 import { Subtask } from '../services/task.service';
 import { Subscription } from 'rxjs';
 import { ContactService } from '../services/contact.service';
 import { Contact } from '../services/contact.service';
 
-// NEU - Suchfunktion
 import { FormsModule } from '@angular/forms';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { Router } from '@angular/router';
@@ -89,36 +80,30 @@ import { Router } from '@angular/router';
 })
 export class BoardComponent {
   animationDirection: 'right' | 'bottom' = 'right';
-  backgroundVisible = false; //später wieder false setzen
+  backgroundVisible = false; 
   overlayVisible = false;
   showTaskDetails = false;
-  showAddOrEditTask: boolean = false; //später wieder false setzen
+  showAddOrEditTask: boolean = false;
   selectedTask?: Task;
-  // Suchfunktion
   searchTerm: string = '';
-
-  // Observable für die Formular-Sichtbarkeit
-  // showForm$: Observable<boolean>;
-  // Datenabruf
   unsubTask!: Subscription;
   unsubSubtask!: Subscription;
   unsubContact!: Subscription;
-  // category = 'technical'; //später dynamisch setzen
   taskList: Task[] = [];
   subtaskList: Subtask[] = [];
-  // subtaskForSelectedTask: Subtask[] = [];
   contactList: Contact[] = [];
   subtasksByTaskId: { [taskId: string]: Subtask[] } = {};
   setTaskStatus: string = 'to-do';
 
   constructor(private taskService: TaskService, private router: Router, private contactService: ContactService) {
-    // this.showForm$ = this.contactService.showForm$;
   }
 
-  // Suchfunktion (geändert)
+  ngOnInit(): void {
+    this.loadTasks();
+  }
+
   onSearchInput() {}
 
-  // Filterung aus sortierten Arrays
   getFilteredTasks(status: string): Task[] {
     // Mapping für bessere Lesbarkeit
     const statusArrayMap: { [key: string]: Task[] } = {
@@ -127,13 +112,8 @@ export class BoardComponent {
       'await-feedback': this.awaitfeedback,
       done: this.done,
     };
-
     const tasksForStatus = statusArrayMap[status] || [];
-
-    if (!this.searchTerm.trim()) {
-      return tasksForStatus;
-    }
-
+    if (!this.searchTerm.trim()) { return tasksForStatus }
     const searchLower = this.searchTerm.toLowerCase();
     return tasksForStatus.filter(
       (task) =>
@@ -156,7 +136,6 @@ export class BoardComponent {
     });
   }
 
-  // NEU: Hilfsmethode um Date-Werte zu extrahieren (Firebase Timestamp oder Date)
   private getDateValue(date: Date | any): number {
     if (date && typeof date.toDate === 'function') {
       // Firebase Timestamp
@@ -190,9 +169,8 @@ export class BoardComponent {
         this.backgroundVisible = true;
       }, 50);
     }
-  } // Test-Daten für die Drag & Drop Funktionalität
+  }
 
-  // NEU Typen für drag&drop zu Task[] geändert
   todo: Task[] = [];
   inprogress: Task[] = [];
   awaitfeedback: Task[] = [];
@@ -229,7 +207,6 @@ export class BoardComponent {
         event.currentIndex
       );
 
-      // Status in Firebase aktualisieren
       if (task.id && task.status !== newStatus) {
         const updatedTask: Task = { ...task, status: newStatus };
         this.taskService
@@ -261,31 +238,18 @@ export class BoardComponent {
 
   openAddOrEditOverlay(event:string, status:string) {
     const isSmallScreen = window.innerWidth < 1000;
-    // this.contactService.showAddForm();
-    if (event === 'open') {
+    if (event === 'open' || event === 'edit') {
       if (isSmallScreen) {
-        this.router.navigate(['/add-task'], { queryParams: { status } }); // oder z.B. /add-task
+        this.router.navigate(['/add-task'], { queryParams: { status } });
       } else {
-        this.selectedTask = undefined;
         this.showTaskDetails = false;
         this.showAddOrEditTask = true;
       }
-    } else if (event === 'edit') {
-      if (isSmallScreen) {
-        this.router.navigate(['/add-task'], { queryParams: { status } }); // oder z.B. /add-task
-      } else {
-        // selectedTask NICHT auf undefined setzen, damit sie an Add-Task weitergegeben werden kann
-        this.showTaskDetails = false;
-        this.showAddOrEditTask = true;
-      }
-      
+    } 
+    this.overlayVisible = true;
   }
-  this.overlayVisible = true;
-}
 
    openTaskDetail(selectedTask: Task) {
-    // this.contactService.showAddForm();
-    console.log('Task selected in board:', selectedTask);
     this.selectedTask = selectedTask;
     this.showTaskDetails = true;
     this.showAddOrEditTask = false;
@@ -303,19 +267,10 @@ export class BoardComponent {
    }
   }
 
-  ngOnInit(): void {
-    this.loadTasks();
-  }
-
   loadTasks() {
     this.unsubTask = this.taskService.getTasks().subscribe((tasks: Task[]) => {
       this.taskList = tasks;
-      // Arrays leeren
-      this.todo = [];
-      this.inprogress = [];
-      this.awaitfeedback = [];
-      this.done = [];
-      console.log('Tasks loaded:', this.taskList);
+      this.emptyArrays();
 
       for (const task of tasks) {
         switch (task.status) {
@@ -338,31 +293,24 @@ export class BoardComponent {
             );
         }
       }
-
       // NEU: Arrays nach Fälligkeitsdatum sortieren
       this.todo = this.sortTasksByDueDate(this.todo);
       this.inprogress = this.sortTasksByDueDate(this.inprogress);
       this.awaitfeedback = this.sortTasksByDueDate(this.awaitfeedback);
       this.done = this.sortTasksByDueDate(this.done);
-
       this.loadSubtasks();
     });
     return () => this.unsubTask.unsubscribe();
   }
-  //um Subtasks zu laden, braucht man die Id der zugehörigen Task
+
+  emptyArrays() {
+    this.todo = [];
+    this.inprogress = [];
+    this.awaitfeedback = [];
+    this.done = [];
+  }
+  
   loadSubtasks() {
-    // for (const task of this.taskList) {
-    //   if (task.id) {
-    //     this.unsubSubtask = this.taskService
-    //       .getSubtasks(task.id)
-    //       .subscribe((subtasks) => {
-    //         this.subtaskList = subtasks;
-    //         console.log(`Subtasks für ${task.title}:`, subtasks);
-    //         console.log(subtasks.length);
-    //         console.log(subtasks[0].isCompleted);
-    //       });
-    //   }
-    // }
     for (const task of this.taskList) {
       if (task.id) {
         this.taskService.getSubtasks(task.id).subscribe((subtasks) => {
@@ -373,11 +321,6 @@ export class BoardComponent {
     }
   }
 
-  // getSubtasks(subtaskList: Subtask[]) {
-  //   this.subtaskForSelectedTask = subtaskList;
-  //   console.log('Subtasks for selected task:', this.subtaskForSelectedTask);
-  // }
-  //Zum Test
   getSubtasksForSelectedTask() {
     if (this.selectedTask?.id) {
       return this.subtasksByTaskId[this.selectedTask.id] || [];
@@ -385,7 +328,6 @@ export class BoardComponent {
     return [];
   }
 
-  // Methode um Subtasks für eine bestimmte Task zu bekommen
   getSubtasksForTask(taskId: string | undefined): Subtask[] {
     if (!taskId) {
       return [];
@@ -403,7 +345,7 @@ export class BoardComponent {
   }
 
   // Track-by-Funktion für bessere Performance hinzufügen
-trackByTaskId(index: number, task: Task): string | undefined {
-  return task.id;
-}
+  trackByTaskId(index: number, task: Task): string | undefined {
+    return task.id;
+  }
 }
