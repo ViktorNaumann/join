@@ -4,7 +4,7 @@
       class="category-flag-card"
       [style.background-color]="task.category == 'user story' ? '#0038ff' : '#1fd7c1'"
     >
-      {{ task.category }}
+      {{ taskService.capitalize(task.category) }}
     </p>
   </div>
   <div class="task-card">

@@ -37,6 +37,9 @@
   gap: 10px;
   .task-description {
     color: var(--background-default-dark);
+    width: 100%;
+    height: auto;
+    @include word-break;
   }
   span {
     @include inter400-fs12();

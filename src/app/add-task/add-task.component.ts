@@ -50,7 +50,7 @@ export class AddTaskComponent implements OnInit {
   
   categories = [
     { value: 'technical', label: 'Technical Task', color: '#1FD7C1' },
-    { value: 'user', label: 'User Story', color: '#0038FF' }
+    { value: 'user story', label: 'User Story', color: '#0038FF' }
   ];
 
   constructor(private contactService: ContactService, private taskService: TaskService, private router: Router) {}

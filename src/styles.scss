@@ -133,6 +133,12 @@
   // --font-heading: 'Montserrat', serif;
 }
 
+@mixin word-break {
+  overflow-wrap: break-word;
+  word-break: normal;
+  line-break: auto;
+}
+
 @mixin flex-center {
   display: flex;
   justify-content: center;

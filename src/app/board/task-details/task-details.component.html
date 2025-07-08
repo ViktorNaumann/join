@@ -1,6 +1,6 @@
 <div class="content-wrapper" *ngIf="showContent">
     <div class="wrapper-top">
-        <p class="category-flag" [style.background-color]="task.category == 'user story' ? '#0038ff': '#1fd7c1'">{{task.category}}</p>
+        <p class="category-flag" [style.background-color]="task.category == 'user story' ? '#0038ff': '#1fd7c1'">{{taskService.capitalize(task.category)}}</p>
         <button class="btn-close" (click)="onClose()" >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_331509_883" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
