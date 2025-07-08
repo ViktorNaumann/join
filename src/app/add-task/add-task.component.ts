@@ -192,7 +192,11 @@ export class AddTaskComponent implements OnInit {
     this.showSubtaskConfirmation = true;
   }
 
-  confirmSubtask() {
+  confirmSubtask(event: Event) {
+    if(event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
     this.addSubtask();
     this.showSubtaskConfirmation = false;
   }
@@ -317,7 +321,8 @@ export class AddTaskComponent implements OnInit {
     this.originalSubtasks = [];
   }
 
-  async createTask() {
+  async createTask(event: Event) {
+    event.preventDefault(); 
     this.showTitleError = false;
     this.showCategoryError = false;
     this.showDateError = false;

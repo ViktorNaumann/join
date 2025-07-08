@@ -477,7 +477,10 @@ $small-mobile-breakpoint: 480px;
   .subtask-actions {
     display: flex;
     gap: 8px;
-    .action-icon { @include icon-size(16px); z-index: 10; }
+    .action-icon { 
+      @include icon-size(16px);
+       z-index: 10; 
+      }
   }
 }
 
