@@ -357,12 +357,23 @@ $small-mobile-breakpoint: 480px;
     }
 
     svg { 
-      width: 20px; 
-      height: 20px;
+      width: 20px !important; 
+      height: 20px !important;
+      flex-shrink: 0; // Verhindert das Schrumpfen
+      
+      @media (max-width: 1220px) {
+        width: 20px !important;
+        height: 20px !important;
+      }
+      
+      @media (max-width: $mobile-breakpoint) {
+        width: 18px !important;
+        height: 18px !important;
+      }
       
       @media (max-width: $small-mobile-breakpoint) {
-        width: 16px;
-        height: 16px;
+        width: 16px !important;
+        height: 16px !important;
       }
     }
   }
