@@ -11,7 +11,7 @@
   </div>
   
   <div class="add-task-content">
-    <form class="task-form" (ngSubmit)="createTask()">
+    <form class="task-form" (ngSubmit)="createTask($event)">
       <div class="form-main">
 
         <div class="form-left">
@@ -208,7 +208,7 @@
                   placeholder="Add new subtask"
                   [(ngModel)]="subtaskInput"
                   (click)="onSubtaskInputClick()"
-                  (keyup.enter)="showSubtaskConfirmation ? confirmSubtask() : (subtaskInput.trim() ? showSubtaskConfirmation = true : showSubtaskDropdown())"
+                  (click)="showSubtaskConfirmation ? confirmSubtask($event) : (subtaskInput.trim() ? showSubtaskConfirmation = true : showSubtaskDropdown())"
                   [readonly]="showSubtaskConfirmation"
                   (focus)="subtaskInputFocused = true"
                   (blur)="subtaskInputFocused = false">
@@ -230,7 +230,8 @@
                     src="assets/img/icons/check-dark.png" 
                     alt="Confirm" 
                     class="confirm-icon"
-                    (mousedown)="confirmSubtask()">
+                    (mousedown)="confirmSubtask($event)"
+                    (keydown.enter)="confirmSubtask($event)">
                 </div>
                 
                 <div class="subtask-suggestions" *ngIf="showSubtaskSuggestions">
