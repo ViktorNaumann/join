@@ -209,16 +209,18 @@
                   [(ngModel)]="subtaskInput"
                   (click)="onSubtaskInputClick()"
                   (keyup.enter)="showSubtaskConfirmation ? confirmSubtask() : (subtaskInput.trim() ? showSubtaskConfirmation = true : showSubtaskDropdown())"
-                  [readonly]="showSubtaskConfirmation">
+                  [readonly]="showSubtaskConfirmation"
+                  (focus)="subtaskInputFocused = true"
+                  (blur)="subtaskInputFocused = false">
                 
                 <img 
-                  *ngIf="!showSubtaskConfirmation"
+                  *ngIf="!showSubtaskConfirmation && !subtaskInputFocused"
                   src="assets/img/icons/add.png" 
                   alt="Add" 
                   class="add-icon"
                   (click)="showSubtaskDropdown()">
                 
-                <div *ngIf="showSubtaskConfirmation" class="confirmation-icons">
+                <div *ngIf="subtaskInputFocused" class="confirmation-icons">
                   <img 
                     src="assets/img/icons/close.png" 
                     alt="Cancel" 

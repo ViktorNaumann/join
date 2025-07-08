@@ -22,6 +22,7 @@ export class AddTaskComponent implements OnInit {
   showCategoryDropdown: boolean = false;
   showSubtaskSuggestions: boolean = false;
   showSubtaskConfirmation: boolean = false;
+  subtaskInputFocused = false;
   selectedCategory: string = '';
   subtasks: { id: string | number; text: string; completed: boolean }[] = [];
   subtaskInput: string = '';
