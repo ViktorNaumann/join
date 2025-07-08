@@ -13,29 +13,36 @@
       {{ taskService.capitalize(task.description) }}
       <span class="see-more">…</span>
     </p>
-    <div class="subtask-wrapper" [style.visibility]="subtaskList && subtaskList.length > 0 ? 'visible' : 'hidden'">
+    <div
+      class="subtask-wrapper"
+      [style.visibility]="subtaskList && subtaskList.length > 0 ? 'visible' : 'hidden'"
+    >
       <div class="subtask-bar-default">
-        <div class="subtask-bar-fill" [ngStyle]="{ width: percentageCompleted(subtaskList) + '%' }"></div>
+        <div
+          class="subtask-bar-fill"
+          [ngStyle]="{ width: percentageCompleted(subtaskList) + '%' }"
+        ></div>
       </div>
       <span>
-        {{ getCompletedSubtasksCount(subtaskList) }} / {{ subtaskList.length }} Subtasks
+        {{ getCompletedSubtasksCount(subtaskList) }} /
+        {{ subtaskList.length }} Subtasks
       </span>
     </div>
     <div class="card-bottom-wrapper">
       <div class="collaborators-wrapper">
         <div class="img-user-wrapper">
-          <!-- NEU - nur 4 Kontakte zeigen -->
           @for (contact of contactList.slice(0, 4); track $index) {
-            <div
-              class="img-user"
-              [style.background-color]="contactService.getContactColor(contact.name)"
-            >
-              <p class="contact-initials">
-                {{ contactService.getInitials(contact.name) }}
-              </p>
-            </div>
+          <div
+            class="img-user"
+            [style.background-color]="
+              contactService.getContactColor(contact.name)
+            "
+          >
+            <p class="contact-initials">
+              {{ contactService.getInitials(contact.name) }}
+            </p>
+          </div>
           }
-          <!-- NEU Bei mehr als 4 Kontakten eine Zahl anzeigen -->
           <div
             class="img-user more-count"
             *ngIf="contactList.length > 4"

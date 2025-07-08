@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import {Firestore, collection, onSnapshot, addDoc, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Contact } from './contact.service';
 import { Timestamp } from '@angular/fire/firestore';
 
 export interface Task {
@@ -26,7 +25,6 @@ export interface Subtask {
   providedIn: 'root'
 })
 export class TaskService {
-  // Neue Variable für die zu bearbeitende Task
   private editingTask: Task | null = null;
 
   constructor(private firestore: Firestore) { }
@@ -72,7 +70,6 @@ export class TaskService {
       return () => unsubscribe();
     });
   }
-
   
   async addTask(newTask: Task): Promise<Task | null> {
     try {
@@ -154,14 +151,13 @@ export class TaskService {
     return '';
  }
 
- formatDate(date: Date): string {
+  formatDate(date: Date): string {
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   }
 
-  // Neue Methoden für das Bearbeiten von Tasks
   setEditingTask(task: Task) {
     this.editingTask = task;
   }
@@ -174,7 +170,6 @@ export class TaskService {
     this.editingTask = null;
   }
 
-  //NEU - Erster Buchstabe für Strings groß
   capitalize(text: string | undefined): string {
     if (!text || undefined) return '';
     return text.charAt(0).toUpperCase() + text.slice(1);

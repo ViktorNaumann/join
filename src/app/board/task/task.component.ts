@@ -5,7 +5,6 @@ import { Contact } from '../../services/contact.service';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../services/task.service';
 import { Subtask } from '../../services/task.service';
-// import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-task',
@@ -16,17 +15,11 @@ import { Subtask } from '../../services/task.service';
   styleUrl: './task.component.scss'
 })
 export class TaskComponent {
-  // unsubTask!: Subscription;
-  // unsubSubtask!: Subscription;
-  // unsubContact!: Subscription;
-  // category ='technical'; //später dynamisch setzen
-  // taskList: Task[] = [];
-  // subtaskList: Subtask[] = [];
+
   contactList: Contact[] = [];
   @Input() task!: Task;
   @Input() subtaskList: Subtask[] = [];
   @Output() taskSelected = new EventEmitter<Task>();
-  // @Output() subtaskForSelectedTask = new EventEmitter<Subtask[]>();
   @Output() contacts = new EventEmitter<Contact[]>();
   selectedTask?: Task;
 
@@ -49,22 +42,18 @@ export class TaskComponent {
   openTaskDetails(task: Task) {
     this.selectedTask = task; 
     this.taskSelected.emit(this.selectedTask);
-    // this.subtaskForSelectedTask.emit(this.subtaskList);
-    console.log('Selected Task emitted:', this.selectedTask);
   }
 
-  //NEU - Kontakte anhand der IDs aus den Tasks geladen
   async getContactList() {
     if (this.task?.assignedTo?.length) {
       for (let contactId of this.task.assignedTo) {
         const contact = await this.contactService.getContactById(contactId);
         if (contact) this.contactList.push(contact);
-        console.log('Das sind die Kontakte:', this.contactList);
       }
        this.contacts.emit(this.contactList);
     }
   }
-  //NEU - Array mit den restlichen Kontakten übergeben und Namen rausgefiltert
+  
   getRemainingContactNames(remainingContacts: Contact[]): string {
     return remainingContacts.map(contact => contact.name).join(', ');
   }

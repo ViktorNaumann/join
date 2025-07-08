@@ -19,7 +19,6 @@ import { FormsModule } from '@angular/forms';
 })
 export class TaskDetailsComponent {
   @Output() closeTaskDetails = new EventEmitter<string>();
-  // @Output() editTask = new EventEmitter<Task>();
   @Output() editTask = new EventEmitter<string>();
   @Output() subtaskChanged = new EventEmitter<Subtask[]>();
   @Input() task!: Task;
@@ -48,8 +47,6 @@ export class TaskDetailsComponent {
       event.stopPropagation();
       event.preventDefault();
     }
-    console.log('Edit button clicked', this.task);
-    // Task im Service für das Bearbeiten speichern
     this.taskService.setEditingTask(this.task);
     this.editTask.emit("edit");
    }
@@ -65,22 +62,20 @@ export class TaskDetailsComponent {
     }
   }
 
-onSubtaskToggle(subtask: Subtask) {
-  if (!this.task.id || !subtask.id) return;
+  onSubtaskToggle(subtask: Subtask) {
+    if (!this.task.id || !subtask.id) return;
 
-  this.taskService.updateSubtask(this.task.id, subtask.id, subtask).then(() => {
-    console.log('Subtask updated successfully');
-    this.subtaskChanged.emit(this.subtasks);
-  }).catch(error => {
-    console.error('Error updating subtask:', error);
-  });
-}
+    this.taskService.updateSubtask(this.task.id, subtask.id, subtask).then(() => {
+      this.subtaskChanged.emit(this.subtasks);
+    }).catch(error => {
+      console.error('Error updating subtask:', error);
+    });
+  }
 
   loadSubtasks() {
     if (this.task?.id) {
       this.taskService.getSubtasks(this.task.id).subscribe((subtasks: Subtask[]) => {
         this.subtasks = subtasks;
-        console.log('Geladene Subtasks:', this.subtasks);
       });
     }
   }
@@ -94,7 +89,6 @@ onSubtaskToggle(subtask: Subtask) {
           this.contactList.push(contact);
         }
       }
-      console.log('Geladene Kontakte in Detailansicht:', this.contactList);
     }
   }
 }
