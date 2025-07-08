@@ -44,6 +44,19 @@
   span {
     @include inter400-fs12();
   }
+  .task-description.truncated {
+    position: relative;
+    max-height: 3lh;
+    overflow: hidden;
+
+  .see-more {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding-left: 8px;
+    background: linear-gradient(to right, transparent, var(--background-light) 60%);
+  }
+}
 }
 
 .subtask-wrapper {
@@ -281,11 +294,18 @@ table {
   .card-layout{
     width: 180px;
   }
+  .task-card{
+    .task-description.truncated {
+    max-height: 2lh;
+    overflow: hidden;
+  }
+  }
 }
+
 
 @media (max-width: 830px){
   .card-layout{
     width: 170px;
-    height: 200px;
+    height: 220px;
   }
 }

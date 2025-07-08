@@ -9,7 +9,10 @@
   </div>
   <div class="task-card">
     <h1>{{ taskService.capitalize(task.title) }}</h1>
-    <p class="task-description">{{ taskService.capitalize(task.description) }}</p>
+    <p class="task-description truncated see-more">
+      {{ taskService.capitalize(task.description) }}
+      <span class="see-more">…</span>
+    </p>
     <div class="subtask-wrapper" *ngIf="subtaskList && subtaskList.length > 0">
       <div class="subtask-bar-default">
         <div class="subtask-bar-fill" [ngStyle]="{ width: percentageCompleted(subtaskList) + '%' }"></div>
