@@ -13,7 +13,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AddTaskComponent implements OnInit {
   @Output() taskAdded = new EventEmitter<string>;
+  @Output() closeOverlay = new EventEmitter<void>(); // Neues Event für Overlay schließen
   @Input() defaultStatus = '';
+  @Input() isOverlayMode = false; // Neue Property um Overlay-Modus zu erkennen
 
   selectedPriority: string = 'medium';
   contacts: Contact[] = [];
@@ -27,6 +29,8 @@ export class AddTaskComponent implements OnInit {
   subtasks: { id: string | number; text: string; completed: boolean }[] = [];
   subtaskInput: string = '';
   nextSubtaskId: number = 1;
+  editingSubtaskId: string | number | null = null;
+  editingSubtaskText: string = '';
   isCreatingTask: boolean = false;
   showTitleError: boolean = false;
   showCategoryError: boolean = false;
@@ -186,6 +190,13 @@ export class AddTaskComponent implements OnInit {
     }
   }
 
+  onSubtaskEnter(event: Event) {
+    event.preventDefault();
+    if (this.subtaskInput && this.subtaskInput.trim()) {
+      this.addSubtask();
+    }
+  }
+
   selectSubtaskSuggestion(suggestion: string) {
     this.subtaskInput = suggestion;
     this.showSubtaskSuggestions = false;
@@ -280,9 +291,42 @@ export class AddTaskComponent implements OnInit {
   }
 
   editSubtaskPrompt(id: string | number, currentText: string) {
-    const newText = prompt('Edit subtask:', currentText);
-    if (newText && newText.trim()) {
-      this.editSubtask(id, newText);
+    this.editingSubtaskId = id;
+    this.editingSubtaskText = currentText;
+    
+    // Focus the input field after a short delay to ensure DOM is updated
+    setTimeout(() => {
+      const inputElement = document.querySelector('.subtask-edit-input') as HTMLInputElement;
+      if (inputElement) {
+        inputElement.value = this.editingSubtaskText;
+        inputElement.focus();
+        inputElement.setSelectionRange(inputElement.value.length, inputElement.value.length);
+      }
+    }, 100);
+  }
+
+  saveSubtaskEdit() {
+    if (this.editingSubtaskId !== null && this.editingSubtaskText.trim()) {
+      this.editSubtask(this.editingSubtaskId, this.editingSubtaskText.trim());
+      this.cancelSubtaskEdit();
+    } else if (this.editingSubtaskId !== null && !this.editingSubtaskText.trim()) {
+      // If the text is empty, cancel the edit instead of saving
+      this.cancelSubtaskEdit();
+    }
+  }
+
+  cancelSubtaskEdit() {
+    this.editingSubtaskId = null;
+    this.editingSubtaskText = '';
+  }
+
+  onSubtaskEditKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.saveSubtaskEdit();
+    } else if (event.key === 'Escape') {
+      event.preventDefault();
+      this.cancelSubtaskEdit();
     }
   }
 
@@ -471,5 +515,10 @@ export class AddTaskComponent implements OnInit {
   getTodayDate(): string {
     const today = new Date();
     return today.toISOString().split('T')[0];
+  }
+
+  // Neue Methode zum Schließen des Overlays
+  closeOverlayMode() {
+    this.closeOverlay.emit();
   }
 }
