@@ -1,5 +1,8 @@
 @import "./../../styles.scss";
-
+section{
+  width: 100%;
+  background-color: rgba(128, 128, 128, 0.099);
+}
 .layout-container {
   height: calc(100vh - 80px); // Abzüglich der Sidebar-Höhe
   overflow: hidden;
