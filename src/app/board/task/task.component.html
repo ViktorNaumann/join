@@ -13,7 +13,7 @@
       {{ taskService.capitalize(task.description) }}
       <span class="see-more">…</span>
     </p>
-    <div class="subtask-wrapper" *ngIf="subtaskList && subtaskList.length > 0">
+    <div class="subtask-wrapper" [style.visibility]="subtaskList && subtaskList.length > 0 ? 'visible' : 'hidden'">
       <div class="subtask-bar-default">
         <div class="subtask-bar-fill" [ngStyle]="{ width: percentageCompleted(subtaskList) + '%' }"></div>
       </div>

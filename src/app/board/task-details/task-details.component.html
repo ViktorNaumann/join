@@ -23,14 +23,14 @@
             </tr>
             <tr>
                 <td>Priority:</td>
-                <td>
-                   <div class="priority-column">
-                        {{ task.priority }}
+                <td class="priority-column">
+                    {{ task.priority }}
+                   <div>
                         <img src="assets/img/icons/prio-high.png" alt="Priority High Icon" *ngIf="task.priority === 'urgent'">
                         <img src="assets/img/icons/prio-medium.png" alt="Priorit Medium Icon" *ngIf="task.priority === 'medium'">
                         <img src="assets/img/icons/prio-low.png" alt="Priority Low Icon" *ngIf="task.priority === 'low'">
                    </div>
-                </td>
+                   </td>
             </tr>
             <tr *ngIf="contactList.length > 0">
                 <td>Assigned To:</td>
