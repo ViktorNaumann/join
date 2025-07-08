@@ -22,6 +22,9 @@ $small-mobile-breakpoint: 480px;
   flex-direction: column;
   height: 100vh; // Wichtig für volle Höhe
   overflow: hidden; // Verhindert doppeltes Scrollen
+  @media(max-width: 1000px) {
+    height: calc(100dvh - 180px);
+  }
 }
 
 %form-element-base {
