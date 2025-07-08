@@ -186,6 +186,13 @@ export class AddTaskComponent implements OnInit {
     }
   }
 
+  onSubtaskEnter(event: Event) {
+    event.preventDefault();
+    if (this.subtaskInput && this.subtaskInput.trim()) {
+      this.addSubtask();
+    }
+  }
+
   selectSubtaskSuggestion(suggestion: string) {
     this.subtaskInput = suggestion;
     this.showSubtaskSuggestions = false;

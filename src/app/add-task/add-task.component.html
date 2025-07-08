@@ -209,6 +209,7 @@
                   [(ngModel)]="subtaskInput"
                   (click)="onSubtaskInputClick()"
                   (click)="showSubtaskConfirmation ? confirmSubtask($event) : (subtaskInput.trim() ? showSubtaskConfirmation = true : showSubtaskDropdown())"
+                  (keydown.enter)="onSubtaskEnter($event)"
                   [readonly]="showSubtaskConfirmation"
                   (focus)="subtaskInputFocused = true"
                   (blur)="subtaskInputFocused = false">
