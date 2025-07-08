@@ -3,7 +3,7 @@ section {
   width: 100%;
 }
 .layout-container {
-  height: calc(100vh - 80px); // Abzüglich der Sidebar-Höhe
+  height: calc(100vh - 80px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -90,7 +90,7 @@ section {
 
       .clear-search-wrapper {
         position: absolute;
-        right: 50px; // Links vom Separator positioniert
+        right: 50px;
         top: 50%;
         transform: translateY(-50%);
         width: 20px;
@@ -157,7 +157,7 @@ section {
   align-items: center;
   gap: 10px;
   position: relative;
-  flex: 1; // Gleichmäßige Verteilung der Spalten
+  flex: 1;
   max-width: 250px;
   min-width: 200px;
 
@@ -174,11 +174,10 @@ section {
     position: relative;
     width: 24px;
     height: 24px;
-    display: flex; // Flexbox für Zentrierung hinzufügen
-    align-items: center; // Vertikal zentrieren
+    display: flex;
+    align-items: center;
     justify-content: center;
     img {
-      // position: absolute;
       width: 22px;
       height: 22px;
       transition: opacity 0.3s ease;
@@ -191,12 +190,11 @@ section {
     }
 
     .default-icon {
-      position: absolute; // Nur für das Default-Icon absolute Position
+      position: absolute;
     }
 
     &:hover {
       .default-icon {
-        // display: none;
         opacity: 0;
       }
 
@@ -296,7 +294,7 @@ app-task {
   // Aktiv beim Drücken (nicht ziehen):
   &:active:not(.cdk-drag-dragging) {
     transform: rotate(5deg);
-    transition: transform 0.3s ease 250ms; // Delay simuliert das CDK-Delay
+    transition: transform 0.3s ease 250ms; // Delay simuliert CDK-Delay
   }
 
   // Während des Ziehens (Funktioniert nicht):
@@ -331,19 +329,6 @@ app-task {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
   }
-
-  // OPTIONAL - visualisiert raus ziehen aus Liste:
-  // &.cdk-drop-list-dragging {
-  //   // background-color: #f5f5f5; // Leicht grauer Hintergrund
-  //   // border: 1px dashed rgba(0, 0, 0, 0.3); // Gestrichelte Umrandung
-  //   // opacity: 0.8; // Leicht transparent
-
-  //   // Oder: Liste weniger prominent machen
-  //   // filter: brightness(0.9);
-
-  //   // Oder: Zeigen dass ein Element "fehlt"
-  //   // box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-  // }
 }
 
 // Spezifische Animationen für Tasks in Listen:
@@ -359,7 +344,7 @@ app-task {
   height: 100dvh;
   background-color: rgba(0, 0, 0, 0);
   z-index: 1000;
-  transition: background-color 250ms ease 150ms; 
+  transition: background-color 250ms ease 150ms;
   &.backgroundVisible {
     background-color: rgba(0, 0, 0, 0.5);
   }
@@ -387,13 +372,13 @@ app-task {
   }
 
   .column {
-    flex: 0 0 calc(25% - 12px); // Vier Spalten mit etwas Abstand
-    width: auto; // Auto-Breite basierend auf Flex-Basis
+    flex: 0 0 calc(25% - 12px);
+    width: auto;
     min-width: 200px;
   }
 
   .drop-list {
-    width: 100%; // Drop-Liste passt sich der Column-Breite an
+    width: 100%;
   }
 }
 
@@ -426,7 +411,7 @@ app-task {
 
 @media (max-width: 1000px) {
   .task-columns {
-    flex-wrap: nowrap; // Verhindert Umbruch
+    flex-wrap: nowrap;
     gap: 0;
     padding-left: 8px;
     font-size: 0.65rem;
@@ -443,8 +428,7 @@ app-task {
   }
 
   .column {
-    flex: 0 0 auto; // Verhindert Wachsen/Schrumpfen
-    // width: 180px;
+    flex: 0 0 auto;
     min-width: 180px;
     max-width: 220px;
   }
@@ -464,9 +448,6 @@ app-task {
 
 @media (max-width: 890px) {
   .task-columns {
-    // display: flex;
-    // justify-content: flex-start;
-    // align-items: flex-start;
     gap: 8px;
     max-width: 100%;
   }
@@ -501,7 +482,6 @@ app-task {
   .board-header {
     height: auto;
     padding: 20px;
-    // flex-shrink: 0;
 
     .header-headline {
       display: flex;
@@ -514,7 +494,7 @@ app-task {
         display: unset;
         width: 38px;
         height: 38px;
-        flex-shrink: 0; // Verhindert Schrumpfen des Icons
+        flex-shrink: 0;
       }
     }
 
@@ -531,7 +511,6 @@ app-task {
 
   .task-columns {
     width: 100%;
-    // flex: 1;
     flex: 0 0 auto;
     overflow-y: visible;
     padding: 0 20px 120px 20px;
@@ -549,14 +528,13 @@ app-task {
     width: 100%;
     min-width: 100%;
     max-width: none;
-    overflow: visible; // Wichtig für die erweiterte drop-list
-    // margin-bottom: 20px;
+    overflow: visible;
   }
 
   .drop-list {
-    width: max-content; // Breite passt sich dem Inhalt an
+    width: max-content;
     min-width: 100%;
-    max-width: calc(100vw - 40px); // Maximale Breite = Viewport - Padding
+    max-width: calc(100vw - 40px);
     min-height: 200px;
     max-height: 250px;
 
@@ -569,23 +547,10 @@ app-task {
     overflow-x: auto;
     overflow-y: hidden;
     gap: 22px;
-    // padding: 10px;
 
-    //NOTE:
-    // Scrollbar wird nur bei Bedarf angezeigt
     scrollbar-width: thin;
     scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
 
-    // Scrollbar verstecken
-    // scrollbar-width: none; // Firefox
-    // -ms-overflow-style: none; // Internet Explorer und Edge
-
-    // Webkit-basierte Browser (Chrome, Safari, etc.)
-    // &::-webkit-scrollbar {
-    //   display: none;
-    // }
-
-    // Klasse für leere Listen
     &.drop-list-empty {
       min-height: 100px;
       height: auto;
@@ -594,7 +559,7 @@ app-task {
   }
 
   .drop-list app-task {
-    flex: 0 0 160px; // Feste Breite, kein Wachsen/Schrumpfen
+    flex: 0 0 160px;
     width: 160px;
   }
 }
@@ -615,7 +580,7 @@ app-task {
 
     .header-controls {
       width: 100%;
-      gap: 0; // Kein Gap da nur noch Search-Input sichtbar
+      gap: 0;
 
       > button {
         display: none;
@@ -623,11 +588,11 @@ app-task {
 
       .search-input-container {
         width: 100%;
-        max-width: none; // Maximale Breite entfernen
+        max-width: none;
 
         input {
-          width: 100%; // Input nutzt volle Container-Breite
-          box-sizing: border-box; // Padding wird in die Breite eingerechnet
+          width: 100%;
+          box-sizing: border-box;
         }
       }
     }
@@ -649,13 +614,9 @@ app-task {
 
   .empty-column {
     width: 100%;
-    // margin: 0 auto;
     padding: 14px;
-    // @include inter400-fs14;
   }
 }
-
-//NEU Für Add-/Edit-Task Overlay
 
 .content-wrapper {
   background-color: var(--background-light);
@@ -682,13 +643,13 @@ app-task {
   width: 100%;
   height: auto;
   justify-content: flex-end;
-  }
-  .btn-close {
-    width: fit-content;
-    border-radius: 50%;
-    border: unset;
-    background-color: transparent;
-    &:hover {
+}
+.btn-close {
+  width: fit-content;
+  border-radius: 50%;
+  border: unset;
+  background-color: transparent;
+  &:hover {
     background-color: var(--background-default-light);
   }
 }

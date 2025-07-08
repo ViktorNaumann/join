@@ -303,10 +303,6 @@ export class BoardComponent {
    }
   }
 
-
-
-  //NEU für Datenabruf
-
   ngOnInit(): void {
     this.loadTasks();
   }
@@ -389,7 +385,7 @@ export class BoardComponent {
     return [];
   }
 
-  // NEU: Methode um Subtasks für eine bestimmte Task zu bekommen
+  // Methode um Subtasks für eine bestimmte Task zu bekommen
   getSubtasksForTask(taskId: string | undefined): Subtask[] {
     if (!taskId) {
       return [];
@@ -406,7 +402,6 @@ export class BoardComponent {
     this.subtaskList = [...updatedSubtasks];
   }
 
-  // TEST
   // Track-by-Funktion für bessere Performance hinzufügen
 trackByTaskId(index: number, task: Task): string | undefined {
   return task.id;
