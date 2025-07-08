@@ -1,5 +1,5 @@
 @import "./../../styles.scss";
-section{
+section {
   width: 100%;
   background-color: rgba(128, 128, 128, 0.099);
 }
@@ -270,7 +270,15 @@ section{
 
 // Platzhalter für gezogenes Element:
 .cdk-drag-placeholder {
-  opacity: 0.3;
+  opacity: 1;
+  border: 1px dashed black;
+  // background-color: transparent; // Transparenter Hintergrund
+  background-color: rgba(66, 82, 110, 0.1);
+
+  * {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 // Animierte Positionswechsel:
