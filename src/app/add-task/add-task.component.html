@@ -225,12 +225,12 @@
                     src="assets/img/icons/close.png" 
                     alt="Cancel" 
                     class="cancel-icon"
-                    (click)="cancelSubtask()">
+                    (mousedown)="cancelSubtask()">
                   <img 
                     src="assets/img/icons/check-dark.png" 
                     alt="Confirm" 
                     class="confirm-icon"
-                    (click)="confirmSubtask()">
+                    (mousedown)="confirmSubtask()">
                 </div>
                 
                 <div class="subtask-suggestions" *ngIf="showSubtaskSuggestions">
