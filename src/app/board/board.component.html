@@ -7,6 +7,7 @@
         src="assets/img/icons/add-box-fill.png"
         alt="add task button"
         (click)="openAddOrEditOverlay('open')"
+        (click)="saveTaskStatus('to-do')"
       />
     </div>
 
@@ -44,7 +45,7 @@
         </div>
       </div>
 
-      <button (click)="openAddOrEditOverlay('open')">Add Task +</button>
+      <button (click)="openAddOrEditOverlay('open')" (click)="saveTaskStatus('to-do')">Add Task +</button>
     </div>
   </div>
 
@@ -52,7 +53,7 @@
     <div class="column">
       <div class="column-header">
         <h2>To do</h2>
-        <div class="icon-container" (click)="openAddOrEditOverlay('open')">
+        <div class="icon-container" (click)="openAddOrEditOverlay('open')" (click)="saveTaskStatus('to-do')">
           <img
             class="default-icon"
             src="assets/img/icons/add-box.png"
@@ -99,7 +100,7 @@
     <div class="column">
       <div class="column-header">
         <h2>In progress</h2>
-        <div class="icon-container" (click)="openAddOrEditOverlay('open')">
+        <div class="icon-container" (click)="openAddOrEditOverlay('open')" (click)="saveTaskStatus('in-progress')">
           <img
             class="default-icon"
             src="assets/img/icons/add-box.png"
@@ -144,7 +145,7 @@
     <div class="column">
       <div class="column-header">
         <h2>Await feedback</h2>
-        <div class="icon-container" (click)="openAddOrEditOverlay('open')">
+        <div class="icon-container" (click)="openAddOrEditOverlay('open')" (click)="saveTaskStatus('await-feedback')">
           <img
             class="default-icon"
             src="assets/img/icons/add-box.png"
@@ -311,6 +312,7 @@
     <app-add-task
       *ngIf="showAddOrEditTask"
       (taskAdded)="closeDetailsOverlay($event)"
+      [defaultStatus]="setTaskStatus"
     ></app-add-task>
   </div>
   <app-task-details

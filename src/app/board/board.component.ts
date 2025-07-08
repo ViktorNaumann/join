@@ -106,6 +106,7 @@ export class BoardComponent {
   // subtaskForSelectedTask: Subtask[] = [];
   contactList: Contact[] = [];
   subtasksByTaskId: { [taskId: string]: Subtask[] } = {};
+  setTaskStatus: string = 'to-do';
 
   constructor(private taskService: TaskService, private router: Router) {}
 
@@ -246,6 +247,10 @@ export class BoardComponent {
       this.awaitfeedback = this.sortTasksByDueDate(this.awaitfeedback);
       this.done = this.sortTasksByDueDate(this.done);
     }
+  }
+
+  saveTaskStatus(status: string) {
+    this.setTaskStatus = status;
   }
 
   openAddOrEditOverlay(event:string) {

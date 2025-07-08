@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class AddTaskComponent implements OnInit {
   @Output() taskAdded = new EventEmitter<string>
+  @Input() defaultStatus = '';
 
   selectedPriority: string = 'medium';
   contacts: Contact[] = [];
@@ -356,12 +357,15 @@ export class AddTaskComponent implements OnInit {
   }
 
   async addNewTask() {
+    if(!this.defaultStatus){
+      this.defaultStatus = 'to-do';
+    }
     const newTask: Task = {
       title: this.formData.title.trim(),
       description: this.formData.description?.trim() || '',
       date: new Date(this.formData.dueDate),
       priority: this.selectedPriority as 'low' | 'medium' | 'urgent',
-      status: 'to-do',
+      status: this.defaultStatus,
       assignedTo: this.selectedContacts.map(contact => contact.id).filter(id => id !== undefined) as string[],
       category: this.selectedCategory as 'technical' | 'user story'
     };
