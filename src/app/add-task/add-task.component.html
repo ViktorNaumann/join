@@ -54,6 +54,8 @@
               This field is required
             </div>
           </div>
+          
+          <p class="required-note"><span class="required">*</span>This field is required</p>
         </div>
         
         <div class="form-divider"></div>
@@ -269,20 +271,16 @@
                       class="action-icon"
                       (click)="deleteSubtask(subtask.id)">
                   </div>
-                </div>
-              </div>
+                </div>              </div>
             </div>
           </div>
-        </div>
-      </div>
-      
-      <div class="form-footer">
-        <p class="required-note"><span class="required">*</span>This field is required</p>
-        <div class="form-actions">
-          <button type="button" class="btn-clear" (click)="clearForm()" [disabled]="isCreatingTask">Clear</button>
-          <button type="submit" class="btn-create" [disabled]="isCreatingTask">
-            {{ isCreatingTask ? (isEditingMode ? 'Updating...' : 'Creating...') : (isEditingMode ? 'Update Task' : 'Create Task') }}
-          </button>
+          
+          <div class="form-actions">
+            <button type="button" class="btn-clear" (click)="clearForm()" [disabled]="isCreatingTask">Clear</button>
+            <button type="submit" class="btn-create" [disabled]="isCreatingTask">
+              {{ isCreatingTask ? (isEditingMode ? 'Updating...' : 'Creating...') : (isEditingMode ? 'Update Task' : 'Create Task') }}
+            </button>
+          </div>
         </div>
       </div>
     </form>
