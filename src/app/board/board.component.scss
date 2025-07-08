@@ -364,7 +364,7 @@ app-task:last-child {
   height: 100dvh;
   background-color: rgba(0, 0, 0, 0);
   z-index: 1000;
-  transition: background-color 300ms ease-in-out;
+  transition: background-color 250ms ease 150ms; 
   &.backgroundVisible {
     background-color: rgba(0, 0, 0, 0.5);
   }
