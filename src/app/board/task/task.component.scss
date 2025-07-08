@@ -46,6 +46,7 @@
   }
   .task-description.truncated {
     position: relative;
+    min-height: 2lh;
     max-height: 3lh;
     overflow: hidden;
 
