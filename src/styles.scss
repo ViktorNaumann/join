@@ -115,6 +115,7 @@
   cursor: grabbing !important;
   transform: rotate(5deg) !important;
   
+  
   &, * {
     cursor: grabbing !important;
   }
@@ -123,6 +124,8 @@
 .cdk-drag-preview {
   cursor: grabbing !important;
   transform: rotate(5deg);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
   
   &, * {
     cursor: grabbing !important;

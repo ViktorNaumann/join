@@ -259,18 +259,6 @@ section {
 // CDK Drag & Drop Styles
 // =======================
 
-// Element wird gezogen:
-.cdk-drag-preview {
-  cursor: grabbing !important;
-  transform: rotate(5deg); //Funktioniert nicht!
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.9);
-  overflow: hidden;
-
-  * {
-    cursor: grabbing !important;
-  }
-}
-
 // Platzhalter für gezogenes Element:
 .cdk-drag-placeholder {
   opacity: 1;
