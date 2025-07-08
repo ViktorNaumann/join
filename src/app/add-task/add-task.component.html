@@ -289,26 +289,59 @@
                       class="subtask-checkbox"
                       (click)="toggleSubtaskCompletion(subtask.id)">
                     
+                    <!-- Normal view mode -->
                     <span 
+                      *ngIf="editingSubtaskId !== subtask.id"
                       class="subtask-text"
                       [class.completed]="subtask.completed">
                       {{ subtask.text }}
                     </span>
+                    
+                    <!-- Edit mode -->
+                    <input 
+                      *ngIf="editingSubtaskId === subtask.id"
+                      type="text"
+                      class="subtask-edit-input"
+                      [(ngModel)]="editingSubtaskText"
+                      [ngModelOptions]="{standalone: true}"
+                      (keydown)="onSubtaskEditKeydown($event)"
+                      #editInput>
                   </div>
                   
                   <div class="subtask-actions">
+                    <!-- Edit/Save icons -->
                     <img 
+                      *ngIf="editingSubtaskId !== subtask.id"
                       src="assets/img/icons/edit-single.png" 
                       alt="Edit"
                       class="action-icon"
                       (click)="editSubtaskPrompt(subtask.id, subtask.text)">
+                    
                     <img 
+                      *ngIf="editingSubtaskId === subtask.id"
+                      src="assets/img/icons/check-dark.png" 
+                      alt="Save"
+                      class="action-icon save-icon"
+                      (click)="saveSubtaskEdit()">
+                    
+                    <!-- Cancel icon (only in edit mode) -->
+                    <img 
+                      *ngIf="editingSubtaskId === subtask.id"
+                      src="assets/img/icons/close.png" 
+                      alt="Cancel"
+                      class="action-icon cancel-icon"
+                      (click)="cancelSubtaskEdit()">
+                    
+                    <!-- Delete icon (only in normal mode) -->
+                    <img 
+                      *ngIf="editingSubtaskId !== subtask.id"
                       src="assets/img/icons/delete.png" 
                       alt="Delete"
                       class="action-icon"
                       (click)="deleteSubtask(subtask.id)">
                   </div>
-                </div>              </div>
+                </div>
+              </div>
             </div>
           </div>
           
