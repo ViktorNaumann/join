@@ -677,14 +677,16 @@ app-task:last-child {
 .close-btn-wrapper {
   display: flex;
   justify-content: flex-end;
-  border-radius: 50%;
-  border: unset;
-  @include btn();
-  width: 26px;
-  height: 26px;
-  padding: 0;
-  &:hover {
-    background-color: var(--background-default-light);
+  width: 100%;
+  height: auto;
+  justify-content: flex-end;
+  }
+  .btn-close {
+    width: fit-content;
     border-radius: 50%;
+    border: unset;
+    background-color: transparent;
+    &:hover {
+    background-color: var(--background-default-light);
   }
 }
