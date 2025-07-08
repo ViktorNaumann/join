@@ -13,7 +13,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AddTaskComponent implements OnInit {
   @Output() taskAdded = new EventEmitter<string>;
+  @Output() closeOverlay = new EventEmitter<void>(); // Neues Event für Overlay schließen
   @Input() defaultStatus = '';
+  @Input() isOverlayMode = false; // Neue Property um Overlay-Modus zu erkennen
 
   selectedPriority: string = 'medium';
   contacts: Contact[] = [];
@@ -478,5 +480,10 @@ export class AddTaskComponent implements OnInit {
   getTodayDate(): string {
     const today = new Date();
     return today.toISOString().split('T')[0];
+  }
+
+  // Neue Methode zum Schließen des Overlays
+  closeOverlayMode() {
+    this.closeOverlay.emit();
   }
 }
