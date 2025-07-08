@@ -22,12 +22,6 @@ $small-mobile-breakpoint: 480px;
   flex-direction: column;
   height: 100vh; // Wichtig für volle Höhe
   overflow: hidden; // Verhindert doppeltes Scrollen
-  
-  @media (max-width: 320px) {
-    height: auto;
-    min-height: 100vh;
-    overflow: visible;
-  }
 }
 
 %form-element-base {
@@ -160,13 +154,6 @@ $small-mobile-breakpoint: 480px;
     padding: 16px;
     padding-bottom: 150px; // Mehr Platz für fixierte Buttons + Navigation
   }
-  
-  @media (max-width: 320px) {
-    padding: 12px;
-    padding-bottom: 150px; // Mehr Platz für fixierte Buttons + Navigation
-    overflow-y: visible;
-    flex: none;
-  }
 }
 
 .task-form { 
@@ -181,7 +168,7 @@ $small-mobile-breakpoint: 480px;
     gap: 24px;
     text-align: left;
     min-height: auto;
-    padding-bottom: 200px; // Mehr Platz für fixierte Buttons
+    padding-bottom: 190px; // Mehr Platz für fixierte Buttons
   }
 }
 
@@ -218,6 +205,72 @@ $small-mobile-breakpoint: 480px;
   @media (max-width: $mobile-breakpoint) {
     max-width: 100%;
     text-align: left;
+  }
+  
+  .required-note {
+    @include inter400-fs16();
+    color: #000000;
+    margin-top: 8px;
+    text-align: left;
+    
+    .required { color: var(--text-color-error); vertical-align: top; }
+    
+    @media (max-width: $mobile-breakpoint) {
+      font-size: 12px;
+      margin-top: 12px;
+    }
+  }
+  
+  .form-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+    justify-content: flex-end; // Rechtsbündige Ausrichtung
+    
+    @media (max-width: $mobile-breakpoint) {
+      position: fixed !important;
+      bottom: 70px; // Platz für die untere Navigation
+      left: 0;
+      right: 0;
+      width: 100%;
+      background-color: var(--background-light);
+      padding: 16px 12px;
+      z-index: 100;
+      margin-top: 0;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    
+    .btn-clear { 
+      @include btn(); 
+      @include btn-light(); 
+      width: 110px; 
+      height: 56px; 
+      border-radius: $border-radius; 
+      border: 1px solid #2A3647;
+      
+      @media (max-width: $mobile-breakpoint) {
+        flex: 1;
+        max-width: calc(50% - 6px);
+        height: 48px;
+        font-size: 14px;
+      }
+    }
+    
+    .btn-create { 
+      @include btn(); 
+      @include btn-dark(); 
+      width: 183px; 
+      height: 56px; 
+      border-radius: $border-radius;
+      
+      @media (max-width: $mobile-breakpoint) {
+        flex: 1;
+        max-width: calc(50% - 6px);
+        height: 48px;
+        font-size: 14px;
+      }
+    }
   }
 }
 
@@ -428,88 +481,6 @@ $small-mobile-breakpoint: 480px;
   }
 }
 
-.form-footer {
-  display: flex;
-  align-items: flex-end;
-  margin-top: 20px;
-  
-  @media (max-width: $mobile-breakpoint) {
-    position: fixed !important;
-    bottom: 70px; // Platz für die untere Navigation
-    left: 0;
-    right: 0;
-    width: 100%;
-    background-color: var(--background-light);
-    padding: 16px 12px;
-    z-index: 100; // Niedriger z-index damit Navigation darüber liegt
-    margin-top: 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-  }
-  
-  .required-note {
-    @include inter400-fs16();
-    color: #000000;
-    flex-shrink: 0;
-    width: fit-content;
-    
-    @media (max-width: $mobile-breakpoint) {
-      text-align: left; // Linksbündig statt zentriert
-      width: 100%;
-      display: block; // Wieder einblenden
-      font-size: 12px; // Kleinere Schrift für mobil
-      margin-bottom: 8px; // Abstand zu den Buttons
-    }
-    
-    .required { color: var(--text-color-error); vertical-align: top; }
-  }
-  
-  .form-actions {
-    display: flex;
-    gap: 16px;
-    margin-left: 490px;
-    
-    @media (max-width: $mobile-breakpoint) {
-      margin-left: 0;
-      justify-content: space-between;
-      width: 100%;
-      gap: 12px;
-    }
-    
-    .btn-clear { 
-      @include btn(); 
-      @include btn-light(); 
-      width: 110px; 
-      height: 56px; 
-      border-radius: $border-radius; 
-      border: 1px solid #2A3647;
-      
-      @media (max-width: $mobile-breakpoint) {
-        flex: 1;
-        max-width: calc(50% - 6px);
-        height: 48px;
-        font-size: 14px;
-      }
-    }
-    
-    .btn-create { 
-      @include btn(); 
-      @include btn-dark(); 
-      width: 183px; 
-      height: 56px; 
-      border-radius: $border-radius;
-      
-      @media (max-width: $mobile-breakpoint) {
-        flex: 1;
-        max-width: calc(50% - 6px);
-        height: 48px;
-        font-size: 14px;
-      }
-    }
-  }
-}
-
 .selected-contacts {
   display: flex;
   flex-wrap: wrap;
@@ -613,10 +584,6 @@ input.error, textarea.error {
 
 // Additional mobile optimizations
 @media (max-width: 320px) {
-  .layout-container {
-    position: relative;
-  }
-  
   .add-task-header {
     height: 80px;
     padding: 0 12px;
@@ -624,6 +591,11 @@ input.error, textarea.error {
     h1 {
       font-size: 24px;
     }
+  }
+  
+  .add-task-content {
+    padding: 12px;
+    padding-bottom: 150px; // Mehr Platz für fixierte Buttons + Navigation
   }
   
   .form-group {
