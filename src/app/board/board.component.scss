@@ -290,14 +290,11 @@ app-task {
     transition: transform 0.3s ease 250ms; // Delay simuliert CDK-Delay
     cursor: grabbing !important;
 
-
-// Zusätzliche Spezifität für Cursor
+    // Zusätzliche Spezifität für Cursor
     * {
       cursor: grabbing !important;
     }
-
   }
-
 
   // Während des Ziehens (Funktioniert nicht):
   &.cdk-drag-dragging {
@@ -309,7 +306,6 @@ app-task {
     * {
       cursor: grabbing !important;
     }
-
   }
 
   // Deaktivierter Zustand (nicht ziehbar):

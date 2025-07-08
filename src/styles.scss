@@ -2,84 +2,85 @@
 /* inter-regular - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
-  src: url('./../public/assets/fonts/inter-v19-latin-regular.woff2') format('woff2'); 
+  src: url("./../public/assets/fonts/inter-v19-latin-regular.woff2")
+    format("woff2");
 }
 /* inter-500 - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 500;
-  src: url('./../public/assets/fonts/inter-v19-latin-500.woff2') format('woff2'); 
+  src: url("./../public/assets/fonts/inter-v19-latin-500.woff2") format("woff2");
 }
 /* inter-700 - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 700;
-  src: url('./../public/assets/fonts/inter-v19-latin-700.woff2') format('woff2');
+  src: url("./../public/assets/fonts/inter-v19-latin-700.woff2") format("woff2");
 }
 
 @mixin inter400-fs27 {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-weight: 400;
   font-size: clamp(18px, calc(0.8vw + 15.5px), 27px);
 }
 
 @mixin inter400-fs20 {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-weight: 400;
   font-size: clamp(16px, calc(0.36vw + 14.85px), 20px);
 }
 
 @mixin inter400-fs16 {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-weight: 400;
   font-size: 16px;
 }
 
 @mixin inter400-fs14 {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-weight: 400;
   font-size: 14px;
 }
 
 @mixin inter400-fs12 {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-weight: 400;
   font-size: 12px;
 }
 
 @mixin inter500-fs47 {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-weight: 500;
   font-size: clamp(37px, calc(0.89vw + 33px), 47px);
 }
 
 @mixin inter700-fs61 {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-weight: 700;
   font-size: clamp(40px, calc(1.875vw + 34px), 61px);
 }
 
 @mixin inter700-fs47 {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-weight: 700;
   font-size: clamp(37px, calc(0.89vw + 33px), 47px);
 }
 
 @mixin inter700-fs21 {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-weight: 700;
   font-size: clamp(18px, calc(0.27vw + 17.14px), 21px);
 }
 
 @mixin inter700-fs16 {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-weight: 700;
   font-size: 16px;
 }
@@ -113,27 +114,27 @@
 // Globale CDK Drag Overrides
 .cdk-drag-dragging {
   cursor: grabbing !important;
-  transform: rotate(5deg) !important;
-  
-  
-  &, * {
+  // transform: rotate(5deg) !important;
+  rotate: 5deg;
+
+  &,
+  * {
     cursor: grabbing !important;
   }
 }
 
 .cdk-drag-preview {
   cursor: grabbing !important;
-  transform: rotate(5deg);
+  rotate: 5deg;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.9);
-  overflow: hidden;
-  
-  &, * {
+
+  &,
+  * {
     cursor: grabbing !important;
   }
 }
 
 //#endregion
-
 
 //#region custom properties
 :root {
@@ -151,7 +152,7 @@
   --background-default-dark: #d1d1d1;
 
   // Fonts
-  --font-primary: 'Inter', sans-serif;
+  --font-primary: "Inter", sans-serif;
   // --font-secondary: 'Open Sans', sans-serif;
   // --font-heading: 'Montserrat', serif;
 }
@@ -179,11 +180,12 @@
   width: clamp(350px, calc(6.43vw + 142.6px), 422px);
   border-radius: 10px;
   border: 1px solid var(--background-default-dark);
-  padding: clamp(8px, calc(0.45vw + 6.56px), 13px) clamp(18px, calc(0.27vw + 17.14px), 21px);
+  padding: clamp(8px, calc(0.45vw + 6.56px), 13px)
+    clamp(18px, calc(0.27vw + 17.14px), 21px);
   @include flex-between();
   @include inter400-fs20();
   &:focus-within {
-     border: 1px solid var(--accent-primary-color);
+    border: 1px solid var(--accent-primary-color);
   }
 }
 
@@ -219,10 +221,9 @@
 
 @mixin svg-hover {
   &:hover {
-    svg path{
-            fill: var(--accent-primary-color);
-        }
+    svg path {
+      fill: var(--accent-primary-color);
+    }
   }
 }
 //#endregion
-
