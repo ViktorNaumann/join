@@ -305,7 +305,7 @@
   [@slideInOut]="animationDirection"
   (@slideInOut.done)="onOverlayAnimationDone($event)"
   [class.backgroundVisible]="backgroundVisible"
-  *ngIf="backgroundVisible"
+  *ngIf="overlayVisible"
 >
   <div class="max-width-container">
     <div class="content-wrapper" *ngIf="showAddOrEditTask">

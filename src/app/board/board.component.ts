@@ -90,12 +90,15 @@ import { Router } from '@angular/router';
 export class BoardComponent {
   animationDirection: 'right' | 'bottom' = 'right';
   backgroundVisible = false; //später wieder false setzen
+  overlayVisible = false;
   showTaskDetails = false;
   showAddOrEditTask: boolean = false; //später wieder false setzen
   selectedTask?: Task;
   // Suchfunktion
   searchTerm: string = '';
 
+  // Observable für die Formular-Sichtbarkeit
+  // showForm$: Observable<boolean>;
   // Datenabruf
   unsubTask!: Subscription;
   unsubSubtask!: Subscription;
@@ -108,7 +111,9 @@ export class BoardComponent {
   subtasksByTaskId: { [taskId: string]: Subtask[] } = {};
   setTaskStatus: string = 'to-do';
 
-  constructor(private taskService: TaskService, private router: Router) {}
+  constructor(private taskService: TaskService, private router: Router, private contactService: ContactService) {
+    // this.showForm$ = this.contactService.showForm$;
+  }
 
   // Suchfunktion (geändert)
   onSearchInput() {}
@@ -175,6 +180,7 @@ export class BoardComponent {
   removeBackground(event: string) {
     if (event === 'closed') {
       this.backgroundVisible = false;
+      this.overlayVisible = false;
     }
   }
 
@@ -255,6 +261,7 @@ export class BoardComponent {
 
   openAddOrEditOverlay(event:string, status:string) {
     const isSmallScreen = window.innerWidth < 1000;
+    // this.contactService.showAddForm();
     if (event === 'open') {
       if (isSmallScreen) {
         this.router.navigate(['/add-task'], { queryParams: { status } }); // oder z.B. /add-task
@@ -273,19 +280,21 @@ export class BoardComponent {
       }
       
   }
-  this.backgroundVisible = true;
+  this.overlayVisible = true;
 }
 
    openTaskDetail(selectedTask: Task) {
+    // this.contactService.showAddForm();
     console.log('Task selected in board:', selectedTask);
     this.selectedTask = selectedTask;
     this.showTaskDetails = true;
     this.showAddOrEditTask = false;
-    this.backgroundVisible = true;
+    this.overlayVisible = true;
 }
 
   closeDetailsOverlay(event: string) {
    if(event === 'close' || 'added') {
+    this.overlayVisible = false;
     this.backgroundVisible = false;
     this.showTaskDetails = false;
     this.showAddOrEditTask = false;
