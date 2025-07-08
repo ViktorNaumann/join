@@ -6,7 +6,7 @@
         class="add-icon"
         src="assets/img/icons/add-box-fill.png"
         alt="add task button"
-        (click)="openAddOrEditOverlay('open')"
+        (click)="openAddOrEditOverlay('open', 'to-do')"
         (click)="saveTaskStatus('to-do')"
       />
     </div>
@@ -45,7 +45,7 @@
         </div>
       </div>
 
-      <button (click)="openAddOrEditOverlay('open')" (click)="saveTaskStatus('to-do')">Add Task +</button>
+      <button (click)="openAddOrEditOverlay('open', 'to-do')" (click)="saveTaskStatus('to-do')">Add Task +</button>
     </div>
   </div>
 
@@ -53,7 +53,7 @@
     <div class="column">
       <div class="column-header">
         <h2>To do</h2>
-        <div class="icon-container" (click)="openAddOrEditOverlay('open')" (click)="saveTaskStatus('to-do')">
+        <div class="icon-container" (click)="openAddOrEditOverlay('open', 'to-do')" (click)="saveTaskStatus('to-do')">
           <img
             class="default-icon"
             src="assets/img/icons/add-box.png"
@@ -100,7 +100,7 @@
     <div class="column">
       <div class="column-header">
         <h2>In progress</h2>
-        <div class="icon-container" (click)="openAddOrEditOverlay('open')" (click)="saveTaskStatus('in-progress')">
+        <div class="icon-container" (click)="openAddOrEditOverlay('open', 'in-progress')" (click)="saveTaskStatus('in-progress')">
           <img
             class="default-icon"
             src="assets/img/icons/add-box.png"
@@ -145,7 +145,7 @@
     <div class="column">
       <div class="column-header">
         <h2>Await feedback</h2>
-        <div class="icon-container" (click)="openAddOrEditOverlay('open')" (click)="saveTaskStatus('await-feedback')">
+        <div class="icon-container" (click)="openAddOrEditOverlay('open', 'await-feedback')" (click)="saveTaskStatus('await-feedback')">
           <img
             class="default-icon"
             src="assets/img/icons/add-box.png"
@@ -318,7 +318,7 @@
   <app-task-details
     *ngIf="showTaskDetails && selectedTask"
     (closeTaskDetails)="closeDetailsOverlay($event)"
-    (editTask)="openAddOrEditOverlay('edit')"
+    (editTask)="openAddOrEditOverlay('edit', '')"
     (subtaskChanged)="onSubtaskUpdate($event)"
     [task]="selectedTask"
     [contactList]="contactList"

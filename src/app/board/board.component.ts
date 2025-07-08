@@ -253,11 +253,11 @@ export class BoardComponent {
     this.setTaskStatus = status;
   }
 
-  openAddOrEditOverlay(event:string) {
+  openAddOrEditOverlay(event:string, status:string) {
     const isSmallScreen = window.innerWidth < 1000;
     if (event === 'open') {
       if (isSmallScreen) {
-        this.router.navigate(['/add-task']); // oder z.B. /add-task
+        this.router.navigate(['/add-task'], { queryParams: { status } }); // oder z.B. /add-task
       } else {
         this.selectedTask = undefined;
         this.showTaskDetails = false;
@@ -265,7 +265,7 @@ export class BoardComponent {
       }
     } else if (event === 'edit') {
       if (isSmallScreen) {
-        this.router.navigate(['/add-task']); // oder z.B. /add-task
+        this.router.navigate(['/add-task'], { queryParams: { status } }); // oder z.B. /add-task
       } else {
         // selectedTask NICHT auf undefined setzen, damit sie an Add-Task weitergegeben werden kann
         this.showTaskDetails = false;

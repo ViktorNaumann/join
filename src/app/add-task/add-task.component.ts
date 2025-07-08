@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ContactService, Contact } from '../services/contact.service';
 import { TaskService, Task } from '../services/task.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrl: './add-task.component.scss'
 })
 export class AddTaskComponent implements OnInit {
-  @Output() taskAdded = new EventEmitter<string>
+  @Output() taskAdded = new EventEmitter<string>;
   @Input() defaultStatus = '';
 
   selectedPriority: string = 'medium';
@@ -54,10 +54,20 @@ export class AddTaskComponent implements OnInit {
     { value: 'user story', label: 'User Story', color: '#0038FF' }
   ];
 
-  constructor(private contactService: ContactService, private taskService: TaskService, private router: Router) {}
+  constructor(private contactService: ContactService, private taskService: TaskService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.loadStatus();
     this.loadContacts();
+    
+  }
+
+  loadStatus() {
+    this.route.queryParams.subscribe(params => {
+      if (params['status']) {
+        this.defaultStatus = params['status'];
+      }
+    });
   }
 
   loadContacts() {
@@ -359,7 +369,7 @@ export class AddTaskComponent implements OnInit {
   async addNewTask() {
     if(!this.defaultStatus){
       this.defaultStatus = 'to-do';
-    }
+    } 
     const newTask: Task = {
       title: this.formData.title.trim(),
       description: this.formData.description?.trim() || '',
