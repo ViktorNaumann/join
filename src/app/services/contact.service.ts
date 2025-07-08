@@ -44,19 +44,31 @@ export class ContactService {
 
   // NEU - Avatar-Farben
   private avatarColors = [
-    '#9C27B0',
-    '#2196F3',
-    '#FF9800',
-    '#4CAF50',
-    '#F44336',
-    '#00BCD4',
-    '#795548',
-    '#607D8B',
-    '#E91E63',
-    '#3F51B5',
-    '#CDDC39',
-    '#FF5722',
-  ];
+  '#9C27B0', // Purple
+  '#2196F3', // Blue
+  '#FF9800', // Orange
+  '#4CAF50', // Green
+  '#F44336', // Red
+  '#00BCD4', // Cyan
+  '#795548', // Brown
+  '#607D8B', // Blue Grey
+  '#E91E63', // Pink
+  '#3F51B5', // Indigo
+  '#CDDC39', // Lime
+  '#FF5722', // Deep Orange
+  '#388E3C', // Dark Green
+  '#1976D2', // Darker Blue
+  '#7B1FA2', // Dark Purple
+  '#D32F2F', // Dark Red
+  '#5D4037', // Dark Brown
+  '#303F9F', // Dark Indigo
+  '#0288D1', // Light Blue (nicht zu hell)
+  '#C2185B', // Deep Pink
+  '#00796B', // Teal
+  '#FFA000', // Amber (dunklerer Ton)
+  '#455A64', // Dark Blue Grey
+  '#AFB42B', // Olive/Lime Darker
+];
 
   constructor(private firestore: Firestore) {}
 
