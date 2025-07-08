@@ -162,7 +162,12 @@
                 [value]="getCategoryText()" 
                 readonly
                 (click)="toggleCategoryDropdown()"
-                [class.error]="showCategoryError">
+                [class.error]="showCategoryError"
+                [disabled]="isEditingMode"
+                [ngStyle]="isEditingMode ? {
+                  'color': 'var(--background-default-dark)',
+                  'cursor': 'not-allowed'
+                } : {}">
               <img 
                 src="assets/img/icons/arrow-dropdown.png" 
                 alt="Dropdown" 
