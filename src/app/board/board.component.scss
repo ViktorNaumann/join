@@ -255,15 +255,20 @@ section {
   }
 }
 
-// ===================
+// =======================
 // CDK Drag & Drop Styles
-// ===================
+// =======================
 
 // Element wird gezogen:
 .cdk-drag-preview {
-  // transform: rotate(5deg); //Funktioniert nicht!
+  cursor: grabbing !important;
+  transform: rotate(5deg); //Funktioniert nicht!
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.9);
   overflow: hidden;
+
+  * {
+    cursor: grabbing !important;
+  }
 }
 
 // Platzhalter für gezogenes Element:
@@ -295,13 +300,28 @@ app-task {
   &:active:not(.cdk-drag-dragging) {
     transform: rotate(5deg);
     transition: transform 0.3s ease 250ms; // Delay simuliert CDK-Delay
+    cursor: grabbing !important;
+
+
+// Zusätzliche Spezifität für Cursor
+    * {
+      cursor: grabbing !important;
+    }
+
   }
+
 
   // Während des Ziehens (Funktioniert nicht):
   &.cdk-drag-dragging {
     cursor: grabbing !important;
-    transform: rotate(5deg);
-    transition: transform 0.1s ease-in-out;
+    transform: rotate(5deg) !important;
+    transition: transform 0.1s ease-in-out !important;
+
+    // Alle Kinder-Elemente auch mit grabbing cursor
+    * {
+      cursor: grabbing !important;
+    }
+
   }
 
   // Deaktivierter Zustand (nicht ziehbar):

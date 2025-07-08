@@ -109,6 +109,26 @@
   margin-right: auto;
   width: 100%;
 }
+
+// Globale CDK Drag Overrides
+.cdk-drag-dragging {
+  cursor: grabbing !important;
+  transform: rotate(5deg) !important;
+  
+  &, * {
+    cursor: grabbing !important;
+  }
+}
+
+.cdk-drag-preview {
+  cursor: grabbing !important;
+  transform: rotate(5deg);
+  
+  &, * {
+    cursor: grabbing !important;
+  }
+}
+
 //#endregion
 
 
