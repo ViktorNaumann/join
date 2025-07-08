@@ -16,9 +16,6 @@
     h1 {
         @include inter700-fs47();
     }
-    @media(min-width: 1000px) {
-        height: 820px;
-    }
     @media(max-width: 550px) {
         width: 95%;
     }

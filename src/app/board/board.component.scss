@@ -664,14 +664,13 @@ app-task:last-child {
 
 .content-wrapper {
   background-color: var(--background-light);
-  height: 900px;
-  width: 1000px;
+  height: 750px;
+  width: 850px;
   min-width: 315px;
   display: flex;
   flex-direction: column;
   border-radius: 30px;
   gap: 24px;
-  padding: clamp(16px, calc(2.86vw + 6.85px), 48px);
   position: relative;
   @include inter400-fs20();
   h1 {

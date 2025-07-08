@@ -103,7 +103,7 @@ $small-mobile-breakpoint: 480px;
 
 .add-task-header {
   width: 100%;
-  height: 170px;
+  height: 140px;
   padding: 0 $form-padding;
   @include flex-center;
   position: relative; // Für absolute Positionierung des X-Buttons
@@ -185,7 +185,7 @@ $small-mobile-breakpoint: 480px;
   display: block;
   width: 100%;
   flex: 1;
-  overflow-y: auto;
+  // overflow-y: auto;
   
   @media (max-width: $mobile-breakpoint) {
     padding: 16px;
@@ -242,7 +242,7 @@ $small-mobile-breakpoint: 480px;
 
 .form-left, .form-right { 
   @include flex-column; 
-  gap: 24px; 
+  gap: 18px; 
   width: 100%;
   max-width: $input-width;
   
@@ -496,6 +496,8 @@ $small-mobile-breakpoint: 480px;
   @include flex-column; 
   gap: 12px; 
   width: 100%;
+  height: 110px;
+  overflow-y: auto;
   max-width: $input-width;
   position: relative;
   z-index: 1; // Niedriger z-index als Footer
@@ -505,7 +507,10 @@ $small-mobile-breakpoint: 480px;
     align-items: stretch; // Änderung von center zu stretch
   }
 }
-.subtasks-list { @include flex-column; gap: 8px; }
+.subtasks-list { 
+  @include flex-column; 
+  gap: 8px; 
+}
 
 .subtask-item {
   @include flex-between;
