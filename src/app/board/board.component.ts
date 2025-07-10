@@ -80,7 +80,7 @@ import { Router } from '@angular/router';
 })
 export class BoardComponent {
   animationDirection: 'right' | 'bottom' = 'right';
-  backgroundVisible = false; 
+  backgroundVisible = false;
   overlayVisible = false;
   showTaskDetails = false;
   showAddOrEditTask: boolean = false;
@@ -95,8 +95,13 @@ export class BoardComponent {
   subtasksByTaskId: { [taskId: string]: Subtask[] } = {};
   setTaskStatus: string = 'to-do';
 
-  constructor(private taskService: TaskService, private router: Router, private contactService: ContactService) {
-  }
+  openedMenuTaskId: string | null = null;
+
+  constructor(
+    private taskService: TaskService,
+    private router: Router,
+    private contactService: ContactService
+  ) {}
 
   ngOnInit(): void {
     this.loadTasks();
@@ -113,7 +118,9 @@ export class BoardComponent {
       done: this.done,
     };
     const tasksForStatus = statusArrayMap[status] || [];
-    if (!this.searchTerm.trim()) { return tasksForStatus }
+    if (!this.searchTerm.trim()) {
+      return tasksForStatus;
+    }
     const searchLower = this.searchTerm.toLowerCase();
     return tasksForStatus.filter(
       (task) =>
@@ -236,7 +243,7 @@ export class BoardComponent {
     this.setTaskStatus = status;
   }
 
-  openAddOrEditOverlay(event:string, status:string) {
+  openAddOrEditOverlay(event: string, status: string) {
     const isSmallScreen = window.innerWidth < 1000;
     if (event === 'open' || event === 'edit') {
       if (isSmallScreen) {
@@ -245,26 +252,26 @@ export class BoardComponent {
         this.showTaskDetails = false;
         this.showAddOrEditTask = true;
       }
-    } 
+    }
     this.overlayVisible = true;
   }
 
-   openTaskDetail(selectedTask: Task) {
+  openTaskDetail(selectedTask: Task) {
     this.selectedTask = selectedTask;
     this.showTaskDetails = true;
     this.showAddOrEditTask = false;
     this.overlayVisible = true;
-}
+  }
 
   closeDetailsOverlay(event: string) {
-   if(event === 'close' || 'added') {
-    this.overlayVisible = false;
-    this.backgroundVisible = false;
-    this.showTaskDetails = false;
-    this.showAddOrEditTask = false;
-    this.selectedTask = undefined;
-    this.taskService.clearEditingTask();
-   }
+    if (event === 'close' || 'added') {
+      this.overlayVisible = false;
+      this.backgroundVisible = false;
+      this.showTaskDetails = false;
+      this.showAddOrEditTask = false;
+      this.selectedTask = undefined;
+      this.taskService.clearEditingTask();
+    }
   }
 
   loadTasks() {
@@ -309,7 +316,7 @@ export class BoardComponent {
     this.awaitfeedback = [];
     this.done = [];
   }
-  
+
   loadSubtasks() {
     for (const task of this.taskList) {
       if (task.id) {
@@ -347,5 +354,18 @@ export class BoardComponent {
   // Track-by-Funktion für bessere Performance hinzufügen
   trackByTaskId(index: number, task: Task): string | undefined {
     return task.id;
+  }
+
+  // NEU:
+  changeTaskStatus(event: { taskId: string; status: string }) {
+    const { taskId, status } = event;
+    const task = this.taskList.find((t) => t.id === taskId);
+    if (task && task.status !== status) {
+      const updatedTask = { ...task, status };
+      this.taskService.updateTask(taskId, updatedTask).then(() => {
+        // Optional: UI-Update, falls nötig
+        this.loadTasks();
+      });
+    }
   }
 }
