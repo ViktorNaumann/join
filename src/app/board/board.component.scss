@@ -1,9 +1,11 @@
 @import "./../../styles.scss";
 section {
-  height: 100vh;
-  width: 100vw;
+  height: calc(100vh - 100px);
+  width: 100%;
   overflow-y: auto; // <-- Scrollbar für die ganze Section
   overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--background-default-light) white;
   display: flex;
   flex-direction: column;
 }
@@ -465,6 +467,9 @@ app-task {
 }
 
 @media (max-width: 1000px) {
+  section {
+    height: calc(100dvh - 180px);
+  }
   .task-columns {
     flex-wrap: nowrap;
     gap: 0;
