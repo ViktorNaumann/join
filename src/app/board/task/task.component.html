@@ -8,8 +8,8 @@
     </p>
   </div>
   <div class="task-card">
-    <h1>{{ taskService.capitalize(task.title) }}</h1>
-    <p class="task-description truncated see-more">
+    <h1 class="see-more">{{ taskService.capitalize(task.title) }}</h1>
+    <p class="task-description ">
       {{ taskService.capitalize(task.description) }}
       <span class="see-more">…</span>
     </p>
