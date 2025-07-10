@@ -1,12 +1,26 @@
 @import "./../../styles.scss";
 section {
-  width: 100%;
-}
-.layout-container {
-  height: calc(100vh - 80px);
-  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: auto; // <-- Scrollbar für die ganze Section
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
+}
+
+// .layout-container {
+//   height: calc(100vh - 80px);
+//   overflow: hidden;
+//   display: flex;
+//   flex-direction: column;
+// }
+
+.layout-container {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: visible; // kein eigenes Scrollen mehr!
+  height: auto;
 }
 
 .board-header {
@@ -140,12 +154,17 @@ section {
 }
 
 .task-columns {
-  flex: 1;
-  overflow: hidden;
+  // flex: 1;
+  // overflow: hidden;
+  flex: 1 1 auto;
 
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+
+  overflow: visible; // kein eigenes Scrollen mehr!
+  height: auto;
+
   gap: 20px;
   padding: 0 clamp(20px, calc(2vw + 10px), 40px);
   @include inter400-fs12;
@@ -220,38 +239,70 @@ section {
 }
 
 .drop-list {
-  height: 700px;
-  max-height: calc(100vh - 350px);
+  // height: 700px;
+  // max-height: calc(100vh - 350px);
   width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto;
-  overflow-x: hidden;
+  // overflow-y: auto;
+  // overflow-x: hidden;
   padding: 10px;
   margin: 10px 0;
   gap: 15px;
 
   // Scrollbar styling (optional)
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.05);
+  // scrollbar-width: thin;
+  // scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.05);
 
-  &::-webkit-scrollbar {
-    width: 6px;
+  // &::-webkit-scrollbar {
+  //   width: 6px;
+  // }
+
+  // &::-webkit-scrollbar-track {
+  //   background: rgba(0, 0, 0, 0.05);
+  //   border-radius: 3px;
+  // }
+
+  // &::-webkit-scrollbar-thumb {
+  //   background: rgba(0, 0, 0, 0.2);
+  //   border-radius: 3px;
+
+  //   &:hover {
+  //     background: rgba(0, 0, 0, 0.3);
+  //   }
+  // }
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--background-dark, #42526e);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 2000;
+  transition: background 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    background: var(--accent-primary-color, #29abe2);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
   }
 
-  &::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 3px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
-
-    &:hover {
-      background: rgba(0, 0, 0, 0.3);
-    }
+  .arrow-up {
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: bold;
+    user-select: none;
   }
 }
 
