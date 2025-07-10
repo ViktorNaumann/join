@@ -1,4 +1,11 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  HostListener,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import {
   trigger,
@@ -94,7 +101,7 @@ export class BoardComponent {
   contactList: Contact[] = [];
   subtasksByTaskId: { [taskId: string]: Subtask[] } = {};
   setTaskStatus: string = 'to-do';
-
+  showBackToTop = false;
   openedMenuTaskId: string | null = null;
 
   constructor(
@@ -102,6 +109,25 @@ export class BoardComponent {
     private router: Router,
     private contactService: ContactService
   ) {}
+
+  // NEU:
+  @ViewChild('scrollSection') scrollSection!: ElementRef<HTMLElement>;
+
+  ngAfterViewInit() {
+    // Optional: falls du initial prüfen willst
+    this.scrollSection.nativeElement.addEventListener('scroll', () =>
+      this.onSectionScroll()
+    );
+  }
+
+  onSectionScroll() {
+    const scrollTop = this.scrollSection.nativeElement.scrollTop;
+    this.showBackToTop = scrollTop > 300;
+  }
+
+  scrollToTop() {
+    this.scrollSection.nativeElement.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
   ngOnInit(): void {
     this.loadTasks();
@@ -216,11 +242,9 @@ export class BoardComponent {
 
       if (task.id && task.status !== newStatus) {
         const updatedTask: Task = { ...task, status: newStatus };
-        this.taskService
-          .updateTask(task.id, updatedTask)
-          .catch((error) => {
-            console.error('Error updating task status:', error);
-          });
+        this.taskService.updateTask(task.id, updatedTask).catch((error) => {
+          console.error('Error updating task status:', error);
+        });
       }
     }
 
