@@ -61,12 +61,17 @@
     }
 }
 
+.row-title {
+    width: 120px;
+    font-weight: 600;
+}
+
 .date-row,
 .priority-row {
     display: flex;
     align-items: center;
     gap: 24px;
-    width: 100%;
+    width: 300px;
 }
 
 .assigned-to-row,
@@ -109,6 +114,10 @@
     flex-direction: column;
     gap: 8px; 
     @include word-break;
+}
+
+.info-no-selection {
+    color: var(--background-default-dark)
 }
 
 .contact-item {

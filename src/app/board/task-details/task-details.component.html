@@ -16,11 +16,11 @@
         <h1>{{ taskService.capitalize(task.title) }}</h1>
         <p class="description">{{ taskService.capitalize(task.description) }}</p>
         <div class="date-row">
-            <span>Due date:</span>
+            <span class="row-title">Due date:</span>
             <span>{{ convertDate(task.date) }}</span>
         </div>
         <div class="priority-row">
-            <span>Priority:</span>
+            <span class="row-title">Priority:</span>
             <span>{{ task.priority }}</span>
             <div>
                 <img src="assets/img/icons/prio-high.png" alt="Priority High Icon" *ngIf="task.priority === 'urgent'">
@@ -29,8 +29,8 @@
             </div>
         </div>
         <div class="assigned-to-row">
-            <span>Assigned To:</span>
-            <span *ngIf="contactList.length <= 0">No contact selected</span>
+            <span class="row-title">Assigned To:</span>
+            <span *ngIf="contactList.length <= 0" class="info-no-selection">No contact selected</span>
             <div class="contact-list">
                 @for (contact of contactList; track $index) {
                     <div class="contact-item">
@@ -45,8 +45,8 @@
             </div>
         </div>
        <div class="subtask-row">
-            <span>Subtasks:</span>
-            <span *ngIf="subtasks.length <= 0">No subtasks defined</span>
+            <span class="row-title">Subtasks:</span>
+            <span *ngIf="subtasks.length <= 0" class="info-no-selection">No subtasks defined</span>
             <div class="subtask-list">
                 @for (subtask of subtasks; track $index) {
                     <div class="subtask-item">
