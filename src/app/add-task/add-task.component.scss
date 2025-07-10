@@ -188,7 +188,9 @@ $small-mobile-breakpoint: 480px;
   display: block;
   width: 100%;
   flex: 1;
-  // overflow-y: auto;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--background-default-light) white;
   
   @media (max-width: $mobile-breakpoint) {
     padding: 16px;
@@ -538,6 +540,8 @@ $small-mobile-breakpoint: 480px;
     // Make scrollable for both desktop and mobile - reduced height so buttons stay visible
     max-height: 60px;
     overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--background-default-light) white;
     
     @media (max-width: $mobile-breakpoint) {
       max-height: none; // Keine Begrenzung auf mobilen Geräten
