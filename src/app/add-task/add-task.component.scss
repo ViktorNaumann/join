@@ -508,15 +508,7 @@ $small-mobile-breakpoint: 480px;
     .confirm-icon { @include icon-size(14px); }
   }
 
-  .subtask-suggestions {
-    @extend %dropdown-menu-base;
-    z-index: 50; // Niedriger als Footer aber höher als Content
 
-    .suggestion-item {
-      @extend %menu-item-base;
-      .suggestion-text { @include inter400-fs16(); color: var(--text-color-dark); }
-    }
-  }
 }
 
 .subtask-container { 

@@ -22,7 +22,6 @@ export class AddTaskComponent implements OnInit {
   selectedContacts: Contact[] = [];
   showContactDropdown: boolean = false;
   showCategoryDropdown: boolean = false;
-  showSubtaskSuggestions: boolean = false;
   showSubtaskConfirmation: boolean = false;
   subtaskInputFocused = false;
   selectedCategory: string = '';
@@ -47,11 +46,6 @@ export class AddTaskComponent implements OnInit {
     description: '',
     dueDate: ''
   };
-  
-  subtaskSuggestions = [
-    'Contact Form',
-    'Write legal Import'
-  ];
   
   categories = [
     { value: 'technical', label: 'Technical Task', color: '#1FD7C1' },
@@ -132,7 +126,6 @@ export class AddTaskComponent implements OnInit {
     if (!target.closest('.dropdown') && !target.closest('.subtask-input')) {
       this.showContactDropdown = false;
       this.showCategoryDropdown = false;
-      this.showSubtaskSuggestions = false;
     }
   }
 
@@ -143,28 +136,16 @@ export class AddTaskComponent implements OnInit {
   toggleContactDropdown() {
     this.showContactDropdown = !this.showContactDropdown;
     this.showCategoryDropdown = false;
-    this.showSubtaskSuggestions = false;
   }
 
   toggleCategoryDropdown() {
     this.showCategoryDropdown = !this.showCategoryDropdown;
     this.showContactDropdown = false;
-    this.showSubtaskSuggestions = false;
-  }
-
-  showSubtaskDropdown() {
-    if (this.showSubtaskConfirmation) {
-      return;
-    }
-    this.showSubtaskSuggestions = true;
-    this.showContactDropdown = false;
-    this.showCategoryDropdown = false;
   }
 
   onSubtaskInputClick() {
     if (!this.showSubtaskConfirmation) {
       this.subtaskInput = '';
-      this.showSubtaskDropdown();
     }
   }
 
@@ -173,12 +154,6 @@ export class AddTaskComponent implements OnInit {
     if (this.subtaskInput && this.subtaskInput.trim()) {
       this.addSubtask();
     }
-  }
-
-  selectSubtaskSuggestion(suggestion: string) {
-    this.subtaskInput = suggestion;
-    this.showSubtaskSuggestions = false;
-    this.showSubtaskConfirmation = true;
   }
 
   confirmSubtask(event: Event) {
@@ -193,7 +168,6 @@ export class AddTaskComponent implements OnInit {
   cancelSubtask() {
     this.subtaskInput = '';
     this.showSubtaskConfirmation = false;
-    this.showSubtaskSuggestions = false;
   }
 
   selectContact(contact: Contact) {
@@ -253,7 +227,6 @@ export class AddTaskComponent implements OnInit {
       this.subtasks.push(newSubtask);
       this.subtaskInput = '';
       this.showSubtaskConfirmation = false;
-      this.showSubtaskSuggestions = false;
     }
   }
 
@@ -326,7 +299,6 @@ export class AddTaskComponent implements OnInit {
     this.nextSubtaskId = 1;
     this.showContactDropdown = false;
     this.showCategoryDropdown = false;
-    this.showSubtaskSuggestions = false;
     this.showSubtaskConfirmation = false;
     this.isCreatingTask = false;
     this.showTitleError = false;
