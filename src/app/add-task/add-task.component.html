@@ -172,10 +172,17 @@
             <div class="selected-contacts" *ngIf="selectedContacts.length > 0">
               <div 
                 class="selected-contact-avatar"
-                *ngFor="let contact of selectedContacts"
+                *ngFor="let contact of selectedContacts.slice(0, 6)"
                 [style.background-color]="getContactColor(contact)"
                 [title]="contact.name">
                 {{ getContactInitials(contact) }}
+              </div>
+              <div 
+                class="selected-contact-avatar"
+                *ngIf="selectedContacts.length > 6"
+                [style.background-color]="'#d1d1d1'"
+                [title]="getRemainingContactNames(selectedContacts.slice(6))">
+                +{{ selectedContacts.length - 6 }}
               </div>
             </div>
           </div>

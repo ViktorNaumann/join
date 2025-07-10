@@ -217,6 +217,10 @@ export class AddTaskComponent implements OnInit {
     return this.contactService.getContactColor(contact.name);
   }
 
+  getRemainingContactNames(remainingContacts: Contact[]): string {
+    return remainingContacts.map((contact) => contact.name).join(', ');
+  }
+
   addSubtask() {
     if (this.subtaskInput && this.subtaskInput.trim()) {
       const newSubtask = {
