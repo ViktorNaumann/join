@@ -224,7 +224,8 @@
           
           <div class="form-group">
             <label for="subtasks">Subtasks</label>
-            <div class="subtask-container">
+            <!-- Subtask Input Container - always visible on mobile -->
+            <div class="subtask-input-container">
               <div class="subtask-input" [class.confirmation]="showSubtaskConfirmation">
                 <input 
                   type="text" 
@@ -258,65 +259,21 @@
                     (keydown.enter)="confirmSubtask($event)">
                 </div>
               </div>
-              
-              <div class="subtasks-list" *ngIf="subtasks.length > 0">
-                <div class="subtask-item" *ngFor="let subtask of subtasks">
-                  <div class="subtask-content">
-                    <img 
-                      *ngIf="subtask.completed"
-                      src="assets/img/icons/checkbox-checked.png" 
-                      alt="Completed"
-                      class="subtask-checkbox"
-                      (click)="toggleSubtaskCompletion(subtask.id)">
-                    <img 
-                      *ngIf="!subtask.completed"
-                      src="assets/img/icons/checkbox.png" 
-                      alt="Not completed"
-                      class="subtask-checkbox"
-                      (click)="toggleSubtaskCompletion(subtask.id)">
-                    
-                    <!-- Normal view mode -->
-                    <span 
-                      *ngIf="editingSubtaskId !== subtask.id"
-                      class="subtask-text"
-                      [class.completed]="subtask.completed">
-                      {{ subtask.text }}
-                    </span>
-                
-                    <input 
-                      *ngIf="editingSubtaskId === subtask.id"
-                      type="text"
-                      class="subtask-edit-input"
-                      [(ngModel)]="editingSubtaskText"
-                      [ngModelOptions]="{standalone: true}"
-                      (keydown)="onSubtaskEditKeydown($event)"
-                      #editInput>
-                  </div>
-                  
+            </div>
+            
+            <!-- Subtask List Container - scrollable on mobile -->
+            <div class="subtask-list-container" *ngIf="subtasks.length > 0">
+              <div class="subtasks-list">
+                <div class="subtask-item-simple" *ngFor="let subtask of subtasks">
+                  <span class="bullet">•</span>
+                  <span class="subtask-text-simple">{{ subtask.text }}</span>
                   <div class="subtask-actions">
                     <img 
-                      *ngIf="editingSubtaskId !== subtask.id"
                       src="assets/img/icons/edit-single.png" 
                       alt="Edit"
                       class="action-icon"
                       (click)="editSubtaskPrompt(subtask.id, subtask.text)">
-                    
                     <img 
-                      *ngIf="editingSubtaskId === subtask.id"
-                      src="assets/img/icons/check-dark.png" 
-                      alt="Save"
-                      class="action-icon save-icon"
-                      (click)="saveSubtaskEdit()">
-                    
-                    <img 
-                      *ngIf="editingSubtaskId === subtask.id"
-                      src="assets/img/icons/close.png" 
-                      alt="Cancel"
-                      class="action-icon cancel-icon"
-                      (click)="cancelSubtaskEdit()">
-                    
-                    <img 
-                      *ngIf="editingSubtaskId !== subtask.id"
                       src="assets/img/icons/delete.png" 
                       alt="Delete"
                       class="action-icon"
