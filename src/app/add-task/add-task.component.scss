@@ -47,7 +47,7 @@ $small-mobile-breakpoint: 480px;
   cursor: pointer;
   
   &.open {
-    border-color: var(--primary-color);
+    border-color: var(--accent-primary-color);
     .dropdown-arrow { transform: rotate(180deg); }
   }
   
@@ -91,7 +91,7 @@ $small-mobile-breakpoint: 480px;
   padding: 12px 16px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  &:hover { background-color: #f5f5f5; }
+  &:hover:not(.selected) { background-color: #f5f5f5; }
 }
 
 %avatar-base {
@@ -440,6 +440,30 @@ $small-mobile-breakpoint: 480px;
       @extend %menu-item-base;
       justify-content: space-between;
 
+      &.selected {
+        background-color: #2A3647;
+        color: #ffffff;
+        
+        .contact-info {
+          .contact-name {
+            color: #ffffff;
+          }
+          
+          .contact-avatar {
+            border: 2px solid #FFFFFF;
+          }
+        }
+        
+        .contact-checkbox img {
+          filter: brightness(0) invert(1);
+        }
+        
+        &:hover {
+          background-color: #091931;
+          opacity: 1;
+        }
+      }
+
       .contact-info {
         display: flex;
         align-items: center;
@@ -484,15 +508,7 @@ $small-mobile-breakpoint: 480px;
     .confirm-icon { @include icon-size(14px); }
   }
 
-  .subtask-suggestions {
-    @extend %dropdown-menu-base;
-    z-index: 50; // Niedriger als Footer aber höher als Content
 
-    .suggestion-item {
-      @extend %menu-item-base;
-      .suggestion-text { @include inter400-fs16(); color: var(--text-color-dark); }
-    }
-  }
 }
 
 .subtask-container { 

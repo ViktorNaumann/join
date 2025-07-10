@@ -142,6 +142,7 @@
               <div class="dropdown-menu" *ngIf="showContactDropdown">
                 <div 
                   class="contact-item" 
+                  [class.selected]="isContactSelected(contact)"
                   *ngFor="let contact of contacts"
                   (click)="selectContact(contact)">
                   
@@ -224,7 +225,7 @@
           <div class="form-group">
             <label for="subtasks">Subtasks</label>
             <div class="subtask-container">
-              <div class="subtask-input" [class.open]="showSubtaskSuggestions" [class.confirmation]="showSubtaskConfirmation">
+              <div class="subtask-input" [class.confirmation]="showSubtaskConfirmation">
                 <input 
                   type="text" 
                   id="subtasks" 
@@ -232,7 +233,6 @@
                   placeholder="Add new subtask"
                   [(ngModel)]="subtaskInput"
                   (click)="onSubtaskInputClick()"
-                  (click)="showSubtaskConfirmation ? confirmSubtask($event) : (subtaskInput.trim() ? showSubtaskConfirmation = true : showSubtaskDropdown())"
                   (keydown.enter)="onSubtaskEnter($event)"
                   [readonly]="showSubtaskConfirmation"
                   (focus)="subtaskInputFocused = true"
@@ -242,8 +242,7 @@
                   *ngIf="!showSubtaskConfirmation && !subtaskInputFocused"
                   src="assets/img/icons/add.png" 
                   alt="Add" 
-                  class="add-icon"
-                  (click)="showSubtaskDropdown()">
+                  class="add-icon">
                 
                 <div *ngIf="subtaskInputFocused" class="confirmation-icons">
                   <img 
@@ -257,15 +256,6 @@
                     class="confirm-icon"
                     (mousedown)="confirmSubtask($event)"
                     (keydown.enter)="confirmSubtask($event)">
-                </div>
-                
-                <div class="subtask-suggestions" *ngIf="showSubtaskSuggestions">
-                  <div 
-                    class="suggestion-item" 
-                    *ngFor="let suggestion of subtaskSuggestions"
-                    (click)="selectSubtaskSuggestion(suggestion)">
-                    <span class="suggestion-text">{{ suggestion }}</span>
-                  </div>
                 </div>
               </div>
               

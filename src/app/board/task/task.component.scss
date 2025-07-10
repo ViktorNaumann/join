@@ -16,6 +16,8 @@
   @include inter400-fs16();
   h1 {
     @include inter700-fs16();
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .category-flag-card {
     @include flex-center();
