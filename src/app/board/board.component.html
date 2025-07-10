@@ -105,6 +105,10 @@
             [task]="task"
             [subtaskList]="getSubtasksForTask(task.id)"
             (contacts)="getContactList($event)"
+            [openedMenuTaskId]="openedMenuTaskId"
+            (openDotsMenu)="openedMenuTaskId = $event"
+            (closeDotsMenu)="openedMenuTaskId = null"
+            (changeTaskStatus)="changeTaskStatus($event)"
           ></app-task>
           }
         </div>
@@ -155,6 +159,10 @@
             [task]="task"
             [subtaskList]="getSubtasksForTask(task.id)"
             (contacts)="getContactList($event)"
+            [openedMenuTaskId]="openedMenuTaskId"
+            (openDotsMenu)="openedMenuTaskId = $event"
+            (closeDotsMenu)="openedMenuTaskId = null"
+            (changeTaskStatus)="changeTaskStatus($event)"
           ></app-task>
           }
         </div>
@@ -207,6 +215,10 @@
             [task]="task"
             [subtaskList]="getSubtasksForTask(task.id)"
             (contacts)="getContactList($event)"
+            [openedMenuTaskId]="openedMenuTaskId"
+            (openDotsMenu)="openedMenuTaskId = $event"
+            (closeDotsMenu)="openedMenuTaskId = null"
+            (changeTaskStatus)="changeTaskStatus($event)"
           ></app-task>
           }
         </div>
@@ -246,6 +258,10 @@
             [task]="task"
             [subtaskList]="getSubtasksForTask(task.id)"
             (contacts)="getContactList($event)"
+            [openedMenuTaskId]="openedMenuTaskId"
+            (openDotsMenu)="openedMenuTaskId = $event"
+            (closeDotsMenu)="openedMenuTaskId = null"
+            (changeTaskStatus)="changeTaskStatus($event)"
           ></app-task>
           }
         </div>
