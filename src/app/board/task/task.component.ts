@@ -6,6 +6,7 @@ import {
   EventEmitter,
   HostListener,
 } from '@angular/core';
+import type { SimpleChanges } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
 import { Contact } from '../../services/contact.service';
 import { TaskService } from '../../services/task.service';
@@ -37,6 +38,11 @@ export class TaskComponent {
     status: string;
   }>();
 
+  constructor(
+    public taskService: TaskService,
+    public contactService: ContactService
+  ) {}
+
   // NEU:
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
@@ -52,22 +58,28 @@ export class TaskComponent {
     }
   }
 
+  ngOnInit(): void {
+    this.getContactList();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['subtaskList'] && this.task?.id && this.task.status !== 'await-feedback') {
+      const percentage = this.percentageCompleted(this.subtaskList);
+      if (percentage === 100) {
+        this.changeTaskStatus.emit({ taskId: this.task.id, status: 'await-feedback' });
+      }
+    }
+  }
+
   // NEU:
-  changeStatus(status: string, event: MouseEvent) {
-    event.stopPropagation();
+  changeStatus(status: string, event: MouseEvent | undefined) {
+    if(event){
+      event.stopPropagation();
+    }
     if (this.task.id) {
       this.changeTaskStatus.emit({ taskId: this.task.id, status });
       this.closeDotsMenu.emit();
     }
-  }
-
-  constructor(
-    public taskService: TaskService,
-    public contactService: ContactService
-  ) {}
-
-  ngOnInit(): void {
-    this.getContactList();
   }
 
   getCompletedSubtasksCount(subtaskList: any[]): number {
