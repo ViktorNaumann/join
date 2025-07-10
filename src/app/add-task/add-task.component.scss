@@ -537,7 +537,7 @@ $small-mobile-breakpoint: 480px;
 
   .subtask-list-container {
     // Make scrollable for both desktop and mobile - reduced height so buttons stay visible
-    max-height: 80px;
+    max-height: 60px;
     overflow-y: auto;
     
     &::-webkit-scrollbar {
