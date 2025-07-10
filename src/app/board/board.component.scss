@@ -10,13 +10,6 @@ section {
   flex-direction: column;
 }
 
-// .layout-container {
-//   height: calc(100vh - 80px);
-//   overflow: hidden;
-//   display: flex;
-//   flex-direction: column;
-// }
-
 .layout-container {
   flex: 1 1 auto;
   display: flex;
@@ -241,8 +234,6 @@ section {
 }
 
 .drop-list {
-  // height: 700px;
-  // max-height: calc(100vh - 350px);
   width: 300px;
   display: flex;
   flex-direction: column;
@@ -252,28 +243,6 @@ section {
   padding: 10px;
   margin: 10px 0;
   gap: 15px;
-
-  // Scrollbar styling (optional)
-  // scrollbar-width: thin;
-  // scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.05);
-
-  // &::-webkit-scrollbar {
-  //   width: 6px;
-  // }
-
-  // &::-webkit-scrollbar-track {
-  //   background: rgba(0, 0, 0, 0.05);
-  //   border-radius: 3px;
-  // }
-
-  // &::-webkit-scrollbar-thumb {
-  //   background: rgba(0, 0, 0, 0.2);
-  //   border-radius: 3px;
-
-  //   &:hover {
-  //     background: rgba(0, 0, 0, 0.3);
-  //   }
-  // }
 }
 
 .back-to-top {
@@ -631,6 +600,14 @@ app-task {
   .drop-list app-task {
     flex: 0 0 160px;
     width: 160px;
+  }
+
+  .cdk-drag-preview,
+  .cdk-drag-placeholder {
+    max-width: 160px !important;
+    min-width: 160px !important;
+    box-sizing: border-box;
+    overflow: hidden !important;
   }
 }
 
