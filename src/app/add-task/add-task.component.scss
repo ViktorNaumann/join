@@ -388,14 +388,16 @@ $small-mobile-breakpoint: 480px;
     @include btn-light();
     @include flex-center;
     gap: 8px;
-    flex: 1;  // Gleichmäßige Verteilung des verfügbaren Platzes
-    min-width: 0; // Erlaubt das Schrumpfen unter die Mindestbreite
+    flex: 1;
+    min-width: 0;
     height: 56px;
     border-radius: $border-radius;
     transition: box-shadow 0.2s ease;
     
-    &:hover {
+    &:hover:not(.active) {
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+      border-color: inherit !important;
+      color: inherit !important;
     }
     
     @media (max-width: $mobile-breakpoint) {
