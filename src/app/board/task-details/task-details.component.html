@@ -14,7 +14,7 @@
     </div>
     <div class="task-content">
         <h1>{{ taskService.capitalize(task.title) }}</h1>
-        <p>{{ taskService.capitalize(task.description) }}</p>
+        <p class="description">{{ taskService.capitalize(task.description) }}</p>
         <div class="date-row">
             <span>Due date:</span>
             <span>{{ convertDate(task.date) }}</span>
@@ -31,7 +31,7 @@
         <div class="assigned-to-row">
             <span>Assigned To:</span>
             <span *ngIf="contactList.length <= 0">No contact selected</span>
-            <div class="contact-list" [style.flex]="subtasks.length <= 0 ? '1' : 'unset'" [style.height]="subtasks.length <= 0 ? 'auto' : '140px'">
+            <div class="contact-list">
                 @for (contact of contactList; track $index) {
                     <div class="contact-item">
                         <div class="img-user-wrapper">
@@ -46,11 +46,11 @@
         </div>
        <div class="subtask-row">
             <span>Subtasks:</span>
-            <span *ngIf="subtasks.length <= 0">No contact selected</span>
+            <span *ngIf="subtasks.length <= 0">No subtasks defined</span>
             <div class="subtask-list">
                 @for (subtask of subtasks; track $index) {
                     <div class="subtask-item">
-                        <input [id]="'subtask-cb' + $index" type="checkbox"  (change)="onSubtaskToggle(subtask)" [(ngModel)]="subtask.isCompleted">
+                        <input class="checkbox" [id]="'subtask-cb' + $index" type="checkbox"  (change)="onSubtaskToggle(subtask)" [(ngModel)]="subtask.isCompleted">
                         <label [for]="'subtask-cb' + $index">{{ subtask.title }}</label>
                     </div>
                 }

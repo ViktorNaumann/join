@@ -415,6 +415,11 @@ app-task {
   align-items: center;
 }
 
+.task-details {
+  width: 100%;
+  @include flex-center;
+}
+
 // ===================
 // Responsive Overrides
 // ===================

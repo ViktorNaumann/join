@@ -292,6 +292,7 @@
       ></app-add-task>
     </div>
     <app-task-details
+    class="task-details"
       *ngIf="showTaskDetails && selectedTask"
       (closeTaskDetails)="closeDetailsOverlay($event)"
       (editTask)="openAddOrEditOverlay('edit', '')"
