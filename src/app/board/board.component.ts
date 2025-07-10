@@ -211,11 +211,6 @@ export class BoardComponent {
         const updatedTask: Task = { ...task, status: newStatus };
         this.taskService
           .updateTask(task.id, updatedTask)
-          .then(() => {
-            console.log(
-              `Task "${task.title}" status updated to "${newStatus}"`
-            );
-          })
           .catch((error) => {
             console.error('Error updating task status:', error);
           });
@@ -315,7 +310,6 @@ export class BoardComponent {
       if (task.id) {
         this.taskService.getSubtasks(task.id).subscribe((subtasks) => {
           this.subtasksByTaskId[task.id!] = subtasks;
-          console.log(`Subtasks für ${task.title}:`, subtasks);
         });
       }
     }
@@ -337,7 +331,6 @@ export class BoardComponent {
 
   getContactList(contactList: Contact[]) {
     this.contactList = contactList;
-    console.log('Contacts for selected task:', this.contactList);
   }
 
   onSubtaskUpdate(updatedSubtasks: Subtask[]) {

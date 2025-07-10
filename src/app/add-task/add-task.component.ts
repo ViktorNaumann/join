@@ -77,8 +77,6 @@ export class AddTaskComponent implements OnInit {
   loadContacts() {
     this.contactService.getContacts().subscribe(contacts => {
       this.contacts = contacts;
-      console.log('Contacts loaded:', this.contacts);
-      // Erst nach dem Laden der Kontakte die Edit-Task laden
       this.loadEditingTask();
     });
   }
@@ -111,12 +109,9 @@ export class AddTaskComponent implements OnInit {
     this.selectedPriority = task.priority || 'medium';
     this.selectedCategory = task.category || '';
     if (task.assignedTo && task.assignedTo.length > 0) {
-      console.log('Task assignedTo:', task.assignedTo);
-      console.log('Available contacts:', this.contacts);
       this.selectedContacts = this.contacts.filter(contact => 
         task.assignedTo.includes(contact.id)
       );
-      console.log('Selected contacts after filtering:', this.selectedContacts);
     }
     if (task.id) {
       this.taskService.getSubtasks(task.id).subscribe(subtasks => {

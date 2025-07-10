@@ -76,7 +76,6 @@ export class TaskService {
       const tasksRef = this.getTasksRef();
       const docRef = await addDoc(tasksRef, newTask);
       const fullTask: Task = { id: docRef.id, ...newTask };
-      console.log('New task added with id:', docRef.id);
       return fullTask;
     } catch (err) {
       console.error(err);
