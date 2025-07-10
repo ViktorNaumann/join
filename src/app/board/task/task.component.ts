@@ -6,7 +6,7 @@ import {
   EventEmitter,
   HostListener,
 } from '@angular/core';
-import type { SimpleChanges } from '@angular/core';
+// import type { SimpleChanges } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
 import { Contact } from '../../services/contact.service';
 import { TaskService } from '../../services/task.service';
@@ -62,14 +62,14 @@ export class TaskComponent {
     this.getContactList();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['subtaskList'] && this.task?.id && this.task.status !== 'await-feedback') {
-      const percentage = this.percentageCompleted(this.subtaskList);
-      if (percentage === 100) {
-        this.changeTaskStatus.emit({ taskId: this.task.id, status: 'await-feedback' });
-      }
-    }
-  }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   if (changes['subtaskList'] && this.task?.id && this.task.status !== 'await-feedback') {
+  //     const percentage = this.percentageCompleted(this.subtaskList);
+  //     if (percentage === 100) {
+  //       this.changeTaskStatus.emit({ taskId: this.task.id, status: 'await-feedback' });
+  //     }
+  //   }
+  // }
 
   // NEU:
   changeStatus(status: string, event: MouseEvent | undefined) {
