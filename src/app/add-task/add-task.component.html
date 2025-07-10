@@ -142,6 +142,7 @@
               <div class="dropdown-menu" *ngIf="showContactDropdown">
                 <div 
                   class="contact-item" 
+                  [class.selected]="isContactSelected(contact)"
                   *ngFor="let contact of contacts"
                   (click)="selectContact(contact)">
                   
