@@ -295,6 +295,11 @@ $small-mobile-breakpoint: 480px;
       height: 56px; 
       border-radius: $border-radius; 
       border: 1px solid #2A3647;
+      transition: box-shadow 0.2s ease;
+      
+      &:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+      }
       
       @media (max-width: $mobile-breakpoint) {
         flex: 1;
@@ -310,6 +315,11 @@ $small-mobile-breakpoint: 480px;
       width: 183px; 
       height: 56px; 
       border-radius: $border-radius;
+      transition: box-shadow 0.2s ease;
+      
+      &:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+      }
       
       @media (max-width: $mobile-breakpoint) {
         flex: 1;
@@ -382,6 +392,11 @@ $small-mobile-breakpoint: 480px;
     min-width: 0; // Erlaubt das Schrumpfen unter die Mindestbreite
     height: 56px;
     border-radius: $border-radius;
+    transition: box-shadow 0.2s ease;
+    
+    &:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    }
     
     @media (max-width: $mobile-breakpoint) {
       padding: 8px 4px;
@@ -508,15 +523,7 @@ $small-mobile-breakpoint: 480px;
     .confirm-icon { @include icon-size(14px); }
   }
 
-  .subtask-suggestions {
-    @extend %dropdown-menu-base;
-    z-index: 50; // Niedriger als Footer aber höher als Content
 
-    .suggestion-item {
-      @extend %menu-item-base;
-      .suggestion-text { @include inter400-fs16(); color: var(--text-color-dark); }
-    }
-  }
 }
 
 .subtask-container { 
