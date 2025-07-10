@@ -25,10 +25,22 @@
       *ngIf="isDotsMenuOpen"
       (click)="$event.stopPropagation()"
     >
-      <a (click)="changeStatus('to-do', $event)">To Do</a>
-      <a (click)="changeStatus('in-progress', $event)">In Progress</a>
-      <a (click)="changeStatus('await-feedback', $event)">Awaiting Feedback</a>
-      <a (click)="changeStatus('done', $event)">Done</a>
+      <a *ngIf="task.status !== 'to-do'" (click)="changeStatus('to-do', $event)"
+        >To Do</a
+      >
+      <a
+        *ngIf="task.status !== 'in-progress'"
+        (click)="changeStatus('in-progress', $event)"
+        >In Progress</a
+      >
+      <a
+        *ngIf="task.status !== 'await-feedback'"
+        (click)="changeStatus('await-feedback', $event)"
+        >Awaiting Feedback</a
+      >
+      <a *ngIf="task.status !== 'done'" (click)="changeStatus('done', $event)"
+        >Done</a
+      >
     </div>
   </div>
   <div class="task-card">

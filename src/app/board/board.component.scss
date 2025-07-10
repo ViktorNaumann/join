@@ -286,7 +286,7 @@ section {
   background: var(--background-dark, #42526e);
   color: #fff;
   border: none;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -301,7 +301,7 @@ section {
   }
 
   .arrow-up {
-    font-size: 2rem;
+    font-size: 1.4rem;
     line-height: 1;
     font-weight: bold;
     user-select: none;
