@@ -570,6 +570,10 @@ $small-mobile-breakpoint: 480px;
 .subtasks-list { 
   @include flex-column; 
   gap: 8px; 
+  height: 130px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--background-default-light) white;
 }
 
 // Simple subtask item design to match the image
