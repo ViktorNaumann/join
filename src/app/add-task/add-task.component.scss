@@ -899,7 +899,7 @@ input.error, textarea.error {
     cursor: pointer;
     width: 24px;
     height: 24px;
-    background-image: url('/assets/img/icons/checkbox.png');
+    background-image: url('./../../../public//assets/img/icons/checkbox.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -908,7 +908,7 @@ input.error, textarea.error {
   }
 
   .subtask-checkbox:checked + .checkbox-label {
-    background-image: url('/assets/img/icons/checkbox-checked.png');
+    background-image: url('./../../../public//assets/img/icons/checkbox-checked.png');
   }
 
   .subtask-text-simple.completed {
