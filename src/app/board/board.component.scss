@@ -309,7 +309,8 @@ app-task {
   // Aktiv beim Drücken (nicht ziehen):
   &:active:not(.cdk-drag-dragging) {
     transform: rotate(5deg);
-    transition: transform 0.3s ease 250ms; // Delay simuliert CDK-Delay
+    // Delay simuliert CDK-Delay
+    transition: transform 0.3s ease 250ms;
     cursor: grabbing !important;
 
     // Zusätzliche Spezifität für Cursor
@@ -444,6 +445,7 @@ app-task {
   section {
     height: calc(100dvh - 180px);
   }
+
   .task-columns {
     flex-wrap: nowrap;
     gap: 0;
@@ -482,6 +484,12 @@ app-task {
   .back-to-top {
     bottom: 90px;
     right: 12px;
+  }
+
+  app-task {
+    &:active:not(.cdk-drag-dragging) {
+      transition: transform 0.3s ease 0ms; // Kein Delay auf Desktop
+    }
   }
 }
 

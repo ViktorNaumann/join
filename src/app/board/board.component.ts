@@ -202,6 +202,11 @@ export class BoardComponent {
   awaitfeedback: Task[] = [];
   done: Task[] = [];
 
+  // NEU:
+  getDragDelay(): number {
+    return window.innerWidth < 1000 ? 250 : 0;
+  }
+
   drop(event: CdkDragDrop<Task[]>) {
     const task = event.item.data as Task; // Task-Daten aus dem Drag-Event
     let newStatus: Task['status'];

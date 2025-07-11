@@ -99,7 +99,7 @@
           task)) {
           <app-task
             [cdkDragData]="task"
-            [cdkDragStartDelay]="250"
+            [cdkDragStartDelay]="getDragDelay()"
             cdkDrag
             (taskSelected)="openTaskDetail($event)"
             [task]="task"
@@ -153,7 +153,7 @@
           trackByTaskId($index, task)) {
           <app-task
             [cdkDragData]="task"
-            [cdkDragStartDelay]="250"
+            [cdkDragStartDelay]="getDragDelay()"
             cdkDrag
             (taskSelected)="openTaskDetail($event)"
             [task]="task"
@@ -209,7 +209,7 @@
           } @for (task of getFilteredTasks('await-feedback'); track task.id) {
           <app-task
             [cdkDragData]="task"
-            [cdkDragStartDelay]="250"
+            [cdkDragStartDelay]="getDragDelay()"
             cdkDrag
             (taskSelected)="openTaskDetail($event)"
             [task]="task"
@@ -252,7 +252,7 @@
           task)) {
           <app-task
             [cdkDragData]="task"
-            [cdkDragStartDelay]="250"
+            [cdkDragStartDelay]="getDragDelay()"
             cdkDrag
             (taskSelected)="openTaskDetail($event)"
             [task]="task"
@@ -270,7 +270,7 @@
   </div>
 
   <button class="back-to-top" (click)="scrollToTop()" *ngIf="showBackToTop">
-     <span class="arrow-up">↑</span>
+    <span class="arrow-up">↑</span>
   </button>
 </section>
 
@@ -292,7 +292,7 @@
       ></app-add-task>
     </div>
     <app-task-details
-    class="task-details"
+      class="task-details"
       *ngIf="showTaskDetails && selectedTask"
       (closeTaskDetails)="closeDetailsOverlay($event)"
       (editTask)="openAddOrEditOverlay('edit', '')"
