@@ -61,6 +61,12 @@
   font-size: clamp(37px, calc(0.89vw + 33px), 47px);
 }
 
+@mixin inter500-fs27 {
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: clamp(18px, calc(0.8vw + 15.5px), 27px);
+}
+
 @mixin inter700-fs61 {
   font-family: "Inter";
   font-weight: 700;
@@ -71,6 +77,12 @@
   font-family: "Inter";
   font-weight: 700;
   font-size: clamp(37px, calc(0.89vw + 33px), 47px);
+}
+
+@mixin inter700-fs27 {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: clamp(18px, calc(0.8vw + 15.5px), 27px);
 }
 
 @mixin inter700-fs21 {
