@@ -1,6 +1,10 @@
 @import "./../../../styles.scss";
 
 
+.dark-logo-wrapper {
+    padding: 32px;
+}
+
 .signup-frame {
   background-color: var(--background-light);
   border-radius: 20px;
@@ -12,7 +16,7 @@
   flex-direction: column;
   align-items: center;
   gap: clamp(24px, 2.5vh, 36px);
-  margin-top: 128px;
+  margin-top: 64px;
 }  
 
 .signup-header {

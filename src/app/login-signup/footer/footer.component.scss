@@ -6,4 +6,9 @@
     @include flex-center();
     gap: 3rem;
     margin-top: 2rem;
+
+    a {
+        text-decoration: none;
+        color: var( --text-color-medium);
+    }
 }

@@ -6,6 +6,11 @@
     align-items: flex-start;
     padding: 48px;
     max-width: 1440px;
+
+    span {
+        text-decoration: none;
+        color: var(--text-color-main);
+    }
 }
 
 .wanna-signup-wrapper {
@@ -17,13 +22,14 @@
     .btn-signup {
         cursor: pointer;
         height: 36px;
-        border-radius: 8px;
+        border-radius: 6px;
         border: unset;
         min-width: 80px;
         transition: background-color 0.2s ease;
         justify-content: center;
         @include btn-dark();
         @include inter400-fs14();
+        padding: 8px 12px;
     }
 
 }
