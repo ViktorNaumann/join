@@ -28,6 +28,7 @@ export class TaskComponent {
   @Output() taskSelected = new EventEmitter<Task>();
   @Output() contacts = new EventEmitter<Contact[]>();
   selectedTask?: Task;
+  // taskCompleted:boolean = false;
 
   // NEU:
   @Input() openedMenuTaskId: string | null = null;
@@ -63,10 +64,11 @@ export class TaskComponent {
   }
 
   // ngOnChanges(changes: SimpleChanges): void {
-  //   if (changes['subtaskList'] && this.task?.id && this.task.status !== 'await-feedback') {
+  //   if (changes['subtaskList'] && this.task?.id && !this.taskCompleted && this.task.status !== 'await-feedback' && this.task.status !== 'done') {
   //     const percentage = this.percentageCompleted(this.subtaskList);
   //     if (percentage === 100) {
   //       this.changeTaskStatus.emit({ taskId: this.task.id, status: 'await-feedback' });
+  //       this.taskCompleted = true;
   //     }
   //   }
   // }
@@ -90,7 +92,7 @@ export class TaskComponent {
 
   percentageCompleted(subtaskList: Subtask[]): number {
     if (!subtaskList || subtaskList.length === 0) return 0;
-    const completed = this.getCompletedSubtasksCount(subtaskList);
+    let completed = this.getCompletedSubtasksCount(subtaskList);
     return Math.round((completed / subtaskList.length) * 100);
   }
 
