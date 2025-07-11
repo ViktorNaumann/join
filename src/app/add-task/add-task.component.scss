@@ -597,6 +597,40 @@ $small-mobile-breakpoint: 480px;
     flex: 1;
   }
   
+  .subtask-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    
+    .subtask-text-simple {
+      flex: 1;
+    }
+  }
+  
+  .subtask-edit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    
+    .subtask-edit-input {
+      @include inter400-fs16();
+      flex: 1;
+      padding: 4px 8px;
+      border: 1px solid var(--accent-primary-color);
+      border-radius: 4px;
+      background-color: var(--background-light);
+      color: var(--text-color-dark);
+      
+      &:focus {
+        outline: none;
+        border-color: var(--accent-primary-color);
+        box-shadow: 0 0 0 2px rgba(42, 54, 71, 0.1);
+      }
+    }
+  }
+  
   .subtask-actions {
     display: flex;
     gap: 8px;
@@ -623,6 +657,11 @@ $small-mobile-breakpoint: 480px;
     .subtask-actions {
       opacity: 1;
     }
+  }
+  
+  // Wenn wir editieren, sollen die Actions immer sichtbar sein
+  .subtask-edit .subtask-actions {
+    opacity: 1;
   }
 }
 
