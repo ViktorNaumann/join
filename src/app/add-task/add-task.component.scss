@@ -538,10 +538,10 @@ $small-mobile-breakpoint: 480px;
 
   .subtask-list-container {
     // Make scrollable for both desktop and mobile - reduced height so buttons stay visible
-    max-height: 60px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--background-default-light) white;
+    max-height: fit-content;
+    // overflow-y: auto;
+    // scrollbar-width: thin;
+    // scrollbar-color: var(--background-default-light) white;
     
     @media (max-width: $mobile-breakpoint) {
       max-height: none; // Keine Begrenzung auf mobilen Geräten
@@ -570,7 +570,7 @@ $small-mobile-breakpoint: 480px;
 .subtasks-list { 
   @include flex-column; 
   gap: 8px; 
-  height: 130px;
+  height: 60px;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--background-default-light) white;
