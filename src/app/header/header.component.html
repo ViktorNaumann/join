@@ -14,13 +14,13 @@
         <img class="help-icon" src="assets/img/icons/help.png" alt="" />
       </div>
 
-      <div class="user-profile" (click)="toggleMenu()">
+      <div class="user-profile" (click)="toggleMenu($event)">
         <p>SM</p>
         <div class="user-menu-links" *ngIf="menuOpen" @slideInOut>
           <a class="mobile-help-link" routerLink="/help">Help</a>
           <a routerLink="/privacy-policy">Privacy Policy</a>
           <a routerLink="/legal-notice">Legal notice</a>
-          <a>Log out</a>
+          <a routerLink="/">Log out</a>
        </div>
       </div>
     </div>
