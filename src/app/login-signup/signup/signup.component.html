@@ -1,0 +1,40 @@
+<section class="signup-frame">
+    <div class="signup-header">
+        <button class="btn-back">
+            <img src="assets/img/icons/arrow-back.png" alt="Back Icon">
+        </button>
+        <h2>Sign up</h2>
+    </div>
+    <div class="form-group-wrapper">
+        <div class="form-group">
+            <label for="name"></label>
+            <input id="name" type="text" placeholder="Name" formControlName="name">
+            <img class="input-icon" src="assets/img/icons/person.png" alt="Person Icon">
+        </div>
+        <div class="form-group">
+            <label for="email"></label>
+            <input id="email" type="text" placeholder="Email" formControlName="email">
+            <img class="input-icon" src="assets/img/icons/mail.png" alt="Mail Icon">
+        </div>
+        <div class="form-group">
+            <label for="password"></label>
+            <input id="password" type="password" placeholder="Password" confirmPassword="password" confirmPassword="password">
+            <img class="input-icon" src="assets/img/icons/lock.png" alt="Lock Icon">
+        </div>
+        <div class="form-group">
+            <label for="password"></label>
+            <input id="confirmPassword" type="password" placeholder="Confirm Password" formControlName="confirmPassword">
+            <img class="input-icon" src="assets/img/icons/lock.png" alt="Lock Icon">
+        </div>
+        <label class="checkbox-label">
+            <input type="checkbox" />
+            I accept the <span class="highlight">Privacy policy</span>
+        </label>
+    </div>
+    <div class="btn-wrapper">
+        <button class="btn-signup">Sign up</button>
+    </div>
+</section>
+
+<app-footer></app-footer>
+

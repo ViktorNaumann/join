@@ -1,0 +1,151 @@
+@import "./../../../styles.scss";
+
+
+.signup-frame {
+  background-color: var(--background-light);
+  border-radius: 20px;
+  padding: clamp(32px, calc(1.8vw + 20px), 64px);
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.05);
+  width: clamp(440px, 5vw + 440px, 560px);
+  margin: 0 auto;
+  @include flex-center;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(24px, 2.5vh, 36px);
+  margin-top: 128px;
+}  
+
+.signup-header {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .btn-back {
+    @include btn();
+    position: absolute;
+    left: 0;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+    h2 {
+        @include inter700-fs47;
+        color: var(--text-color-main);
+        position: relative;
+        margin-bottom: 0;
+
+        &::after {
+        content: "";
+        display: block;
+        width: 128px;
+        height: 3px;
+        background-color: var(--accent-primary-color);
+        margin: 12px auto 0;
+        border-radius: 3px;
+        }
+    }
+}    
+
+
+.form-group-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+}
+
+.form-group {
+    @include form-group();
+    background-color: var(--background-light);
+    position: relative;
+
+    input {
+        width: 100%;
+        background-color: transparent;
+        color: var(--text-color-main);
+        padding-right: 28px;
+        @include inter400-fs20();
+        height: 16px;
+        font-size: 16px;
+    }
+
+    input::placeholder {
+        color: var(--text-color-medium);
+        opacity: 1; 
+    }
+
+    .input-icon {
+        position: absolute;
+        right: clamp(12px, 2vw, 18px);
+        top: 50%;
+        transform: translateY(-50%);
+        height: 20px;
+        width: 20px;
+        opacity: 0.6;
+    }
+
+}
+
+.checkbox-label {
+    @include flex-center;
+    gap: 8px;
+    margin: 8px;
+    margin-top: 16px;
+    width: 100%;
+    @include inter400-fs14();
+    color: var(--text-color-medium);
+    cursor: pointer;
+    position: relative;
+
+    input[type="checkbox"] {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        background-image: url("/assets/img/icons/checkbox.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        border: none;
+        margin: 0;
+        padding: 0;
+        flex-shrink: 0;
+    }
+
+    input[type="checkbox"]:checked {
+        background-image: url("/assets/img/icons/checkbox-checked.png");
+    }
+
+    .highlight {
+        color: var(--accent-primary-color);
+        text-decoration: none;
+        cursor: pointer;
+    }
+}
+
+.btn-wrapper {
+    width: 100%;
+    @include flex-center;
+}
+
+.btn-signup {
+    cursor: pointer;
+    height: 44px;
+    border-radius: 8px;
+    border: unset;
+    min-width: 120px;
+    transition: background-color 0.2s ease;
+    justify-content: center;
+    @include btn-dark();
+}
+
+.btn-signup:hover {
+    background-color: #29abe2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}

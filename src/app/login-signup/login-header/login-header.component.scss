@@ -1,0 +1,29 @@
+@import "./../../../styles.scss";
+
+.login-header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 48px;
+    max-width: 1440px;
+}
+
+.wanna-signup-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    @include inter400-fs16();
+
+    .btn-signup {
+        cursor: pointer;
+        height: 36px;
+        border-radius: 8px;
+        border: unset;
+        min-width: 80px;
+        transition: background-color 0.2s ease;
+        justify-content: center;
+        @include btn-dark();
+        @include inter400-fs14();
+    }
+
+}

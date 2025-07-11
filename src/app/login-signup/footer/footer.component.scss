@@ -1,0 +1,9 @@
+@import "./../../../styles.scss";
+
+.link-wrapper {
+    color: var( --text-color-medium);
+    @include inter400-fs16();
+    @include flex-center();
+    gap: 3rem;
+    margin-top: 2rem;
+}
