@@ -2,20 +2,58 @@
   <div class="wrapper-top">
     <p
       class="category-flag-card"
-      [style.background-color]="task.category == 'user story' ? '#0038ff' : '#1fd7c1'"
+      [style.background-color]="
+        task.category == 'user story' ? '#0038ff' : '#1fd7c1'
+      "
     >
       {{ taskService.capitalize(task.category) }}
     </p>
+
+    <button
+      class="dots-menu-btn"
+      type="button"
+      (click)="openDotsMenuHandler($event)"
+      aria-label="Mehr Optionen"
+    >
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </button>
+
+    <div
+      class="dots-menu-overlay"
+      *ngIf="isDotsMenuOpen"
+      (click)="$event.stopPropagation()"
+    >
+      <a *ngIf="task.status !== 'to-do'" (click)="changeStatus('to-do', $event)"
+        >To Do</a
+      >
+      <a
+        *ngIf="task.status !== 'in-progress'"
+        (click)="changeStatus('in-progress', $event)"
+        >In Progress</a
+      >
+      <a
+        *ngIf="task.status !== 'await-feedback'"
+        (click)="changeStatus('await-feedback', $event)"
+        >Awaiting Feedback</a
+      >
+      <a *ngIf="task.status !== 'done'" (click)="changeStatus('done', $event)"
+        >Done</a
+      >
+    </div>
   </div>
   <div class="task-card">
-    <h1>{{ taskService.capitalize(task.title) }}</h1>
-    <p class="task-description truncated see-more">
+    <h1 class="see-more">{{ taskService.capitalize(task.title) }}</h1>
+    <p class="task-description truncated">
       {{ taskService.capitalize(task.description) }}
       <span class="see-more">…</span>
     </p>
     <div
       class="subtask-wrapper"
-      [style.visibility]="subtaskList && subtaskList.length > 0 ? 'visible' : 'hidden'"
+      [style.visibility]="
+        subtaskList && subtaskList.length > 0 ? 'visible' : 'hidden'
+      "
     >
       <div class="subtask-bar-default">
         <div

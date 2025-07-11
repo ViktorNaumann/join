@@ -142,6 +142,7 @@
               <div class="dropdown-menu" *ngIf="showContactDropdown">
                 <div 
                   class="contact-item" 
+                  [class.selected]="isContactSelected(contact)"
                   *ngFor="let contact of contacts"
                   (click)="selectContact(contact)">
                   
@@ -171,10 +172,17 @@
             <div class="selected-contacts" *ngIf="selectedContacts.length > 0">
               <div 
                 class="selected-contact-avatar"
-                *ngFor="let contact of selectedContacts"
+                *ngFor="let contact of selectedContacts.slice(0, 6)"
                 [style.background-color]="getContactColor(contact)"
                 [title]="contact.name">
                 {{ getContactInitials(contact) }}
+              </div>
+              <div 
+                class="selected-contact-avatar"
+                *ngIf="selectedContacts.length > 6"
+                [style.background-color]="'#d1d1d1'"
+                [title]="getRemainingContactNames(selectedContacts.slice(6))">
+                +{{ selectedContacts.length - 6 }}
               </div>
             </div>
           </div>
@@ -223,8 +231,9 @@
           
           <div class="form-group">
             <label for="subtasks">Subtasks</label>
-            <div class="subtask-container">
-              <div class="subtask-input" [class.open]="showSubtaskSuggestions" [class.confirmation]="showSubtaskConfirmation">
+            <!-- Subtask Input Container - always visible on mobile -->
+            <div class="subtask-input-container">
+              <div class="subtask-input" [class.confirmation]="showSubtaskConfirmation">
                 <input 
                   type="text" 
                   id="subtasks" 
@@ -232,7 +241,6 @@
                   placeholder="Add new subtask"
                   [(ngModel)]="subtaskInput"
                   (click)="onSubtaskInputClick()"
-                  (click)="showSubtaskConfirmation ? confirmSubtask($event) : (subtaskInput.trim() ? showSubtaskConfirmation = true : showSubtaskDropdown())"
                   (keydown.enter)="onSubtaskEnter($event)"
                   [readonly]="showSubtaskConfirmation"
                   (focus)="subtaskInputFocused = true"
@@ -242,8 +250,7 @@
                   *ngIf="!showSubtaskConfirmation && !subtaskInputFocused"
                   src="assets/img/icons/add.png" 
                   alt="Add" 
-                  class="add-icon"
-                  (click)="showSubtaskDropdown()">
+                  class="add-icon">
                 
                 <div *ngIf="subtaskInputFocused" class="confirmation-icons">
                   <img 
@@ -258,79 +265,75 @@
                     (mousedown)="confirmSubtask($event)"
                     (keydown.enter)="confirmSubtask($event)">
                 </div>
-                
-                <div class="subtask-suggestions" *ngIf="showSubtaskSuggestions">
-                  <div 
-                    class="suggestion-item" 
-                    *ngFor="let suggestion of subtaskSuggestions"
-                    (click)="selectSubtaskSuggestion(suggestion)">
-                    <span class="suggestion-text">{{ suggestion }}</span>
-                  </div>
-                </div>
               </div>
-              
-              <div class="subtasks-list" *ngIf="subtasks.length > 0">
-                <div class="subtask-item" *ngFor="let subtask of subtasks">
-                  <div class="subtask-content">
-                    <img 
-                      *ngIf="subtask.completed"
-                      src="assets/img/icons/checkbox-checked.png" 
-                      alt="Completed"
-                      class="subtask-checkbox"
-                      (click)="toggleSubtaskCompletion(subtask.id)">
-                    <img 
-                      *ngIf="!subtask.completed"
-                      src="assets/img/icons/checkbox.png" 
-                      alt="Not completed"
-                      class="subtask-checkbox"
-                      (click)="toggleSubtaskCompletion(subtask.id)">
-                    
-                    <!-- Normal view mode -->
-                    <span 
-                      *ngIf="editingSubtaskId !== subtask.id"
-                      class="subtask-text"
-                      [class.completed]="subtask.completed">
-                      {{ subtask.text }}
-                    </span>
-                
+            </div>
+            
+            <!-- Subtask List Container - scrollable on mobile -->
+            <div class="subtask-list-container" *ngIf="subtasks.length > 0">
+              <div class="subtasks-list">
+                <div class="subtask-item-simple" *ngFor="let subtask of subtasks">
+                  <!-- Normal view -->
+                  <div *ngIf="editingSubtaskId !== subtask.id" class="subtask-display">
+                    <!-- Show checkbox only in edit mode -->
+                    <div *ngIf="isEditingMode" class="subtask-checkbox-container">
+                      <input 
+                        type="checkbox" 
+                        class="subtask-checkbox"
+                        [checked]="subtask.completed"
+                        (change)="toggleSubtaskCompletion(subtask.id)"
+                        [id]="'subtask-' + subtask.id">
+                      <label [for]="'subtask-' + subtask.id" class="checkbox-label"></label>
+                    </div>
+                    <!-- Show bullet only in add mode -->
+                    <span *ngIf="!isEditingMode" class="bullet">•</span>
+                    <span class="subtask-text-simple" [class.completed]="isEditingMode && subtask.completed">{{ subtask.text }}</span>
+                    <div class="subtask-actions">
+                      <img 
+                        src="assets/img/icons/edit-single.png" 
+                        alt="Edit"
+                        class="action-icon"
+                        (click)="editSubtaskPrompt(subtask.id, subtask.text)">
+                      <img 
+                        src="assets/img/icons/delete.png" 
+                        alt="Delete"
+                        class="action-icon"
+                        (click)="deleteSubtask(subtask.id)">
+                    </div>
+                  </div>
+                  
+                  <!-- Edit view -->
+                  <div *ngIf="editingSubtaskId === subtask.id" class="subtask-edit">
+                    <!-- Show checkbox only in edit mode -->
+                    <div *ngIf="isEditingMode" class="subtask-checkbox-container">
+                      <input 
+                        type="checkbox" 
+                        class="subtask-checkbox"
+                        [checked]="subtask.completed"
+                        (change)="toggleSubtaskCompletion(subtask.id)"
+                        [id]="'subtask-edit-' + subtask.id">
+                      <label [for]="'subtask-edit-' + subtask.id" class="checkbox-label"></label>
+                    </div>
+                    <!-- Show bullet only in add mode -->
+                    <span *ngIf="!isEditingMode" class="bullet">•</span>
                     <input 
-                      *ngIf="editingSubtaskId === subtask.id"
-                      type="text"
+                      type="text" 
                       class="subtask-edit-input"
                       [(ngModel)]="editingSubtaskText"
                       [ngModelOptions]="{standalone: true}"
                       (keydown)="onSubtaskEditKeydown($event)"
                       #editInput>
-                  </div>
-                  
-                  <div class="subtask-actions">
-                    <img 
-                      *ngIf="editingSubtaskId !== subtask.id"
-                      src="assets/img/icons/edit-single.png" 
-                      alt="Edit"
-                      class="action-icon"
-                      (click)="editSubtaskPrompt(subtask.id, subtask.text)">
-                    
-                    <img 
-                      *ngIf="editingSubtaskId === subtask.id"
-                      src="assets/img/icons/check-dark.png" 
-                      alt="Save"
-                      class="action-icon save-icon"
-                      (click)="saveSubtaskEdit()">
-                    
-                    <img 
-                      *ngIf="editingSubtaskId === subtask.id"
-                      src="assets/img/icons/close.png" 
-                      alt="Cancel"
-                      class="action-icon cancel-icon"
-                      (click)="cancelSubtaskEdit()">
-                    
-                    <img 
-                      *ngIf="editingSubtaskId !== subtask.id"
-                      src="assets/img/icons/delete.png" 
-                      alt="Delete"
-                      class="action-icon"
-                      (click)="deleteSubtask(subtask.id)">
+                    <div class="subtask-actions">
+                      <img 
+                        src="assets/img/icons/check-dark.png" 
+                        alt="Save"
+                        class="action-icon"
+                        (click)="saveSubtaskEdit()">
+                      <img 
+                        src="assets/img/icons/close.png" 
+                        alt="Cancel"
+                        class="action-icon"
+                        (click)="cancelSubtaskEdit()">
+                    </div>
                   </div>
                 </div>
               </div>

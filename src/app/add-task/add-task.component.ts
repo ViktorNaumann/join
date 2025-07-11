@@ -22,7 +22,6 @@ export class AddTaskComponent implements OnInit {
   selectedContacts: Contact[] = [];
   showContactDropdown: boolean = false;
   showCategoryDropdown: boolean = false;
-  showSubtaskSuggestions: boolean = false;
   showSubtaskConfirmation: boolean = false;
   subtaskInputFocused = false;
   selectedCategory: string = '';
@@ -48,11 +47,6 @@ export class AddTaskComponent implements OnInit {
     dueDate: ''
   };
   
-  subtaskSuggestions = [
-    'Contact Form',
-    'Write legal Import'
-  ];
-  
   categories = [
     { value: 'technical', label: 'Technical Task', color: '#1FD7C1' },
     { value: 'user story', label: 'User Story', color: '#0038FF' }
@@ -77,8 +71,6 @@ export class AddTaskComponent implements OnInit {
   loadContacts() {
     this.contactService.getContacts().subscribe(contacts => {
       this.contacts = contacts;
-      console.log('Contacts loaded:', this.contacts);
-      // Erst nach dem Laden der Kontakte die Edit-Task laden
       this.loadEditingTask();
     });
   }
@@ -111,12 +103,9 @@ export class AddTaskComponent implements OnInit {
     this.selectedPriority = task.priority || 'medium';
     this.selectedCategory = task.category || '';
     if (task.assignedTo && task.assignedTo.length > 0) {
-      console.log('Task assignedTo:', task.assignedTo);
-      console.log('Available contacts:', this.contacts);
       this.selectedContacts = this.contacts.filter(contact => 
         task.assignedTo.includes(contact.id)
       );
-      console.log('Selected contacts after filtering:', this.selectedContacts);
     }
     if (task.id) {
       this.taskService.getSubtasks(task.id).subscribe(subtasks => {
@@ -137,7 +126,6 @@ export class AddTaskComponent implements OnInit {
     if (!target.closest('.dropdown') && !target.closest('.subtask-input')) {
       this.showContactDropdown = false;
       this.showCategoryDropdown = false;
-      this.showSubtaskSuggestions = false;
     }
   }
 
@@ -148,28 +136,16 @@ export class AddTaskComponent implements OnInit {
   toggleContactDropdown() {
     this.showContactDropdown = !this.showContactDropdown;
     this.showCategoryDropdown = false;
-    this.showSubtaskSuggestions = false;
   }
 
   toggleCategoryDropdown() {
     this.showCategoryDropdown = !this.showCategoryDropdown;
     this.showContactDropdown = false;
-    this.showSubtaskSuggestions = false;
-  }
-
-  showSubtaskDropdown() {
-    if (this.showSubtaskConfirmation) {
-      return;
-    }
-    this.showSubtaskSuggestions = true;
-    this.showContactDropdown = false;
-    this.showCategoryDropdown = false;
   }
 
   onSubtaskInputClick() {
     if (!this.showSubtaskConfirmation) {
       this.subtaskInput = '';
-      this.showSubtaskDropdown();
     }
   }
 
@@ -178,12 +154,6 @@ export class AddTaskComponent implements OnInit {
     if (this.subtaskInput && this.subtaskInput.trim()) {
       this.addSubtask();
     }
-  }
-
-  selectSubtaskSuggestion(suggestion: string) {
-    this.subtaskInput = suggestion;
-    this.showSubtaskSuggestions = false;
-    this.showSubtaskConfirmation = true;
   }
 
   confirmSubtask(event: Event) {
@@ -198,7 +168,6 @@ export class AddTaskComponent implements OnInit {
   cancelSubtask() {
     this.subtaskInput = '';
     this.showSubtaskConfirmation = false;
-    this.showSubtaskSuggestions = false;
   }
 
   selectContact(contact: Contact) {
@@ -248,6 +217,10 @@ export class AddTaskComponent implements OnInit {
     return this.contactService.getContactColor(contact.name);
   }
 
+  getRemainingContactNames(remainingContacts: Contact[]): string {
+    return remainingContacts.map((contact) => contact.name).join(', ');
+  }
+
   addSubtask() {
     if (this.subtaskInput && this.subtaskInput.trim()) {
       const newSubtask = {
@@ -258,7 +231,6 @@ export class AddTaskComponent implements OnInit {
       this.subtasks.push(newSubtask);
       this.subtaskInput = '';
       this.showSubtaskConfirmation = false;
-      this.showSubtaskSuggestions = false;
     }
   }
 
@@ -268,7 +240,7 @@ export class AddTaskComponent implements OnInit {
 
   editSubtask(id: string | number, newText: string) {
     const subtask = this.subtasks.find(s => s.id === id);
-    if (subtask && newText.trim()) {
+    if (subtask) {
       subtask.text = newText.trim();
     }
   }
@@ -287,10 +259,10 @@ export class AddTaskComponent implements OnInit {
   }
 
   saveSubtaskEdit() {
-    if (this.editingSubtaskId !== null && this.editingSubtaskText.trim()) {
-      this.editSubtask(this.editingSubtaskId, this.editingSubtaskText.trim());
-      this.cancelSubtaskEdit();
-    } else if (this.editingSubtaskId !== null && !this.editingSubtaskText.trim()) {
+    if (this.editingSubtaskId !== null) {
+      if (this.editingSubtaskText && this.editingSubtaskText.trim()) {
+        this.editSubtask(this.editingSubtaskId, this.editingSubtaskText.trim());
+      }
       this.cancelSubtaskEdit();
     }
   }
@@ -331,7 +303,6 @@ export class AddTaskComponent implements OnInit {
     this.nextSubtaskId = 1;
     this.showContactDropdown = false;
     this.showCategoryDropdown = false;
-    this.showSubtaskSuggestions = false;
     this.showSubtaskConfirmation = false;
     this.isCreatingTask = false;
     this.showTitleError = false;

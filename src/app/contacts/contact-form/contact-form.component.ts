@@ -79,7 +79,6 @@ getDataToEdit = (contact: Contact | null) => {
 
   clearInputs() {
     this.contactForm.reset();
-    console.log('Inputs cleared')
   }
 
   deleteContact() {
@@ -87,6 +86,5 @@ getDataToEdit = (contact: Contact | null) => {
       this.contactService.deleteContact(this.contactToEdit?.id);
       this.onClose();
     }
-    console.log('Deleted contact with', this.contactToEdit?.id);
   }
 }

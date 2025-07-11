@@ -1,4 +1,11 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  HostListener,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import {
   trigger,
@@ -80,7 +87,7 @@ import { Router } from '@angular/router';
 })
 export class BoardComponent {
   animationDirection: 'right' | 'bottom' = 'right';
-  backgroundVisible = false; 
+  backgroundVisible = false;
   overlayVisible = false;
   showTaskDetails = false;
   showAddOrEditTask: boolean = false;
@@ -94,8 +101,31 @@ export class BoardComponent {
   contactList: Contact[] = [];
   subtasksByTaskId: { [taskId: string]: Subtask[] } = {};
   setTaskStatus: string = 'to-do';
+  showBackToTop = false;
+  openedMenuTaskId: string | null = null;
 
-  constructor(private taskService: TaskService, private router: Router, private contactService: ContactService) {
+  constructor(
+    private taskService: TaskService,
+    private router: Router,
+    private contactService: ContactService
+  ) {}
+
+  @ViewChild('scrollSection') scrollSection!: ElementRef<HTMLElement>;
+
+  ngAfterViewInit() {
+    // Optional: falls du initial prüfen willst
+    this.scrollSection.nativeElement.addEventListener('scroll', () =>
+      this.onSectionScroll()
+    );
+  }
+
+  onSectionScroll() {
+    const scrollTop = this.scrollSection.nativeElement.scrollTop;
+    this.showBackToTop = scrollTop > 300;
+  }
+
+  scrollToTop() {
+    this.scrollSection.nativeElement.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   ngOnInit(): void {
@@ -113,7 +143,9 @@ export class BoardComponent {
       done: this.done,
     };
     const tasksForStatus = statusArrayMap[status] || [];
-    if (!this.searchTerm.trim()) { return tasksForStatus }
+    if (!this.searchTerm.trim()) {
+      return tasksForStatus;
+    }
     const searchLower = this.searchTerm.toLowerCase();
     return tasksForStatus.filter(
       (task) =>
@@ -122,17 +154,11 @@ export class BoardComponent {
     );
   }
 
-  // Erweiterte Sortier-Methode mit verschiedenen Optionen
   private sortTasksByDueDate(tasks: Task[], ascending: boolean = true): Task[] {
-    return tasks.sort((a, b) => {
+    return [...tasks].sort((a, b) => {
       const dateA = this.getDateValue(a.date);
       const dateB = this.getDateValue(b.date);
-
-      if (ascending) {
-        return dateA - dateB; // Nächstes Datum zuerst
-      } else {
-        return dateB - dateA; // Spätestes Datum zuerst
-      }
+      return ascending ? dateA - dateB : dateB - dateA;
     });
   }
 
@@ -176,6 +202,11 @@ export class BoardComponent {
   awaitfeedback: Task[] = [];
   done: Task[] = [];
 
+  // NEU:
+  getDragDelay(): number {
+    return window.innerWidth < 1000 ? 250 : 0;
+  }
+
   drop(event: CdkDragDrop<Task[]>) {
     const task = event.item.data as Task; // Task-Daten aus dem Drag-Event
     let newStatus: Task['status'];
@@ -193,50 +224,43 @@ export class BoardComponent {
       return; // Fallback, falls Container unbekannt
     }
 
+    // NEU:
     if (event.previousContainer === event.container) {
+      // Innerhalb einer Liste verschieben
       moveItemInArray(
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
     } else {
+      // Zwischen Listen verschieben
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
-
+      // Status im Task-Objekt und Backend aktualisieren
       if (task.id && task.status !== newStatus) {
         const updatedTask: Task = { ...task, status: newStatus };
-        this.taskService
-          .updateTask(task.id, updatedTask)
-          .then(() => {
-            console.log(
-              `Task "${task.title}" status updated to "${newStatus}"`
-            );
-          })
-          .catch((error) => {
-            console.error('Error updating task status:', error);
-          });
+        this.taskService.updateTask(task.id, updatedTask).catch((error) => {
+          console.error('Error updating task status:', error);
+        });
       }
     }
 
-    // Nach dem Drop die betroffenen Arrays neu sortieren
-    if (event.previousContainer !== event.container) {
-      // Arrays neu sortieren nach Status-Änderung
-      this.todo = this.sortTasksByDueDate(this.todo);
-      this.inprogress = this.sortTasksByDueDate(this.inprogress);
-      this.awaitfeedback = this.sortTasksByDueDate(this.awaitfeedback);
-      this.done = this.sortTasksByDueDate(this.done);
-    }
+    // Nach jedem Drop sortieren
+    this.todo = this.sortTasksByDueDate(this.todo);
+    this.inprogress = this.sortTasksByDueDate(this.inprogress);
+    this.awaitfeedback = this.sortTasksByDueDate(this.awaitfeedback);
+    this.done = this.sortTasksByDueDate(this.done);
   }
 
   saveTaskStatus(status: string) {
     this.setTaskStatus = status;
   }
 
-  openAddOrEditOverlay(event:string, status:string) {
+  openAddOrEditOverlay(event: string, status: string) {
     const isSmallScreen = window.innerWidth < 1000;
     if (event === 'open' || event === 'edit') {
       if (isSmallScreen) {
@@ -245,26 +269,26 @@ export class BoardComponent {
         this.showTaskDetails = false;
         this.showAddOrEditTask = true;
       }
-    } 
+    }
     this.overlayVisible = true;
   }
 
-   openTaskDetail(selectedTask: Task) {
+  openTaskDetail(selectedTask: Task) {
     this.selectedTask = selectedTask;
     this.showTaskDetails = true;
     this.showAddOrEditTask = false;
     this.overlayVisible = true;
-}
+  }
 
   closeDetailsOverlay(event: string) {
-   if(event === 'close' || 'added') {
-    this.overlayVisible = false;
-    this.backgroundVisible = false;
-    this.showTaskDetails = false;
-    this.showAddOrEditTask = false;
-    this.selectedTask = undefined;
-    this.taskService.clearEditingTask();
-   }
+    if (event === 'close' || 'added') {
+      this.overlayVisible = false;
+      this.backgroundVisible = false;
+      this.showTaskDetails = false;
+      this.showAddOrEditTask = false;
+      this.selectedTask = undefined;
+      this.taskService.clearEditingTask();
+    }
   }
 
   loadTasks() {
@@ -293,7 +317,7 @@ export class BoardComponent {
             );
         }
       }
-      // NEU: Arrays nach Fälligkeitsdatum sortieren
+      // Arrays nach Fälligkeitsdatum sortieren
       this.todo = this.sortTasksByDueDate(this.todo);
       this.inprogress = this.sortTasksByDueDate(this.inprogress);
       this.awaitfeedback = this.sortTasksByDueDate(this.awaitfeedback);
@@ -309,13 +333,12 @@ export class BoardComponent {
     this.awaitfeedback = [];
     this.done = [];
   }
-  
+
   loadSubtasks() {
     for (const task of this.taskList) {
       if (task.id) {
         this.taskService.getSubtasks(task.id).subscribe((subtasks) => {
           this.subtasksByTaskId[task.id!] = subtasks;
-          console.log(`Subtasks für ${task.title}:`, subtasks);
         });
       }
     }
@@ -337,7 +360,6 @@ export class BoardComponent {
 
   getContactList(contactList: Contact[]) {
     this.contactList = contactList;
-    console.log('Contacts for selected task:', this.contactList);
   }
 
   onSubtaskUpdate(updatedSubtasks: Subtask[]) {
@@ -347,5 +369,17 @@ export class BoardComponent {
   // Track-by-Funktion für bessere Performance hinzufügen
   trackByTaskId(index: number, task: Task): string | undefined {
     return task.id;
+  }
+
+  changeTaskStatus(event: { taskId: string; status: string }) {
+    const { taskId, status } = event;
+    const task = this.taskList.find((t) => t.id === taskId);
+    if (task && task.status !== status) {
+      const updatedTask = { ...task, status };
+      this.taskService.updateTask(taskId, updatedTask).then(() => {
+        // Optional: UI-Update, falls nötig
+        this.loadTasks();
+      });
+    }
   }
 }

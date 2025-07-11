@@ -14,58 +14,49 @@
     </div>
     <div class="task-content">
         <h1>{{ taskService.capitalize(task.title) }}</h1>
-        <p>{{ taskService.capitalize(task.description) }}</p>
-        <table>
-            <tr>
-                <td>Due date:</td>
-                <td>{{ convertDate(task.date) }}</td>
-            </tr>
-            <tr>
-                <td>Priority:</td>
-                <td class="priority-column">
-                    {{ task.priority }}
-                   <div>
-                        <img src="assets/img/icons/prio-high.png" alt="Priority High Icon" *ngIf="task.priority === 'urgent'">
-                        <img src="assets/img/icons/prio-medium.png" alt="Priorit Medium Icon" *ngIf="task.priority === 'medium'">
-                        <img src="assets/img/icons/prio-low.png" alt="Priority Low Icon" *ngIf="task.priority === 'low'">
-                   </div>
-                   </td>
-            </tr>
-            <tr *ngIf="contactList.length > 0">
-                <td>Assigned To:</td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <div class="contact-list" [style.flex]="subtasks.length <= 0 ? '1' : 'unset'" [style.height]="subtasks.length <= 0 ? 'auto' : '140px'">
-                        @for (contact of contactList; track $index) {
-                            <div class="contact-item">
-                                <div class="img-user-wrapper">
-                                    <div class="img-user" [style.background-color]="contactService.getContactColor(contact.name)">
-                                        <p class="contact-initials">{{ contactService.getInitials(contact.name) }}</p>
-                                    </div>
-                                    <p class="contact-name">{{ contact.name }}</p>
-                                </div>
+        <p class="description">{{ taskService.capitalize(task.description) }}</p>
+        <div class="date-row">
+            <span class="row-title">Due date:</span>
+            <span>{{ convertDate(task.date) }}</span>
+        </div>
+        <div class="priority-row">
+            <span class="row-title">Priority:</span>
+            <span>{{ task.priority }}</span>
+            <div>
+                <img src="assets/img/icons/prio-high.png" alt="Priority High Icon" *ngIf="task.priority === 'urgent'">
+                <img src="assets/img/icons/prio-medium.png" alt="Priorit Medium Icon" *ngIf="task.priority === 'medium'">
+                <img src="assets/img/icons/prio-low.png" alt="Priority Low Icon" *ngIf="task.priority === 'low'">
+            </div>
+        </div>
+        <div class="assigned-to-row">
+            <span class="row-title">Assigned To:</span>
+            <span *ngIf="contactList.length <= 0" class="info-no-selection">No contact selected</span>
+            <div class="contact-list">
+                @for (contact of contactList; track $index) {
+                    <div class="contact-item">
+                        <div class="img-user-wrapper">
+                            <div class="img-user" [style.background-color]="contactService.getContactColor(contact.name)">
+                                <p class="contact-initials">{{ contactService.getInitials(contact.name) }}</p>
                             </div>
-                        }
+                            <p class="contact-name">{{ contact.name }}</p>
+                        </div>
                     </div>
-                </td>
-            </tr>
-             <tr *ngIf="subtasks.length > 0">
-                <td>Subtasks:</td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <div class="subtask-list">
-                        @for (subtask of subtasks; track $index) {
-                            <div class="subtask-item">
-                                <input [id]="'subtask-cb' + $index" type="checkbox"  (change)="onSubtaskToggle(subtask)" [(ngModel)]="subtask.isCompleted">
-                                <label [for]="'subtask-cb' + $index">{{ subtask.title }}</label>
-                            </div>
-                        }
+                }
+            </div>
+        </div>
+       <div class="subtask-row">
+            <span class="row-title">Subtasks:</span>
+            <span *ngIf="subtasks.length <= 0" class="info-no-selection">No subtasks defined</span>
+            <div class="subtask-list">
+                @for (subtask of subtasks; track $index) {
+                    <div class="subtask-item">
+                        <input class="checkbox" [id]="'subtask-cb' + $index" type="checkbox"  (change)="onSubtaskToggle(subtask)" [(ngModel)]="subtask.isCompleted">
+                        <label class="checkbox-label" [for]="'subtask-cb' + $index"></label>
+                        <span>{{ subtask.title }}</span>
                     </div>
-                </td>
-            </tr>
-        </table>
+                }
+            </div>
+        </div>
         <div class="btn-wrapper">
             <button class="btn-delete" (click)="deleteTask($event)">
                 <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">

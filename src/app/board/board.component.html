@@ -1,4 +1,4 @@
-<section>
+<section #scrollSection (scroll)="onSectionScroll()">
   <div class="layout-container">
     <div class="board-header">
       <div class="header-headline">
@@ -99,12 +99,16 @@
           task)) {
           <app-task
             [cdkDragData]="task"
-            [cdkDragStartDelay]="250"
+            [cdkDragStartDelay]="getDragDelay()"
             cdkDrag
             (taskSelected)="openTaskDetail($event)"
             [task]="task"
             [subtaskList]="getSubtasksForTask(task.id)"
             (contacts)="getContactList($event)"
+            [openedMenuTaskId]="openedMenuTaskId"
+            (openDotsMenu)="openedMenuTaskId = $event"
+            (closeDotsMenu)="openedMenuTaskId = null"
+            (changeTaskStatus)="changeTaskStatus($event)"
           ></app-task>
           }
         </div>
@@ -149,12 +153,16 @@
           trackByTaskId($index, task)) {
           <app-task
             [cdkDragData]="task"
-            [cdkDragStartDelay]="250"
+            [cdkDragStartDelay]="getDragDelay()"
             cdkDrag
             (taskSelected)="openTaskDetail($event)"
             [task]="task"
             [subtaskList]="getSubtasksForTask(task.id)"
             (contacts)="getContactList($event)"
+            [openedMenuTaskId]="openedMenuTaskId"
+            (openDotsMenu)="openedMenuTaskId = $event"
+            (closeDotsMenu)="openedMenuTaskId = null"
+            (changeTaskStatus)="changeTaskStatus($event)"
           ></app-task>
           }
         </div>
@@ -201,12 +209,16 @@
           } @for (task of getFilteredTasks('await-feedback'); track task.id) {
           <app-task
             [cdkDragData]="task"
-            [cdkDragStartDelay]="250"
+            [cdkDragStartDelay]="getDragDelay()"
             cdkDrag
             (taskSelected)="openTaskDetail($event)"
             [task]="task"
             [subtaskList]="getSubtasksForTask(task.id)"
             (contacts)="getContactList($event)"
+            [openedMenuTaskId]="openedMenuTaskId"
+            (openDotsMenu)="openedMenuTaskId = $event"
+            (closeDotsMenu)="openedMenuTaskId = null"
+            (changeTaskStatus)="changeTaskStatus($event)"
           ></app-task>
           }
         </div>
@@ -240,18 +252,26 @@
           task)) {
           <app-task
             [cdkDragData]="task"
-            [cdkDragStartDelay]="250"
+            [cdkDragStartDelay]="getDragDelay()"
             cdkDrag
             (taskSelected)="openTaskDetail($event)"
             [task]="task"
             [subtaskList]="getSubtasksForTask(task.id)"
             (contacts)="getContactList($event)"
+            [openedMenuTaskId]="openedMenuTaskId"
+            (openDotsMenu)="openedMenuTaskId = $event"
+            (closeDotsMenu)="openedMenuTaskId = null"
+            (changeTaskStatus)="changeTaskStatus($event)"
           ></app-task>
           }
         </div>
       </div>
     </div>
   </div>
+
+  <button class="back-to-top" (click)="scrollToTop()" *ngIf="showBackToTop">
+    <span class="arrow-up">↑</span>
+  </button>
 </section>
 
 <div
@@ -272,6 +292,7 @@
       ></app-add-task>
     </div>
     <app-task-details
+      class="task-details"
       *ngIf="showTaskDetails && selectedTask"
       (closeTaskDetails)="closeDetailsOverlay($event)"
       (editTask)="openAddOrEditOverlay('edit', '')"

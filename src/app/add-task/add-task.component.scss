@@ -47,7 +47,7 @@ $small-mobile-breakpoint: 480px;
   cursor: pointer;
   
   &.open {
-    border-color: var(--primary-color);
+    border-color: var(--accent-primary-color);
     .dropdown-arrow { transform: rotate(180deg); }
   }
   
@@ -91,7 +91,7 @@ $small-mobile-breakpoint: 480px;
   padding: 12px 16px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  &:hover { background-color: #f5f5f5; }
+  &:hover:not(.selected) { background-color: #f5f5f5; }
 }
 
 %avatar-base {
@@ -188,18 +188,20 @@ $small-mobile-breakpoint: 480px;
   display: block;
   width: 100%;
   flex: 1;
-  // overflow-y: auto;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--background-default-light) white;
   
   @media (max-width: $mobile-breakpoint) {
     padding: 16px;
-    padding-bottom: 150px; // Mehr Platz für fixierte Buttons + Navigation
+    padding-bottom: 100px; // Platz für fixierte Buttons + Navigation
     overflow-y: auto;
     min-height: 0; /* Wichtig für Flexbox-Scrolling */
   }
   
   @media (max-width: $small-mobile-breakpoint) {
     padding: 16px;
-    padding-bottom: 150px; // Mehr Platz für fixierte Buttons + Navigation
+    padding-bottom: 100px; // Platz für fixierte Buttons + Navigation
   }
 }
 
@@ -215,7 +217,6 @@ $small-mobile-breakpoint: 480px;
     gap: 24px;
     text-align: left;
     min-height: auto;
-    padding-bottom: 190px; // Mehr Platz für fixierte Buttons
   }
 }
 
@@ -280,7 +281,7 @@ $small-mobile-breakpoint: 480px;
       left: 0;
       right: 0;
       width: 100%;
-      background-color: var(--background-light);
+      background-color: #f6f7f8;
       padding: 16px 12px;
       z-index: 100;
       margin-top: 0;
@@ -295,6 +296,11 @@ $small-mobile-breakpoint: 480px;
       height: 56px; 
       border-radius: $border-radius; 
       border: 1px solid #2A3647;
+      transition: box-shadow 0.2s ease;
+      
+      &:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+      }
       
       @media (max-width: $mobile-breakpoint) {
         flex: 1;
@@ -310,6 +316,11 @@ $small-mobile-breakpoint: 480px;
       width: 183px; 
       height: 56px; 
       border-radius: $border-radius;
+      transition: box-shadow 0.2s ease;
+      
+      &:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+      }
       
       @media (max-width: $mobile-breakpoint) {
         flex: 1;
@@ -378,10 +389,17 @@ $small-mobile-breakpoint: 480px;
     @include btn-light();
     @include flex-center;
     gap: 8px;
-    flex: 1;  // Gleichmäßige Verteilung des verfügbaren Platzes
-    min-width: 0; // Erlaubt das Schrumpfen unter die Mindestbreite
+    flex: 1;
+    min-width: 0;
     height: 56px;
     border-radius: $border-radius;
+    transition: box-shadow 0.2s ease;
+    
+    &:hover:not(.active) {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+      border-color: inherit !important;
+      color: inherit !important;
+    }
     
     @media (max-width: $mobile-breakpoint) {
       padding: 8px 4px;
@@ -440,6 +458,30 @@ $small-mobile-breakpoint: 480px;
       @extend %menu-item-base;
       justify-content: space-between;
 
+      &.selected {
+        background-color: #2A3647;
+        color: #ffffff;
+        
+        .contact-info {
+          .contact-name {
+            color: #ffffff;
+          }
+          
+          .contact-avatar {
+            border: 2px solid #FFFFFF;
+          }
+        }
+        
+        .contact-checkbox img {
+          filter: brightness(0) invert(1);
+        }
+        
+        &:hover {
+          background-color: #091931;
+          opacity: 1;
+        }
+      }
+
       .contact-info {
         display: flex;
         align-items: center;
@@ -484,37 +526,146 @@ $small-mobile-breakpoint: 480px;
     .confirm-icon { @include icon-size(14px); }
   }
 
-  .subtask-suggestions {
-    @extend %dropdown-menu-base;
-    z-index: 50; // Niedriger als Footer aber höher als Content
 
-    .suggestion-item {
-      @extend %menu-item-base;
-      .suggestion-text { @include inter400-fs16(); color: var(--text-color-dark); }
+}  // Subtask containers - separate for better mobile control
+  .subtask-input-container {
+    margin-bottom: 1rem;
+    
+    @media (max-width: $mobile-breakpoint) {
+      margin-bottom: 0.5rem;
     }
   }
-}
 
-.subtask-container { 
-  @include flex-column; 
-  gap: 12px; 
-  width: 100%;
-  height: 110px;
-  overflow-y: auto;
-  max-width: $input-width;
-  position: relative;
-  z-index: 1; // Niedriger z-index als Footer
-  
-  @media (max-width: $mobile-breakpoint) {
-    max-width: 100%;
-    align-items: stretch; // Änderung von center zu stretch
+  .subtask-list-container {
+    // Make scrollable for both desktop and mobile - reduced height so buttons stay visible
+    max-height: fit-content;
+    // overflow-y: auto;
+    // scrollbar-width: thin;
+    // scrollbar-color: var(--background-default-light) white;
+    
+    @media (max-width: $mobile-breakpoint) {
+      max-height: none; // Keine Begrenzung auf mobilen Geräten
+      overflow-y: visible; // Keine Scrollbar
+    }
+    
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: transparent;
+      border-radius: 3px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 3px;
+      
+      &:hover {
+        background: #a1a1a1;
+      }
+    }
   }
-}
+
 .subtasks-list { 
   @include flex-column; 
   gap: 8px; 
+  height: 60px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--background-default-light) white;
 }
 
+// Simple subtask item design to match the image
+.subtask-item-simple {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  transition: all 0.2s ease;
+  
+  .bullet {
+    font-size: 16px;
+    color: var(--text-color-dark);
+    font-weight: bold;
+    min-width: 16px;
+  }
+  
+  .subtask-text-simple {
+    @include inter400-fs16();
+    color: var(--text-color-dark);
+    flex: 1;
+  }
+  
+  .subtask-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    
+    .subtask-text-simple {
+      flex: 1;
+    }
+  }
+  
+  .subtask-edit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    
+    .subtask-edit-input {
+      @include inter400-fs16();
+      flex: 1;
+      padding: 4px 8px;
+      border: 1px solid var(--accent-primary-color);
+      border-radius: 4px;
+      background-color: var(--background-light);
+      color: var(--text-color-dark);
+      
+      &:focus {
+        outline: none;
+        border-color: var(--accent-primary-color);
+        box-shadow: 0 0 0 2px rgba(42, 54, 71, 0.1);
+      }
+    }
+  }
+  
+  .subtask-actions {
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    margin-left: auto; // Push to the right
+    
+    .action-icon { 
+      @include icon-size(16px);
+      cursor: pointer;
+      
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+    border-radius: 4px;
+    padding: 4px 4px;
+
+    
+    .subtask-actions {
+      opacity: 1;
+    }
+  }
+  
+  // Wenn wir editieren, sollen die Actions immer sichtbar sein
+  .subtask-edit .subtask-actions {
+    opacity: 1;
+  }
+}
+
+// Keep the old complex design for backwards compatibility
 .subtask-item {
   @include flex-between;
   padding: 8px 12px;
@@ -682,7 +833,7 @@ input.error, textarea.error {
 }
 
 // Additional mobile optimizations
-@media (max-width: 320px) {
+@media (max-width: 310px) {
   .add-task-header {
     height: 80px;
     padding: 0 12px;
@@ -704,7 +855,6 @@ input.error, textarea.error {
   
   .add-task-content {
     padding: 12px;
-    padding-bottom: 150px; // Mehr Platz für fixierte Buttons + Navigation
   }
   
   .form-group {
@@ -729,7 +879,43 @@ input.error, textarea.error {
       height: 14px !important;
     }
   }
-}
+}  .subtask-checkbox-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 24px;
+    margin-right: 4px;
+  }
+
+  .subtask-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .checkbox-label {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    background-image: url('./../../../public//assets/img/icons/checkbox.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    transition: all 0.2s ease;
+  }
+
+  .subtask-checkbox:checked + .checkbox-label {
+    background-image: url('./../../../public//assets/img/icons/checkbox-checked.png');
+  }
+
+  .subtask-text-simple.completed {
+    text-decoration: line-through;
+    color: var(--text-color-medium);
+    opacity: 0.7;
+  }
 
 
 
