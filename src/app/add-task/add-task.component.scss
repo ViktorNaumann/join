@@ -538,10 +538,10 @@ $small-mobile-breakpoint: 480px;
 
   .subtask-list-container {
     // Make scrollable for both desktop and mobile - reduced height so buttons stay visible
-    max-height: 60px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--background-default-light) white;
+    max-height: fit-content;
+    // overflow-y: auto;
+    // scrollbar-width: thin;
+    // scrollbar-color: var(--background-default-light) white;
     
     @media (max-width: $mobile-breakpoint) {
       max-height: none; // Keine Begrenzung auf mobilen Geräten
@@ -570,7 +570,7 @@ $small-mobile-breakpoint: 480px;
 .subtasks-list { 
   @include flex-column; 
   gap: 8px; 
-  height: 130px;
+  height: 60px;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--background-default-light) white;
@@ -595,6 +595,40 @@ $small-mobile-breakpoint: 480px;
     @include inter400-fs16();
     color: var(--text-color-dark);
     flex: 1;
+  }
+  
+  .subtask-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    
+    .subtask-text-simple {
+      flex: 1;
+    }
+  }
+  
+  .subtask-edit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    
+    .subtask-edit-input {
+      @include inter400-fs16();
+      flex: 1;
+      padding: 4px 8px;
+      border: 1px solid var(--accent-primary-color);
+      border-radius: 4px;
+      background-color: var(--background-light);
+      color: var(--text-color-dark);
+      
+      &:focus {
+        outline: none;
+        border-color: var(--accent-primary-color);
+        box-shadow: 0 0 0 2px rgba(42, 54, 71, 0.1);
+      }
+    }
   }
   
   .subtask-actions {
@@ -623,6 +657,11 @@ $small-mobile-breakpoint: 480px;
     .subtask-actions {
       opacity: 1;
     }
+  }
+  
+  // Wenn wir editieren, sollen die Actions immer sichtbar sein
+  .subtask-edit .subtask-actions {
+    opacity: 1;
   }
 }
 
@@ -840,7 +879,43 @@ input.error, textarea.error {
       height: 14px !important;
     }
   }
-}
+}  .subtask-checkbox-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 24px;
+    margin-right: 4px;
+  }
+
+  .subtask-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .checkbox-label {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    background-image: url('/assets/img/icons/checkbox.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    transition: all 0.2s ease;
+  }
+
+  .subtask-checkbox:checked + .checkbox-label {
+    background-image: url('/assets/img/icons/checkbox-checked.png');
+  }
+
+  .subtask-text-simple.completed {
+    text-decoration: line-through;
+    color: var(--text-color-medium);
+    opacity: 0.7;
+  }
 
 
 
