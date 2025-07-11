@@ -240,7 +240,7 @@ export class AddTaskComponent implements OnInit {
 
   editSubtask(id: string | number, newText: string) {
     const subtask = this.subtasks.find(s => s.id === id);
-    if (subtask && newText.trim()) {
+    if (subtask) {
       subtask.text = newText.trim();
     }
   }
@@ -259,10 +259,10 @@ export class AddTaskComponent implements OnInit {
   }
 
   saveSubtaskEdit() {
-    if (this.editingSubtaskId !== null && this.editingSubtaskText.trim()) {
-      this.editSubtask(this.editingSubtaskId, this.editingSubtaskText.trim());
-      this.cancelSubtaskEdit();
-    } else if (this.editingSubtaskId !== null && !this.editingSubtaskText.trim()) {
+    if (this.editingSubtaskId !== null) {
+      if (this.editingSubtaskText && this.editingSubtaskText.trim()) {
+        this.editSubtask(this.editingSubtaskId, this.editingSubtaskText.trim());
+      }
       this.cancelSubtaskEdit();
     }
   }

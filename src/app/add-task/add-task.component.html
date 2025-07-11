@@ -272,19 +272,46 @@
             <div class="subtask-list-container" *ngIf="subtasks.length > 0">
               <div class="subtasks-list">
                 <div class="subtask-item-simple" *ngFor="let subtask of subtasks">
-                  <span class="bullet">•</span>
-                  <span class="subtask-text-simple">{{ subtask.text }}</span>
-                  <div class="subtask-actions">
-                    <img 
-                      src="assets/img/icons/edit-single.png" 
-                      alt="Edit"
-                      class="action-icon"
-                      (click)="editSubtaskPrompt(subtask.id, subtask.text)">
-                    <img 
-                      src="assets/img/icons/delete.png" 
-                      alt="Delete"
-                      class="action-icon"
-                      (click)="deleteSubtask(subtask.id)">
+                  <!-- Normal view -->
+                  <div *ngIf="editingSubtaskId !== subtask.id" class="subtask-display">
+                    <span class="bullet">•</span>
+                    <span class="subtask-text-simple">{{ subtask.text }}</span>
+                    <div class="subtask-actions">
+                      <img 
+                        src="assets/img/icons/edit-single.png" 
+                        alt="Edit"
+                        class="action-icon"
+                        (click)="editSubtaskPrompt(subtask.id, subtask.text)">
+                      <img 
+                        src="assets/img/icons/delete.png" 
+                        alt="Delete"
+                        class="action-icon"
+                        (click)="deleteSubtask(subtask.id)">
+                    </div>
+                  </div>
+                  
+                  <!-- Edit view -->
+                  <div *ngIf="editingSubtaskId === subtask.id" class="subtask-edit">
+                    <span class="bullet">•</span>
+                    <input 
+                      type="text" 
+                      class="subtask-edit-input"
+                      [(ngModel)]="editingSubtaskText"
+                      [ngModelOptions]="{standalone: true}"
+                      (keydown)="onSubtaskEditKeydown($event)"
+                      #editInput>
+                    <div class="subtask-actions">
+                      <img 
+                        src="assets/img/icons/check-dark.png" 
+                        alt="Save"
+                        class="action-icon"
+                        (click)="saveSubtaskEdit()">
+                      <img 
+                        src="assets/img/icons/close.png" 
+                        alt="Cancel"
+                        class="action-icon"
+                        (click)="cancelSubtaskEdit()">
+                    </div>
                   </div>
                 </div>
               </div>
