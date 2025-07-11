@@ -110,7 +110,6 @@ export class BoardComponent {
     private contactService: ContactService
   ) {}
 
-  // NEU:
   @ViewChild('scrollSection') scrollSection!: ElementRef<HTMLElement>;
 
   ngAfterViewInit() {
@@ -155,17 +154,11 @@ export class BoardComponent {
     );
   }
 
-  // Erweiterte Sortier-Methode mit verschiedenen Optionen
   private sortTasksByDueDate(tasks: Task[], ascending: boolean = true): Task[] {
-    return tasks.sort((a, b) => {
+    return [...tasks].sort((a, b) => {
       const dateA = this.getDateValue(a.date);
       const dateB = this.getDateValue(b.date);
-
-      if (ascending) {
-        return dateA - dateB; // Nächstes Datum zuerst
-      } else {
-        return dateB - dateA; // Spätestes Datum zuerst
-      }
+      return ascending ? dateA - dateB : dateB - dateA;
     });
   }
 
@@ -226,20 +219,23 @@ export class BoardComponent {
       return; // Fallback, falls Container unbekannt
     }
 
+    // NEU:
     if (event.previousContainer === event.container) {
+      // Innerhalb einer Liste verschieben
       moveItemInArray(
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
     } else {
+      // Zwischen Listen verschieben
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
-
+      // Status im Task-Objekt und Backend aktualisieren
       if (task.id && task.status !== newStatus) {
         const updatedTask: Task = { ...task, status: newStatus };
         this.taskService.updateTask(task.id, updatedTask).catch((error) => {
@@ -248,14 +244,11 @@ export class BoardComponent {
       }
     }
 
-    // Nach dem Drop die betroffenen Arrays neu sortieren
-    if (event.previousContainer !== event.container) {
-      // Arrays neu sortieren nach Status-Änderung
-      this.todo = this.sortTasksByDueDate(this.todo);
-      this.inprogress = this.sortTasksByDueDate(this.inprogress);
-      this.awaitfeedback = this.sortTasksByDueDate(this.awaitfeedback);
-      this.done = this.sortTasksByDueDate(this.done);
-    }
+    // Nach jedem Drop sortieren
+    this.todo = this.sortTasksByDueDate(this.todo);
+    this.inprogress = this.sortTasksByDueDate(this.inprogress);
+    this.awaitfeedback = this.sortTasksByDueDate(this.awaitfeedback);
+    this.done = this.sortTasksByDueDate(this.done);
   }
 
   saveTaskStatus(status: string) {
@@ -319,7 +312,7 @@ export class BoardComponent {
             );
         }
       }
-      // NEU: Arrays nach Fälligkeitsdatum sortieren
+      // Arrays nach Fälligkeitsdatum sortieren
       this.todo = this.sortTasksByDueDate(this.todo);
       this.inprogress = this.sortTasksByDueDate(this.inprogress);
       this.awaitfeedback = this.sortTasksByDueDate(this.awaitfeedback);
@@ -373,7 +366,6 @@ export class BoardComponent {
     return task.id;
   }
 
-  // NEU:
   changeTaskStatus(event: { taskId: string; status: string }) {
     const { taskId, status } = event;
     const task = this.taskList.find((t) => t.id === taskId);
