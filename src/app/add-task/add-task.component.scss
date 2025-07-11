@@ -879,7 +879,43 @@ input.error, textarea.error {
       height: 14px !important;
     }
   }
-}
+}  .subtask-checkbox-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 24px;
+    margin-right: 4px;
+  }
+
+  .subtask-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .checkbox-label {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    background-image: url('/assets/img/icons/checkbox.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    transition: all 0.2s ease;
+  }
+
+  .subtask-checkbox:checked + .checkbox-label {
+    background-image: url('/assets/img/icons/checkbox-checked.png');
+  }
+
+  .subtask-text-simple.completed {
+    text-decoration: line-through;
+    color: var(--text-color-medium);
+    opacity: 0.7;
+  }
 
 
 

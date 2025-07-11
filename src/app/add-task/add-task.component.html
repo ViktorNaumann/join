@@ -274,8 +274,19 @@
                 <div class="subtask-item-simple" *ngFor="let subtask of subtasks">
                   <!-- Normal view -->
                   <div *ngIf="editingSubtaskId !== subtask.id" class="subtask-display">
-                    <span class="bullet">•</span>
-                    <span class="subtask-text-simple">{{ subtask.text }}</span>
+                    <!-- Show checkbox only in edit mode -->
+                    <div *ngIf="isEditingMode" class="subtask-checkbox-container">
+                      <input 
+                        type="checkbox" 
+                        class="subtask-checkbox"
+                        [checked]="subtask.completed"
+                        (change)="toggleSubtaskCompletion(subtask.id)"
+                        [id]="'subtask-' + subtask.id">
+                      <label [for]="'subtask-' + subtask.id" class="checkbox-label"></label>
+                    </div>
+                    <!-- Show bullet only in add mode -->
+                    <span *ngIf="!isEditingMode" class="bullet">•</span>
+                    <span class="subtask-text-simple" [class.completed]="isEditingMode && subtask.completed">{{ subtask.text }}</span>
                     <div class="subtask-actions">
                       <img 
                         src="assets/img/icons/edit-single.png" 
@@ -292,7 +303,18 @@
                   
                   <!-- Edit view -->
                   <div *ngIf="editingSubtaskId === subtask.id" class="subtask-edit">
-                    <span class="bullet">•</span>
+                    <!-- Show checkbox only in edit mode -->
+                    <div *ngIf="isEditingMode" class="subtask-checkbox-container">
+                      <input 
+                        type="checkbox" 
+                        class="subtask-checkbox"
+                        [checked]="subtask.completed"
+                        (change)="toggleSubtaskCompletion(subtask.id)"
+                        [id]="'subtask-edit-' + subtask.id">
+                      <label [for]="'subtask-edit-' + subtask.id" class="checkbox-label"></label>
+                    </div>
+                    <!-- Show bullet only in add mode -->
+                    <span *ngIf="!isEditingMode" class="bullet">•</span>
                     <input 
                       type="text" 
                       class="subtask-edit-input"
