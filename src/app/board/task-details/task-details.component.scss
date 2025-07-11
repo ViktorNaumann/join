@@ -135,8 +135,29 @@
     @include word-break;
     .checkbox {
         margin: 4px;
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
     }
 }
+
+.checkbox-label {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    background-image: url('/assets/img/icons/checkbox.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    transition: all 0.2s ease;
+  }
+
+.checkbox:checked + .checkbox-label {
+    background-image: url('/assets/img/icons/checkbox-checked.png');
+  }
 
 .btn-close {
     @include btn();

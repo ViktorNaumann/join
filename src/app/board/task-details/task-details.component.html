@@ -51,7 +51,8 @@
                 @for (subtask of subtasks; track $index) {
                     <div class="subtask-item">
                         <input class="checkbox" [id]="'subtask-cb' + $index" type="checkbox"  (change)="onSubtaskToggle(subtask)" [(ngModel)]="subtask.isCompleted">
-                        <label [for]="'subtask-cb' + $index">{{ subtask.title }}</label>
+                        <label class="checkbox-label" [for]="'subtask-cb' + $index"></label>
+                        <span>{{ subtask.title }}</span>
                     </div>
                 }
             </div>
