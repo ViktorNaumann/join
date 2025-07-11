@@ -9,6 +9,7 @@
     scrollbar-width: thin;
     scrollbar-color: var(--background-default-light) white;
     gap: 16px;
+    color: var( --text-color-dark);
     h1 {
         @include inter700-fs61;
     }
