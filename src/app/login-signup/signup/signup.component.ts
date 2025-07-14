@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from '../footer/footer.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -20,8 +21,15 @@ import { CommonModule } from '@angular/common';
 
 export class SignupComponent implements OnInit {
   signupform!: FormGroup;
+  errorMessage: string = '';
+  successMessage: string = '';
+  isLoading: boolean = false;
 
-  constructor(private form: FormBuilder, ) {}
+  constructor(
+    private form: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.signupform = this.form.group({
@@ -44,12 +52,33 @@ export class SignupComponent implements OnInit {
     return password === confirm ? null : { passwordsDontMatch: true };
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     if (this.signupform.invalid) {
       this.signupform.markAllAsTouched();
       return;
     }
-    console.log('Signup data:', this.signupform.value);
+
+    this.isLoading = true;
+    this.errorMessage = '';
+    this.successMessage = '';
+
+    const { name, email, password } = this.signupform.value;
+    const result = await this.authService.signUp(email, password, name);
+
+    if (result.success) {
+      this.successMessage = 'Registration successful! You will be redirected...';
+      setTimeout(() => {
+        this.router.navigate(['/summary']);
+      }, 2000);
+    } else {
+      this.errorMessage = result.message || 'Registration failed';
+    }
+
+    this.isLoading = false;
+  }
+
+  onBackToLogin(): void {
+    this.router.navigate(['/login']);
   }
 
   getValidationMessage(field: string): string {
@@ -58,10 +87,10 @@ export class SignupComponent implements OnInit {
     if (control.errors['required']) return 'This field is required';
     if (control.errors['email']) return 'Please enter a valid email address';
     if (control.errors['minlength']) {
-      return `Minimum length is ${control.errors['minlength'].requiredLength} characters`;
+      return `Minimum ${control.errors['minlength'].requiredLength} characters required`;
     }
     if (control.errors['pattern']) {
-      return 'Password must contain uppercase, number, and special character';
+      return 'Password must contain uppercase, numbers and special characters';
     }
     if (field === 'confirmPassword' && this.signupform.errors?.['passwordsDontMatch']) {
       return 'Passwords do not match';

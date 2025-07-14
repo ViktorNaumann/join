@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -35,6 +36,8 @@ export class HeaderComponent {
   menuOpen = false;
   isMobile = window.innerWidth < 1000;
 
+  constructor(private authService: AuthService) {}
+
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     const width = (event.target as Window).innerWidth;
@@ -47,5 +50,15 @@ export class HeaderComponent {
   toggleMenu(event: Event) {
     event.stopPropagation();
     this.menuOpen = !this.menuOpen;
+  }
+
+  async logout(): Promise<void> {
+    await this.authService.signOutUser();
+    this.menuOpen = false;
+  }
+
+  getCurrentUserName(): string {
+    const user = this.authService.getCurrentUser();
+    return user?.displayName || user?.email || 'User';
   }
 }

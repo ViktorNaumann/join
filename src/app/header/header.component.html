@@ -15,12 +15,12 @@
       </div>
 
       <div class="user-profile" (click)="toggleMenu($event)">
-        <p>SM</p>
+        <p>{{ getCurrentUserName().charAt(0).toUpperCase() }}</p>
         <div class="user-menu-links" *ngIf="menuOpen" @slideInOut>
           <a class="mobile-help-link" routerLink="/help">Help</a>
           <a routerLink="/privacy-policy">Privacy Policy</a>
           <a routerLink="/legal-notice">Legal notice</a>
-          <a routerLink="/">Log out</a>
+          <a (click)="logout()">Log out</a>
        </div>
       </div>
     </div>

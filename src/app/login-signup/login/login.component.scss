@@ -112,6 +112,22 @@
         color: var(--error-color);
         margin-top: 4px;
     }
+
+    .signup-link {
+        @include inter400-fs12;
+        color: var(--text-color-light);
+        text-align: center;
+        margin-top: 16px;
+        
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
 }
 
 .btn-wrapper {
