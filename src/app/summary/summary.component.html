@@ -50,7 +50,7 @@
           </svg>
 
           <div class="info-text">
-            <p class="counter">1</p>
+            <p class="counter">{{ todoCount }}</p>
             <p class="task-info">To-do</p>
           </div>
         </div>
@@ -80,7 +80,7 @@
             />
           </svg>
           <div class="info-text">
-            <p class="counter">1</p>
+            <p class="counter">{{ doneCount }}</p>
             <p class="task-info">Done</p>
           </div>
         </div>
@@ -120,19 +120,19 @@
       <div class="last-row">
         <div class="board-tasks">
 <div class="info-text">
-          <p class="counter">1</p>
+          <p class="counter">{{ totalTaskCount }}</p>
           <p class="task-info">Tasks in Board</p>
 </div>
         </div>
         <div class="in-progress">
 <div class="info-text">
-          <p class="counter">1</p>
+          <p class="counter">{{ inProgressCount }}</p>
           <p class="task-info">Tasks in Progress</p>
 </div>
         </div>
         <div class="await-feedback">
 <div class="info-text">
-          <p class="counter">1</p>
+          <p class="counter">{{ awaitingFeedbackCount }}</p>
           <p class="task-info">Awaiting Feedback</p>
 </div>
         </div>
