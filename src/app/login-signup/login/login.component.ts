@@ -9,12 +9,14 @@ import {
   animate,
   group
 } from '@angular/animations';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   imports: [
     LoginHeaderComponent,
-    FooterComponent
+    FooterComponent,
+    CommonModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -27,19 +29,19 @@ import {
         opacity: 1
       })),
       state('moved', style({
-        top: '0px',
-        left: '0px',
+        top: '0',
+        left: '0',
         transform: 'translate(0, 0)',
         opacity: 0
       })),
       transition('start => moved', [
         group([
-          animate('2s ease-in-out', style({
+          animate('2.5s 0.5s ease-in-out', style({
             top: '0',
             left: '0',
             transform: 'translate(0, 0)'
           })),
-          animate('1s 0.5s ease-in-out', style({ opacity: 0 }))
+          animate('2s 0.5s ease-in-out', style({ opacity: 0 }))
         ])
       ])
     ]),
@@ -51,7 +53,7 @@ import {
         opacity: 0
       })),
       transition('start => moved', [
-        animate('2.5s 0.5s ease-in-out')
+        animate('1.5s 0.25s ease-in-out')
       ])
     ])
   ]
