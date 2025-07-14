@@ -87,9 +87,7 @@ section {
     .deadline {
       width: 500px;
       height: 150px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @include flex-center;
       background-color: white;
       border-radius: 30px;
       gap: 30px;
@@ -100,12 +98,7 @@ section {
       &:hover {
         background-color: var(--background-dark);
         transform: scale(1.1);
-        .svg-circle {
-          fill: white;
-        }
-        .svg-path {
-          fill: #2a3647;
-        }
+
         .info-text {
           .counter {
             color: white;
@@ -157,13 +150,19 @@ section {
       }
     }
 
+    //TODO:
     .last-row {
       width: 100%;
-      display: flex;
+      @include flex-center;
       gap: 24px;
 
       .board-tasks {
+        @include flex-center;
         @include cards;
+
+        &:hover {
+          @include summary-card-hover-light;
+        }
 
         .counter {
           font-size: 54px;
@@ -174,7 +173,12 @@ section {
       }
 
       .in-progress {
+        @include flex-center;
         @include cards;
+
+        &:hover {
+          @include summary-card-hover-light;
+        }
 
         .counter {
           font-size: 54px;
@@ -185,7 +189,12 @@ section {
       }
 
       .await-feedback {
+        @include flex-center;
         @include cards;
+
+        &:hover {
+          @include summary-card-hover-light;
+        }
 
         .counter {
           font-size: 54px;

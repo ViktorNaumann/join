@@ -317,4 +317,16 @@
   }
 }
 
+@mixin summary-card-hover-light {
+  background-color: var(--background-dark);
+  transform: scale(1.1);
+
+  .info-text {
+    .counter,
+    .task-info {
+      color: white;
+    }
+  }
+}
+
 //#endregion
