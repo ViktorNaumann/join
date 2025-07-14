@@ -50,6 +50,7 @@ export class SignupComponent implements OnInit {
       this.signupform.markAllAsTouched();
       return;
     }
+    console.log('submitted')
     console.log('Signup data:', this.signupform.value);
   }
 
