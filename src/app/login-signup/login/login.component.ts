@@ -9,40 +9,18 @@ import {
   animate,
   group
 } from '@angular/animations';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   imports: [
     LoginHeaderComponent,
-    FooterComponent
+    FooterComponent,
+    CommonModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   animations: [
-    trigger('moveLogo', [
-      state('start', style({
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        opacity: 1
-      })),
-      state('moved', style({
-        top: '0px',
-        left: '0px',
-        transform: 'translate(0, 0)',
-        opacity: 0
-      })),
-      transition('start => moved', [
-        group([
-          animate('2s ease-in-out', style({
-            top: '0',
-            left: '0',
-            transform: 'translate(0, 0)'
-          })),
-          animate('1s 1s ease-in-out', style({ opacity: 0 }))
-        ])
-      ])
-    ]),
     trigger('fadeOutWrapper', [
       state('start', style({
         opacity: 1
@@ -51,17 +29,19 @@ import {
         opacity: 0
       })),
       transition('start => moved', [
-        animate('2s 0.5s ease-in-out')
+        animate('1.5s 0.5s ease-in-out')
       ])
     ])
   ]
 })
 export class LoginComponent {
   logoState: 'start' | 'moved' = 'start';
+  pageLoaded = false;
 
   ngOnInit(): void {
     if (!sessionStorage.getItem('logoMoved')) {
       setTimeout(() => {
+        this.pageLoaded = true;
         this.logoState = 'moved';
         sessionStorage.setItem('logoMoved', 'true');
       }, 100);

@@ -1,7 +1,7 @@
 <div class="login-content">
     <app-login-header class="login-header"></app-login-header>
      <div class="dark-logo-wrapper" [@fadeOutWrapper]="logoState">
-        <img src="./assets/img/logo/logo.png" alt="Dark Join Logo" [@moveLogo]="logoState">
+        <img src="./assets/img/logo/logo.png" alt="Dark Join Logo" [ngClass]="{'load':pageLoaded}">
     </div>
     <section class="login-frame">
         <h2>Log in</h2>
