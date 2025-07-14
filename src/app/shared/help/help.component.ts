@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+
 @Component({
   selector: 'app-help',
   imports: [
@@ -10,5 +11,6 @@ import { RouterModule } from '@angular/router';
   styleUrl: './help.component.scss'
 })
 export class HelpComponent {
+  constructor() {}
 
 }
