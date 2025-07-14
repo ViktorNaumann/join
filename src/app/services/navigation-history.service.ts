@@ -12,6 +12,9 @@ export class NavigationHistoryService {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
+        if (this.history.length === 3) {
+          this.history.shift();
+        }
         this.history.push(event.urlAfterRedirects);
       });
   }

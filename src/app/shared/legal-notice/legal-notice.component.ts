@@ -15,7 +15,6 @@ export class LegalNoticeComponent {
 
    goBack() {
     this.navigationService.navigateBack();
-    console.log(this.navigationService.getHistory())
   }
 
 }

@@ -16,7 +16,6 @@ export class HelpComponent {
 
    goBack() {
     this.navigationService.navigateBack();
-    console.log(this.navigationService.getHistory())
   }
 
 }
