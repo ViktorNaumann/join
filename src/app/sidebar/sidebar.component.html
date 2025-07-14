@@ -2,7 +2,9 @@
   <div class="logo-section">
     <img src="assets/img/logo/logo.png" alt="Join Logo" class="logo" />
   </div>
-  <nav class="navigation">
+  
+  <!-- Navigation für eingeloggte Benutzer -->
+  <nav class="navigation" *ngIf="isLoggedIn()">
     <ul>
       <li routerLinkActive="active">
         <a routerLink="/summary">
@@ -30,6 +32,19 @@
       </li>
     </ul>
   </nav>
+
+  <!-- Login-Button für nicht eingeloggte Benutzer -->
+  <nav class="login-navigation" *ngIf="!isLoggedIn()">
+    <ul>
+      <li>
+        <a routerLink="/login">
+          <img src="assets/img/svg/log-in.svg" alt="Log In Icon" />
+          <span>Log In</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
   <div class="legal-links">
     <a routerLink="/privacy-policy">Privacy Policy</a>
     <a routerLink="/legal-notice">Legal notice</a>
