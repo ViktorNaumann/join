@@ -147,6 +147,7 @@
     transition: background-color 0.2s ease;
     justify-content: center;
     @include btn-dark();
+    margin-top: 12px;
 }
 
 .btn-signup:hover {
