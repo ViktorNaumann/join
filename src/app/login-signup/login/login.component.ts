@@ -39,7 +39,7 @@ import {
             left: '0',
             transform: 'translate(0, 0)'
           })),
-          animate('1s 1s ease-in-out', style({ opacity: 0 }))
+          animate('1s 0.5s ease-in-out', style({ opacity: 0 }))
         ])
       ])
     ]),
@@ -51,7 +51,7 @@ import {
         opacity: 0
       })),
       transition('start => moved', [
-        animate('2s 0.5s ease-in-out')
+        animate('2.5s 0.5s ease-in-out')
       ])
     ])
   ]
