@@ -384,11 +384,11 @@ export class BoardComponent {
     }
   }
 
-  //TEST
+  // NEU Window Drag-Scroll
   onDragMoved(event: CdkDragMove) {
     const mouseY = event.pointerPosition.y;
     const threshold = 100;
-    const scrollStep = 60;
+    const scrollStep = 30;
 
     const section = this.scrollSection?.nativeElement;
     if (!section) return;
