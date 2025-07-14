@@ -19,7 +19,7 @@ export const routes: Routes = [
     { path: 'board', component: BoardComponent, canActivate: [AuthGuard] },
     { path: 'contacts', component: ContactsComponent, canActivate: [AuthGuard] },
     { path: 'help', component: HelpComponent, canActivate: [AuthGuard] },
-    { path: 'legal-notice', component: LegalNoticeComponent, canActivate: [AuthGuard] },
-    { path: 'privacy-policy', component: PrivacyPolicyComponent, canActivate: [AuthGuard] },
+    { path: 'legal-notice', component: LegalNoticeComponent },
+    { path: 'privacy-policy', component: PrivacyPolicyComponent },
     { path: '**', redirectTo: '/login' }
 ];

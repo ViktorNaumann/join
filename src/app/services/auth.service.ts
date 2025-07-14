@@ -94,7 +94,6 @@ export class AuthService {
       await signInWithEmailAndPassword(this.auth, guestEmail, guestPassword);
       return { success: true };
     } catch (error: any) {
-      // Falls der Gast-Account nicht existiert, erstelle ihn
       try {
         const userCredential = await createUserWithEmailAndPassword(this.auth, 'guest@join.com', 'Guest123!');
         const user = userCredential.user;
@@ -144,7 +143,6 @@ export class AuthService {
     return this.auth.currentUser;
   }
 
-  // Fehler-Nachrichten übersetzen
   private getErrorMessage(errorCode: string): string {
     switch (errorCode) {
       case 'auth/user-not-found':
