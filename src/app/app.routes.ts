@@ -12,11 +12,11 @@ import { SignupComponent } from './login-signup/signup/signup.component';
 export const routes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
-    {path: 'summary', component: SummaryComponent},
-    {path: 'add-task', component: AddTaskComponent},
-    {path: 'board', component: BoardComponent},
-    {path: 'contacts', component: ContactsComponent},
-    {path: 'help', component: HelpComponent},
-    {path: 'legal-notice', component: LegalNoticeComponent},
-    {path: 'privacy-policy', component: PrivacyPolicyComponent},
+    { path: 'summary', component: SummaryComponent },
+    { path: 'add-task', component: AddTaskComponent },
+    { path: 'board', component: BoardComponent },
+    { path: 'contacts', component: ContactsComponent },
+    { path: 'help', component: HelpComponent },
+    { path: 'legal-notice', component: LegalNoticeComponent },
+    { path: 'privacy-policy', component: PrivacyPolicyComponent },
 ];

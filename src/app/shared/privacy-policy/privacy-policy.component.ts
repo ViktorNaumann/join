@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { NavigationHistoryService } from '../../services/navigation-history.service';
 
 @Component({
   selector: 'app-privacy-policy',
@@ -10,5 +11,10 @@ import { RouterModule } from '@angular/router';
   styleUrl: './privacy-policy.component.scss'
 })
 export class PrivacyPolicyComponent {
-
+  constructor(private navigationService: NavigationHistoryService) {}
+  
+     goBack() {
+      this.navigationService.navigateBack();
+    }
+  
 }

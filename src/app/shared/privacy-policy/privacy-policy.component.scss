@@ -18,7 +18,11 @@
         margin: 1em 0;
     }
     h3 {
-        @include inter500-fs27;
+        @include inter500-fs20;
+        margin: 1em 0;
+    }
+    h4 {
+        @include inter400-fs20;
         margin: 0.5em 0;
     }
     p {
@@ -27,6 +31,23 @@
     }
     @media(max-width: 1000px) {
         height: calc(100dvh - 180px);
+    }
+    dl {
+        @include inter400-fs20;
+        margin: 0.5em 0;
+        dt {
+            font-weight: bold;
+        }
+        dd {
+            margin-bottom: 8px;
+        }
+    }
+    .list {
+        @include inter400-fs20;
+        margin: 0.5em 0;
+        li {
+            margin-left: 16px;
+        }
     }
 }
 

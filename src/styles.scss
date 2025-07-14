@@ -67,6 +67,12 @@
   font-size: clamp(18px, calc(0.8vw + 15.5px), 27px);
 }
 
+@mixin inter500-fs20 {
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: clamp(16px, calc(0.36vw + 14.85px), 20px);
+}
+
 @mixin inter700-fs61 {
   font-family: "Inter";
   font-weight: 700;
@@ -207,6 +213,13 @@
   align-items: center;
 }
 
+@mixin flex-direction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 @mixin form-group {
   height: fit-content;
   width: clamp(350px, calc(6.43vw + 142.6px), 422px);
@@ -258,4 +271,62 @@
     }
   }
 }
+
+// ======================
+// Mixins Summary Section
+// ======================
+
+@mixin cards {
+  width: 150px;
+  height: 150px;
+  @include flex-direction();
+  background-color: white;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 5px 10px 18px #888888;
+  transition: all 0.2s ease-in-out;
+}
+
+@mixin summary-card {
+  width: 238px;
+  height: 150px;
+  @include flex-center();
+  background-color: white;
+  border-radius: 30px;
+  gap: 24px;
+  cursor: pointer;
+  box-shadow: 5px 10px 18px #888888;
+  transition: all 0.2s ease-in-out;
+}
+
+@mixin summary-card-hover($svg-path-prop: fill, $svg-path-color: #2a3647) {
+  background-color: var(--background-dark);
+  transform: scale(1.1);
+
+  .svg-circle {
+    fill: white;
+  }
+  .svg-path {
+    #{$svg-path-prop}: $svg-path-color;
+  }
+  .info-text {
+    .counter,
+    .task-info {
+      color: white;
+    }
+  }
+}
+
+@mixin summary-card-hover-light {
+  background-color: var(--background-dark);
+  transform: scale(1.1);
+
+  .info-text {
+    .counter,
+    .task-info {
+      color: white;
+    }
+  }
+}
+
 //#endregion
