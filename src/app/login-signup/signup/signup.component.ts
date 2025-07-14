@@ -35,7 +35,6 @@ export class SignupComponent implements OnInit {
       confirmPassword: ['', Validators.required]
     }, { validators: this.passwordsMatchValidator }
     );
-
   }
 
   //sogenannte cross-field-validator, check ob passwörter identisch sind
@@ -50,6 +49,7 @@ export class SignupComponent implements OnInit {
       this.signupform.markAllAsTouched();
       return;
     }
+    console.log('submitted')
     console.log('Signup data:', this.signupform.value);
   }
 
