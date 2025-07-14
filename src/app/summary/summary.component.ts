@@ -21,6 +21,7 @@ export class SummaryComponent implements OnInit {
   nextDeadlineDate: Date | null = null;
   // nextDeadlineTask: Task | null = null; //Kann die Variable weg?
   nextDeadlineCount: number = 0;
+  greeting: string = '';
 
   todoCount = 0;
   doneCount = 0;
@@ -48,12 +49,28 @@ export class SummaryComponent implements OnInit {
     );
   }
 
+  // Neue Methode Uhrzeit
+  getGreeting(): string {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) {
+      return 'Good morning,';
+    } else if (hour >= 12 && hour < 18) {
+      return 'Good afternoon,';
+    } else if (hour >= 18 && hour < 23) {
+      return 'Good evening,';
+    } else {
+      return 'Good night,';
+    }
+  }
+
   goToBoard() {
     this.router.navigate(['/board']);
   }
 
   //NEU:
   ngOnInit() {
+    this.greeting = this.getGreeting(); // NEU
+
     this.taskService.getTasks().subscribe((tasks: Task[]) => {
       this.taskList = tasks; // Hier alle Tasks speichern!
 
