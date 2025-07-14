@@ -794,13 +794,14 @@ input.error, textarea.error {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #4CAF50;
-  color: white;
+  color: var(--text-color-light);
+  background-color: var(--background-dark);
   padding: 20px 30px;
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   z-index: 1000;
   text-align: center;
+  @include inter400-fs20;
   
   @media (max-width: $small-mobile-breakpoint) {
     width: calc(100% - 32px);
@@ -811,10 +812,14 @@ input.error, textarea.error {
   .success-content {
     @include flex-column;
     gap: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    @include inter400-fs20;
+
     
     span:first-child {
-      font-size: 18px;
-      font-weight: 600;
+      @include inter400-fs20;
+      
       
       @media (max-width: $small-mobile-breakpoint) {
         font-size: 16px;
