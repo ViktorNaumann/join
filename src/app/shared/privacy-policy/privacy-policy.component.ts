@@ -15,7 +15,6 @@ export class PrivacyPolicyComponent {
   
      goBack() {
       this.navigationService.navigateBack();
-      console.log(this.navigationService.getHistory())
     }
   
 }
