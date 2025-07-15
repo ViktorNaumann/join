@@ -51,11 +51,12 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.initializeForm();
+    this.logoState = 'start'
     this.initializeAnimation();
   }
 
