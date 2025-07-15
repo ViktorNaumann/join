@@ -30,9 +30,12 @@ export class SummaryComponent implements OnInit {
   inProgressCount = 0;
   awaitingFeedbackCount = 0;
 
-  constructor(private taskService: TaskService, private router: Router, private authService: AuthService) {}
+  constructor(
+    private taskService: TaskService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
-  
   private countTasksByStatus(tasks: Task[], status: string): number {
     return tasks.filter((t) => t.status === status).length;
   }
@@ -72,8 +75,12 @@ export class SummaryComponent implements OnInit {
   ngOnInit() {
     this.greeting = this.getGreeting();
 
-    this.authService.getCurrentUserData().then(userData => {
-      this.userName = userData?.displayName || '';
+    this.authService.getCurrentUserData().then((userData) => {
+      // this.userName = userData?.displayName || '';
+      // Login als Guest:
+      this.userName = userData?.displayName?.trim()
+        ? userData.displayName
+        : 'Nice to see you!';
     });
 
     this.taskService.getTasks().subscribe((tasks: Task[]) => {
