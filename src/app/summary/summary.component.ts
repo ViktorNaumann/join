@@ -97,14 +97,16 @@ export class SummaryComponent implements OnInit {
         : 'Nice to see you!';
       this.greeting = this.getGreeting();
 
-      // Animation und Anzeige erst starten, wenn beides gesetzt ist
-      if (this.isMobile) {
+      // Begrüßungstext nur beim ersten Login anzeigen
+      const greetingShown = sessionStorage.getItem('greetingShown');
+      if (this.isMobile && !greetingShown) {
         this.showGreeting = true;
         this.greetingState = 'start';
         setTimeout(() => {
           this.greetingState = 'moved';
           setTimeout(() => {
             this.showGreeting = false;
+            sessionStorage.setItem('greetingShown', 'true');
           }, 2000);
         }, 500);
       } else {

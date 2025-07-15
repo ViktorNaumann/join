@@ -23,6 +23,12 @@ section {
     padding: 22px 4px;
   }
 
+  @media (max-width: 375px) {
+    height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; // für sanftes Scrollen auf iOS
+  }
+
   .greeting-overlay {
     position: fixed;
     inset: 0;
