@@ -8,9 +8,11 @@ import {
   updateDoc,
   deleteDoc,
   getDoc,
+  getDocs,
 } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { AuthService } from './auth.service';
 
 export interface Contact {
   id?: string;
@@ -70,7 +72,10 @@ export class ContactService {
   '#6bb604ff', // Lime Darker
 ];
 
-  constructor(private firestore: Firestore) {}
+  constructor(
+    private firestore: Firestore,
+    private authService: AuthService
+  ) {}
 
   getContacts(): Observable<Contact[]> {
     return new Observable((observer) => {
@@ -133,6 +138,7 @@ export class ContactService {
   selectContact(contact: Contact): void {
     this.selectedContactSubject.next(contact);
   }
+
   //NEU
   clearSelection(): void {
     this.selectedContactSubject.next(null);

@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { ContactService, Contact } from '../../services/contact.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-contact-list',
@@ -13,23 +14,36 @@ import { Subscription } from 'rxjs';
 export class ContactListComponent implements OnInit, OnDestroy {
   groupedContacts: { [key: string]: Contact[] } = {};
   selectedContact: Contact | null = null; //NEU
+  currentUserEmail: string | null = null;
   private contactsSubscription: Subscription = new Subscription();
   private selectionSubscription: Subscription = new Subscription(); //NEU
 
   @Output() contactSelected = new EventEmitter<void>();
 
-  constructor(public contactService: ContactService) {}
+  constructor(
+    public contactService: ContactService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.contactsSubscription = this.contactService.getContacts().subscribe({
       next: (contacts) => {
         this.groupedContacts = this.groupByInitial(contacts);
-      },
-      error: (error) => {
-        console.error('Error loading contacts:', error);
-      }
-    });
 
+        if (this.currentUserEmail) {
+        const matchedContact = contacts.find(c => c.email === this.currentUserEmail);
+        if (matchedContact) {
+          this.onContactSelect(matchedContact); // ← selektiere Benutzer-Kontakt
+        }
+      }
+    },
+    error: (error) => {
+      console.error('Error loading contacts:', error);
+    }
+  });
+
+    const user = this.authService.getCurrentUser();
+    this.currentUserEmail = user?.email || null;
 
     // Aktuelle Auswahl verfolgen für visuelle Hervorhebung
     this.selectionSubscription = this.contactService.selectedContact$.subscribe(
@@ -44,6 +58,9 @@ export class ContactListComponent implements OnInit, OnDestroy {
     this.selectionSubscription.unsubscribe();
   }
 
+  isCurrentUser(contact: Contact): boolean {
+    return typeof contact.email === 'string' && contact.email === this.currentUserEmail;
+  }
   
    onContactSelect(contact: Contact): void {
     this.contactService.selectContact(contact);
