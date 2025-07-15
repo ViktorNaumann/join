@@ -36,9 +36,7 @@ export class SummaryComponent implements OnInit {
   showGreeting = true;
   isMobile = false;
 
-  // NEU
   nextDeadlineDate: Date | null = null;
-  // nextDeadlineTask: Task | null = null; //Kann die Variable weg?
   nextDeadlineCount: number = 0;
   greeting: string = '';
 
@@ -90,28 +88,14 @@ export class SummaryComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.greeting = this.getGreeting();
     this.isMobile = window.innerWidth < 1000; // Mobile Ansicht Pixelbreite!
 
     this.authService.getCurrentUserData().then((userData) => {
-      // this.userName = userData?.displayName || '';
       // Login als Guest:
       this.userName = userData?.displayName?.trim()
         ? userData.displayName
         : 'Nice to see you!';
-      this.greeting = this.getGreeting(); // NEU zum Test!
-
-      // Animation erst starten, wenn userName gesetzt ist
-      // if (this.isMobile) {
-      //   setTimeout(() => {
-      //     this.greetingState = 'moved';
-      //     setTimeout(() => {
-      //       this.showGreeting = false;
-      //     }, 2000);
-      //   }, 500);
-      // } else {
-      //   this.showGreeting = false;
-      // }
+      this.greeting = this.getGreeting();
 
       // Animation und Anzeige erst starten, wenn beides gesetzt ist
       if (this.isMobile) {
@@ -167,17 +151,5 @@ export class SummaryComponent implements OnInit {
         this.nextDeadlineCount = 0;
       }
     });
-
-    // Animation für Begrüßung starten
-    // if (this.isMobile) {
-    //   setTimeout(() => {
-    //     this.greetingState = 'moved';
-    //     setTimeout(() => {
-    //       this.showGreeting = false;
-    //     }, 2000);
-    //   }, 500);
-    // } else {
-    //   this.showGreeting = false;
-    // }
   }
 }

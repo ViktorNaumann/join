@@ -7,10 +7,11 @@
   </div>
 
   <!-- Greeting Fullscreen Overlay (nur mobil) -->
-  <div 
-    class="greeting-overlay" 
+  <div
+    class="greeting-overlay"
     *ngIf="showGreeting && isMobile"
-    [@fadeOutGreeting]="greetingState">
+    [@fadeOutGreeting]="greetingState"
+  >
     <div class="greeting-overlay-container">
       <p class="greet-overlay">{{ greeting }}</p>
       <p class="user-overlay-name">{{ userName }}</p>
@@ -151,12 +152,9 @@
       </div>
     </div>
 
-    
-
     <div class="greeting-container">
       <p class="greet">{{ greeting }}</p>
       <p class="user-name">{{ userName }}</p>
     </div>
-
   </div>
 </section>
