@@ -8,7 +8,7 @@
   <div class="content-wrapper">
     <div class="summary-content">
       <div class="first-row">
-        <div class="to-do">
+        <div class="to-do" (click)="goToBoard()">
           <svg
             width="70"
             height="70"
@@ -55,7 +55,7 @@
           </div>
         </div>
 
-        <div class="done">
+        <div class="done" (click)="goToBoard()">
           <svg
             width="70"
             height="70"
@@ -86,7 +86,7 @@
         </div>
       </div>
 
-      <div class="deadline">
+      <div class="deadline" (click)="goToBoard()">
         <div class="svg-container">
           <svg
             width="40"
@@ -107,40 +107,40 @@
         </div>
 
         <div class="info-text">
-          <p class="counter">1</p>
+          <p class="counter">{{ nextDeadlineCount }}</p>
           <p class="task-info">Urgent</p>
         </div>
         <div class="container-divider"></div>
         <div class="deadline-info">
-          <p class="date">October 16, 2025</p>
+          <p class="date">{{ nextDeadlineDate | date : "MMMM d, y" }}</p>
           <p class="text">Upcoming Deadline</p>
         </div>
       </div>
 
       <div class="last-row">
-        <div class="board-tasks">
-<div class="info-text">
-          <p class="counter">{{ totalTaskCount }}</p>
-          <p class="task-info">Tasks in Board</p>
-</div>
+        <div class="board-tasks" (click)="goToBoard()">
+          <div class="info-text">
+            <p class="counter">{{ totalTaskCount }}</p>
+            <p class="task-info">Tasks in Board</p>
+          </div>
         </div>
-        <div class="in-progress">
-<div class="info-text">
-          <p class="counter">{{ inProgressCount }}</p>
-          <p class="task-info">Tasks in Progress</p>
-</div>
+        <div class="in-progress" (click)="goToBoard()">
+          <div class="info-text">
+            <p class="counter">{{ inProgressCount }}</p>
+            <p class="task-info">Tasks in Progress</p>
+          </div>
         </div>
-        <div class="await-feedback">
-<div class="info-text">
-          <p class="counter">{{ awaitingFeedbackCount }}</p>
-          <p class="task-info">Awaiting Feedback</p>
-</div>
+        <div class="await-feedback" (click)="goToBoard()">
+          <div class="info-text">
+            <p class="counter">{{ awaitingFeedbackCount }}</p>
+            <p class="task-info">Awaiting Feedback</p>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="greeting-container">
-      <p class="greet">Good morning,</p>
+      <p class="greet">{{ greeting }}</p>
       <p class="user-name">Giuliano Gioia</p>
     </div>
   </div>

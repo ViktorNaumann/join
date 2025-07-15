@@ -25,7 +25,7 @@ import {
         opacity: 1
       })),
       transition('start => moved', [
-        animate('2s 0.5s ease-in-out')
+        animate('1.25s 1.5s ease-in-out')
       ])
     ])
   ]

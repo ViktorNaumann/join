@@ -21,6 +21,7 @@ import {
   transferArrayItem,
   CdkDrag,
   CdkDropList,
+  CdkDragMove,
 } from '@angular/cdk/drag-drop';
 import { Task } from '../services/task.service';
 import { TaskService } from '../services/task.service';
@@ -380,6 +381,23 @@ export class BoardComponent {
         // Optional: UI-Update, falls nötig
         this.loadTasks();
       });
+    }
+  }
+
+  // NEU Window Drag-Scroll
+  onDragMoved(event: CdkDragMove) {
+    const mouseY = event.pointerPosition.y;
+    const threshold = 100;
+    const scrollStep = 30;
+
+    const section = this.scrollSection?.nativeElement;
+    if (!section) return;
+
+    const rect = section.getBoundingClientRect();
+    if (mouseY < rect.top + threshold) {
+      section.scrollBy({ top: -scrollStep, behavior: 'auto' });
+    } else if (rect.bottom - mouseY < threshold) {
+      section.scrollBy({ top: scrollStep, behavior: 'auto' });
     }
   }
 }

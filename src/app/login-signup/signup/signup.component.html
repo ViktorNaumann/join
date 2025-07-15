@@ -4,7 +4,7 @@
 
 <section class="signup-frame">
     <div class="signup-header">
-        <a class="btn-back">
+        <a class="btn-back" (click)="onBackToLogin()">
             <img src="assets/img/icons/arrow-back.png" alt="Back Icon">
         </a>
         <h2>Sign up</h2>
@@ -64,6 +64,11 @@
                 Sign up 
             </button>
         </div>
+        <p class="login-link">
+            Already have an account? <a routerLink="/login">Sign in here</a>
+        </p>
+        <p class="success-message" *ngIf="successMessage">{{ successMessage }}</p>
+        <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
     </form>
 </section>
 

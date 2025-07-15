@@ -101,6 +101,7 @@
             [cdkDragData]="task"
             [cdkDragStartDelay]="getDragDelay()"
             cdkDrag
+            (cdkDragMoved)="onDragMoved($event)"
             (taskSelected)="openTaskDetail($event)"
             [task]="task"
             [subtaskList]="getSubtasksForTask(task.id)"
@@ -155,6 +156,7 @@
             [cdkDragData]="task"
             [cdkDragStartDelay]="getDragDelay()"
             cdkDrag
+            (cdkDragMoved)="onDragMoved($event)"
             (taskSelected)="openTaskDetail($event)"
             [task]="task"
             [subtaskList]="getSubtasksForTask(task.id)"
@@ -211,6 +213,7 @@
             [cdkDragData]="task"
             [cdkDragStartDelay]="getDragDelay()"
             cdkDrag
+            (cdkDragMoved)="onDragMoved($event)"
             (taskSelected)="openTaskDetail($event)"
             [task]="task"
             [subtaskList]="getSubtasksForTask(task.id)"
@@ -254,6 +257,7 @@
             [cdkDragData]="task"
             [cdkDragStartDelay]="getDragDelay()"
             cdkDrag
+            (cdkDragMoved)="onDragMoved($event)"
             (taskSelected)="openTaskDetail($event)"
             [task]="task"
             [subtaskList]="getSubtasksForTask(task.id)"

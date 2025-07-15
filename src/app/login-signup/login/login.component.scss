@@ -9,9 +9,6 @@
         width: 100%;
         top: 0;
         left: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         z-index: 2;
         background-color: var(--background-dark);
         pointer-events: none;
@@ -22,8 +19,29 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 120px;
+        width: 100px;
         height: auto;
+        margin: 30px 40px;
+    }
+        .dark-logo-wrapper img.load {
+        animation: logoTransition 1s ease forwards;
+        }
+
+        
+}
+
+@keyframes logoTransition {
+    0% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+    100% {
+        top: 0%;
+        left: 0%;
+        transform: translate(0%, 0%);
+        opacity: 0;
     }
 }
 
@@ -93,6 +111,22 @@
         @include inter400-fs16;
         color: var(--error-color);
         margin-top: 4px;
+    }
+
+    .signup-link {
+        @include inter400-fs12;
+        color: var(--text-color-light);
+        text-align: center;
+        margin-top: 16px;
+        
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
 }
 

@@ -7,7 +7,7 @@
     padding: clamp(15px, 3vw, 50px);
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: var(--background-default-light) white;
+    scrollbar-color: transparent transparent;
     gap: 16px;
     color: var( --text-color-dark);
     h1 {

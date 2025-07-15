@@ -7,7 +7,7 @@
     padding: clamp(15px, 3vw, 50px);
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: var(--background-default-light) white;
+    scrollbar-color: transparent transparent;;
     gap: 16px;
     color: var( --text-color-dark);
     h1 {
@@ -23,7 +23,7 @@
     }
     h4 {
         @include inter400-fs20;
-        margin: 0.5em 0;
+        margin: 0.8em 0;
     }
     p {
         @include inter400-fs20;

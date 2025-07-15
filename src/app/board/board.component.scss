@@ -1,4 +1,5 @@
 @import "./../../styles.scss";
+
 section {
   height: calc(100vh - 100px);
   width: 100%;
@@ -149,8 +150,6 @@ section {
 }
 
 .task-columns {
-  // flex: 1;
-  // overflow: hidden;
   flex: 1 1 auto;
 
   display: flex;
@@ -238,8 +237,6 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  // overflow-y: auto;
-  // overflow-x: hidden;
   padding: 10px;
   margin: 10px 0;
   gap: 15px;
@@ -515,16 +512,32 @@ app-task {
   }
 }
 
+//TODO:
 @media (max-width: 830px) {
+  // .layout-container {
+  //   height: calc(100vh - 80px);
+  //   max-height: calc(100vh - 80px);
+  //   overflow-y: auto;
+  //   overflow-x: hidden;
+  //   display: flex;
+  //   flex-direction: column;
+  //   box-sizing: border-box;
+  // }
+
+  // NEU für das Window Scrolling:
   .layout-container {
-    height: calc(100vh - 80px);
-    max-height: calc(100vh - 80px);
-    overflow-y: auto;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
+    height: auto;
+    max-height: unset;
+    overflow-y: visible;
+    overflow-x: visible;
   }
+
+  // .layout-container {
+  //   height: auto !important;
+  //   max-height: unset !important;
+  //   overflow-y: visible !important;
+  //   overflow-x: visible !important;
+  // }
 
   .board-header {
     height: auto;

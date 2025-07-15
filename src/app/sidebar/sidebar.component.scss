@@ -20,7 +20,6 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    cursor: pointer;
 
     .logo {
       width: 100px;
@@ -81,6 +80,70 @@
 
         a {
           
+          span {
+            color: white;
+          }
+
+          img {
+            filter: brightness(0) invert(1);
+          }
+        }
+      }
+    }
+  }
+
+  .login-navigation {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 80px;
+
+    ul {
+      width: auto;
+      max-width: 200px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 12px 0;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      width: 232px;
+      box-sizing: border-box;
+      margin-left: calc((232px - 200px) / 2 * -1);
+      padding-left: calc(32px + (232px - 200px) / 2);
+      padding-right: 32px;
+
+      a {
+        gap: 16px;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+
+        img {
+          width: 24px;
+          height: 24px;
+        }
+
+        span {
+          font-size: 16px;
+          color: #cdcdcd;
+          font-family: var(--font-primary);
+        }
+      }
+
+      &:hover {
+        background-color: #2a3d59;
+
+        a {
           span {
             color: white;
           }
