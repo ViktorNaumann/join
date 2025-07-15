@@ -1,7 +1,13 @@
 <div class="login-content">
     <app-login-header class="login-header"></app-login-header>
-     <div class="dark-logo-wrapper" [@fadeOutWrapper]="logoState">
-        <img src="./assets/img/logo/logo.png" alt="Light Join Logo" [ngClass]="{'load':pageLoaded}">
+    <div 
+     class="dark-logo-wrapper" 
+     [@fadeOutWrapper]="logoState"
+     [ngStyle]="{'background': isTouchDevice ? '#2a3647' : 'transparent'}">
+        <img 
+        [src]="isTouchDevice ? './assets/img/logo/logo.png' : './assets/img/logo/favicon.png'"
+        alt="Join Logo" 
+        [ngClass]="{'load':pageLoaded}">
     </div>
     <section class="login-frame">
         <h2>Log in</h2>

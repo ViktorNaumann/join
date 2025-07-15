@@ -26,11 +26,9 @@
         margin: 30px 40px;
         z-index: 3;
     }
-        .dark-logo-wrapper img.load {
-        animation: logoTransition 1s ease forwards;
-        }
-
-        
+    .dark-logo-wrapper img.load {
+        animation: logoTransition 1.5s ease forwards;
+    }    
 }
 
 @keyframes logoTransition {
