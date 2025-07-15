@@ -43,10 +43,24 @@ section {
       .greet-overlay {
         font-size: 2.75rem;
         color: var(--text-color-dark);
+
+        @media (max-width: 530px) {
+          font-size: 2rem;
+        }
+        @media (max-width: 385px) {
+          font-size: 1.5rem;
+        }
       }
       .user-overlay-name {
         font-size: 4rem;
         color: var(--accent-primary-color);
+
+        @media (max-width: 530px) {
+          font-size: 3rem;
+        }
+        @media (max-width: 385px) {
+          font-size: 2rem;
+        }
       }
     }
 
@@ -174,7 +188,7 @@ section {
         transform: scale(0.85);
         transform-origin: top center;
       }
-      
+
       @media (max-width: 500px) {
         transform: scale(0.7);
         transform-origin: top center;

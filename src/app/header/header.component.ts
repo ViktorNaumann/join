@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -7,11 +7,7 @@ import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule
-
-  ],
+  imports: [CommonModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   animations: [
@@ -36,6 +32,9 @@ export class HeaderComponent {
   menuOpen = false;
   isMobile = window.innerWidth < 1000;
 
+  // NEU!
+  @ViewChild('menu') menuRef!: ElementRef;
+
   constructor(private authService: AuthService) {}
 
   @HostListener('window:resize', ['$event'])
@@ -43,6 +42,18 @@ export class HeaderComponent {
     const width = (event.target as Window).innerWidth;
     this.isMobile = width < 1000;
     if (!this.isMobile && this.menuOpen) {
+      this.menuOpen = false;
+    }
+  }
+
+  // NEU!
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    if (
+      this.menuOpen &&
+      this.menuRef &&
+      !this.menuRef.nativeElement.contains(event.target)
+    ) {
       this.menuOpen = false;
     }
   }
