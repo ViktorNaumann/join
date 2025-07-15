@@ -65,6 +65,7 @@ export class HeaderComponent {
 
   async logout(): Promise<void> {
     await this.authService.signOutUser();
+    sessionStorage.removeItem('greetingShown'); // Begrüßung zurücksetzen
     this.menuOpen = false;
   }
 
