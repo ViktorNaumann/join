@@ -15,6 +15,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
   groupedContacts: { [key: string]: Contact[] } = {};
   selectedContact: Contact | null = null; //NEU
   currentUserEmail: string | null = null;
+  currentUser: string | null = null;
   private contactsSubscription: Subscription = new Subscription();
   private selectionSubscription: Subscription = new Subscription(); //NEU
 
@@ -43,6 +44,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
   });
 
     const user = this.authService.getCurrentUser();
+    this.currentUser = user?.displayName || null;
     this.currentUserEmail = user?.email || null;
 
     // Aktuelle Auswahl verfolgen für visuelle Hervorhebung
