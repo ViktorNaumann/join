@@ -32,8 +32,13 @@ import {
 })
 export class LoginHeaderComponent {
   logoState: 'start' | 'appear' = 'start';
+  isTouchDevice:boolean = false;
 
   ngOnInit(): void {
+    this.initializeAnimation();
+  } 
+
+  initializeAnimation() {
     if (!sessionStorage.getItem('logoMoved')) {
       setTimeout(() => {
         this.logoState = 'appear';
@@ -44,3 +49,4 @@ export class LoginHeaderComponent {
     }
   }
 }
+
