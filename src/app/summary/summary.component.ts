@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TaskService, Task } from '../services/task.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 // NEU:
 interface FirestoreTimestamp {
@@ -16,6 +17,7 @@ interface FirestoreTimestamp {
 })
 export class SummaryComponent implements OnInit {
   taskList: Task[] = []; // Variable zum speichern aller Tasks!
+  userName: string = '';
 
   // NEU
   nextDeadlineDate: Date | null = null;
@@ -28,9 +30,9 @@ export class SummaryComponent implements OnInit {
   inProgressCount = 0;
   awaitingFeedbackCount = 0;
 
-  constructor(private taskService: TaskService, private router: Router) {}
+  constructor(private taskService: TaskService, private router: Router, private authService: AuthService) {}
 
-  //NEU:
+  
   private countTasksByStatus(tasks: Task[], status: string): number {
     return tasks.filter((t) => t.status === status).length;
   }
@@ -49,7 +51,7 @@ export class SummaryComponent implements OnInit {
     );
   }
 
-  // Neue Methode Uhrzeit
+  // Methode Uhrzeit
   getGreeting(): string {
     const hour = new Date().getHours();
     if (hour >= 5 && hour < 12) {
@@ -67,9 +69,12 @@ export class SummaryComponent implements OnInit {
     this.router.navigate(['/board']);
   }
 
-  //NEU:
   ngOnInit() {
-    this.greeting = this.getGreeting(); // NEU
+    this.greeting = this.getGreeting();
+
+    this.authService.getCurrentUserData().then(userData => {
+      this.userName = userData?.displayName || '';
+    });
 
     this.taskService.getTasks().subscribe((tasks: Task[]) => {
       this.taskList = tasks; // Hier alle Tasks speichern!
