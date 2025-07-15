@@ -25,6 +25,8 @@ export class SignupComponent implements OnInit {
   errorMessage: string = '';
   successMessage: string = '';
   isLoading: boolean = false;
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
 
   constructor(
     private form: FormBuilder,

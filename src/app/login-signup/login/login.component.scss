@@ -103,7 +103,8 @@
             width: 20px;
             height: 20px;
             opacity: 0.6;
-            pointer-events: none;
+            pointer-events: auto;
+            z-index: 2;
         }
     }
 
@@ -134,6 +135,7 @@
     display: flex;
     justify-content: center;
     gap: 16px;
+    margin-top: 24px;
 
     .btn-login {
         @include btn-dark;
@@ -158,5 +160,12 @@
         background-color: white;
         justify-content: center;
     }
+}
 
+.input-icon.toggle-eye {
+    cursor: pointer;
+    right: 16px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }

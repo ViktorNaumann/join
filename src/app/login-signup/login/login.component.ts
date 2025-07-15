@@ -45,6 +45,7 @@ export class LoginComponent {
   loginForm!: FormGroup;
   errorMessage: string = '';
   isLoading: boolean = false;
+  showPassword: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -115,11 +116,9 @@ export class LoginComponent {
   getValidationMessage(field: string): string {
     const control = this.loginForm.get(field);
     if (!control || !control.touched || !control.errors) return '';
-    
     if (control.errors['required']) return 'This field is required';
     if (control.errors['email']) return 'Please enter a valid email address';
-    if (control.errors['minlength']) return 'Password must be at least 6 characters long';
-    
+    if (control.errors['minlength']) return 'Password must be at least 8 characters long';
     return '';
   }
 }
