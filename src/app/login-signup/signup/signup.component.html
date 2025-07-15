@@ -12,61 +12,63 @@
         </div>
         <form [formGroup]="signupform" (ngSubmit)="onSubmit()">
             <div class="form-group-wrapper">
-                <div class="form-group">
-                    <label for="name"></label>
-                    <input id="name" type="text" placeholder="Name" formControlName="name">
-                    <img class="input-icon" src="assets/img/icons/person.png" alt="Person Icon">
+                <div>
+                    <div class="form-group" [ngClass]="{'colorError': signupform.get('name')?.invalid && signupform.get('name')?.touched}">
+                        <label for="name"></label>
+                        <input id="name" type="text" placeholder="Name" formControlName="name">
+                        <img class="input-icon" src="assets/img/icons/person.png" alt="Person Icon">
+                    </div>
+                    <p class="error-message" *ngIf="signupform.get('name')?.invalid && signupform.get('name')?.touched">
+                        {{ getValidationMessage('name') }}
+                    </p>
                 </div>
-                <p class="error-message" *ngIf="signupform.get('name')?.invalid && signupform.get('name')?.touched">
-                    {{ getValidationMessage('name') }}
-                </p>
             </div>   
             <div class="form-group-wrapper">
-                <div class="form-group">
-                    <label for="email"></label>
-                    <input id="email" type="text" placeholder="Email" formControlName="email">
-                    <img class="input-icon" src="assets/img/icons/mail.png" alt="Mail Icon">
+                <div>
+                    <div class="form-group" [ngClass]="{'colorError': signupform.get('email')?.invalid && signupform.get('email')?.touched}">
+                        <label for="email"></label>
+                        <input id="email" type="text" placeholder="Email" formControlName="email">
+                        <img class="input-icon" src="assets/img/icons/mail.png" alt="Mail Icon">
+                    </div>
+                    <p class="error-message" *ngIf="signupform.get('email')?.invalid && signupform.get('email')?.touched">
+                        {{ getValidationMessage('email') }}
+                    </p>
                 </div>
-                <p class="error-message" *ngIf="signupform.get('email')?.invalid && signupform.get('email')?.touched">
-                    {{ getValidationMessage('email') }}
-                </p>
             </div>    
             <div class="form-group-wrapper">
-
-
-
-                <div class="form-group">
-                    <label for="password"></label>
-                    <input id="password" [type]="showPassword ? 'text' : 'password'" placeholder="Password" formControlName="password">
-                    <img class="input-icon" src="assets/img/icons/lock.png" alt="Lock Icon" *ngIf="!signupform.get('password')?.value">
-                    <img class="input-icon toggle-eye" [src]="showPassword ? 'assets/img/icons/visibility-off.png' : 'assets/img/icons/visibility.png'" alt="Toggle Password Visibility" *ngIf="signupform.get('password')?.value" (click)="showPassword = !showPassword" />
+                <div>
+                    <div class="form-group" [ngClass]="{'colorError': signupform.get('password')?.invalid && signupform.get('password')?.touched}">
+                        <label for="password"></label>
+                        <input id="password" [type]="showPassword ? 'text' : 'password'" placeholder="Password" formControlName="password">
+                        <img class="input-icon" src="assets/img/icons/lock.png" alt="Lock Icon" *ngIf="!signupform.get('password')?.value">
+                        <img class="input-icon toggle-eye" [src]="showPassword ? 'assets/img/icons/visibility-off.png' : 'assets/img/icons/visibility.png'" alt="Toggle Password Visibility" *ngIf="signupform.get('password')?.value" (click)="showPassword = !showPassword" />
+                    </div>
+                    <p class="error-message" *ngIf="signupform.get('password')?.invalid && signupform.get('password')?.touched">
+                        {{ getValidationMessage('password') }}
+                    </p>
                 </div>
-
-
-
-                <p class="error-message" *ngIf="signupform.get('password')?.invalid && signupform.get('password')?.touched">
-                    {{ getValidationMessage('password') }}
-                </p>
             </div>    
             <div class="form-group-wrapper"> 
-                <div class="form-group">
-                    <label for="confirmPassword"></label>
-                    <input id="confirmPassword" [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirm Password" formControlName="confirmPassword">
-                    <img class="input-icon" src="assets/img/icons/lock.png" alt="Lock Icon" *ngIf="!signupform.get('confirmPassword')?.value">
-                    <img class="input-icon toggle-eye" [src]="showConfirmPassword ? 'assets/img/icons/eye-off.png' : 'assets/img/icons/eye.png'" alt="Toggle Confirm Password Visibility" *ngIf="signupform.get('confirmPassword')?.value" (click)="showConfirmPassword = !showConfirmPassword"/>
+                <div>
+                    <div class="form-group" [ngClass]="{'colorError': signupform.get('confirmPassword')?.invalid && signupform.get('confirmPassword')?.touched}">
+                        <label for="confirmPassword"></label>
+                        <input id="confirmPassword" [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirm Password" formControlName="confirmPassword">
+                        <img class="input-icon" src="assets/img/icons/lock.png" alt="Lock Icon" *ngIf="!signupform.get('confirmPassword')?.value">
+                        <img class="input-icon toggle-eye" [src]="showConfirmPassword ? 'assets/img/icons/visibility.png' : 'assets/img/icons/visibility-off.png'" alt="Toggle Confirm Password Visibility" *ngIf="signupform.get('confirmPassword')?.value" (click)="showConfirmPassword = !showConfirmPassword"/>
+                    </div>
+                    <p class="error-message" *ngIf="getValidationMessage('confirmPassword')">
+                        {{ getValidationMessage('confirmPassword') }}
+                    </p>
                 </div>
-                <p class="error-message" *ngIf="getValidationMessage('confirmPassword')">
-                    {{ getValidationMessage('confirmPassword') }}
-                </p>
             </div>
             <div class="form-group-wrapper">    
                 <label class="checkbox-label">
                     <input type="checkbox" formControlName="privacyPolicy" />
                     I accept the <span class="highlight">Privacy policy</span>
                 </label>
-                <div class="error-message">
+                <!--<div class="error-message">
                     {{ getValidationMessage('privacyPolicy') }}
-                </div>
+                </div>-->
             </div>    
             <div class="btn-wrapper">
                 <button class="btn-signup" type="submit" [disabled]="signupform.invalid || isLoading">

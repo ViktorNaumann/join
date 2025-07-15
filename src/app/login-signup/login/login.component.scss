@@ -88,7 +88,10 @@
     .form-group {
         @include form-group;
         position: relative;
-
+        
+        &.colorError {
+            border: 1px solid var(--text-color-error);
+        }
         input {
             background-color: transparent;
             color: var(--text-color-main);
@@ -112,9 +115,8 @@
     }
 
     .error-message {
-        @include inter400-fs16;
-        color: var(--error-color);
-        margin-top: 4px;
+        @include inter400-fs12;
+        color: var(--text-color-error);
     }
 
     .signup-link {
