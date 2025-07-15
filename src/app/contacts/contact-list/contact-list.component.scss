@@ -55,7 +55,7 @@
     padding: clamp(8px, 1.5vw, 15px) clamp(8px, 2vw, 24px);
     gap: clamp(12px, 2vw, 24px);
     flex-wrap: wrap;
-
+    position: relative;
     cursor: pointer;
     transition: background-color 0.2s;
     border-radius: 10px;
@@ -74,6 +74,18 @@
       .avatar {
         border: 2px solid #ffffff;
       }
+    }
+
+    .active-user {
+      @include inter400-fs12;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      color: var(--text-color-dark);
+      border-radius: 50%;
+      background-color: var(--background-light);
+      border: 2px solid var(--text-color-error);
+      padding: 4px;
     }
 
     .avatar {

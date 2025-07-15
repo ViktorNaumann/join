@@ -2,6 +2,8 @@
 
 .login-content {
     position:relative;
+    max-width: 1440px;
+    margin: 0 auto;
     
     .dark-logo-wrapper {
         position: absolute;
@@ -9,7 +11,7 @@
         width: 100%;
         top: 0;
         left: 0;
-        z-index: 2;
+        z-index: 3;
         background-color: var(--background-dark);
         pointer-events: none;
     }
@@ -22,6 +24,7 @@
         width: 100px;
         height: auto;
         margin: 30px 40px;
+        z-index: 3;
     }
         .dark-logo-wrapper img.load {
         animation: logoTransition 1s ease forwards;
@@ -55,7 +58,7 @@
     @include flex-center;
     flex-direction: column;
     gap: clamp(24px, 2.5vh, 36px);
-    margin-top: 64px; //zu testzwecken
+    margin-top: 10rem; //zu testzwecken
 
     h2 {
         @include inter700-fs47;
@@ -103,7 +106,8 @@
             width: 20px;
             height: 20px;
             opacity: 0.6;
-            pointer-events: none;
+            pointer-events: auto;
+            z-index: 2;
         }
     }
 
@@ -134,6 +138,7 @@
     display: flex;
     justify-content: center;
     gap: 16px;
+    margin-top: 24px;
 
     .btn-login {
         @include btn-dark;
@@ -158,5 +163,12 @@
         background-color: white;
         justify-content: center;
     }
+}
 
+.input-icon.toggle-eye {
+    cursor: pointer;
+    right: 16px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }

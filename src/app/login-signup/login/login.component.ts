@@ -16,6 +16,7 @@ import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   imports: [
     LoginHeaderComponent,
     FooterComponent,
@@ -45,15 +46,17 @@ export class LoginComponent {
   loginForm!: FormGroup;
   errorMessage: string = '';
   isLoading: boolean = false;
+  showPassword: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.initializeForm();
+    this.logoState = 'start'
     this.initializeAnimation();
   }
 
@@ -115,11 +118,9 @@ export class LoginComponent {
   getValidationMessage(field: string): string {
     const control = this.loginForm.get(field);
     if (!control || !control.touched || !control.errors) return '';
-    
     if (control.errors['required']) return 'This field is required';
     if (control.errors['email']) return 'Please enter a valid email address';
-    if (control.errors['minlength']) return 'Password must be at least 6 characters long';
-    
+    if (control.errors['minlength']) return 'Password must be at least 8 characters long';
     return '';
   }
 }

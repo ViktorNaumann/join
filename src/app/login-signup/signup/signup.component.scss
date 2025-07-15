@@ -1,5 +1,10 @@
 @import "./../../../styles.scss";
 
+.signup-content {
+    position:relative;
+    max-width: 1440px;
+    margin: 0 auto;
+}
 
 .dark-logo-wrapper {
     padding: 32px;
@@ -147,7 +152,7 @@
     transition: background-color 0.2s ease;
     justify-content: center;
     @include btn-dark();
-    margin-top: 12px;
+    margin-top: 8px;
 
     &:hover {
         background-color: #29abe2;
@@ -215,4 +220,12 @@ input:focus {
   to {
     transform: rotate(360deg);
   }
+}
+
+.input-icon.toggle-eye {
+    cursor: pointer;
+    right: 16px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }

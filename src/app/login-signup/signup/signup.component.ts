@@ -25,6 +25,8 @@ export class SignupComponent implements OnInit {
   errorMessage: string = '';
   successMessage: string = '';
   isLoading: boolean = false;
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
 
   constructor(
     private form: FormBuilder,
@@ -67,7 +69,6 @@ export class SignupComponent implements OnInit {
     const { name, email, password } = this.signupform.value;
     const result = await this.authService.signUp(email, password, name);
     this.saveNewContact(name, email);
-    console.log(result)
 
     if (result.success) {
       this.successMessage = 'Registration successful! You will be redirected...';
@@ -84,9 +85,10 @@ export class SignupComponent implements OnInit {
   saveNewContact(newName:string, newEmail:string){
     const newContact: Contact = {
       name: newName,
-      email: newEmail
+      email: newEmail,
     }
     this.contactService.addContact(newContact)
+    this.contactService.selectContact(newContact)
   }
 
   onBackToLogin(): void {

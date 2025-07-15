@@ -6,7 +6,8 @@ import {
   signOut, 
   User,
   onAuthStateChanged,
-  updateProfile
+  updateProfile,
+  deleteUser
 } from '@angular/fire/auth';
 import { 
   Firestore, 
@@ -163,6 +164,20 @@ export class AuthService {
         return 'Network error. Please check your internet connection.';
       default:
         return 'An error occurred. Please try again.';
+    }
+  }
+
+  //Löschen des Accounts
+  async deleteAccount(): Promise<{ success: boolean; message?: string }> {
+    const user = this.auth.currentUser;
+    if (!user) {
+      return { success: false, message: 'No user is currently signed in.' };
+    }
+    try {
+      await deleteUser(user);
+      return { success: true };
+    } catch (error: any) {
+      return { success: false, message: this.getErrorMessage(error.code) };
     }
   }
 }
