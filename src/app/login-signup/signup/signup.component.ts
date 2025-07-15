@@ -4,6 +4,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { Contact, ContactService } from '../../services/contact.service';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class SignupComponent implements OnInit {
   constructor(
     private form: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private contactService: ContactService,
   ) {}
 
   ngOnInit(): void {
@@ -58,13 +60,14 @@ export class SignupComponent implements OnInit {
       this.signupform.markAllAsTouched();
       return;
     }
-
     this.isLoading = true;
     this.errorMessage = '';
     this.successMessage = '';
 
     const { name, email, password } = this.signupform.value;
     const result = await this.authService.signUp(email, password, name);
+    this.saveNewContact(name, email);
+    console.log(result)
 
     if (result.success) {
       this.successMessage = 'Registration successful! You will be redirected...';
@@ -76,6 +79,14 @@ export class SignupComponent implements OnInit {
     }
 
     this.isLoading = false;
+  }
+
+  saveNewContact(newName:string, newEmail:string){
+    const newContact: Contact = {
+      name: newName,
+      email: newEmail
+    }
+    this.contactService.addContact(newContact)
   }
 
   onBackToLogin(): void {

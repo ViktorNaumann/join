@@ -50,24 +50,24 @@ export class ContactService {
   '#4CAF50', // Green
   '#F44336', // Red
   '#00BCD4', // Cyan
-  '#795548', // Brown
-  '#607D8B', // Blue Grey
+  '#c44314ff', // Dark Orange
+  '#5191daff', // Blue Grey
   '#E91E63', // Pink
   '#3F51B5', // Indigo
-  '#CDDC39', // Lime
+  '#b3c511ff', // Lime
   '#FF5722', // Deep Orange
   '#388E3C', // Dark Green
   '#1976D2', // Darker Blue
-  '#7B1FA2', // Dark Purple
-  '#D32F2F', // Dark Red
-  '#5D4037', // Dark Brown
-  '#303F9F', // Dark Indigo
+  '#5c0582ff', // Dark Purple
+  '#c90d0dff', // Dark Red
+  '#c303aaff', // Pink
+  '#0118acff', // Dark Indigo
   '#0288D1', // Light Blue (nicht zu hell)
   '#C2185B', // Deep Pink
-  '#00796B', // Teal
+  '#049484ff', // Teal
   '#FFA000', // Amber (dunklerer Ton)
-  '#455A64', // Dark Blue Grey
-  '#AFB42B', // Olive/Lime Darker
+  '#084c6bff', // Dark Blue Grey
+  '#6bb604ff', // Lime Darker
 ];
 
   constructor(private firestore: Firestore) {}
