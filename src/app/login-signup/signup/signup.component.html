@@ -61,7 +61,7 @@
         </div>    
         <div class="btn-wrapper">
             <button class="btn-signup" type="submit" [disabled]="signupform.invalid">
-                Sign up 
+                {{ isLoading ? 'Loading...' : 'Sign up' }}
             </button>
         </div>
         <p class="login-link">
