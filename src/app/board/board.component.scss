@@ -524,20 +524,13 @@ app-task {
   //   box-sizing: border-box;
   // }
 
-  // NEU für das Window Scrolling:
+  // NEU Window Scrolling:
   .layout-container {
     height: auto;
     max-height: unset;
     overflow-y: visible;
     overflow-x: visible;
   }
-
-  // .layout-container {
-  //   height: auto !important;
-  //   max-height: unset !important;
-  //   overflow-y: visible !important;
-  //   overflow-x: visible !important;
-  // }
 
   .board-header {
     height: auto;

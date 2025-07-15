@@ -123,17 +123,4 @@ export class SummaryComponent implements OnInit {
       }
     });
   }
-
-  // ngOnInit() {
-  //   this.taskService.getTasks().subscribe((tasks: Task[]) => {
-  //     this.todoCount = tasks.filter((t) => t.status === 'to-do').length;
-  //     this.doneCount = tasks.filter((t) => t.status === 'done').length;
-  //     this.inProgressCount = tasks.filter(
-  //       (t) => t.status === 'in-progress'
-  //     ).length;
-  //     this.awaitingFeedbackCount = tasks.filter(
-  //       (t) => t.status === 'await-feedback'
-  //     ).length;
-  //   });
-  // }
 }

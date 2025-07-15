@@ -7,17 +7,34 @@ section {
   width: 100%;
   font-family: "inter", var(--font-primary), sans-serif;
 
+  @media (max-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .summary-header {
     display: flex;
     align-items: center;
     min-height: 200px;
     gap: 20px;
-    padding-top: clamp(40px, 8vh, 80px);
+    padding-top: 12px;
     margin-bottom: 44px;
+
+    @media (max-width: 750px) {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding-top: 44px;
+    }
 
     h1 {
       font-family: var(--font-primary);
-      font-size: clamp(1.5rem, 5vw, 3.5rem);
+      font-size: 3.5rem;
       font-weight: 600;
       margin: 0;
       color: var(--text-color-dark);
@@ -25,14 +42,31 @@ section {
 
     .header-divider {
       width: 3px;
-      height: clamp(40px, 8vh, 60px);
+      height: 62px;
       background-color: var(--accent-primary-color);
       border-radius: 2px;
+
+      @media (max-width: 750px) {
+        display: none;
+      }
+    }
+
+    .mobile-header-divider {
+      display: none;
+      width: 90px;
+      height: 3px;
+      background-color: var(--accent-primary-color);
+      border-radius: 2px;
+      margin: 8px 0;
+
+      @media (max-width: 750px) {
+        display: unset;
+      }
     }
 
     p {
       font-family: var(--font-primary);
-      font-size: clamp(1rem, 3vw, 1.5rem);
+      font-size: 1.5rem;
       font-weight: 400;
       margin: 0;
       color: black;
@@ -42,16 +76,20 @@ section {
   .info-text {
     @include flex-direction;
     .counter {
-      font-size: 54px;
+      font-size: 3.375rem;
     }
     .task-info {
-      font-size: 20px;
+      font-size: 1.25rem;
     }
   }
 
   .content-wrapper {
     display: flex;
     gap: 64px;
+
+    @media (max-width: 1235px) {
+      gap: 34px;
+    }
 
     .summary-content {
       display: flex;
@@ -129,10 +167,10 @@ section {
         display: flex;
         flex-direction: column;
         .date {
-          font-size: 24px;
+          font-size: 1.5rem;
         }
         .text {
-          font-size: 18px;
+          font-size: 1.125rem;
         }
       }
 
@@ -147,7 +185,6 @@ section {
       }
     }
 
-    //TODO:
     .last-row {
       width: 100%;
       @include flex-center;
@@ -162,10 +199,10 @@ section {
         }
 
         .counter {
-          font-size: 54px;
+          font-size: 3.375rem;
         }
         .task-info {
-          font-size: 20px;
+          font-size: 1.25rem;
         }
       }
 
@@ -178,10 +215,10 @@ section {
         }
 
         .counter {
-          font-size: 54px;
+          font-size: 3.375rem;
         }
         .task-info {
-          font-size: 20px;
+          font-size: 1.25rem;
         }
       }
 
@@ -194,10 +231,10 @@ section {
         }
 
         .counter {
-          font-size: 54px;
+          font-size: 3.375rem;
         }
         .task-info {
-          font-size: 20px;
+          font-size: 1.25rem;
         }
       }
     }
@@ -207,12 +244,24 @@ section {
       flex-direction: column;
       justify-content: center;
 
+      @media (max-width: 1215px) {
+        display: none;
+      }
+
       .greet {
-        font-size: 44px;
+        font-size: 2.75rem;
+
+        @media (max-width: 1400px) {
+          font-size: 2.125rem;
+        }
       }
       .user-name {
-        font-size: 64px;
+        font-size: 4rem;
         color: var(--accent-primary-color);
+
+        @media (max-width: 1400px) {
+          font-size: 2.75rem;
+        }
       }
     }
   }
