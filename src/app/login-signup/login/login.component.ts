@@ -47,6 +47,7 @@ export class LoginComponent {
   errorMessage: string = '';
   isLoading: boolean = false;
   showPassword: boolean = false;
+  isTouchDevice = false;
 
   constructor(
     private fb: FormBuilder,
@@ -56,8 +57,13 @@ export class LoginComponent {
 
   ngOnInit(): void {
     this.initializeForm();
-    this.logoState = 'start'
+    this.checkIfTouchDevice();
     this.initializeAnimation();
+  }
+
+  private checkIfTouchDevice(): void {
+    this.isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    console.log(this.isTouchDevice)
   }
 
   private initializeForm(): void {
