@@ -16,6 +16,38 @@ section {
     margin-right: auto;
   }
 
+  .greeting-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    will-change: opacity;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .greeting-overlay-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .greet-overlay {
+        font-size: 2.75rem;
+        color: var(--text-color-dark);
+      }
+      .user-overlay-name {
+        font-size: 4rem;
+        color: var(--accent-primary-color);
+      }
+    }
+
+    @media (min-width: 1000px) {
+      display: none !important;
+    }
+  }
+
   .summary-header {
     display: flex;
     align-items: center;

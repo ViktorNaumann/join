@@ -3,8 +3,14 @@ import { TaskService, Task } from '../services/task.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 
-// NEU:
 interface FirestoreTimestamp {
   toDate(): Date;
 }
@@ -14,10 +20,21 @@ interface FirestoreTimestamp {
   imports: [CommonModule],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss',
+  animations: [
+    trigger('fadeOutGreeting', [
+      state('start', style({ opacity: 1 })),
+      state('moved', style({ opacity: 0 })),
+      transition('start => moved', [animate('1.5s 0.5s ease-in-out')]),
+    ]),
+  ],
 })
 export class SummaryComponent implements OnInit {
   taskList: Task[] = []; // Variable zum speichern aller Tasks!
   userName: string = '';
+
+  greetingState: 'start' | 'moved' = 'start';
+  showGreeting = true;
+  isMobile = false;
 
   // NEU
   nextDeadlineDate: Date | null = null;
@@ -73,7 +90,8 @@ export class SummaryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.greeting = this.getGreeting();
+    // this.greeting = this.getGreeting();
+    this.isMobile = window.innerWidth < 1000; // Mobile Ansicht Pixelbreite!
 
     this.authService.getCurrentUserData().then((userData) => {
       // this.userName = userData?.displayName || '';
@@ -81,6 +99,33 @@ export class SummaryComponent implements OnInit {
       this.userName = userData?.displayName?.trim()
         ? userData.displayName
         : 'Nice to see you!';
+      this.greeting = this.getGreeting(); // NEU zum Test!
+
+      // Animation erst starten, wenn userName gesetzt ist
+      // if (this.isMobile) {
+      //   setTimeout(() => {
+      //     this.greetingState = 'moved';
+      //     setTimeout(() => {
+      //       this.showGreeting = false;
+      //     }, 2000);
+      //   }, 500);
+      // } else {
+      //   this.showGreeting = false;
+      // }
+
+      // Animation und Anzeige erst starten, wenn beides gesetzt ist
+      if (this.isMobile) {
+        this.showGreeting = true;
+        this.greetingState = 'start';
+        setTimeout(() => {
+          this.greetingState = 'moved';
+          setTimeout(() => {
+            this.showGreeting = false;
+          }, 2000);
+        }, 500);
+      } else {
+        this.showGreeting = false;
+      }
     });
 
     this.taskService.getTasks().subscribe((tasks: Task[]) => {
@@ -122,5 +167,17 @@ export class SummaryComponent implements OnInit {
         this.nextDeadlineCount = 0;
       }
     });
+
+    // Animation für Begrüßung starten
+    // if (this.isMobile) {
+    //   setTimeout(() => {
+    //     this.greetingState = 'moved';
+    //     setTimeout(() => {
+    //       this.showGreeting = false;
+    //     }, 2000);
+    //   }, 500);
+    // } else {
+    //   this.showGreeting = false;
+    // }
   }
 }
