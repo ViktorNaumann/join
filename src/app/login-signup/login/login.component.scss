@@ -26,17 +26,11 @@
         margin: 30px 40px;
         z-index: 3;
     }
-<<<<<<< HEAD
-    .dark-logo-wrapper img.load {
-        animation: logoTransition 1.5s ease forwards;
-    }    
-=======
 
     .dark-logo-wrapper img.load {
         animation: logoTransition 1s ease forwards;
     }
    
->>>>>>> 6c42692 (some more styling)
 }
 
 @keyframes logoTransition {

@@ -59,6 +59,10 @@
     }
 }    
 
+form {
+    padding: 0 33px;
+}
+
 .form-group-wrapper {
     display: flex;
     flex-direction: column;
@@ -72,6 +76,7 @@
     @include form-group();
     background-color: var(--background-light);
     position: relative;
+    
 
     input {
         width: 100%;
