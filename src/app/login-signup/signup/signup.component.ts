@@ -32,8 +32,9 @@ export class SignupComponent implements OnInit {
           Validators.minLength(8),
           Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};:'"\\|,.<>\/?]).+$/)  //8-Zeichen langes Passwort min. 1 Großbuchstabe, 1 Zahle & 1 Sonderzeichen -> maybe kleine Info-i mit was muss passwort haben
         ]],
-      confirmPassword: ['', Validators.required]
-    }, { validators: this.passwordsMatchValidator }
+      confirmPassword: ['', Validators.required],
+      privacyPolicy: [false, [Validators.requiredTrue]],
+      }, { validators: this.passwordsMatchValidator }
     );
   }
 
@@ -54,6 +55,13 @@ export class SignupComponent implements OnInit {
 
   getValidationMessage(field: string): string {
     const control = this.signupform.get(field);
+    if (field === 'confirmPassword') {
+      const passwordMismatch = this.signupform.errors?.['passwordsDontMatch'];
+      const touched = control?.touched || this.signupform.get('password')?.touched;
+      if (passwordMismatch && touched) {
+        return 'Passwords do not match';
+      }
+    }
     if (!control || !control.touched || !control.errors) return '';
     if (control.errors['required']) return 'This field is required';
     if (control.errors['email']) return 'Please enter a valid email address';
@@ -63,10 +71,10 @@ export class SignupComponent implements OnInit {
     if (control.errors['pattern']) {
       return 'Password must contain uppercase, number, and special character';
     }
-    if (field === 'confirmPassword' && this.signupform.errors?.['passwordsDontMatch']) {
-      return 'Passwords do not match';
-    }
+    if (control.errors['requiredTrue']) return 'You must accept the privacy policy';
     return '';
   }
+
+
 
 }
