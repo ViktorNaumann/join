@@ -2,6 +2,8 @@
 
 .login-content {
     position:relative;
+    max-width: 1440px;
+    margin: 0 auto;
     
     .dark-logo-wrapper {
         position: absolute;
@@ -55,7 +57,7 @@
     @include flex-center;
     flex-direction: column;
     gap: clamp(24px, 2.5vh, 36px);
-    margin-top: 64px; //zu testzwecken
+    margin-top: 10rem; //zu testzwecken
 
     h2 {
         @include inter700-fs47;
