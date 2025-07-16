@@ -1,51 +1,59 @@
 @import "./../../../styles.scss";
 
 .legal-notice-page {
-    width: 100%;
-    max-width: 1200px;
-    height: calc(100dvh - 100px);
-    padding: clamp(15px, 3vw, 50px);
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: transparent transparent;
-    gap: 16px;
-    color: var( --text-color-dark);
-    h1 {
-        @include inter700-fs61;
-    }
-    h2 {
-        @include inter700-fs27;
-        margin: 1em 0;
-    }
-    h3 {
-        @include inter500-fs20;
-        margin: 0.5em 0;
-    }
-    p {
-        @include inter400-fs20;
-        margin: 0.5em 0;
-    }
-    @media(max-width: 1000px) {
-        height: calc(100dvh - 180px);
-    }
+  width: 100%;
+  max-width: 1200px;
+  height: calc(100dvh - 100px);
+  padding: clamp(15px, 3vw, 50px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  gap: 16px;
+  color: var(--text-color-dark);
+
+  h1 {
+    @include inter700-fs61;
+  }
+
+  h2 {
+    @include inter700-fs27;
+    margin: 1em 0;
+  }
+
+  h3 {
+    @include inter500-fs20;
+    margin: 0.5em 0;
+  }
+
+  p {
+    @include inter400-fs20;
+    margin: 0.5em 0;
+  }
+
+  @media (max-width: 1000px) {
+    height: calc(100dvh - 180px);
+  }
 }
 
 .back-btn-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    a {
-        @include flex-center();
-        img {
-            width: 40px;
-            height: 40px;
-        }
-        &:hover {
-            scale: 1.09;
-            border-radius: 50%;
-            background-color: var(--background-default-light);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  a {
+    @include flex-center();
+
+    img {
+      width: 40px;
+      height: 40px;
     }
+
+    &:hover {
+      scale: 1.09;
+      border-radius: 50%;
+      background-color: var(--background-default-light);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
 }
