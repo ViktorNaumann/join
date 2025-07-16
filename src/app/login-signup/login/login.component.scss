@@ -25,6 +25,11 @@
         height: auto;
         margin: 30px 40px;
         z-index: 3;
+
+        @media (max-width: 768px) {
+            height: 72px;
+            width: 64px;
+        }
     }
 
     .dark-logo-wrapper img.load {
@@ -74,8 +79,10 @@
         border-radius: 3px;
         }
     }
+
     @media(max-width: 768px) {
         padding: 24px 16px;
+        margin-top: 2rem;
     }
 }
 
@@ -88,6 +95,7 @@
     .form-group {
         @include form-group;
         position: relative;
+        gap: 4px;
         
         &.colorError {
             border: 1px solid var(--text-color-error);
@@ -100,11 +108,17 @@
             @include inter400-fs16();
             height: 16px;
             font-size: 16px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            @media (max-width: 768px) {
+                padding: 0 8px;
+            }
         }
 
         .input-icon {
             position: absolute;
-            right: 16px;
+            right: 8px;
             top: 50%;
             transform: translateY(-50%);
             width: 20px;
@@ -113,7 +127,7 @@
             pointer-events: auto;
             z-index: 2;
         }
-         @media(max-width: 768px) {
+        @media(max-width: 768px) {
             width: 100%;
         }
     }
@@ -179,6 +193,43 @@
     transform: translateY(-50%);
 }
 
+.wanna-signup-wrapper{
+    display: none;
+
+    @media (max-width: 768px) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        @include inter400-fs16();
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        text-decoration: none;
+
+        .btn-wrapper {
+            height: fit-content;
+        }
+
+        .btn-signup {
+            cursor: pointer;
+            height: 36px;
+            border-radius: 6px;
+            border: unset;
+            min-width: 80px;
+            transition: background-color 0.2s ease;
+            justify-content: center;
+            @include btn-dark();
+            @include inter400-fs14();
+            padding: 8px 12px;
+        }
+
+        span {
+            height: 0;
+        }
+    }
+    
+}
+
 
 @media (max-width: 480px) {
 
@@ -188,12 +239,6 @@
     gap: 20px;
     box-sizing: border-box;
     overflow-x: hidden;
-
-    /*
-    h2 {
-      @include inter700-fs27;
-    }
-    */
   }
 
   .form-group-wrapper {

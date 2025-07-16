@@ -15,6 +15,13 @@
     }
 }
 
+.dark-logo-wrapper img {
+    @media (max-width: 768px) {
+        height: 72px;
+        width: 64px;
+    }
+}
+
 .wanna-signup-wrapper {
     display: flex;
     align-items: center;
@@ -34,4 +41,7 @@
         padding: 8px 12px;
     }
 
+    @media (max-width: 768px) {
+        display: none;
+    }
 }

@@ -11,4 +11,8 @@
         text-decoration: none;
         color: var( --text-color-medium);
     }
+
+    @media(max-width: 768px) {
+       margin-top: 1rem;
+    }
 }

@@ -64,11 +64,8 @@
             <div class="form-group-wrapper">    
                 <label class="checkbox-label">
                     <input type="checkbox" formControlName="privacyPolicy" />
-                    I accept the <span class="highlight">Privacy policy</span>
+                    I accept the <a routerLink="/privacy-policy" class="highlight">Privacy policy</a>
                 </label>
-                <!--<div class="error-message">
-                    {{ getValidationMessage('privacyPolicy') }}
-                </div>-->
             </div>    
             <div class="btn-wrapper">
                 <button class="btn-signup" type="submit" [disabled]="signupform.invalid || isLoading">
@@ -79,9 +76,6 @@
                     </ng-container>
                 </button>
             </div>
-            <p class="login-link">
-                Already have an account? <a routerLink="/login">Log in here</a>
-            </p>
             <p class="success-message" *ngIf="successMessage">{{ successMessage }}</p>
             <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
         </form>

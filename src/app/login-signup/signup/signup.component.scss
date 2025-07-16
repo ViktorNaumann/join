@@ -8,6 +8,13 @@
 
 .dark-logo-wrapper {
     padding: 32px;
+
+    img {
+        @media (max-width: 768px) {
+            height: 72px;
+            width: 64px;
+        }
+    }
 }
 
 .signup-frame {
@@ -21,7 +28,17 @@
   flex-direction: column;
   align-items: center;
   gap: clamp(24px, 2.5vh, 36px);
-  margin-top: 64px;
+  margin-top: 1rem;
+
+  @media (max-width: 768px){
+    width: 90vw;
+    padding: 16px 12px;
+    gap: 20px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    max-height: 500px;
+  }
+
 }  
 
 .signup-header {
@@ -35,6 +52,7 @@
     @include btn();
     position: absolute;
     left: 0;
+
     img {
       width: 24px;
       height: 24px;
@@ -50,7 +68,7 @@
         &::after {
         content: "";
         display: block;
-        width: 128px;
+        width: 80px;
         height: 3px;
         background-color: var(--accent-primary-color);
         margin: 12px auto 0;
@@ -70,6 +88,9 @@ form {
     width: 100%;
     margin-bottom: 20px;
 
+    @media(max-width: 768px) {
+        gap: 16px;
+    }
 }
 
 .form-group {
@@ -101,6 +122,22 @@ form {
         height: 20px;
         width: 20px;
         opacity: 0.6;
+    }
+
+    @media(max-width: 768px) {
+        width: 100%;
+
+        input {
+            width: 100%;
+            font-size: 15px;
+            height: 14px;
+        }
+
+        .input-icon {
+            width: 18px;
+            height: 18px;
+            right: 12px;
+        }
     }
 
 }
@@ -157,7 +194,6 @@ form {
     transition: background-color 0.2s ease;
     justify-content: center;
     @include btn-dark();
-    margin-top: 8px;
 
     &:hover {
         background-color: #29abe2;
@@ -180,6 +216,10 @@ form {
     @include inter400-fs12;
     color: var(--text-color-error);
     display: hidden;
+
+    @media(max-width: 768px) {
+        font-size: 13px;
+    }
 }
 
 .success-message {
@@ -234,3 +274,4 @@ input:focus {
     top: 50%;
     transform: translateY(-50%);
 }
+
