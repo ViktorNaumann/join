@@ -194,7 +194,8 @@
   .form-group-wrapper {
     gap: 16px;
 
-    .form-group {  
+    .form-group { 
+        width: 100%; 
       input {
         width: 100%;
         font-size: 15px;
