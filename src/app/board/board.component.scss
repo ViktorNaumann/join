@@ -514,15 +514,6 @@ app-task {
 
 //TODO:
 @media (max-width: 830px) {
-  // .layout-container {
-  //   height: calc(100vh - 80px);
-  //   max-height: calc(100vh - 80px);
-  //   overflow-y: auto;
-  //   overflow-x: hidden;
-  //   display: flex;
-  //   flex-direction: column;
-  //   box-sizing: border-box;
-  // }
 
   // NEU Window Scrolling:
   .layout-container {
@@ -566,7 +557,7 @@ app-task {
     width: 100%;
     flex: 0 0 auto;
     overflow-y: visible;
-    padding: 0 20px 120px 20px;
+    padding: 0 0 120px 20px;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-start;
