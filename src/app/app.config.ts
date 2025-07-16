@@ -23,15 +23,15 @@ export const appConfig: ApplicationConfig = {
     ),
     provideFirestore(() => getFirestore()),
     provideAnimations(),
-     provideAuth(() => getAuth()),
+    provideAuth(() => getAuth()),
     {
       provide: CDK_DRAG_CONFIG,
       useValue: {
         dragStartThreshold: 5,
         pointerDirectionChangeThreshold: 5,
         zIndex: 1000,
-        scrollSpeed: 30,          // Geschwindigkeit
-        scrollProximity: 100,     // Abstand zum Rand
+        scrollSpeed: 30,          
+        scrollProximity: 100,     // Distance to border
       },
     },
   ],
