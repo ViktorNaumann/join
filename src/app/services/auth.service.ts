@@ -19,6 +19,9 @@ import {
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 
+/**
+ * Interface for user data stored in Firestore.
+ */
 export interface UserData {
   uid: string;
   email: string;
@@ -26,79 +29,92 @@ export interface UserData {
   createdAt: Date;
 }
 
+/**
+ * Authentication service for handling user registration, login, logout,
+ * guest access, profile updates, account deletion, and state tracking.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
+
+  /**
+   * Observable emitting the current authenticated Firebase user.
+   */
   public currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
 
+  /**
+   * Initializes the AuthService and subscribes to authentication state changes.
+   * @param auth - Firebase Auth instance
+   * @param firestore - Firebase Firestore instance
+   * @param router - Angular Router for navigation
+   */
   constructor(
     private auth: Auth,
     private firestore: Firestore,
     private router: Router
   ) {
-    // Überwache den Authentifizierungsstatus
     onAuthStateChanged(this.auth, (user) => {
       this.currentUserSubject.next(user);
     });
   }
 
-  // Registrierung
+  /**
+   * Registers a new user with email, password, and display name.
+   * Stores user data in Firestore.
+   * @param email - User's email address
+   * @param password - User's password
+   * @param displayName - User's display name
+   * @returns A success status and optional error message
+   */
   async signUp(email: string, password: string, displayName: string): Promise<{ success: boolean; message?: string }> {
     try {
       const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
       const user = userCredential.user;
-
-      // Aktualisiere das Profil mit dem Anzeigenamen
       await updateProfile(user, { displayName });
-
-      // Speichere zusätzliche Benutzerdaten in Firestore
       const userData: UserData = {
         uid: user.uid,
         email: user.email!,
         displayName: displayName,
         createdAt: new Date()
       };
-
       await setDoc(doc(this.firestore, 'users', user.uid), userData);
-
       return { success: true };
     } catch (error: any) {
-      return { 
-        success: false, 
-        message: this.getErrorMessage(error.code) 
-      };
+      return { success: false, message: this.getErrorMessage(error.code) };
     }
   }
 
-  // Anmeldung
+  /**
+   * Signs in a user with email and password.
+   * @param email - User's email
+   * @param password - User's password
+   * @returns A success status and optional error message
+   */
   async signIn(email: string, password: string): Promise<{ success: boolean; message?: string }> {
     try {
       await signInWithEmailAndPassword(this.auth, email, password);
       return { success: true };
     } catch (error: any) {
-      return { 
-        success: false, 
-        message: this.getErrorMessage(error.code) 
-      };
+      return { success: false, message: this.getErrorMessage(error.code) };
     }
   }
 
-  // Gast-Anmeldung
+  /**
+   * Signs in as a guest user. If guest user does not exist, it will be created.
+   * @returns A success status and optional error message
+   */
   async signInAsGuest(): Promise<{ success: boolean; message?: string }> {
     try {
-      // Verwende einen vorgefertigten Gast-Account
       const guestEmail = 'guest@join.com';
       const guestPassword = 'Guest123!';
-      
       await signInWithEmailAndPassword(this.auth, guestEmail, guestPassword);
       return { success: true };
     } catch (error: any) {
       try {
         const userCredential = await createUserWithEmailAndPassword(this.auth, 'guest@join.com', 'Guest123!');
         const user = userCredential.user;
-
         await updateProfile(user, { displayName: 'Guest User' });
 
         const userData: UserData = {
@@ -111,21 +127,23 @@ export class AuthService {
         await setDoc(doc(this.firestore, 'users', user.uid), userData);
         return { success: true };
       } catch (createError: any) {
-        return { 
-          success: false, 
-          message: this.getErrorMessage(createError.code) 
-        };
+        return { success: false, message: this.getErrorMessage(createError.code) };
       }
     }
   }
 
-  // Abmeldung
+  /**
+   * Signs out the currently authenticated user and redirects to the login page.
+   */
   async signOutUser(): Promise<void> {
     await signOut(this.auth);
     this.router.navigate(['/login']);
   }
 
-  // Aktuelle Benutzerdaten aus Firestore abrufen
+  /**
+   * Retrieves the current user's data from Firestore.
+   * @returns The user's Firestore data or null if not found
+   */
   async getCurrentUserData(): Promise<UserData | null> {
     const currentUser = this.auth.currentUser;
     if (!currentUser) return null;
@@ -134,16 +152,27 @@ export class AuthService {
     return userDoc.exists() ? userDoc.data() as UserData : null;
   }
 
-  // Prüfe ob Benutzer eingeloggt ist
+  /**
+   * Checks whether a user is currently authenticated.
+   * @returns True if a user is signed in, otherwise false
+   */
   isLoggedIn(): boolean {
     return this.auth.currentUser !== null;
   }
 
-  // Aktueller Benutzer
+  /**
+   * Gets the current authenticated Firebase user.
+   * @returns The current user or null if not logged in
+   */
   getCurrentUser(): User | null {
     return this.auth.currentUser;
   }
 
+  /**
+   * Maps Firebase Auth error codes to human-readable error messages.
+   * @param errorCode - Firebase Auth error code
+   * @returns A string describing the error
+   */
   private getErrorMessage(errorCode: string): string {
     switch (errorCode) {
       case 'auth/user-not-found':
@@ -167,7 +196,10 @@ export class AuthService {
     }
   }
 
-  //Löschen des Accounts
+  /**
+   * Deletes the currently authenticated user account.
+   * @returns A success status and optional error message
+   */
   async deleteAccount(): Promise<{ success: boolean; message?: string }> {
     const user = this.auth.currentUser;
     if (!user) {

@@ -14,16 +14,27 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { AuthService } from './auth.service';
 
+/**
+ * Interface representing a contact.
+ */
 export interface Contact {
+  /** Unique identifier (automatically assigned by Firestore) */
   id?: string;
+  /** Full name of the contact */
   name: string;
+  /** Email address of the contact */
   email: string;
+  /** Optional phone number of the contact */
   phone?: string;
 }
 
-export function notOnlyWhitespace(
-  control: AbstractControl
-): ValidationErrors | null {
+/**
+ * Custom validator to check that a form input contains more than just whitespace.
+ *
+ * @param control - The form control to validate.
+ * @returns A validation error object if invalid, otherwise null.
+ */
+export function notOnlyWhitespace(control: AbstractControl): ValidationErrors | null {
   const value = control.value;
   if (typeof value === 'string' && value.trim().length === 0) {
     return { whitespace: true };
@@ -31,52 +42,64 @@ export function notOnlyWhitespace(
   return null;
 }
 
+/**
+ * Injectable service for managing contact data in Firestore.
+ * Provides reactive streams for selected contact, form visibility, and editing state.
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class ContactService {
+  /** Currently selected contact (for viewing or interaction) */
   private selectedContactSubject = new BehaviorSubject<Contact | null>(null);
+  /** Observable for the selected contact */
   public selectedContact$ = this.selectedContactSubject.asObservable();
 
+  /** Whether the contact form should be displayed */
   private showFormSubject = new BehaviorSubject<boolean>(false);
+  /** Observable for contact form visibility */
   public showForm$ = this.showFormSubject.asObservable();
 
+  /** Currently selected contact to be edited */
   private editContactSubject = new BehaviorSubject<Contact | null>(null);
+  /** Observable for the contact being edited */
   public editContact$ = this.editContactSubject.asObservable();
 
-  // NEU - Avatar-Farben
+  /** Preset avatar colors for visual identification */
   private avatarColors = [
-  '#9C27B0', // Purple
-  '#2196F3', // Blue
-  '#FF9800', // Orange
-  '#4CAF50', // Green
-  '#F44336', // Red
-  '#00BCD4', // Cyan
-  '#c44314ff', // Dark Orange
-  '#5191daff', // Blue Grey
-  '#E91E63', // Pink
-  '#3F51B5', // Indigo
-  '#b3c511ff', // Lime
-  '#FF5722', // Deep Orange
-  '#388E3C', // Dark Green
-  '#1976D2', // Darker Blue
-  '#5c0582ff', // Dark Purple
-  '#c90d0dff', // Dark Red
-  '#c303aaff', // Pink
-  '#0118acff', // Dark Indigo
-  '#0288D1', // Light Blue (nicht zu hell)
-  '#C2185B', // Deep Pink
-  '#049484ff', // Teal
-  '#FFA000', // Amber (dunklerer Ton)
-  '#084c6bff', // Dark Blue Grey
-  '#6bb604ff', // Lime Darker
-];
+    '#9C27B0', '#2196F3', '#FF9800', '#4CAF50', '#F44336', '#00BCD4',
+    '#c44314ff', '#5191daff', '#E91E63', '#3F51B5', '#b3c511ff',
+    '#FF5722', '#388E3C', '#1976D2', '#5c0582ff', '#c90d0dff',
+    '#c303aaff', '#0118acff', '#0288D1', '#C2185B', '#049484ff',
+    '#FFA000', '#084c6bff', '#6bb604ff'
+  ];
 
   constructor(
     private firestore: Firestore,
     private authService: AuthService
   ) {}
 
+  /**
+   * Returns a Firestore reference to the `contacts` collection.
+   */
+  getContactsRef() {
+    return collection(this.firestore, 'contacts');
+  }
+
+  /**
+   * Returns a Firestore reference to a single contact document.
+   *
+   * @param docId - The ID of the contact document.
+   */
+  getSingleContactsRef(docId: string) {
+    return doc(this.getContactsRef(), docId);
+  }
+
+  /**
+   * Returns an observable stream of all contacts from Firestore.
+   *
+   * @returns Observable of Contact array.
+   */
   getContacts(): Observable<Contact[]> {
     return new Observable((observer) => {
       const contactsRef = this.getContactsRef();
@@ -93,20 +116,16 @@ export class ContactService {
           observer.error(error);
         }
       );
-
-      // Cleanup-Funktion zurückgeben
       return () => unsubscribe();
     });
   }
 
-  getContactsRef() {
-    return collection(this.firestore, 'contacts');
-  }
-
-  getSingleContactsRef(docId: string) {
-    return doc(collection(this.firestore, 'contacts'), docId);
-  }
-
+  /**
+   * Adds a new contact to Firestore.
+   *
+   * @param newContact - The contact to add.
+   * @returns The added contact with its generated ID or null if failed.
+   */
   async addContact(newContact: Contact): Promise<Contact | null> {
     try {
       const contactsRef = this.getContactsRef();
@@ -119,76 +138,127 @@ export class ContactService {
     }
   }
 
-  async updateContact(docId: string, updatedContact: Contact) {
-    let docRef = this.getSingleContactsRef(docId);
-    await updateDoc(docRef, this.getCleanJson(updatedContact)).catch((err) => {
-      console.error(err);
-    });
-  }
+  /**
+ * Updates an existing contact in Firestore.
+ *
+ * @param docId - The Firestore document ID of the contact to update.
+ * @param updatedContact - The updated contact data.
+ */
+async updateContact(docId: string, updatedContact: Contact): Promise<void> {
+  let docRef = this.getSingleContactsRef(docId);
+  await updateDoc(docRef, this.getCleanJson(updatedContact)).catch((err) => {
+    console.error(err);
+  });
+}
 
-  getCleanJson(updatedContact: Contact) {
-    return {
-      name: updatedContact.name,
-      email: updatedContact.email,
-      phone: updatedContact.phone,
-    };
-  }
+/**
+ * Returns a plain JSON object with only the allowed contact fields.
+ * This is used to avoid including undefined or extra properties when updating Firestore.
+ *
+ * @param updatedContact - The contact object to sanitize.
+ * @returns A JSON object containing name, email, and phone.
+ */
+getCleanJson(updatedContact: Contact): Partial<Contact> {
+  return {
+    name: updatedContact.name,
+    email: updatedContact.email,
+    phone: updatedContact.phone,
+  };
+}
 
-  //NEU
-  selectContact(contact: Contact): void {
-    this.selectedContactSubject.next(contact);
-  }
+/**
+ * Emits a contact to the selected contact observable.
+ * Used to show the contact details in the UI.
+ *
+ * @param contact - The contact to select.
+ */
+selectContact(contact: Contact): void {
+  this.selectedContactSubject.next(contact);
+}
 
-  //NEU
-  clearSelection(): void {
-    this.selectedContactSubject.next(null);
-  }
+/**
+ * Clears the currently selected contact.
+ */
+clearSelection(): void {
+  this.selectedContactSubject.next(null);
+}
 
-  // NEU - Methoden für Formular-Anzeige
-  showAddForm(): void {
-    this.showFormSubject.next(true);
-  }
+/**
+ * Triggers the display of the add contact form.
+ */
+showAddForm(): void {
+  this.showFormSubject.next(true);
+}
 
-  // NEU - Methode für Edit-Modus
-  showEditForm(contact: Contact): void {
-    this.editContactSubject.next(contact);
-    this.showFormSubject.next(true);
-  }
+/**
+ * Triggers the display of the edit contact form with a prefilled contact.
+ *
+ * @param contact - The contact to edit.
+ */
+showEditForm(contact: Contact): void {
+  this.editContactSubject.next(contact);
+  this.showFormSubject.next(true);
+}
 
-  hideForm(): void {
-    this.showFormSubject.next(false);
-    this.editContactSubject.next(null); //NEU
-  }
-  
-  async deleteContact(docId: string) {
-    await deleteDoc(this.getSingleContactsRef(docId)).catch((err) => {
-      console.log(err);
-    });
-  }
+/**
+ * Hides the contact form and clears the edit state.
+ */
+hideForm(): void {
+  this.showFormSubject.next(false);
+  this.editContactSubject.next(null);
+}
 
-  // NEU - Avatar-Funktionen
-  getContactColor(contactName: string): string {
-    let hash = 0;
-    for (let i = 0; i < contactName.length; i++) {
-      hash += contactName.charCodeAt(i);
+/**
+ * Deletes a contact from Firestore.
+ *
+ * @param docId - The Firestore document ID of the contact to delete.
+ */
+async deleteContact(docId: string): Promise<void> {
+  await deleteDoc(this.getSingleContactsRef(docId)).catch((err) => {
+    console.log(err);
+  });
+}
+
+/**
+ * Generates a consistent avatar color for a contact based on their name.
+ *
+ * @param contactName - The contact’s name used to calculate a hash.
+ * @returns A hexadecimal color string from the avatarColors array.
+ */
+getContactColor(contactName: string): string {
+  let hash = 0;
+  for (let i = 0; i < contactName.length; i++) {
+    hash += contactName.charCodeAt(i);
+  }
+  return this.avatarColors[hash % this.avatarColors.length];
+}
+
+/**
+ * Extracts the initials from a contact name.
+ *
+ * @param name - The full name of the contact.
+ * @returns A string with one or two uppercase initials, or '?' if the name is invalid.
+ */
+getInitials(name?: string): string {
+  if (!name) return '?';
+  const words = name.trim().split(' ');
+  if (words.length === 1) return words[0][0].toUpperCase();
+  return (words[0][0] + words[words.length - 1][0]).toUpperCase();
+}
+
+/**
+ * Fetches a single contact by its Firestore document ID.
+ *
+ * @param contactId - The Firestore document ID.
+ * @returns A promise resolving to the contact object or null if not found.
+ */
+async getContactById(contactId: string): Promise<Contact | null> {
+  const contactRef = this.getSingleContactsRef(contactId);
+  return getDoc(contactRef).then(snapshot => {
+    if (snapshot.exists()) {
+      return { id: snapshot.id, ...snapshot.data() } as Contact;
     }
-    return this.avatarColors[hash % this.avatarColors.length];
-  }
-
-  getInitials(name?: string): string {
-    if (!name) return '?';
-    const words = name.trim().split(' ');
-    if (words.length === 1) return words[0][0].toUpperCase();
-    return (words[0][0] + words[words.length - 1][0]).toUpperCase();
-  }
-  //NEU - Kontakte per ID abrufen z.B. für Tasks
-  async getContactById(contactId: string): Promise<Contact | null> {
-    const contactRef = this.getSingleContactsRef(contactId);
-    return getDoc(contactRef).then(snapshot => {
-      if (snapshot.exists()) {
-        return { id: snapshot.id, ...snapshot.data() } as Contact;
-      }
-      return null;
-    });
-  }
+    return null;
+  });
+}
 }
