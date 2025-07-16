@@ -16,6 +16,9 @@ section {
     max-width: 390px;
     min-width: 320px;
   }
+   @media (max-width: 768px) {
+        height: 90dvh;
+    };
 }
 
 //#region left-frame
@@ -106,7 +109,7 @@ h1 {
     flex: 1 1 60%;
     height: 530px;
     width: 390px;
-    min-width: 320px;
+    min-width: 315px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -146,6 +149,9 @@ form {
     @media(max-width: 1000px) {
         margin-top: 80px;
     }
+     @media (max-width: 400px) {
+        margin-top: 30px;
+    };
 }
 
 .form-group-wrapper {
@@ -232,6 +238,9 @@ input:focus {
         transform: translate(0, -50%);
         margin-bottom: 45px;
     }
+    @media (max-width: 400px) {
+        margin-bottom: 0;
+    };
 }
 
 .img-user {
