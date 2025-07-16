@@ -16,6 +16,7 @@
   padding-left: clamp(15px, 3vw, 50px);
   padding-right: clamp(15px, 3vw, 50px);
   min-height: 100vh;
+  overflow-y: auto;
 }
 
 .contact-header {
@@ -360,7 +361,7 @@
     margin: 0;
     padding-left: 20px;
     padding-right: 20px;
-    min-height: 100vh;
+    height: calc(100dvh - 180px);
   }
 
   .contact-header {
@@ -370,6 +371,7 @@
     min-height: auto;
     padding-bottom: 40px;
     width: 100%;
+    padding: 32px 0;
 
     h1 {
       font-size: 2.5rem;
@@ -443,7 +445,7 @@
   .contact-info {
     width: 100%;
     margin-top: 25px;
-    gap: 20px;
+    gap: 18px;
 
     h3 {
       font-size: 20px;
