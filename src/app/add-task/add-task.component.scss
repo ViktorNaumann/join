@@ -5,8 +5,6 @@ $input-width: 440px;
 $border-color: #D1D1D1;
 $border-radius: 10px;
 $form-padding: clamp(20px, calc(2vw + 10px), 40px);
-
-// Responsive breakpoints
 $mobile-breakpoint: 768px;
 $small-mobile-breakpoint: 480px;
 
@@ -16,12 +14,11 @@ $small-mobile-breakpoint: 480px;
 @mixin hover-opacity { &:hover { opacity: 0.7; } }
 @mixin icon-size($size) { width: $size; height: $size; cursor: pointer; @include hover-opacity; }
 
-// Überschreibe den layout-container für diese Komponente
 .layout-container {
   display: flex;
   flex-direction: column;
-  height: 100vh; // Wichtig für volle Höhe
-  overflow: hidden; // Verhindert doppeltes Scrollen
+  height: 100vh;
+  overflow: hidden;
   @media(max-width: 1000px) {
     height: calc(100dvh - 180px);
   }
@@ -109,7 +106,7 @@ $small-mobile-breakpoint: 480px;
   height: 140px;
   padding: 0 $form-padding;
   @include flex-center;
-  position: relative; // Für absolute Positionierung des X-Buttons
+  position: relative;
 
   h1 {
     margin: 0;
@@ -194,14 +191,14 @@ $small-mobile-breakpoint: 480px;
   
   @media (max-width: $mobile-breakpoint) {
     padding: 16px;
-    padding-bottom: 100px; // Platz für fixierte Buttons + Navigation
+    padding-bottom: 100px;
     overflow-y: auto;
-    min-height: 0; /* Wichtig für Flexbox-Scrolling */
+    min-height: 0;
   }
   
   @media (max-width: $small-mobile-breakpoint) {
     padding: 16px;
-    padding-bottom: 100px; // Platz für fixierte Buttons + Navigation
+    padding-bottom: 100px;
   }
 }
 
@@ -210,8 +207,8 @@ $small-mobile-breakpoint: 480px;
   gap: 32px; 
   width: 100%;
   max-width: $form-width;
-  margin: 0 auto; // Zentrieren
-  padding-bottom: 24px; // Platz am Ende
+  margin: 0 auto;
+  padding-bottom: 24px;
   
   @media (max-width: $mobile-breakpoint) {
     gap: 24px;
@@ -273,11 +270,11 @@ $small-mobile-breakpoint: 480px;
     display: flex;
     gap: 16px;
     margin-top: 8px;
-    justify-content: flex-end; // Rechtsbündige Ausrichtung
+    justify-content: flex-end;
     
     @media (max-width: $mobile-breakpoint) {
       position: fixed !important;
-      bottom: 70px; // Platz für die untere Navigation
+      bottom: 70px;
       left: 0;
       right: 0;
       width: 100%;
@@ -376,8 +373,8 @@ $small-mobile-breakpoint: 480px;
   width: 100%;
   
   @media (max-width: $mobile-breakpoint) {
-    justify-content: space-between; // Gleichmäßige Verteilung
-    flex-wrap: nowrap; // Keine Umbrüche
+    justify-content: space-between;
+    flex-wrap: nowrap;
   }
   
   @media (max-width: $small-mobile-breakpoint) {
@@ -424,7 +421,7 @@ $small-mobile-breakpoint: 480px;
     svg { 
       width: 20px !important; 
       height: 20px !important;
-      flex-shrink: 0; // Verhindert das Schrumpfen
+      flex-shrink: 0;
       
       @media (max-width: 1220px) {
         width: 20px !important;
@@ -525,9 +522,7 @@ $small-mobile-breakpoint: 480px;
     .cancel-icon { @include icon-size(24px); }
     .confirm-icon { @include icon-size(14px); }
   }
-
-
-}  // Subtask containers - separate for better mobile control
+}  
   .subtask-input-container {
     margin-bottom: 1rem;
     
@@ -544,8 +539,8 @@ $small-mobile-breakpoint: 480px;
     // scrollbar-color: var(--background-default-light) white;
     
     @media (max-width: $mobile-breakpoint) {
-      max-height: none; // Keine Begrenzung auf mobilen Geräten
-      overflow-y: visible; // Keine Scrollbar
+      max-height: none;
+      overflow-y: visible;
     }
     
     &::-webkit-scrollbar {
@@ -576,7 +571,6 @@ $small-mobile-breakpoint: 480px;
   scrollbar-color: var(--background-default-light) white;
 }
 
-// Simple subtask item design to match the image
 .subtask-item-simple {
   display: flex;
   align-items: center;
@@ -636,7 +630,7 @@ $small-mobile-breakpoint: 480px;
     gap: 8px;
     opacity: 0;
     transition: opacity 0.2s ease;
-    margin-left: auto; // Push to the right
+    margin-left: auto;
     
     .action-icon { 
       @include icon-size(16px);
@@ -658,14 +652,11 @@ $small-mobile-breakpoint: 480px;
       opacity: 1;
     }
   }
-  
-  // Wenn wir editieren, sollen die Actions immer sichtbar sein
   .subtask-edit .subtask-actions {
     opacity: 1;
   }
 }
 
-// Keep the old complex design for backwards compatibility
 .subtask-item {
   @include flex-between;
   padding: 8px 12px;
@@ -770,7 +761,6 @@ $small-mobile-breakpoint: 480px;
   }
 }
 
-// Error States and Validation Messages
 .error-message {
   color: #FF4A4A;
   font-size: 12px;
@@ -788,7 +778,6 @@ input.error, textarea.error {
   }
 }
 
-// Success Message
 .success-message {
   position: fixed;
   top: 50%;
@@ -808,24 +797,18 @@ input.error, textarea.error {
     max-width: 300px;
     padding: 16px 20px;
   }
-  
   .success-content {
     @include flex-column;
     gap: 8px;
     font-size: 18px;
     font-weight: 600;
     @include inter400-fs20;
-
-    
     span:first-child {
       @include inter400-fs20;
-      
-      
       @media (max-width: $small-mobile-breakpoint) {
         font-size: 16px;
       }
     }
-    
     .redirect-text {
       font-size: 14px;
       opacity: 0.9;
@@ -837,7 +820,6 @@ input.error, textarea.error {
   }
 }
 
-// Additional mobile optimizations
 @media (max-width: 310px) {
   .add-task-header {
     height: 80px;
