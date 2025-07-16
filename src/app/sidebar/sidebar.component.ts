@@ -4,8 +4,8 @@ import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 
 /**
- * Sidebar-Komponente für die Navigation der Anwendung.
- * Zeigt Navigationslinks und überprüft den Authentifizierungsstatus des Benutzers.
+ * Sidebar component for application navigation.
+ * Displays navigation links and checks the user's authentication status.
  */
 @Component({
   selector: 'app-sidebar',
@@ -18,14 +18,14 @@ import { CommonModule } from '@angular/common';
 })
 export class SidebarComponent {
   /**
-   * Konstruktor der SidebarComponent.
-   * @param authService - Service zur Verwaltung der Benutzerauthentifizierung
+   * Constructs the SidebarComponent.
+   * @param authService - Service for managing user authentication
    */
   constructor(private authService: AuthService) {}
 
   /**
-   * Überprüft, ob der Benutzer eingeloggt ist.
-   * @returns True, wenn der Benutzer authentifiziert ist, andernfalls false
+   * Checks whether the user is currently logged in.
+   * @returns True if the user is authenticated, otherwise false
    */
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
