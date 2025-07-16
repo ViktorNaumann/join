@@ -24,8 +24,8 @@ import {
       state('appear', style({
         opacity: 1
       })),
-      transition('start => moved', [
-        animate('2s 1.5s ease-in-out')
+      transition('start => appear', [
+        animate('2s 0.7s ease-in-out')
       ])
     ])
   ]
@@ -39,10 +39,10 @@ export class LoginHeaderComponent {
   } 
 
   initializeAnimation() {
-    if (!sessionStorage.getItem('logoMoved')) {
+    if (!sessionStorage.getItem('logoAppeared')) {
       setTimeout(() => {
         this.logoState = 'appear';
-        sessionStorage.setItem('logoMoved', 'true');
+        sessionStorage.setItem('logoAppeared', 'true');
       }, 100);
     } else {
       this.logoState = 'appear';
