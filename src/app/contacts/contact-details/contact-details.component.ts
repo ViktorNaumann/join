@@ -28,7 +28,6 @@ import { map } from 'rxjs/operators';
 
   animations: [
     trigger('slideInFromRight', [
-      // Add an initial state for elements entering the DOM
       transition(':enter', [
         style({ transform: 'translateX(100%)', opacity: 0 }),
         animate(
@@ -36,7 +35,6 @@ import { map } from 'rxjs/operators';
           style({ transform: 'translateX(0%)', opacity: 1 })
         ),
       ]),
-      // Keep the increment transition for subsequent changes
       transition(':increment', [
         style({ transform: 'translateX(100%)', opacity: 0 }),
         animate(
@@ -44,9 +42,8 @@ import { map } from 'rxjs/operators';
           style({ transform: 'translateX(0%)', opacity: 1 })
         ),
       ]),
-    ]),
+    ],),
 
-    // NEU: Animation für mobile menu
     trigger('slideInOut', [
       transition(':enter', [
         style({ transform: 'translateX(100%)', opacity: 0 }),
@@ -67,14 +64,13 @@ import { map } from 'rxjs/operators';
 export class ContactDetailsComponent implements OnInit, OnDestroy {
   contactVisible = false;
   contact?: Contact;
-  animationState = 0; // Trigger für Animation
+  animationState = 0;
   isDeleting = false;
   isEditing = false;
-  // NEU: Mobile menu properties
   menuOpen = false;
   isMobile = window.innerWidth < 768;
   private subscription?: Subscription;
-  private firstLoad = true; // Add this flag
+  private firstLoad = true;
 
   @Output() backToList = new EventEmitter<void>();
   @Output() noContactVisible = new EventEmitter<void>();
@@ -84,7 +80,12 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     private elementRef: ElementRef
   ) {}
 
-  // NEU: HostListener für Document-Clicks
+  /**
+   * Triggered when clicking outside the mobile menu.
+   * Closes the menu if it is open and the click occurred outside.
+   *
+   * @param {Event} event - The click event.
+   */
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event) {
     const target = event.target as HTMLElement;
@@ -94,7 +95,6 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
       '.mobile-options-btn'
     );
 
-    // Prüfen ob das Click-Target innerhalb des Mobile-Menus oder Mobile-Options ist
     if (
       this.menuOpen &&
       !mobileMenu?.contains(target) &&
@@ -104,7 +104,12 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  // NEU: HostListener für Resize-Events
+  /**
+   * Triggered on window resize.
+   * Adjusts the mobile layout and menu accordingly.
+   *
+   * @param {Event} event - The resize event.
+   */
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     const width = (event.target as Window).innerWidth;
@@ -114,20 +119,28 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  // NEU: Toggle Menu Funktion
+  /**
+   * Opens or closes the mobile menu when on a mobile device.
+   */
   toggleMobileMenu() {
     if (this.isMobile) {
       this.menuOpen = !this.menuOpen;
     }
   }
 
-  // Getter für Template - kombiniert beide Flags
+  /**
+   * Returns whether animations are disabled (e.g., when deleting or editing).
+   *
+   * @returns {boolean} True if animations are disabled.
+   */
   get isAnimationDisabled(): boolean {
     return this.isDeleting || this.isEditing;
   }
 
+  /**
+   * Initializes the component, subscribes to contact changes, and controls animations.
+   */
   ngOnInit(): void {
-    // Kombiniere selectedContact$ und getContacts() um immer aktuelle Daten zu haben
     this.subscription = combineLatest([
       this.contactService.selectedContact$,
       this.contactService.getContacts(),
@@ -135,7 +148,6 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
       .pipe(
         map(([selectedContact, allContacts]) => {
           if (!selectedContact) return null;
-          // Finde den aktuellen Kontakt in der Liste aller Kontakte
           return (
             allContacts.find((contact) => contact.id === selectedContact.id) ||
             selectedContact
@@ -148,33 +160,26 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
           const wasEmpty = !this.contact;
           const isContactChange = contact && contact !== this.contact;
 
-          // Update contact data but don't show it yet
           this.contact = contact || undefined;
 
-          // Reset flags
           if (!contact) {
             this.isDeleting = false;
             this.isEditing = false;
             this.contactVisible = false;
 
-            // NEU: Event emittieren wenn kein Kontakt angezeigt wird
             setTimeout(() => {
               this.noContactVisible.emit();
             }, 100);
           } else if (isContactChange) {
-            // Reset editing flag when changing contacts
             this.isEditing = false;
 
             if (
               !this.isDeleting &&
               (this.firstLoad || wasEmpty || isContactChange)
             ) {
-              // Important: Keep element hidden until animation is ready
               this.contactVisible = false;
 
-              // Short timeout to ensure the DOM has time to process the visibility change
               setTimeout(() => {
-                // Now make it visible and trigger the animation
                 this.contactVisible = true;
                 this.animationState++;
                 this.firstLoad = false;
@@ -185,44 +190,70 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Called when the component is destroyed.
+   * Unsubscribes from the subscription to avoid memory leaks.
+   */
   ngOnDestroy(): void {
-    if (this.subscription) {
+    if this.subscription) {
       this.subscription.unsubscribe();
     }
   }
 
+  /**
+   * Opens the edit form for the current contact.
+   */
   onEditContact(): void {
     if (this.contact) {
       this.isEditing = true;
-      this.contactService.showEditForm(this.contact); //NEU
-      this.menuOpen = false; // NEU: Menu schließen nach Aktion
+      this.contactService.showEditForm(this.contact);
+      this.menuOpen = false;
     }
   }
 
+  /**
+   * Deletes the current contact and clears the selection.
+   */
   onDeleteContact(): void {
     if (this.contact?.id) {
       this.isDeleting = true;
-      this.menuOpen = false; // NEU: Menu schließen nach Aktion
+      this.menuOpen = false;
       this.contactService.deleteContact(this.contact.id);
-      this.contactService.clearSelection(); // Auswahl nach dem Löschen zurücksetzen
+      this.contactService.clearSelection();
     }
   }
 
+  /**
+   * Returns the initials of a name.
+   *
+   * @param {string} [name] - The name from which to generate initials.
+   * @returns {string} The initials.
+   */
   getInitials(name?: string): string {
     return this.contactService.getInitials(name);
   }
 
-  // Avatar-Farbe aus dem Service
+  /**
+   * Returns the color for a contact.
+   *
+   * @param {string} [name] - The contact's name.
+   * @returns {string} The corresponding color as a hex code.
+   */
   getContactColor(name?: string): string {
-    if (!name) return '#9E9E9E'; // Fallback-Farbe für leere Namen
+    if (!name) return '#9E9E9E';
     return this.contactService.getContactColor(name);
   }
 
-  // Schließen über den Pfeil
+  /**
+   * Closes the contact details view.
+   */
   closeContactDetails(): void {
     this.contactVisible = false;
   }
 
+  /**
+   * Emits the event to return to the contact list.
+   */
   onBackToList() {
     this.backToList.emit();
   }

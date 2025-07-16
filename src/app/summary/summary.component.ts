@@ -29,7 +29,7 @@ interface FirestoreTimestamp {
   ],
 })
 export class SummaryComponent implements OnInit {
-  taskList: Task[] = []; // Variable zum speichern aller Tasks!
+  taskList: Task[] = [];
   userName: string = '';
 
   greetingState: 'start' | 'moved' = 'start';
@@ -51,15 +51,35 @@ export class SummaryComponent implements OnInit {
     private authService: AuthService
   ) {}
 
+  /**
+   * Counts the number of tasks with a specific status.
+   *
+   * @private
+   * @param {Task[]} tasks - The list of tasks.
+   * @param {string} status - The status to count.
+   * @returns {number} The number of tasks with the given status.
+   */
   private countTasksByStatus(tasks: Task[], status: string): number {
     return tasks.filter((t) => t.status === status).length;
   }
 
+  /**
+   * Checks if the given object is a FirestoreTimestamp.
+   *
+   * @private
+   * @param {any} obj - The object to check.
+   * @returns {obj is FirestoreTimestamp} True if the object is a FirestoreTimestamp.
+   */
   private isFirestoreTimestamp(obj: any): obj is FirestoreTimestamp {
     return obj && typeof obj.toDate === 'function';
   }
 
-  // Getter-Method:
+  /**
+   * Returns the total number of all tasks.
+   *
+   * @readonly
+   * @returns {number} The total number of tasks.
+   */
   get totalTaskCount(): number {
     return (
       this.todoCount +
@@ -69,7 +89,11 @@ export class SummaryComponent implements OnInit {
     );
   }
 
-  // Methode Uhrzeit
+  /**
+   * Returns a greeting depending on the current time.
+   *
+   * @returns {string} The greeting (e.g., "Good morning,").
+   */
   getGreeting(): string {
     const hour = new Date().getHours();
     if (hour >= 5 && hour < 12) {
@@ -83,21 +107,26 @@ export class SummaryComponent implements OnInit {
     }
   }
 
+  /**
+   * Navigates to the board view.
+   */
   goToBoard() {
     this.router.navigate(['/board']);
   }
 
+  /**
+   * Initializes the component, loads user data and tasks,
+   * calculates statistics, and controls the welcome greeting display.
+   */
   ngOnInit() {
-    this.isMobile = window.innerWidth < 1000; // Mobile Ansicht Pixelbreite!
+    this.isMobile = window.innerWidth < 1000;
 
     this.authService.getCurrentUserData().then((userData) => {
-      // Login als Guest:
       this.userName = userData?.displayName?.trim()
         ? userData.displayName
         : 'Nice to see you!';
       this.greeting = this.getGreeting();
 
-      // Begrüßungstext nur beim ersten Login anzeigen
       const greetingShown = sessionStorage.getItem('greetingShown');
       if (this.isMobile && !greetingShown) {
         this.showGreeting = true;
@@ -115,7 +144,7 @@ export class SummaryComponent implements OnInit {
     });
 
     this.taskService.getTasks().subscribe((tasks: Task[]) => {
-      this.taskList = tasks; // Hier alle Tasks speichern!
+      this.taskList = tasks;
 
       this.todoCount = this.countTasksByStatus(tasks, 'to-do');
       this.doneCount = this.countTasksByStatus(tasks, 'done');
@@ -127,7 +156,7 @@ export class SummaryComponent implements OnInit {
 
       const now = new Date();
       const futureTasks = tasks
-        .filter((t) => t.date && t.status !== 'done') // Status-Check
+        .filter((t) => t.date && t.status !== 'done')
         .map((t) => {
           let dateObj: Date | null = null;
           if (t.date instanceof Date) {
