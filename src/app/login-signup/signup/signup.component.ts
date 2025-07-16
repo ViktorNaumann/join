@@ -50,7 +50,6 @@ export class SignupComponent implements OnInit {
     );
   }
 
-  //sogenannte cross-field-validator, check ob passwörter identisch sind
   passwordsMatchValidator(group: AbstractControl): ValidationErrors | null {
     const password = group.get('password')?.value;
     const confirm = group.get('confirmPassword')?.value;
@@ -92,7 +91,10 @@ export class SignupComponent implements OnInit {
   }
 
   onBackToLogin(): void {
-    this.router.navigate(['/login']);
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/login']);
+    });
+    this.isLoading = false;
   }
 
   getValidationMessage(field: string): string {

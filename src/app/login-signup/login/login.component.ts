@@ -57,8 +57,16 @@ export class LoginComponent {
 
   ngOnInit(): void {
     this.initializeForm();
+<<<<<<< HEAD
     this.checkIfTouchDevice();
+=======
+<<<<<<< HEAD
+    this.logoState = 'start'
+>>>>>>> 6c42692 (some more styling)
     this.initializeAnimation();
+=======
+    this.initializeAnimation();    
+>>>>>>> ca606f6 (some more styling)
   }
 
   private checkIfTouchDevice(): void {
@@ -129,4 +137,9 @@ export class LoginComponent {
     if (control.errors['minlength']) return 'Password must be at least 8 characters long';
     return '';
   }
+
+  ngOnDestroy(): void {
+    this.isLoading = false;
+  }
+
 }
