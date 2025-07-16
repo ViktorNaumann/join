@@ -74,7 +74,9 @@
         border-radius: 3px;
         }
     }
-    
+    @media(max-width: 768px) {
+        padding: 24px 16px;
+    }
 }
 
 .form-group-wrapper {
@@ -110,6 +112,9 @@
             opacity: 0.6;
             pointer-events: auto;
             z-index: 2;
+        }
+         @media(max-width: 768px) {
+            width: 100%;
         }
     }
 
