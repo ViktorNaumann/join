@@ -11,8 +11,7 @@ $small-mobile-breakpoint: 480px;
 @mixin flex-center { display: flex; justify-content: center; align-items: center; }
 @mixin flex-column { display: flex; flex-direction: column; }
 @mixin flex-between { display: flex; justify-content: space-between; align-items: center; }
-@mixin hover-opacity { &:hover { opacity: 0.7; } }
-@mixin icon-size($size) { width: $size; height: $size; cursor: pointer; @include hover-opacity; }
+@mixin icon-size($size) { width: $size; height: $size; cursor: pointer; &:hover { opacity: 0.7; } }
 
 .layout-container {
   display: flex;
@@ -70,10 +69,11 @@ $small-mobile-breakpoint: 480px;
   border-radius: 0 0 $border-radius $border-radius;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
 
   @media (max-width: $small-mobile-breakpoint) {
     max-height: 150px;
-    overflow-y: auto;
   }
 
   &.error {
@@ -448,8 +448,6 @@ $small-mobile-breakpoint: 480px;
 
   .dropdown-menu {
     @extend %dropdown-menu-base;
-    max-height: 200px;
-    overflow-y: auto;
 
     .contact-item {
       @extend %menu-item-base;
@@ -460,23 +458,12 @@ $small-mobile-breakpoint: 480px;
         color: #ffffff;
         
         .contact-info {
-          .contact-name {
-            color: #ffffff;
-          }
-          
-          .contact-avatar {
-            border: 2px solid #FFFFFF;
-          }
+          .contact-name { color: #ffffff; }
+          .contact-avatar { border: 2px solid #FFFFFF; }
         }
         
-        .contact-checkbox img {
-          filter: brightness(0) invert(1);
-        }
-        
-        &:hover {
-          background-color: #091931;
-          opacity: 1;
-        }
+        .contact-checkbox img { filter: brightness(0) invert(1); }
+        &:hover { background-color: #091931; opacity: 1; }
       }
 
       .contact-info {
@@ -522,45 +509,24 @@ $small-mobile-breakpoint: 480px;
     .cancel-icon { @include icon-size(24px); }
     .confirm-icon { @include icon-size(14px); }
   }
-}  
-  .subtask-input-container {
-    margin-bottom: 1rem;
-    
-    @media (max-width: $mobile-breakpoint) {
-      margin-bottom: 0.5rem;
-    }
-  }
+}
 
-  .subtask-list-container {
-    // Make scrollable for both desktop and mobile - reduced height so buttons stay visible
-    max-height: fit-content;
-    // overflow-y: auto;
-    // scrollbar-width: thin;
-    // scrollbar-color: var(--background-default-light) white;
-    
-    @media (max-width: $mobile-breakpoint) {
-      max-height: none;
-      overflow-y: visible;
-    }
-    
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-    
-    &::-webkit-scrollbar-track {
-      background: transparent;
-      border-radius: 3px;
-    }
-    
-    &::-webkit-scrollbar-thumb {
-      background: #c1c1c1;
-      border-radius: 3px;
-      
-      &:hover {
-        background: #a1a1a1;
-      }
-    }
+.subtask-input-container {
+  margin-bottom: 1rem;
+  
+  @media (max-width: $mobile-breakpoint) {
+    margin-bottom: 0.5rem;
   }
+}
+
+.subtask-list-container {
+  max-height: fit-content;
+  
+  @media (max-width: $mobile-breakpoint) {
+    max-height: none;
+    overflow-y: visible;
+  }
+}
 
 .subtasks-list { 
   @include flex-column; 
@@ -589,6 +555,12 @@ $small-mobile-breakpoint: 480px;
     @include inter400-fs16();
     color: var(--text-color-dark);
     flex: 1;
+    
+    &.completed {
+      text-decoration: line-through;
+      color: var(--text-color-medium);
+      opacity: 0.7;
+    }
   }
   
   .subtask-display {
@@ -597,9 +569,7 @@ $small-mobile-breakpoint: 480px;
     gap: 8px;
     width: 100%;
     
-    .subtask-text-simple {
-      flex: 1;
-    }
+    .subtask-text-simple { flex: 1; }
   }
   
   .subtask-edit {
@@ -636,9 +606,7 @@ $small-mobile-breakpoint: 480px;
       @include icon-size(16px);
       cursor: pointer;
       
-      &:hover {
-        opacity: 0.7;
-      }
+      &:hover { opacity: 0.7; }
     }
   }
   
@@ -646,80 +614,11 @@ $small-mobile-breakpoint: 480px;
     background-color: rgba(0, 0, 0, 0.02);
     border-radius: 4px;
     padding: 4px 4px;
-
     
-    .subtask-actions {
-      opacity: 1;
-    }
-  }
-  .subtask-edit .subtask-actions {
-    opacity: 1;
-  }
-}
-
-.subtask-item {
-  @include flex-between;
-  padding: 8px 12px;
-  background-color: var(--background-light);
-  border: 1px solid $border-color;
-  border-radius: 8px;
-  
-  .subtask-content {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex: 1;
-    
-    .subtask-checkbox { @include icon-size(16px); }
-    
-    .subtask-text {
-      @include inter400-fs16();
-      color: var(--text-color-dark);
-      &.completed { text-decoration: line-through; color: var(--text-color-medium); }
-    }
-    
-    .subtask-edit-input {
-      @extend %form-element-base;
-      height: 32px;
-      max-width: none;
-      flex: 1;
-      margin: 0;
-      padding: 6px 12px;
-      border: 2px solid var(--primary-color);
-      background-color: var(--background-light);
-      
-      &:focus {
-        outline: none;
-        border-color: var(--accent-color);
-        box-shadow: 0 0 0 2px rgba(42, 54, 71, 0.1);
-      }
-    }
+    .subtask-actions { opacity: 1; }
   }
   
-  .subtask-actions {
-    display: flex;
-    gap: 8px;
-    .action-icon { 
-      @include icon-size(16px);
-      z-index: 10; 
-    }
-    
-    .save-icon {
-      filter: brightness(0.8);
-      &:hover {
-        filter: brightness(1);
-        opacity: 1;
-      }
-    }
-    
-    .cancel-icon {
-      filter: brightness(0.6);
-      &:hover {
-        filter: brightness(0.8);
-        opacity: 1;
-      }
-    }
-  }
+  .subtask-edit .subtask-actions { opacity: 1; }
 }
 
 .selected-contacts {
@@ -797,18 +696,21 @@ input.error, textarea.error {
     max-width: 300px;
     padding: 16px 20px;
   }
+  
   .success-content {
     @include flex-column;
     gap: 8px;
     font-size: 18px;
     font-weight: 600;
     @include inter400-fs20;
+    
     span:first-child {
       @include inter400-fs20;
       @media (max-width: $small-mobile-breakpoint) {
         font-size: 16px;
       }
     }
+    
     .redirect-text {
       font-size: 14px;
       opacity: 0.9;
@@ -820,14 +722,44 @@ input.error, textarea.error {
   }
 }
 
+.subtask-checkbox-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 24px;
+  margin-right: 4px;
+}
+
+.subtask-checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox-label {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  background-image: url('./../../../public//assets/img/icons/checkbox.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+  transition: all 0.2s ease;
+}
+
+.subtask-checkbox:checked + .checkbox-label {
+  background-image: url('./../../../public//assets/img/icons/checkbox-checked.png');
+}
+
 @media (max-width: 310px) {
   .add-task-header {
     height: 80px;
     padding: 0 12px;
     
-    h1 {
-      font-size: 24px;
-    }
+    h1 { font-size: 24px; }
     
     .btn-close-overlay {
       right: 12px;
@@ -840,21 +772,14 @@ input.error, textarea.error {
     }
   }
   
-  .add-task-content {
-    padding: 12px;
-  }
+  .add-task-content { padding: 12px; }
   
   .form-group {
     gap: 6px;
-    
-    label {
-      font-size: 16px;
-    }
+    label { font-size: 16px; }
   }
   
-  .priority-buttons {
-    gap: 4px;
-  }
+  .priority-buttons { gap: 4px; }
   
   .priority-btn {
     height: 48px !important;
@@ -866,43 +791,7 @@ input.error, textarea.error {
       height: 14px !important;
     }
   }
-}  .subtask-checkbox-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    min-width: 24px;
-    margin-right: 4px;
-  }
-
-  .subtask-checkbox {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-
-  .checkbox-label {
-    cursor: pointer;
-    width: 24px;
-    height: 24px;
-    background-image: url('./../../../public//assets/img/icons/checkbox.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: block;
-    transition: all 0.2s ease;
-  }
-
-  .subtask-checkbox:checked + .checkbox-label {
-    background-image: url('./../../../public//assets/img/icons/checkbox-checked.png');
-  }
-
-  .subtask-text-simple.completed {
-    text-decoration: line-through;
-    color: var(--text-color-medium);
-    opacity: 0.7;
-  }
+}
 
 
 
