@@ -195,7 +195,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
    * Unsubscribes from the subscription to avoid memory leaks.
    */
   ngOnDestroy(): void {
-    if this.subscription) {
+    if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }
