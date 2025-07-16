@@ -5,23 +5,19 @@ $input-width: 440px;
 $border-color: #D1D1D1;
 $border-radius: 10px;
 $form-padding: clamp(20px, calc(2vw + 10px), 40px);
-
-// Responsive breakpoints
 $mobile-breakpoint: 768px;
 $small-mobile-breakpoint: 480px;
 
 @mixin flex-center { display: flex; justify-content: center; align-items: center; }
 @mixin flex-column { display: flex; flex-direction: column; }
 @mixin flex-between { display: flex; justify-content: space-between; align-items: center; }
-@mixin hover-opacity { &:hover { opacity: 0.7; } }
-@mixin icon-size($size) { width: $size; height: $size; cursor: pointer; @include hover-opacity; }
+@mixin icon-size($size) { width: $size; height: $size; cursor: pointer; &:hover { opacity: 0.7; } }
 
-// Überschreibe den layout-container für diese Komponente
 .layout-container {
   display: flex;
   flex-direction: column;
-  height: 100vh; // Wichtig für volle Höhe
-  overflow: hidden; // Verhindert doppeltes Scrollen
+  height: 100vh;
+  overflow: hidden;
   @media(max-width: 1000px) {
     height: calc(100dvh - 180px);
   }
@@ -73,10 +69,11 @@ $small-mobile-breakpoint: 480px;
   border-radius: 0 0 $border-radius $border-radius;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
 
   @media (max-width: $small-mobile-breakpoint) {
     max-height: 150px;
-    overflow-y: auto;
   }
 
   &.error {
@@ -109,7 +106,7 @@ $small-mobile-breakpoint: 480px;
   height: 140px;
   padding: 0 $form-padding;
   @include flex-center;
-  position: relative; // Für absolute Positionierung des X-Buttons
+  position: relative;
 
   h1 {
     margin: 0;
@@ -194,14 +191,14 @@ $small-mobile-breakpoint: 480px;
   
   @media (max-width: $mobile-breakpoint) {
     padding: 16px;
-    padding-bottom: 100px; // Platz für fixierte Buttons + Navigation
+    padding-bottom: 100px;
     overflow-y: auto;
-    min-height: 0; /* Wichtig für Flexbox-Scrolling */
+    min-height: 0;
   }
   
   @media (max-width: $small-mobile-breakpoint) {
     padding: 16px;
-    padding-bottom: 100px; // Platz für fixierte Buttons + Navigation
+    padding-bottom: 100px;
   }
 }
 
@@ -210,8 +207,8 @@ $small-mobile-breakpoint: 480px;
   gap: 32px; 
   width: 100%;
   max-width: $form-width;
-  margin: 0 auto; // Zentrieren
-  padding-bottom: 24px; // Platz am Ende
+  margin: 0 auto;
+  padding-bottom: 24px;
   
   @media (max-width: $mobile-breakpoint) {
     gap: 24px;
@@ -273,11 +270,11 @@ $small-mobile-breakpoint: 480px;
     display: flex;
     gap: 16px;
     margin-top: 8px;
-    justify-content: flex-end; // Rechtsbündige Ausrichtung
+    justify-content: flex-end;
     
     @media (max-width: $mobile-breakpoint) {
       position: fixed !important;
-      bottom: 70px; // Platz für die untere Navigation
+      bottom: 70px;
       left: 0;
       right: 0;
       width: 100%;
@@ -376,8 +373,8 @@ $small-mobile-breakpoint: 480px;
   width: 100%;
   
   @media (max-width: $mobile-breakpoint) {
-    justify-content: space-between; // Gleichmäßige Verteilung
-    flex-wrap: nowrap; // Keine Umbrüche
+    justify-content: space-between;
+    flex-wrap: nowrap;
   }
   
   @media (max-width: $small-mobile-breakpoint) {
@@ -424,7 +421,7 @@ $small-mobile-breakpoint: 480px;
     svg { 
       width: 20px !important; 
       height: 20px !important;
-      flex-shrink: 0; // Verhindert das Schrumpfen
+      flex-shrink: 0;
       
       @media (max-width: 1220px) {
         width: 20px !important;
@@ -451,8 +448,6 @@ $small-mobile-breakpoint: 480px;
 
   .dropdown-menu {
     @extend %dropdown-menu-base;
-    max-height: 200px;
-    overflow-y: auto;
 
     .contact-item {
       @extend %menu-item-base;
@@ -463,23 +458,12 @@ $small-mobile-breakpoint: 480px;
         color: #ffffff;
         
         .contact-info {
-          .contact-name {
-            color: #ffffff;
-          }
-          
-          .contact-avatar {
-            border: 2px solid #FFFFFF;
-          }
+          .contact-name { color: #ffffff; }
+          .contact-avatar { border: 2px solid #FFFFFF; }
         }
         
-        .contact-checkbox img {
-          filter: brightness(0) invert(1);
-        }
-        
-        &:hover {
-          background-color: #091931;
-          opacity: 1;
-        }
+        .contact-checkbox img { filter: brightness(0) invert(1); }
+        &:hover { background-color: #091931; opacity: 1; }
       }
 
       .contact-info {
@@ -525,47 +509,24 @@ $small-mobile-breakpoint: 480px;
     .cancel-icon { @include icon-size(24px); }
     .confirm-icon { @include icon-size(14px); }
   }
+}
 
-
-}  // Subtask containers - separate for better mobile control
-  .subtask-input-container {
-    margin-bottom: 1rem;
-    
-    @media (max-width: $mobile-breakpoint) {
-      margin-bottom: 0.5rem;
-    }
+.subtask-input-container {
+  margin-bottom: 1rem;
+  
+  @media (max-width: $mobile-breakpoint) {
+    margin-bottom: 0.5rem;
   }
+}
 
-  .subtask-list-container {
-    // Make scrollable for both desktop and mobile - reduced height so buttons stay visible
-    max-height: fit-content;
-    // overflow-y: auto;
-    // scrollbar-width: thin;
-    // scrollbar-color: var(--background-default-light) white;
-    
-    @media (max-width: $mobile-breakpoint) {
-      max-height: none; // Keine Begrenzung auf mobilen Geräten
-      overflow-y: visible; // Keine Scrollbar
-    }
-    
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-    
-    &::-webkit-scrollbar-track {
-      background: transparent;
-      border-radius: 3px;
-    }
-    
-    &::-webkit-scrollbar-thumb {
-      background: #c1c1c1;
-      border-radius: 3px;
-      
-      &:hover {
-        background: #a1a1a1;
-      }
-    }
+.subtask-list-container {
+  max-height: fit-content;
+  
+  @media (max-width: $mobile-breakpoint) {
+    max-height: none;
+    overflow-y: visible;
   }
+}
 
 .subtasks-list { 
   @include flex-column; 
@@ -576,7 +537,6 @@ $small-mobile-breakpoint: 480px;
   scrollbar-color: var(--background-default-light) white;
 }
 
-// Simple subtask item design to match the image
 .subtask-item-simple {
   display: flex;
   align-items: center;
@@ -595,6 +555,12 @@ $small-mobile-breakpoint: 480px;
     @include inter400-fs16();
     color: var(--text-color-dark);
     flex: 1;
+    
+    &.completed {
+      text-decoration: line-through;
+      color: var(--text-color-medium);
+      opacity: 0.7;
+    }
   }
   
   .subtask-display {
@@ -603,9 +569,7 @@ $small-mobile-breakpoint: 480px;
     gap: 8px;
     width: 100%;
     
-    .subtask-text-simple {
-      flex: 1;
-    }
+    .subtask-text-simple { flex: 1; }
   }
   
   .subtask-edit {
@@ -636,15 +600,13 @@ $small-mobile-breakpoint: 480px;
     gap: 8px;
     opacity: 0;
     transition: opacity 0.2s ease;
-    margin-left: auto; // Push to the right
+    margin-left: auto;
     
     .action-icon { 
       @include icon-size(16px);
       cursor: pointer;
       
-      &:hover {
-        opacity: 0.7;
-      }
+      &:hover { opacity: 0.7; }
     }
   }
   
@@ -652,83 +614,11 @@ $small-mobile-breakpoint: 480px;
     background-color: rgba(0, 0, 0, 0.02);
     border-radius: 4px;
     padding: 4px 4px;
-
     
-    .subtask-actions {
-      opacity: 1;
-    }
+    .subtask-actions { opacity: 1; }
   }
   
-  // Wenn wir editieren, sollen die Actions immer sichtbar sein
-  .subtask-edit .subtask-actions {
-    opacity: 1;
-  }
-}
-
-// Keep the old complex design for backwards compatibility
-.subtask-item {
-  @include flex-between;
-  padding: 8px 12px;
-  background-color: var(--background-light);
-  border: 1px solid $border-color;
-  border-radius: 8px;
-  
-  .subtask-content {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex: 1;
-    
-    .subtask-checkbox { @include icon-size(16px); }
-    
-    .subtask-text {
-      @include inter400-fs16();
-      color: var(--text-color-dark);
-      &.completed { text-decoration: line-through; color: var(--text-color-medium); }
-    }
-    
-    .subtask-edit-input {
-      @extend %form-element-base;
-      height: 32px;
-      max-width: none;
-      flex: 1;
-      margin: 0;
-      padding: 6px 12px;
-      border: 2px solid var(--primary-color);
-      background-color: var(--background-light);
-      
-      &:focus {
-        outline: none;
-        border-color: var(--accent-color);
-        box-shadow: 0 0 0 2px rgba(42, 54, 71, 0.1);
-      }
-    }
-  }
-  
-  .subtask-actions {
-    display: flex;
-    gap: 8px;
-    .action-icon { 
-      @include icon-size(16px);
-      z-index: 10; 
-    }
-    
-    .save-icon {
-      filter: brightness(0.8);
-      &:hover {
-        filter: brightness(1);
-        opacity: 1;
-      }
-    }
-    
-    .cancel-icon {
-      filter: brightness(0.6);
-      &:hover {
-        filter: brightness(0.8);
-        opacity: 1;
-      }
-    }
-  }
+  .subtask-edit .subtask-actions { opacity: 1; }
 }
 
 .selected-contacts {
@@ -770,7 +660,6 @@ $small-mobile-breakpoint: 480px;
   }
 }
 
-// Error States and Validation Messages
 .error-message {
   color: #FF4A4A;
   font-size: 12px;
@@ -788,7 +677,6 @@ input.error, textarea.error {
   }
 }
 
-// Success Message
 .success-message {
   position: fixed;
   top: 50%;
@@ -815,12 +703,9 @@ input.error, textarea.error {
     font-size: 18px;
     font-weight: 600;
     @include inter400-fs20;
-
     
     span:first-child {
       @include inter400-fs20;
-      
-      
       @media (max-width: $small-mobile-breakpoint) {
         font-size: 16px;
       }
@@ -837,15 +722,44 @@ input.error, textarea.error {
   }
 }
 
-// Additional mobile optimizations
+.subtask-checkbox-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 24px;
+  margin-right: 4px;
+}
+
+.subtask-checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox-label {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  background-image: url('./../../../public//assets/img/icons/checkbox.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+  transition: all 0.2s ease;
+}
+
+.subtask-checkbox:checked + .checkbox-label {
+  background-image: url('./../../../public//assets/img/icons/checkbox-checked.png');
+}
+
 @media (max-width: 310px) {
   .add-task-header {
     height: 80px;
     padding: 0 12px;
     
-    h1 {
-      font-size: 24px;
-    }
+    h1 { font-size: 24px; }
     
     .btn-close-overlay {
       right: 12px;
@@ -858,21 +772,14 @@ input.error, textarea.error {
     }
   }
   
-  .add-task-content {
-    padding: 12px;
-  }
+  .add-task-content { padding: 12px; }
   
   .form-group {
     gap: 6px;
-    
-    label {
-      font-size: 16px;
-    }
+    label { font-size: 16px; }
   }
   
-  .priority-buttons {
-    gap: 4px;
-  }
+  .priority-buttons { gap: 4px; }
   
   .priority-btn {
     height: 48px !important;
@@ -884,43 +791,7 @@ input.error, textarea.error {
       height: 14px !important;
     }
   }
-}  .subtask-checkbox-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    min-width: 24px;
-    margin-right: 4px;
-  }
-
-  .subtask-checkbox {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-
-  .checkbox-label {
-    cursor: pointer;
-    width: 24px;
-    height: 24px;
-    background-image: url('./../../../public//assets/img/icons/checkbox.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: block;
-    transition: all 0.2s ease;
-  }
-
-  .subtask-checkbox:checked + .checkbox-label {
-    background-image: url('./../../../public//assets/img/icons/checkbox-checked.png');
-  }
-
-  .subtask-text-simple.completed {
-    text-decoration: line-through;
-    color: var(--text-color-medium);
-    opacity: 0.7;
-  }
+}
 
 
 
