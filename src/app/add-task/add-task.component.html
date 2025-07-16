@@ -29,18 +29,15 @@
       </svg>
     </button>
   </div>
-  
   <div class="success-message" *ngIf="showSuccessMessage">
     <div class="success-content">
       <span>✓ Task successfully {{ isEditingMode ? 'updated' : 'created' }}!</span>
       <span class="redirect-text">Redirecting to board...</span>
     </div>
   </div>
-  
   <div class="add-task-content">
     <form class="task-form" (ngSubmit)="createTask($event)">
       <div class="form-main">
-
         <div class="form-left">
           <div class="form-group">
             <label for="title">Title<span class="required">*</span></label>
@@ -56,7 +53,6 @@
               This field is required
             </div>
           </div>
-          
           <div class="form-group">
             <label for="description">Description</label>
             <textarea 
@@ -66,7 +62,6 @@
               [(ngModel)]="formData.description">
             </textarea>
           </div>
-          
           <div class="form-group">
             <label for="due-date">Due date<span class="required">*</span></label>
             <input 
@@ -81,12 +76,9 @@
               This field is required
             </div>
           </div>
-          
           <p class="required-note"><span class="required">*</span>This field is required</p>
         </div>
-        
         <div class="form-divider"></div>
-        
         <div class="form-right">
           <div class="form-group">
             <label for="priority">Priority</label>
@@ -123,7 +115,6 @@
               </button>
             </div>
           </div>
-          
           <div class="form-group">
             <label for="assigned-to">Assigned to</label>
             <div class="dropdown" [class.open]="showContactDropdown">
@@ -138,14 +129,12 @@
                 alt="Dropdown" 
                 class="dropdown-arrow"
                 (click)="toggleContactDropdown()">
-              
               <div class="dropdown-menu" *ngIf="showContactDropdown">
                 <div 
                   class="contact-item" 
                   [class.selected]="isContactSelected(contact)"
                   *ngFor="let contact of contacts"
                   (click)="selectContact(contact)">
-                  
                   <div class="contact-info">
                     <div 
                       class="contact-avatar"
@@ -154,7 +143,6 @@
                     </div>
                     <span class="contact-name">{{ contact.name }}</span>
                   </div>
-                  
                   <div class="contact-checkbox">
                     <img 
                       *ngIf="isContactSelected(contact)"
@@ -168,7 +156,6 @@
                 </div>
               </div>
             </div>
-            
             <div class="selected-contacts" *ngIf="selectedContacts.length > 0">
               <div 
                 class="selected-contact-avatar"
@@ -186,7 +173,6 @@
               </div>
             </div>
           </div>
-          
           <div class="form-group">
             <label for="category">Category<span class="required">*</span></label>
             <div class="dropdown" [class.open]="showCategoryDropdown">
@@ -207,13 +193,11 @@
                 alt="Dropdown" 
                 class="dropdown-arrow"
                 (click)="toggleCategoryDropdown()">
-              
               <div class="dropdown-menu" *ngIf="showCategoryDropdown">
                 <div 
                   class="category-item" 
                   *ngFor="let category of categories"
                   (click)="selectCategory(category)">
-                  
                   <div class="category-info">
                     <div 
                       class="category-color"
@@ -228,10 +212,8 @@
               This field is required
             </div>
           </div>
-          
           <div class="form-group">
             <label for="subtasks">Subtasks</label>
-            <!-- Subtask Input Container - always visible on mobile -->
             <div class="subtask-input-container">
               <div class="subtask-input" [class.confirmation]="showSubtaskConfirmation">
                 <input 
@@ -245,13 +227,11 @@
                   [readonly]="showSubtaskConfirmation"
                   (focus)="subtaskInputFocused = true"
                   (blur)="subtaskInputFocused = false">
-                
                 <img 
                   *ngIf="!showSubtaskConfirmation && !subtaskInputFocused"
                   src="assets/img/icons/add.png" 
                   alt="Add" 
                   class="add-icon">
-                
                 <div *ngIf="subtaskInputFocused" class="confirmation-icons">
                   <img 
                     src="assets/img/icons/close.png" 
@@ -267,14 +247,10 @@
                 </div>
               </div>
             </div>
-            
-            <!-- Subtask List Container - scrollable on mobile -->
             <div class="subtask-list-container" *ngIf="subtasks.length > 0">
               <div class="subtasks-list">
                 <div class="subtask-item-simple" *ngFor="let subtask of subtasks">
-                  <!-- Normal view -->
                   <div *ngIf="editingSubtaskId !== subtask.id" class="subtask-display">
-                    <!-- Show checkbox only in edit mode -->
                     <div *ngIf="isEditingMode" class="subtask-checkbox-container">
                       <input 
                         type="checkbox" 
@@ -284,7 +260,6 @@
                         [id]="'subtask-' + subtask.id">
                       <label [for]="'subtask-' + subtask.id" class="checkbox-label"></label>
                     </div>
-                    <!-- Show bullet only in add mode -->
                     <span *ngIf="!isEditingMode" class="bullet">•</span>
                     <span class="subtask-text-simple" [class.completed]="isEditingMode && subtask.completed">{{ subtask.text }}</span>
                     <div class="subtask-actions">
@@ -300,10 +275,7 @@
                         (click)="deleteSubtask(subtask.id)">
                     </div>
                   </div>
-                  
-                  <!-- Edit view -->
                   <div *ngIf="editingSubtaskId === subtask.id" class="subtask-edit">
-                    <!-- Show checkbox only in edit mode -->
                     <div *ngIf="isEditingMode" class="subtask-checkbox-container">
                       <input 
                         type="checkbox" 
@@ -313,7 +285,6 @@
                         [id]="'subtask-edit-' + subtask.id">
                       <label [for]="'subtask-edit-' + subtask.id" class="checkbox-label"></label>
                     </div>
-                    <!-- Show bullet only in add mode -->
                     <span *ngIf="!isEditingMode" class="bullet">•</span>
                     <input 
                       type="text" 
@@ -339,7 +310,6 @@
               </div>
             </div>
           </div>
-          
           <div class="form-actions">
             <button type="button" class="btn-clear" (click)="clearForm()" [disabled]="isCreatingTask">Clear</button>
             <button type="submit" class="btn-create" [disabled]="isCreatingTask">
