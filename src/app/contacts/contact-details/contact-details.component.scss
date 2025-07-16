@@ -114,7 +114,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width:60%;
+  max-width: 60%;
   > p {
     font-family: var(--font-primary);
     font-size: clamp(18px, 5vw, 42px);
@@ -228,7 +228,7 @@
     height: 60px;
     object-fit: contain;
   }
-  
+
   .hover-icon {
     display: none;
     position: absolute;
@@ -306,12 +306,9 @@
   }
 }
 
-//
-//
-//
-//
-//
-//
+//=====================
+// Responsive Overrides
+//=====================
 
 @media (max-width: 1210px) {
   .contact-header {
@@ -400,11 +397,11 @@
   }
 
   .mobile-back-btn {
-    display: flex !important; // In mobiler Ansicht sichtbar
+    display: flex !important;
   }
 
   .mobile-options-btn {
-    display: block; // In mobiler Ansicht sichtbar
+    display: block;
   }
 
   .user-options {
@@ -412,7 +409,7 @@
   }
 
   .mobile-menu {
-    display: flex; // Nur in mobiler Ansicht sichtbar
+    display: flex;
   }
 
   .contact-content {
