@@ -161,9 +161,14 @@ export class BoardComponent {
   /**
    * Lifecycle hook that runs on component initialization.
    * Starts loading tasks from the task service.
+   * Lifecycle hook: Sets initial animation direction and attaches resize listener.
    */
   ngOnInit(): void {
     this.loadTasks();
+    this.setAnimationDirection(window.innerWidth);
+    window.addEventListener('resize', () => {
+      this.setAnimationDirection(window.innerWidth);
+    });
   }
 
   /**
