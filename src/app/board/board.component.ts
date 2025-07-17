@@ -31,6 +31,9 @@ import { Contact } from '../services/contact.service';
 import { FormsModule } from '@angular/forms';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { Router } from '@angular/router';
+import { TaskListManager } from './task-list-manager';
+import { DragDropManager } from './drag-drop-manager';
+import { OverlayManager } from './overlay-manager';
 
 @Component({
   selector: 'app-board',
@@ -93,23 +96,64 @@ import { Router } from '@angular/router';
  * - Responsive design (mobile / desktop behavior)
  */
 export class BoardComponent {
-  animationDirection: 'right' | 'bottom' = 'right';
-  backgroundVisible = false;
-  overlayVisible = false;
-  showTaskDetails = false;
-  showAddOrEditTask: boolean = false;
-  selectedTask?: Task;
   searchTerm: string = '';
   unsubTask!: Subscription;
   unsubSubtask!: Subscription;
   unsubContact!: Subscription;
-  taskList: Task[] = [];
   subtaskList: Subtask[] = [];
   contactList: Contact[] = [];
-  subtasksByTaskId: { [taskId: string]: Subtask[] } = {};
   setTaskStatus: string = 'to-do';
   showBackToTop = false;
   openedMenuTaskId: string | null = null;
+
+  /**
+   * Getter for overlay states from OverlayManager
+   */
+  get animationDirection(): 'right' | 'bottom' {
+    return this.overlayManager.getAnimationDirection();
+  }
+
+  get backgroundVisible(): boolean {
+    return this.overlayManager.getBackgroundVisible();
+  }
+
+  get overlayVisible(): boolean {
+    return this.overlayManager.getOverlayVisible();
+  }
+
+  get showTaskDetails(): boolean {
+    return this.overlayManager.getShowTaskDetails();
+  }
+
+  get showAddOrEditTask(): boolean {
+    return this.overlayManager.getShowAddOrEditTask();
+  }
+
+  get selectedTask(): Task | undefined {
+    return this.overlayManager.getSelectedTask();
+  }
+
+  /**
+   * Getter for task lists from TaskListManager
+   */
+  get taskList(): Task[] {
+    return this.taskListManager.getTaskList();
+  }
+  get subtasksByTaskId(): { [taskId: string]: Subtask[] } {
+    return this.taskListManager.getSubtasksByTaskId();
+  }
+  get todo(): Task[] {
+    return this.taskListManager.getTodoTasks();
+  }
+  get inprogress(): Task[] {
+    return this.taskListManager.getInProgressTasks();
+  }
+  get awaitfeedback(): Task[] {
+    return this.taskListManager.getAwaitFeedbackTasks();
+  }
+  get done(): Task[] {
+    return this.taskListManager.getDoneTasks();
+  }
 
   /**
    * Constructs the BoardComponent with injected services for task management, navigation,
@@ -122,9 +166,11 @@ export class BoardComponent {
   constructor(
     private taskService: TaskService,
     private router: Router,
-    private contactService: ContactService
+    private contactService: ContactService,
+    private taskListManager: TaskListManager,
+    private dragDropManager: DragDropManager,
+    private overlayManager: OverlayManager
   ) { }
-
 
   /**
    * Reference to the scrollable board section element.
@@ -164,10 +210,10 @@ export class BoardComponent {
    * Lifecycle hook: Sets initial animation direction and attaches resize listener.
    */
   ngOnInit(): void {
-    this.loadTasks();
-    this.setAnimationDirection(window.innerWidth);
+    this.taskListManager.loadTasks();
+    this.overlayManager.setAnimationDirection(window.innerWidth);
     window.addEventListener('resize', () => {
-      this.setAnimationDirection(window.innerWidth);
+      this.overlayManager.setAnimationDirection(window.innerWidth);
     });
   }
 
@@ -183,54 +229,7 @@ export class BoardComponent {
    * @returns Filtered list of tasks.
    */
   getFilteredTasks(status: string): Task[] {
-    const statusArrayMap: { [key: string]: Task[] } = {
-      'to-do': this.todo,
-      'in-progress': this.inprogress,
-      'await-feedback': this.awaitfeedback,
-      done: this.done,
-    };
-    const tasksForStatus = statusArrayMap[status] || [];
-    if (!this.searchTerm.trim()) {
-      return tasksForStatus;
-    }
-    const searchLower = this.searchTerm.toLowerCase();
-    return tasksForStatus.filter(
-      (task) =>
-        task.title.toLowerCase().includes(searchLower) ||
-        task.description?.toLowerCase().includes(searchLower)
-    );
-  }
-
-  /**
-   * Sorts a list of tasks by their due date.
-   *
-   * @param tasks - Array of tasks to be sorted.
-   * @param ascending - Whether to sort in ascending order (default: true).
-   * @returns Sorted task array.
-   */
-  private sortTasksByDueDate(tasks: Task[], ascending: boolean = true): Task[] {
-    return [...tasks].sort((a, b) => {
-      const dateA = this.getDateValue(a.date);
-      const dateB = this.getDateValue(b.date);
-      return ascending ? dateA - dateB : dateB - dateA;
-    });
-  }
-
-  /**
-   * Converts different date formats (Date, Firestore Timestamp, string) into a timestamp.
-   *
-   * @param date - Date input to convert.
-   * @returns Numeric timestamp, or Number.MAX_SAFE_INTEGER if invalid.
-   */
-  private getDateValue(date: Date | any): number {
-    if (date && typeof date.toDate === 'function') {
-      return date.toDate().getTime();
-    } else if (date instanceof Date) {
-      return date.getTime();
-    } else if (typeof date === 'string') {
-      return new Date(date).getTime();
-    }
-    return Number.MAX_SAFE_INTEGER;
+    return this.taskListManager.getFilteredTasks(status, this.searchTerm);
   }
 
   /**
@@ -247,7 +246,7 @@ export class BoardComponent {
    * @param width - Current screen width.
    */
   setAnimationDirection(width: number) {
-    this.animationDirection = width < 1000 ? 'bottom' : 'right';
+    this.overlayManager.setAnimationDirection(width);
   }
 
   /**
@@ -256,10 +255,7 @@ export class BoardComponent {
    * @param event - A string (expected: 'closed') that triggers background removal.
    */
   removeBackground(event: string) {
-    if (event === 'closed') {
-      this.backgroundVisible = false;
-      this.overlayVisible = false;
-    }
+    this.overlayManager.removeBackground(event);
   }
 
   /**
@@ -269,28 +265,16 @@ export class BoardComponent {
    * @param event - AnimationEvent from Angular.
    */
   onOverlayAnimationDone(event: AnimationEvent) {
-    if (event.toState === 'right' || event.toState === 'bottom') {
-      setTimeout(() => {
-        this.backgroundVisible = true;
-      }, 50);
-    }
+    this.overlayManager.onOverlayAnimationDone(event);
   }
   /**
-   * List of tasks status.
+   * Returns the delay for starting a drag action based on screen width.
+   * Prevents accidental drags on small screens.
+   *
+   * @returns Drag delay in milliseconds.
    */
-  todo: Task[] = [];
-  inprogress: Task[] = [];
-  awaitfeedback: Task[] = [];
-  done: Task[] = [];
-
-  /**
- * Returns the delay for starting a drag action based on screen width.
- * Prevents accidental drags on small screens.
- *
- * @returns Drag delay in milliseconds.
- */
   getDragDelay(): number {
-    return window.innerWidth < 1000 ? 250 : 0;
+    return this.dragDropManager.getDragDelay();
   }
 
   /**
@@ -300,44 +284,9 @@ export class BoardComponent {
  * @param event - The CdkDragDrop event containing task data and drop context.
  */
   drop(event: CdkDragDrop<Task[]>) {
-    const task = event.item.data as Task;
-    let newStatus: Task['status'];
-    if (event.container.id === 'todoList') {
-      newStatus = 'to-do';
-    } else if (event.container.id === 'inprogressList') {
-      newStatus = 'in-progress';
-    } else if (event.container.id === 'awaitfeedbackList') {
-      newStatus = 'await-feedback';
-    } else if (event.container.id === 'doneList') {
-      newStatus = 'done';
-    } else {
-      return;
-    }
-
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-      if (task.id && task.status !== newStatus) {
-        const updatedTask: Task = { ...task, status: newStatus };
-        this.taskService.updateTask(task.id, updatedTask).catch((error) => {
-          console.error('Error updating task status:', error);
-        });
-      }
-    }
-    this.todo = this.sortTasksByDueDate(this.todo);
-    this.inprogress = this.sortTasksByDueDate(this.inprogress);
-    this.awaitfeedback = this.sortTasksByDueDate(this.awaitfeedback);
-    this.done = this.sortTasksByDueDate(this.done);
+    this.dragDropManager.handleDrop(event, () => {
+      this.taskListManager.updateTaskLists();
+    });
   }
 
   /**
@@ -357,16 +306,7 @@ export class BoardComponent {
    * @param status - The status to prefill in the add/edit task form.
    */
   openAddOrEditOverlay(event: string, status: string) {
-    const isSmallScreen = window.innerWidth < 1000;
-    if (event === 'open' || event === 'edit') {
-      if (isSmallScreen) {
-        this.router.navigate(['/add-task'], { queryParams: { status } });
-      } else {
-        this.showTaskDetails = false;
-        this.showAddOrEditTask = true;
-      }
-    }
-    this.overlayVisible = true;
+    this.overlayManager.openAddOrEditOverlay(event, status);
   }
 
   /**
@@ -375,10 +315,7 @@ export class BoardComponent {
    * @param selectedTask - The task object to display in detail.
    */
   openTaskDetail(selectedTask: Task) {
-    this.selectedTask = selectedTask;
-    this.showTaskDetails = true;
-    this.showAddOrEditTask = false;
-    this.overlayVisible = true;
+    this.overlayManager.openTaskDetail(selectedTask);
   }
 
   /**
@@ -388,77 +325,17 @@ export class BoardComponent {
    * @param event - A string indicating why the overlay is being closed (e.g., 'close', 'added').
    */
   closeDetailsOverlay(event: string) {
-    if (event === 'close' || 'added') {
-      this.overlayVisible = false;
-      this.backgroundVisible = false;
-      this.showTaskDetails = false;
-      this.showAddOrEditTask = false;
-      this.selectedTask = undefined;
-      this.taskService.clearEditingTask();
-    }
+    this.overlayManager.closeDetailsOverlay(event);
   }
 
   /**
-  * Loads tasks from the task service and distributes them into status-based lists.
-  * Also sorts tasks by due date and loads their subtasks.
+  * Returns the subtasks for a given task ID.
   *
-  * @returns A function to unsubscribe from the task observable.
+  * @param taskId - The ID of the task to retrieve subtasks for.
+  * @returns Array of subtasks, or an empty array if none exist.
   */
-  loadTasks() {
-    this.unsubTask = this.taskService.getTasks().subscribe((tasks: Task[]) => {
-      this.taskList = tasks;
-      this.emptyArrays();
-      for (const task of tasks) {
-        switch (task.status) {
-          case 'to-do':
-            this.todo.push(task);
-            break;
-          case 'in-progress':
-            this.inprogress.push(task);
-            break;
-          case 'await-feedback':
-            this.awaitfeedback.push(task);
-            break;
-          case 'done':
-            this.done.push(task);
-            break;
-          default:
-            console.warn(
-              `Unbekannter Status bei Task ${task.title}:`,
-              task.status
-            );
-        }
-      }
-      this.todo = this.sortTasksByDueDate(this.todo);
-      this.inprogress = this.sortTasksByDueDate(this.inprogress);
-      this.awaitfeedback = this.sortTasksByDueDate(this.awaitfeedback);
-      this.done = this.sortTasksByDueDate(this.done);
-      this.loadSubtasks();
-    });
-    return () => this.unsubTask.unsubscribe();
-  }
-
-  /**
-  * Empties all task lists (to-do, in-progress, await-feedback, done).
-  */
-  emptyArrays() {
-    this.todo = [];
-    this.inprogress = [];
-    this.awaitfeedback = [];
-    this.done = [];
-  }
-
-  /**
-  * Loads subtasks for each task and stores them in a lookup table by task ID.
-  */
-  loadSubtasks() {
-    for (const task of this.taskList) {
-      if (task.id) {
-        this.taskService.getSubtasks(task.id).subscribe((subtasks) => {
-          this.subtasksByTaskId[task.id!] = subtasks;
-        });
-      }
-    }
+  getSubtasksForTask(taskId: string | undefined): Subtask[] {
+    return this.taskListManager.getSubtasksForTask(taskId);
   }
 
   /**
@@ -467,23 +344,7 @@ export class BoardComponent {
  * @returns Array of subtasks, or an empty array if none are found.
  */
   getSubtasksForSelectedTask() {
-    if (this.selectedTask?.id) {
-      return this.subtasksByTaskId[this.selectedTask.id] || [];
-    }
-    return [];
-  }
-
-  /**
- * Returns the subtasks for a given task ID.
- *
- * @param taskId - The ID of the task to retrieve subtasks for.
- * @returns Array of subtasks, or an empty array if none exist.
- */
-  getSubtasksForTask(taskId: string | undefined): Subtask[] {
-    if (!taskId) {
-      return [];
-    }
-    return this.subtasksByTaskId[taskId] || [];
+    return this.taskListManager.getSubtasksForSelectedTask(this.selectedTask);
   }
 
   /**
@@ -512,7 +373,7 @@ export class BoardComponent {
  * @returns The unique task ID.
  */
   trackByTaskId(index: number, task: Task): string | undefined {
-    return task.id;
+    return this.taskListManager.trackByTaskId(index, task);
   }
 
   /**
@@ -522,13 +383,9 @@ export class BoardComponent {
  */
   changeTaskStatus(event: { taskId: string; status: string }) {
     const { taskId, status } = event;
-    const task = this.taskList.find((t) => t.id === taskId);
-    if (task && task.status !== status) {
-      const updatedTask = { ...task, status };
-      this.taskService.updateTask(taskId, updatedTask).then(() => {
-        this.loadTasks();
-      });
-    }
+    this.dragDropManager.changeTaskStatus(taskId, status, this.taskList, () => {
+      this.taskListManager.loadTasks();
+    });
   }
 
   /**
@@ -538,16 +395,6 @@ export class BoardComponent {
  * @param event - The CdkDragMove event containing the pointer position.
  */
   onDragMoved(event: CdkDragMove) {
-    const mouseY = event.pointerPosition.y;
-    const threshold = 100;
-    const scrollStep = 30;
-    const section = this.scrollSection?.nativeElement;
-    if (!section) return;
-    const rect = section.getBoundingClientRect();
-    if (mouseY < rect.top + threshold) {
-      section.scrollBy({ top: -scrollStep, behavior: 'auto' });
-    } else if (rect.bottom - mouseY < threshold) {
-      section.scrollBy({ top: scrollStep, behavior: 'auto' });
-    }
+    this.dragDropManager.handleDragMove(event, this.scrollSection);
   }
 }
