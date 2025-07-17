@@ -14,6 +14,8 @@
         z-index: 3;
         background-color: var(--background-dark);
         pointer-events: none;
+
+
     }
 
     .dark-logo-wrapper img {
@@ -103,6 +105,10 @@
         margin-top: 2rem;
     }
 
+    @media (max-width: 406px){
+        margin-top: 1rem;
+    }
+
 
 }
 
@@ -187,7 +193,7 @@
         height: 44px;
         border-radius: 8px;
         border: unset;
-        min-width: 100px;
+        width: 150px;
         transition: background-color 0.2s ease;
         justify-content: center;
     }
@@ -199,15 +205,9 @@
         height: 44px;
         border-radius: 8px;
         border: 1px solid var(--text-color-dark);
-        min-width: 150px;
+        width: 150px;
         background-color: white;
         justify-content: center;
-    }
-
-    @media (max-width: 406px){
-        font-size: 16px;
-        height: 64px;
-        min-width: 72px;
     }
 }
 
@@ -253,9 +253,12 @@
             height: 0;
         }
     }
+
+    @media (max-width: 406px){
+        margin: 0.25rem 0;
+    }
     
 }
-
 
 @media (max-width: 480px) {
 
@@ -307,4 +310,14 @@
         white-space: nowrap;
     }
   }
+}
+
+
+.btn-login,
+.btn-guestlogin {
+        @media (max-width: 406px){
+        font-size: 16px;
+        height: 20px;
+        width: 72px;
+    }
 }

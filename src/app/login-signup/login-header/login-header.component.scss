@@ -13,6 +13,10 @@
         text-decoration: none;
         color: var(--text-color-main);
     }
+
+    @media (max-width: 406px){
+        padding: 8px;
+    }
 }
 
 .dark-logo-wrapper img {
