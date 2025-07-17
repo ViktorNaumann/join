@@ -3,7 +3,7 @@
 section {
   height: calc(100vh - 100px);
   width: 100%;
-  overflow-y: auto; // <-- Scrollbar für die ganze Section
+  overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: var(--background-default-light) white;
@@ -15,7 +15,7 @@ section {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  overflow: visible; // kein eigenes Scrollen mehr!
+  overflow: visible;
   height: auto;
 }
 
@@ -151,14 +151,11 @@ section {
 
 .task-columns {
   flex: 1 1 auto;
-
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-
-  overflow: visible; // kein eigenes Scrollen mehr!
+  overflow: visible;
   height: auto;
-
   gap: 20px;
   padding: 0 clamp(20px, calc(2vw + 10px), 40px);
   @include inter400-fs12;
@@ -274,15 +271,9 @@ section {
   }
 }
 
-// =======================
-// CDK Drag & Drop Styles
-// =======================
-
-// Platzhalter für gezogenes Element:
 .cdk-drag-placeholder {
   opacity: 1;
   border: 1px dashed black;
-  // background-color: transparent; // Transparenter Hintergrund
   background-color: rgba(66, 82, 110, 0.1);
 
   * {
@@ -291,62 +282,51 @@ section {
   }
 }
 
-// Animierte Positionswechsel:
 .cdk-drag-animating {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-// Task-spezifische Drag-Styles
 app-task {
   cursor: grab !important;
   transform-origin: center center;
   border-radius: 30px;
   transition: box-shadow 0.2s ease, opacity 0.2s ease;
 
-  // Aktiv beim Drücken (nicht ziehen):
   &:active:not(.cdk-drag-dragging) {
     transform: rotate(5deg);
-    // Delay simuliert CDK-Delay
     transition: transform 0.3s ease 250ms;
     cursor: grabbing !important;
 
-    // Zusätzliche Spezifität für Cursor
     * {
       cursor: grabbing !important;
     }
   }
 
-  // Während des Ziehens (Funktioniert nicht):
   &.cdk-drag-dragging {
     cursor: grabbing !important;
     transform: rotate(5deg) !important;
     transition: transform 0.1s ease-in-out !important;
 
-    // Alle Kinder-Elemente auch mit grabbing cursor
     * {
       cursor: grabbing !important;
     }
   }
 
-  // Deaktivierter Zustand (nicht ziehbar):
   &.cdk-drag-disabled {
     cursor: default;
     opacity: 0.5;
     pointer-events: none;
   }
 
-  // Hover-Effekt, wenn nicht gezogen/gedrückt:
   &:not(.cdk-drag-dragging):not(:active):hover {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     transition: box-shadow 0.2s ease;
   }
 }
 
-// Drop-Listen Visual Feedback
 .drop-list {
   transition: all 0.2s ease;
 
-  // visualisiert Aktive Zone:
   &.cdk-drop-list-receiving {
     background-color: #f9f9f9;
     border: 1px dashed rgba(0, 0, 0, 0.2);
@@ -355,7 +335,6 @@ app-task {
   }
 }
 
-// Spezifische Animationen für Tasks in Listen:
 .drop-list.cdk-drop-list-dragging app-task:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
@@ -386,10 +365,6 @@ app-task {
   width: 100%;
   @include flex-center;
 }
-
-// ===================
-// Responsive Overrides
-// ===================
 
 @media (max-width: 1455px) {
   .task-columns {
@@ -485,7 +460,7 @@ app-task {
 
   app-task {
     &:active:not(.cdk-drag-dragging) {
-      transition: transform 0.3s ease 0ms; // Kein Delay auf Desktop
+      transition: transform 0.3s ease 0ms;
     }
   }
 }
@@ -512,10 +487,7 @@ app-task {
   }
 }
 
-//TODO:
 @media (max-width: 830px) {
-
-  // NEU Window Scrolling:
   .layout-container {
     height: auto;
     max-height: unset;
@@ -581,17 +553,14 @@ app-task {
     max-width: calc(100vw - 40px);
     min-height: 200px;
     max-height: 250px;
-
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: flex-start;
-
     overflow-x: auto;
     overflow-y: hidden;
     gap: 22px;
-
     scrollbar-width: thin;
     scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
 

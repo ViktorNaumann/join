@@ -1,10 +1,8 @@
 import {
   Component,
   ViewEncapsulation,
-  HostListener,
   ViewChild,
   ElementRef,
-  AfterViewInit,
 } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import {
@@ -26,12 +24,10 @@ import {
 import { Task } from '../services/task.service';
 import { TaskService } from '../services/task.service';
 import { CommonModule } from '@angular/common';
-
 import { Subtask } from '../services/task.service';
 import { Subscription } from 'rxjs';
 import { ContactService } from '../services/contact.service';
 import { Contact } from '../services/contact.service';
-
 import { FormsModule } from '@angular/forms';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { Router } from '@angular/router';
@@ -52,7 +48,6 @@ import { Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('slideInOut', [
-      // ENTER: void => right
       transition('void => right', [
         style({ transform: 'translateX(100%)', opacity: 0 }),
         animate(
@@ -60,15 +55,12 @@ import { Router } from '@angular/router';
           style({ transform: 'translateX(0)', opacity: 1 })
         ),
       ]),
-      // LEAVE: right => void
       transition('right => void', [
         animate(
           '250ms ease-in-out',
           style({ transform: 'translateX(100%)', opacity: 0 })
         ),
       ]),
-
-      // ENTER: void => bottom
       transition('void => bottom', [
         style({ transform: 'translateY(100%)', opacity: 0 }),
         animate(
@@ -76,7 +68,6 @@ import { Router } from '@angular/router';
           style({ transform: 'translateY(0)', opacity: 1 })
         ),
       ]),
-      // LEAVE: bottom => void
       transition('bottom => void', [
         animate(
           '250ms ease-in-out',
@@ -109,12 +100,11 @@ export class BoardComponent {
     private taskService: TaskService,
     private router: Router,
     private contactService: ContactService
-  ) {}
+  ) { }
 
   @ViewChild('scrollSection') scrollSection!: ElementRef<HTMLElement>;
 
   ngAfterViewInit() {
-    // Optional: falls du initial prüfen willst
     this.scrollSection.nativeElement.addEventListener('scroll', () =>
       this.onSectionScroll()
     );
@@ -133,10 +123,9 @@ export class BoardComponent {
     this.loadTasks();
   }
 
-  onSearchInput() {}
+  onSearchInput() { }
 
   getFilteredTasks(status: string): Task[] {
-    // Mapping für bessere Lesbarkeit
     const statusArrayMap: { [key: string]: Task[] } = {
       'to-do': this.todo,
       'in-progress': this.inprogress,
@@ -165,14 +154,13 @@ export class BoardComponent {
 
   private getDateValue(date: Date | any): number {
     if (date && typeof date.toDate === 'function') {
-      // Firebase Timestamp
       return date.toDate().getTime();
     } else if (date instanceof Date) {
       return date.getTime();
     } else if (typeof date === 'string') {
       return new Date(date).getTime();
     }
-    return Number.MAX_SAFE_INTEGER; // Tasks ohne Datum kommen ans Ende
+    return Number.MAX_SAFE_INTEGER;
   }
 
   clearSearch() {
@@ -203,16 +191,13 @@ export class BoardComponent {
   awaitfeedback: Task[] = [];
   done: Task[] = [];
 
-  // NEU:
   getDragDelay(): number {
     return window.innerWidth < 1000 ? 250 : 0;
   }
 
   drop(event: CdkDragDrop<Task[]>) {
-    const task = event.item.data as Task; // Task-Daten aus dem Drag-Event
+    const task = event.item.data as Task;
     let newStatus: Task['status'];
-
-    // Status basierend auf der Container-ID bestimmen
     if (event.container.id === 'todoList') {
       newStatus = 'to-do';
     } else if (event.container.id === 'inprogressList') {
@@ -222,26 +207,22 @@ export class BoardComponent {
     } else if (event.container.id === 'doneList') {
       newStatus = 'done';
     } else {
-      return; // Fallback, falls Container unbekannt
+      return;
     }
 
-    // NEU:
     if (event.previousContainer === event.container) {
-      // Innerhalb einer Liste verschieben
       moveItemInArray(
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
     } else {
-      // Zwischen Listen verschieben
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
-      // Status im Task-Objekt und Backend aktualisieren
       if (task.id && task.status !== newStatus) {
         const updatedTask: Task = { ...task, status: newStatus };
         this.taskService.updateTask(task.id, updatedTask).catch((error) => {
@@ -249,8 +230,6 @@ export class BoardComponent {
         });
       }
     }
-
-    // Nach jedem Drop sortieren
     this.todo = this.sortTasksByDueDate(this.todo);
     this.inprogress = this.sortTasksByDueDate(this.inprogress);
     this.awaitfeedback = this.sortTasksByDueDate(this.awaitfeedback);
@@ -296,7 +275,6 @@ export class BoardComponent {
     this.unsubTask = this.taskService.getTasks().subscribe((tasks: Task[]) => {
       this.taskList = tasks;
       this.emptyArrays();
-
       for (const task of tasks) {
         switch (task.status) {
           case 'to-do':
@@ -318,7 +296,6 @@ export class BoardComponent {
             );
         }
       }
-      // Arrays nach Fälligkeitsdatum sortieren
       this.todo = this.sortTasksByDueDate(this.todo);
       this.inprogress = this.sortTasksByDueDate(this.inprogress);
       this.awaitfeedback = this.sortTasksByDueDate(this.awaitfeedback);
@@ -367,7 +344,6 @@ export class BoardComponent {
     this.subtaskList = [...updatedSubtasks];
   }
 
-  // Track-by-Funktion für bessere Performance hinzufügen
   trackByTaskId(index: number, task: Task): string | undefined {
     return task.id;
   }
@@ -378,21 +354,17 @@ export class BoardComponent {
     if (task && task.status !== status) {
       const updatedTask = { ...task, status };
       this.taskService.updateTask(taskId, updatedTask).then(() => {
-        // Optional: UI-Update, falls nötig
         this.loadTasks();
       });
     }
   }
 
-  // NEU Window Drag-Scroll
   onDragMoved(event: CdkDragMove) {
     const mouseY = event.pointerPosition.y;
     const threshold = 100;
     const scrollStep = 30;
-
     const section = this.scrollSection?.nativeElement;
     if (!section) return;
-
     const rect = section.getBoundingClientRect();
     if (mouseY < rect.top + threshold) {
       section.scrollBy({ top: -scrollStep, behavior: 'auto' });
