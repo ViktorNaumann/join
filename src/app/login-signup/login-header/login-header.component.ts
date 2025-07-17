@@ -1,3 +1,14 @@
+/**
+ * LoginHeaderComponent displays the animated header section for the login page.
+ * It includes a fade-in logo animation that only plays once per session.
+ * 
+ * Features:
+ * - Animated logo using Angular animation triggers
+ * - Touch device detection (optional extension)
+ * - Session-based control to play animation only once per session
+ * 
+ * This component is purely visual and does not manage any business logic.
+ */
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {
@@ -31,14 +42,31 @@ import {
   ]
 })
 export class LoginHeaderComponent {
+  /**
+   * The current state of the logo animation.
+   * - `'start'`: hidden state with opacity 0
+   * - `'appear'`: visible state with opacity 1
+   */
   logoState: 'start' | 'appear' = 'start';
-  isTouchDevice:boolean = false;
 
+  /**
+   * Indicates whether the current device supports touch input.
+   * Currently unused, but reserved for future enhancements.
+   */
+  isTouchDevice: boolean = false;
+
+  /**
+   * Lifecycle hook that initializes the animation state when the component loads.
+   */
   ngOnInit(): void {
     this.initializeAnimation();
-  } 
+  }
 
-  initializeAnimation() {
+  /**
+   * Triggers the logo fade-in animation if it hasn’t already played during the session.
+   * Stores a flag in sessionStorage to prevent the animation from repeating.
+   */
+  initializeAnimation(): void {
     if (!sessionStorage.getItem('logoAppeared')) {
       setTimeout(() => {
         this.logoState = 'appear';
@@ -49,4 +77,3 @@ export class LoginHeaderComponent {
     }
   }
 }
-
