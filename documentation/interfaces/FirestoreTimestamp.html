@@ -1,0 +1,471 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>join documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">join documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  FirestoreTimestamp</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/summary/summary.component.ts</code>
+        </p>
+
+
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Methods</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#toDate" 
+>
+                                        toDate
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toDate"></a>
+                    <span class="name">
+                        <span ><b>toDate</b></span>
+                        <a href="#toDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toDate()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="15"
+                                    class="link-to-prism">src/app/summary/summary.component.ts:15</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { TaskService, Task } from &#x27;../services/task.service&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { AuthService } from &#x27;../services/auth.service&#x27;;
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from &#x27;@angular/animations&#x27;;
+
+interface FirestoreTimestamp {
+  toDate(): Date;
+}
+
+@Component({
+  selector: &#x27;app-summary&#x27;,
+  imports: [CommonModule],
+  templateUrl: &#x27;./summary.component.html&#x27;,
+  styleUrl: &#x27;./summary.component.scss&#x27;,
+  animations: [
+    trigger(&#x27;fadeOutGreeting&#x27;, [
+      state(&#x27;start&#x27;, style({ opacity: 1 })),
+      state(&#x27;moved&#x27;, style({ opacity: 0 })),
+      transition(&#x27;start &#x3D;&gt; moved&#x27;, [animate(&#x27;1.5s 0.5s ease-in-out&#x27;)]),
+    ]),
+  ],
+})
+export class SummaryComponent implements OnInit {
+  taskList: Task[] &#x3D; [];
+  userName: string &#x3D; &#x27;&#x27;;
+
+  greetingState: &#x27;start&#x27; | &#x27;moved&#x27; &#x3D; &#x27;start&#x27;;
+  showGreeting &#x3D; true;
+  isMobile &#x3D; false;
+
+  nextDeadlineDate: Date | null &#x3D; null;
+  nextDeadlineCount: number &#x3D; 0;
+  greeting: string &#x3D; &#x27;&#x27;;
+
+  todoCount &#x3D; 0;
+  doneCount &#x3D; 0;
+  inProgressCount &#x3D; 0;
+  awaitingFeedbackCount &#x3D; 0;
+
+  constructor(
+    private taskService: TaskService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
+
+  /**
+   * Counts the number of tasks with a specific status.
+   *
+   * @private
+   * @param {Task[]} tasks - The list of tasks.
+   * @param {string} status - The status to count.
+   * @returns {number} The number of tasks with the given status.
+   */
+  private countTasksByStatus(tasks: Task[], status: string): number {
+    return tasks.filter((t) &#x3D;&gt; t.status &#x3D;&#x3D;&#x3D; status).length;
+  }
+
+  /**
+   * Checks if the given object is a FirestoreTimestamp.
+   *
+   * @private
+   * @param {any} obj - The object to check.
+   * @returns {obj is FirestoreTimestamp} True if the object is a FirestoreTimestamp.
+   */
+  private isFirestoreTimestamp(obj: any): obj is FirestoreTimestamp {
+    return obj &amp;&amp; typeof obj.toDate &#x3D;&#x3D;&#x3D; &#x27;function&#x27;;
+  }
+
+  /**
+   * Returns the total number of all tasks.
+   *
+   * @readonly
+   * @returns {number} The total number of tasks.
+   */
+  get totalTaskCount(): number {
+    return (
+      this.todoCount +
+      this.inProgressCount +
+      this.awaitingFeedbackCount +
+      this.doneCount
+    );
+  }
+
+  /**
+   * Returns a greeting depending on the current time.
+   *
+   * @returns {string} The greeting (e.g., &quot;Good morning,&quot;).
+   */
+  getGreeting(): string {
+    const hour &#x3D; new Date().getHours();
+    if (hour &gt;&#x3D; 5 &amp;&amp; hour &lt; 12) {
+      return &#x27;Good morning,&#x27;;
+    } else if (hour &gt;&#x3D; 12 &amp;&amp; hour &lt; 18) {
+      return &#x27;Good afternoon,&#x27;;
+    } else if (hour &gt;&#x3D; 18 &amp;&amp; hour &lt; 23) {
+      return &#x27;Good evening,&#x27;;
+    } else {
+      return &#x27;Good night,&#x27;;
+    }
+  }
+
+  /**
+   * Navigates to the board view.
+   */
+  goToBoard() {
+    this.router.navigate([&#x27;/board&#x27;]);
+  }
+
+  /**
+   * Initializes the component, loads user data and tasks,
+   * calculates statistics, and controls the welcome greeting display.
+   */
+  ngOnInit() {
+    this.isMobile &#x3D; window.innerWidth &lt; 1000;
+
+    this.authService.getCurrentUserData().then((userData) &#x3D;&gt; {
+      this.userName &#x3D; userData?.displayName?.trim()
+        ? userData.displayName
+        : &#x27;Nice to see you!&#x27;;
+      this.greeting &#x3D; this.getGreeting();
+
+      const greetingShown &#x3D; sessionStorage.getItem(&#x27;greetingShown&#x27;);
+      if (this.isMobile &amp;&amp; !greetingShown) {
+        this.showGreeting &#x3D; true;
+        this.greetingState &#x3D; &#x27;start&#x27;;
+        setTimeout(() &#x3D;&gt; {
+          this.greetingState &#x3D; &#x27;moved&#x27;;
+          setTimeout(() &#x3D;&gt; {
+            this.showGreeting &#x3D; false;
+            sessionStorage.setItem(&#x27;greetingShown&#x27;, &#x27;true&#x27;);
+          }, 2000);
+        }, 500);
+      } else {
+        this.showGreeting &#x3D; false;
+      }
+    });
+
+    this.taskService.getTasks().subscribe((tasks: Task[]) &#x3D;&gt; {
+      this.taskList &#x3D; tasks;
+
+      this.todoCount &#x3D; this.countTasksByStatus(tasks, &#x27;to-do&#x27;);
+      this.doneCount &#x3D; this.countTasksByStatus(tasks, &#x27;done&#x27;);
+      this.inProgressCount &#x3D; this.countTasksByStatus(tasks, &#x27;in-progress&#x27;);
+      this.awaitingFeedbackCount &#x3D; this.countTasksByStatus(
+        tasks,
+        &#x27;await-feedback&#x27;
+      );
+
+      const now &#x3D; new Date();
+      const futureTasks &#x3D; tasks
+        .filter((t) &#x3D;&gt; t.date &amp;&amp; t.status !&#x3D;&#x3D; &#x27;done&#x27;)
+        .map((t) &#x3D;&gt; {
+          let dateObj: Date | null &#x3D; null;
+          if (t.date instanceof Date) {
+            dateObj &#x3D; t.date;
+          } else if (this.isFirestoreTimestamp(t.date)) {
+            dateObj &#x3D; t.date.toDate();
+          } else if (typeof t.date &#x3D;&#x3D;&#x3D; &#x27;string&#x27; || typeof t.date &#x3D;&#x3D;&#x3D; &#x27;number&#x27;) {
+            dateObj &#x3D; new Date(t.date);
+          }
+          return { ...t, dateObj };
+        })
+        .filter((t) &#x3D;&gt; t.dateObj &amp;&amp; t.dateObj &gt; now);
+
+      if (futureTasks.length &gt; 0) {
+        futureTasks.sort((a, b) &#x3D;&gt; a.dateObj!.getTime() - b.dateObj!.getTime());
+        const nextDate &#x3D; futureTasks[0].dateObj!;
+        this.nextDeadlineDate &#x3D; nextDate;
+        this.nextDeadlineCount &#x3D; futureTasks.filter(
+          (t) &#x3D;&gt; t.dateObj!.getTime() &#x3D;&#x3D;&#x3D; nextDate.getTime()
+        ).length;
+      } else {
+        this.nextDeadlineDate &#x3D; null;
+        this.nextDeadlineCount &#x3D; 0;
+      }
+    });
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'FirestoreTimestamp.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

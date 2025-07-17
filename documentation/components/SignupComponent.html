@@ -1,0 +1,1645 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>join documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">join documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  SignupComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/login-signup/signup/signup.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-signup</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>RouterModule</code>
+                                <code><a href="../components/FooterComponent.html" target="_self" >FooterComponent</a></code>
+                            <code>ReactiveFormsModule</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./signup.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./signup.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#errorMessage" >errorMessage</a>
+                            </li>
+                            <li>
+                                <a href="#isLoading" >isLoading</a>
+                            </li>
+                            <li>
+                                <a href="#showConfirmPassword" >showConfirmPassword</a>
+                            </li>
+                            <li>
+                                <a href="#showPassword" >showPassword</a>
+                            </li>
+                            <li>
+                                <a href="#signupform" >signupform</a>
+                            </li>
+                            <li>
+                                <a href="#successMessage" >successMessage</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#getValidationMessage" >getValidationMessage</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onBackToLogin" >onBackToLogin</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                            <li>
+                                <a href="#passwordsMatchValidator" >passwordsMatchValidator</a>
+                            </li>
+                            <li>
+                                <a href="#saveNewContact" >saveNewContact</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(form: FormBuilder, authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, router: Router, contactService: <a href="../injectables/ContactService.html" target="_self">ContactService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/login-signup/signup/signup.component.ts:69</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Initializes the signup form and injects required services.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>form</td>
+                                                  
+                                                        <td>
+                                                                    <code>FormBuilder</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>FormBuilder for creating the reactive form</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Service for user registration</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Angular Router for navigation</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>contactService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ContactService.html" target="_self" >ContactService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Service to store new users as contacts</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getValidationMessage"></a>
+                    <span class="name">
+                        <span ><b>getValidationMessage</b></span>
+                        <a href="#getValidationMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getValidationMessage(field: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="174"
+                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:174</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Returns a user-friendly validation message for the given form field.
+Includes special handling for mismatched passwords.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>field</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The name of the form control.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>A descriptive validation message or empty string.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:89</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Lifecycle hook: creates the signup form with all necessary validators.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onBackToLogin"></a>
+                    <span class="name">
+                        <span ><b>onBackToLogin</b></span>
+                        <a href="#onBackToLogin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onBackToLogin()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="160"
+                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:160</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Navigates the user back to the login screen.
+Uses <code>skipLocationChange</code> to avoid adding the redirect to browser history.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:119</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles the form submission process, including validation,
+user registration, contact saving, and navigation on success.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="passwordsMatchValidator"></a>
+                    <span class="name">
+                        <span ><b>passwordsMatchValidator</b></span>
+                        <a href="#passwordsMatchValidator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>passwordsMatchValidator(group: AbstractControl)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="109"
+                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:109</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Custom validator to ensure password and confirm password fields match.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>group</td>
+                                            <td>
+                                                        <code>AbstractControl</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The form group containing password fields.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>ValidationErrors | null</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>A validation error object or null if passwords match.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveNewContact"></a>
+                    <span class="name">
+                        <span ><b>saveNewContact</b></span>
+                        <a href="#saveNewContact"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>saveNewContact(newName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, newEmail: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:147</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Creates and stores a new contact based on registration input.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>newName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Name entered during registration.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>newEmail</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Email address entered during registration.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errorMessage"></a>
+                    <span class="name">
+                        <span ><b>errorMessage</b></span>
+                        <a href="#errorMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/login-signup/signup/signup.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Holds the current error message for display on form failure.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoading"></a>
+                    <span class="name">
+                        <span ><b>isLoading</b></span>
+                        <a href="#isLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/login-signup/signup/signup.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indicates whether a registration request is currently in progress.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showConfirmPassword"></a>
+                    <span class="name">
+                        <span ><b>showConfirmPassword</b></span>
+                        <a href="#showConfirmPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/login-signup/signup/signup.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controls visibility of the confirm password input field.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showPassword"></a>
+                    <span class="name">
+                        <span ><b>showPassword</b></span>
+                        <a href="#showPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/login-signup/signup/signup.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controls visibility of the password input field.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="signupform"></a>
+                    <span class="name">
+                        <span ><b>signupform</b></span>
+                        <a href="#signupform"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FormGroup</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/login-signup/signup/signup.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The reactive signup form with fields for name, email, password, etc.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="successMessage"></a>
+                    <span class="name">
+                        <span ><b>successMessage</b></span>
+                        <a href="#successMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/login-signup/signup/signup.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Holds the success message shown after successful registration.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
+import { FooterComponent } from &#x27;../footer/footer.component&#x27;;
+import { RouterModule, Router } from &#x27;@angular/router&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { AuthService } from &#x27;../../services/auth.service&#x27;;
+import { Contact, ContactService } from &#x27;../../services/contact.service&#x27;;
+
+@Component({
+  selector: &#x27;app-signup&#x27;,
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    FooterComponent,
+    ReactiveFormsModule
+  ],
+  templateUrl: &#x27;./signup.component.html&#x27;,
+  styleUrls: [&#x27;./signup.component.scss&#x27;]
+})
+
+export class SignupComponent implements OnInit {
+  /**
+   * The reactive signup form with fields for name, email, password, etc.
+   */
+  signupform!: FormGroup;
+
+  /**
+   * Holds the current error message for display on form failure.
+   */
+  errorMessage: string &#x3D; &#x27;&#x27;;
+
+  /**
+   * Holds the success message shown after successful registration.
+   */
+  successMessage: string &#x3D; &#x27;&#x27;;
+
+  /**
+   * Indicates whether a registration request is currently in progress.
+   */
+  isLoading: boolean &#x3D; false;
+
+  /**
+   * Controls visibility of the password input field.
+   */
+  showPassword: boolean &#x3D; false;
+
+  /**
+   * Controls visibility of the confirm password input field.
+   */
+  showConfirmPassword: boolean &#x3D; false;
+
+  /**
+   * Initializes the signup form and injects required services.
+   * 
+   * @param form FormBuilder for creating the reactive form
+   * @param authService Service for user registration
+   * @param router Angular Router for navigation
+   * @param contactService Service to store new users as contacts
+   */
+  constructor(
+    private form: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private contactService: ContactService,
+  ) {}
+
+  /**
+   * Lifecycle hook: creates the signup form with all necessary validators.
+   */
+  ngOnInit(): void {
+    this.signupform &#x3D; this.form.group({
+      name : [&#x27;&#x27;, [Validators.required, Validators.minLength(2)]],
+      email: [&#x27;&#x27;, [Validators.required, Validators.email]],
+      password: [&#x27;&#x27;, [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern(/^(?&#x3D;.*[A-Z])(?&#x3D;.*\d)(?&#x3D;.*[!@#$%^&amp;*()_\-+&#x3D;\[\]{};:&#x27;&quot;\\|,.&lt;&gt;\/?]).+$/)
+      ]],
+      confirmPassword: [&#x27;&#x27;, Validators.required],
+      privacyPolicy: [false, [Validators.requiredTrue]],
+    }, { validators: this.passwordsMatchValidator });
+  }
+
+  /**
+   * Custom validator to ensure password and confirm password fields match.
+   * 
+   * @param group The form group containing password fields.
+   * @returns A validation error object or null if passwords match.
+   */
+  passwordsMatchValidator(group: AbstractControl): ValidationErrors | null {
+    const password &#x3D; group.get(&#x27;password&#x27;)?.value;
+    const confirm &#x3D; group.get(&#x27;confirmPassword&#x27;)?.value;
+    return password &#x3D;&#x3D;&#x3D; confirm ? null : { passwordsDontMatch: true };
+  }
+
+  /**
+   * Handles the form submission process, including validation,
+   * user registration, contact saving, and navigation on success.
+   */
+  async onSubmit(): Promise&lt;void&gt; {
+    if (this.signupform.invalid) {
+      this.signupform.markAllAsTouched();
+      return;
+    }
+    this.isLoading &#x3D; true;
+    this.errorMessage &#x3D; &#x27;&#x27;;
+    this.successMessage &#x3D; &#x27;&#x27;;
+    const { name, email, password } &#x3D; this.signupform.value;
+    const result &#x3D; await this.authService.signUp(email, password, name);
+    this.saveNewContact(name, email);
+    if (result.success) {
+      this.successMessage &#x3D; &#x27;Registration successful! You will be redirected...&#x27;;
+      setTimeout(() &#x3D;&gt; {
+        this.router.navigate([&#x27;/summary&#x27;]);
+      }, 2000);
+    } else {
+      this.errorMessage &#x3D; result.message || &#x27;Registration failed&#x27;;
+    }
+    this.isLoading &#x3D; false;
+  }
+
+  /**
+   * Creates and stores a new contact based on registration input.
+   * 
+   * @param newName Name entered during registration.
+   * @param newEmail Email address entered during registration.
+   */
+  saveNewContact(newName: string, newEmail: string): void {
+    const newContact: Contact &#x3D; {
+      name: newName,
+      email: newEmail,
+    };
+    this.contactService.addContact(newContact);
+    this.contactService.selectContact(newContact);
+  }
+
+  /**
+   * Navigates the user back to the login screen.
+   * Uses &#x60;skipLocationChange&#x60; to avoid adding the redirect to browser history.
+   */
+  onBackToLogin(): void {
+    this.router.navigateByUrl(&#x27;/&#x27;, { skipLocationChange: true }).then(() &#x3D;&gt; {
+      this.router.navigate([&#x27;/login&#x27;]);
+    });
+    this.isLoading &#x3D; false;
+  }
+
+  /**
+   * Returns a user-friendly validation message for the given form field.
+   * Includes special handling for mismatched passwords.
+   * 
+   * @param field The name of the form control.
+   * @returns A descriptive validation message or empty string.
+   */
+  getValidationMessage(field: string): string {
+    const control &#x3D; this.signupform.get(field);
+
+    if (field &#x3D;&#x3D;&#x3D; &#x27;confirmPassword&#x27;) {
+      const passwordMismatch &#x3D; this.signupform.errors?.[&#x27;passwordsDontMatch&#x27;];
+      const touched &#x3D; control?.touched || this.signupform.get(&#x27;password&#x27;)?.touched;
+      if (passwordMismatch &amp;&amp; touched) {
+        return &#x27;Passwords do not match&#x27;;
+      }
+    }
+    if (!control || !control.touched || !control.errors) return &#x27;&#x27;;
+    if (control.errors[&#x27;required&#x27;]) return &#x27;This field is required&#x27;;
+    if (control.errors[&#x27;email&#x27;]) return &#x27;Please enter a valid email address&#x27;;
+    if (control.errors[&#x27;minlength&#x27;]) {
+      return &#x60;Minimum ${control.errors[&#x27;minlength&#x27;].requiredLength} characters required&#x60;;
+    }
+    if (control.errors[&#x27;pattern&#x27;]) {
+      return &#x27;Password must contain uppercase, numbers and special characters&#x27;;
+    }
+    if (control.errors[&#x27;requiredTrue&#x27;]) return &#x27;You must accept the privacy policy&#x27;;
+
+    return &#x27;&#x27;;
+  }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;signup-content&quot;&gt;    
+    &lt;div class&#x3D;&quot;dark-logo-wrapper&quot;&gt;
+        &lt;img src&#x3D;&quot;./assets/img/logo/favicon.png&quot; alt&#x3D;&quot;Dark Join Logo&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;section class&#x3D;&quot;signup-frame&quot;&gt;
+        &lt;div class&#x3D;&quot;signup-header&quot;&gt;
+            &lt;a class&#x3D;&quot;btn-back&quot; (click)&#x3D;&quot;onBackToLogin()&quot;&gt;
+                &lt;img src&#x3D;&quot;assets/img/icons/arrow-back.png&quot; alt&#x3D;&quot;Back Icon&quot;&gt;
+            &lt;/a&gt;
+            &lt;h2&gt;Sign up&lt;/h2&gt;
+        &lt;/div&gt;
+        &lt;form [formGroup]&#x3D;&quot;signupform&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot;&gt;
+            &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt;
+                &lt;div&gt;
+                    &lt;div class&#x3D;&quot;form-group&quot; [ngClass]&#x3D;&quot;{&#x27;colorError&#x27;: signupform.get(&#x27;name&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;name&#x27;)?.touched}&quot;&gt;
+                        &lt;label for&#x3D;&quot;name&quot;&gt;&lt;/label&gt;
+                        &lt;input id&#x3D;&quot;name&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Name&quot; formControlName&#x3D;&quot;name&quot;&gt;
+                        &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/person.png&quot; alt&#x3D;&quot;Person Icon&quot;&gt;
+                    &lt;/div&gt;
+                    &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;signupform.get(&#x27;name&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;name&#x27;)?.touched&quot;&gt;
+                        {{ getValidationMessage(&#x27;name&#x27;) }}
+                    &lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;   
+            &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt;
+                &lt;div&gt;
+                    &lt;div class&#x3D;&quot;form-group&quot; [ngClass]&#x3D;&quot;{&#x27;colorError&#x27;: signupform.get(&#x27;email&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;email&#x27;)?.touched}&quot;&gt;
+                        &lt;label for&#x3D;&quot;email&quot;&gt;&lt;/label&gt;
+                        &lt;input id&#x3D;&quot;email&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Email&quot; formControlName&#x3D;&quot;email&quot;&gt;
+                        &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/mail.png&quot; alt&#x3D;&quot;Mail Icon&quot;&gt;
+                    &lt;/div&gt;
+                    &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;signupform.get(&#x27;email&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;email&#x27;)?.touched&quot;&gt;
+                        {{ getValidationMessage(&#x27;email&#x27;) }}
+                    &lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;    
+            &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt;
+                &lt;div&gt;
+                    &lt;div class&#x3D;&quot;form-group&quot; [ngClass]&#x3D;&quot;{&#x27;colorError&#x27;: signupform.get(&#x27;password&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;password&#x27;)?.touched}&quot;&gt;
+                        &lt;label for&#x3D;&quot;password&quot;&gt;&lt;/label&gt;
+                        &lt;input id&#x3D;&quot;password&quot; [type]&#x3D;&quot;showPassword ? &#x27;text&#x27; : &#x27;password&#x27;&quot; placeholder&#x3D;&quot;Password&quot; formControlName&#x3D;&quot;password&quot;&gt;
+                        &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/lock.png&quot; alt&#x3D;&quot;Lock Icon&quot; *ngIf&#x3D;&quot;!signupform.get(&#x27;password&#x27;)?.value&quot;&gt;
+                        &lt;img class&#x3D;&quot;input-icon toggle-eye&quot; [src]&#x3D;&quot;showPassword ? &#x27;assets/img/icons/visibility.png&#x27; : &#x27;assets/img/icons/visibility-off.png&#x27;&quot; alt&#x3D;&quot;Toggle Password Visibility&quot; *ngIf&#x3D;&quot;signupform.get(&#x27;password&#x27;)?.value&quot; (click)&#x3D;&quot;showPassword &#x3D; !showPassword&quot; /&gt;
+                    &lt;/div&gt;
+                    &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;signupform.get(&#x27;password&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;password&#x27;)?.touched&quot;&gt;
+                        {{ getValidationMessage(&#x27;password&#x27;) }}
+                    &lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;    
+            &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt; 
+                &lt;div&gt;
+                    &lt;div class&#x3D;&quot;form-group&quot; [ngClass]&#x3D;&quot;{&#x27;colorError&#x27;: signupform.get(&#x27;confirmPassword&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;confirmPassword&#x27;)?.touched}&quot;&gt;
+                        &lt;label for&#x3D;&quot;confirmPassword&quot;&gt;&lt;/label&gt;
+                        &lt;input id&#x3D;&quot;confirmPassword&quot; [type]&#x3D;&quot;showConfirmPassword ? &#x27;text&#x27; : &#x27;password&#x27;&quot; placeholder&#x3D;&quot;Confirm Password&quot; formControlName&#x3D;&quot;confirmPassword&quot;&gt;
+                        &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/lock.png&quot; alt&#x3D;&quot;Lock Icon&quot; *ngIf&#x3D;&quot;!signupform.get(&#x27;confirmPassword&#x27;)?.value&quot;&gt;
+                        &lt;img class&#x3D;&quot;input-icon toggle-eye&quot; [src]&#x3D;&quot;showConfirmPassword ? &#x27;assets/img/icons/visibility.png&#x27; : &#x27;assets/img/icons/visibility-off.png&#x27;&quot; alt&#x3D;&quot;Toggle Confirm Password Visibility&quot; *ngIf&#x3D;&quot;signupform.get(&#x27;confirmPassword&#x27;)?.value&quot; (click)&#x3D;&quot;showConfirmPassword &#x3D; !showConfirmPassword&quot;/&gt;
+                    &lt;/div&gt;
+                    &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;getValidationMessage(&#x27;confirmPassword&#x27;)&quot;&gt;
+                        {{ getValidationMessage(&#x27;confirmPassword&#x27;) }}
+                    &lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt;    
+                &lt;label class&#x3D;&quot;checkbox-label&quot;&gt;
+                    &lt;input type&#x3D;&quot;checkbox&quot; formControlName&#x3D;&quot;privacyPolicy&quot; /&gt;
+                    I accept the &lt;a routerLink&#x3D;&quot;/privacy-policy&quot; class&#x3D;&quot;highlight&quot;&gt;Privacy policy&lt;/a&gt;
+                &lt;/label&gt;
+            &lt;/div&gt;    
+            &lt;div class&#x3D;&quot;btn-wrapper&quot;&gt;
+                &lt;button class&#x3D;&quot;btn-signup&quot; type&#x3D;&quot;submit&quot; [disabled]&#x3D;&quot;signupform.invalid || isLoading&quot;&gt;
+                    &lt;ng-container *ngIf&#x3D;&quot;!isLoading&quot;&gt;Sign Up&lt;/ng-container&gt;
+                    &lt;ng-container *ngIf&#x3D;&quot;isLoading&quot;&gt;
+                        &lt;span class&#x3D;&quot;spinner&quot;&gt;&lt;/span&gt;
+                        Signing up...
+                    &lt;/ng-container&gt;
+                &lt;/button&gt;
+            &lt;/div&gt;
+            &lt;p class&#x3D;&quot;success-message&quot; *ngIf&#x3D;&quot;successMessage&quot;&gt;{{ successMessage }}&lt;/p&gt;
+            &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;errorMessage&quot;&gt;{{ errorMessage }}&lt;/p&gt;
+        &lt;/form&gt;
+    &lt;/section&gt;
+&lt;/div&gt;
+
+&lt;app-footer&gt;&lt;/app-footer&gt;
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./signup.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &quot;./../../../styles.scss&quot;;
+
+.signup-content {
+    position:relative;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.dark-logo-wrapper {
+    padding: 32px;
+
+    img {
+        @media (max-width: 768px) {
+            height: 72px;
+            width: 64px;
+        }
+    }
+}
+
+.signup-frame {
+  background-color: var(--background-light);
+  border-radius: 20px;
+  padding: clamp(32px, calc(1.8vw + 20px), 64px);
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.05);
+  width: clamp(440px, 5vw + 440px, 560px);
+  margin: 0 auto;
+  @include flex-center;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(24px, 2.5vh, 36px);
+  margin-top: 1rem;
+
+  @media (max-width: 768px){
+    width: 90vw;
+    padding: 16px 12px;
+    gap: 20px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    max-height: 500px;
+  }
+}  
+
+.signup-header {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .btn-back {
+    @include btn();
+    position: absolute;
+    left: 0;
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+    h2 {
+        @include inter700-fs47;
+        color: var(--text-color-main);
+        position: relative;
+        margin-bottom: 0;
+
+        &amp;::after {
+        content: &quot;&quot;;
+        display: block;
+        width: 80px;
+        height: 3px;
+        background-color: var(--accent-primary-color);
+        margin: 12px auto 0;
+        border-radius: 3px;
+        }
+    }
+}    
+
+form {
+    padding: 0;
+}
+
+.form-group-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+
+    @media(max-width: 768px) {
+        gap: 16px;
+    }
+}
+
+.form-group {
+    @include form-group();
+    background-color: var(--background-light);
+    position: relative;
+    
+
+    input {
+        width: 100%;
+        background-color: transparent;
+        color: var(--text-color-main);
+        padding-right: 28px;
+        @include inter400-fs20();
+        height: 16px;
+        font-size: 16px;
+    }
+
+    input::placeholder {
+        color: var(--text-color-medium);
+        opacity: 1; 
+    }
+
+    .input-icon {
+        position: absolute;
+        right: clamp(12px, 2vw, 18px);
+        top: 50%;
+        transform: translateY(-50%);
+        height: 20px;
+        width: 20px;
+        opacity: 0.6;
+    }
+
+    @media(max-width: 768px) {
+        width: 100%;
+
+        input {
+            width: 100%;
+            font-size: 15px;
+            height: 14px;
+        }
+
+        .input-icon {
+            width: 18px;
+            height: 18px;
+            right: 12px;
+        }
+    }
+
+}
+
+.checkbox-label {
+    @include flex-center;
+    gap: 8px;
+    margin: 8px;
+    margin-top: 16px;
+    width: 100%;
+    @include inter400-fs14();
+    color: var(--text-color-medium);
+    cursor: pointer;
+    position: relative;
+
+    input[type&#x3D;&quot;checkbox&quot;] {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        background-image: url(&quot;/assets/img/icons/checkbox.png&quot;);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        border: none;
+        margin: 0;
+        padding: 0;
+        flex-shrink: 0;
+    }
+
+    input[type&#x3D;&quot;checkbox&quot;]:checked {
+        background-image: url(&quot;/assets/img/icons/checkbox-checked.png&quot;);
+    }
+
+    .highlight {
+        color: var(--accent-primary-color);
+        text-decoration: none;
+        cursor: pointer;
+    }
+}
+
+.btn-wrapper {
+    width: 100%;
+    @include flex-center;
+}
+
+.btn-signup {
+    cursor: pointer;
+    height: 44px;
+    border-radius: 8px;
+    border: unset;
+    min-width: 120px;
+    transition: background-color 0.2s ease;
+    justify-content: center;
+    @include btn-dark();
+
+    &amp;:hover {
+        background-color: #29abe2;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+
+    &amp;:disabled {
+        background-color: #ccc;
+        color: #666;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+}
+
+.colorError {
+    border: 1px solid var(--text-color-error);
+}
+
+.error-message {
+    @include inter400-fs12;
+    color: var(--text-color-error);
+    display: hidden;
+
+    @media(max-width: 768px) {
+        font-size: 13px;
+    }
+}
+
+.success-message {
+    @include inter400-fs12;
+    color: var(--text-color-success);
+    display: block;
+    margin-top: 16px;
+    text-align: center;
+}
+
+.login-link {
+    @include inter400-fs12;
+    color: var(--text-color-light);
+    text-align: center;
+    margin-top: 16px;
+    
+    a {
+        color: var(--accent-color);
+        text-decoration: none;
+        
+        &amp;:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+input:focus {
+    border: unset;
+}
+
+.spinner {
+  border: 2px solid #fff;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  animation: spin 0.8s linear infinite;
+  margin-right: 6px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.input-icon.toggle-eye {
+    cursor: pointer;
+    right: 16px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="signup-content">        <div class="dark-logo-wrapper">        <img src="./assets/img/logo/favicon.png" alt="Dark Join Logo">    </div>    <section class="signup-frame">        <div class="signup-header">            <a class="btn-back" (click)="onBackToLogin()">                <img src="assets/img/icons/arrow-back.png" alt="Back Icon">            </a>            <h2>Sign up</h2>        </div>        <form [formGroup]="signupform" (ngSubmit)="onSubmit()">            <div class="form-group-wrapper">                <div>                    <div class="form-group" [ngClass]="{\'colorError\': signupform.get(\'name\')?.invalid && signupform.get(\'name\')?.touched}">                        <label for="name"></label>                        <input id="name" type="text" placeholder="Name" formControlName="name">                        <img class="input-icon" src="assets/img/icons/person.png" alt="Person Icon">                    </div>                    <p class="error-message" *ngIf="signupform.get(\'name\')?.invalid && signupform.get(\'name\')?.touched">                        {{ getValidationMessage(\'name\') }}                    </p>                </div>            </div>               <div class="form-group-wrapper">                <div>                    <div class="form-group" [ngClass]="{\'colorError\': signupform.get(\'email\')?.invalid && signupform.get(\'email\')?.touched}">                        <label for="email"></label>                        <input id="email" type="text" placeholder="Email" formControlName="email">                        <img class="input-icon" src="assets/img/icons/mail.png" alt="Mail Icon">                    </div>                    <p class="error-message" *ngIf="signupform.get(\'email\')?.invalid && signupform.get(\'email\')?.touched">                        {{ getValidationMessage(\'email\') }}                    </p>                </div>            </div>                <div class="form-group-wrapper">                <div>                    <div class="form-group" [ngClass]="{\'colorError\': signupform.get(\'password\')?.invalid && signupform.get(\'password\')?.touched}">                        <label for="password"></label>                        <input id="password" [type]="showPassword ? \'text\' : \'password\'" placeholder="Password" formControlName="password">                        <img class="input-icon" src="assets/img/icons/lock.png" alt="Lock Icon" *ngIf="!signupform.get(\'password\')?.value">                        <img class="input-icon toggle-eye" [src]="showPassword ? \'assets/img/icons/visibility.png\' : \'assets/img/icons/visibility-off.png\'" alt="Toggle Password Visibility" *ngIf="signupform.get(\'password\')?.value" (click)="showPassword = !showPassword" />                    </div>                    <p class="error-message" *ngIf="signupform.get(\'password\')?.invalid && signupform.get(\'password\')?.touched">                        {{ getValidationMessage(\'password\') }}                    </p>                </div>            </div>                <div class="form-group-wrapper">                 <div>                    <div class="form-group" [ngClass]="{\'colorError\': signupform.get(\'confirmPassword\')?.invalid && signupform.get(\'confirmPassword\')?.touched}">                        <label for="confirmPassword"></label>                        <input id="confirmPassword" [type]="showConfirmPassword ? \'text\' : \'password\'" placeholder="Confirm Password" formControlName="confirmPassword">                        <img class="input-icon" src="assets/img/icons/lock.png" alt="Lock Icon" *ngIf="!signupform.get(\'confirmPassword\')?.value">                        <img class="input-icon toggle-eye" [src]="showConfirmPassword ? \'assets/img/icons/visibility.png\' : \'assets/img/icons/visibility-off.png\'" alt="Toggle Confirm Password Visibility" *ngIf="signupform.get(\'confirmPassword\')?.value" (click)="showConfirmPassword = !showConfirmPassword"/>                    </div>                    <p class="error-message" *ngIf="getValidationMessage(\'confirmPassword\')">                        {{ getValidationMessage(\'confirmPassword\') }}                    </p>                </div>            </div>            <div class="form-group-wrapper">                    <label class="checkbox-label">                    <input type="checkbox" formControlName="privacyPolicy" />                    I accept the <a routerLink="/privacy-policy" class="highlight">Privacy policy</a>                </label>            </div>                <div class="btn-wrapper">                <button class="btn-signup" type="submit" [disabled]="signupform.invalid || isLoading">                    <ng-container *ngIf="!isLoading">Sign Up</ng-container>                    <ng-container *ngIf="isLoading">                        <span class="spinner"></span>                        Signing up...                    </ng-container>                </button>            </div>            <p class="success-message" *ngIf="successMessage">{{ successMessage }}</p>            <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>        </form>    </section></div><app-footer></app-footer></div>'
+    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'SignupComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'SignupComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
