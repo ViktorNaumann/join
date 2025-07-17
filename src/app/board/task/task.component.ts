@@ -28,6 +28,7 @@ import { Contact } from '../../services/contact.service';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../services/task.service';
 import { Subtask } from '../../services/task.service';
+import { SimpleChanges, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-task',
@@ -41,6 +42,8 @@ export class TaskComponent {
    * The full list of contacts assigned to the task.
    */
   contactList: Contact[] = [];
+
+  /**
 
   /**
    * The task to be displayed in this component.
@@ -124,6 +127,20 @@ export class TaskComponent {
    */
   ngOnInit(): void {
     this.getContactList();
+  }
+
+  /**
+   * Lifecycle hook that is called when any data-bound @Input properties change.
+   * This method checks whether the `task` input has changed (excluding the first change),
+   * and if so, resets and reloads the contact list based on the updated task data.
+   *
+   * @param changes An object of changed properties with current and previous values.
+   */
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['task'] && !changes['task'].firstChange) {
+      this.contactList = [];
+      this.getContactList();
+    }
   }
 
   /**

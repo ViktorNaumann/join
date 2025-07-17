@@ -1,0 +1,2065 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>join documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">join documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  TaskComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/board/task/task.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-task</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./task.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./task.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#contactList" >contactList</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#contactService" >contactService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#selectedTask" >selectedTask</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#taskService" >taskService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#changeStatus" >changeStatus</a>
+                            </li>
+                            <li>
+                                <a href="#getCompletedSubtasksCount" >getCompletedSubtasksCount</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getContactList" >getContactList</a>
+                            </li>
+                            <li>
+                                <a href="#getRemainingContactNames" >getRemainingContactNames</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#onDocumentClick" >onDocumentClick</a>
+                            </li>
+                            <li>
+                                <a href="#openDotsMenuHandler" >openDotsMenuHandler</a>
+                            </li>
+                            <li>
+                                <a href="#openTaskDetails" >openTaskDetails</a>
+                            </li>
+                            <li>
+                                <a href="#percentageCompleted" >percentageCompleted</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#openedMenuTaskId" >openedMenuTaskId</a>
+                            </li>
+                            <li>
+                                <a href="#subtaskList" >subtaskList</a>
+                            </li>
+                            <li>
+                                <a href="#task" >task</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#changeTaskStatus" >changeTaskStatus</a>
+                            </li>
+                            <li>
+                                <a href="#closeDotsMenu" >closeDotsMenu</a>
+                            </li>
+                            <li>
+                                <a href="#contacts" >contacts</a>
+                            </li>
+                            <li>
+                                <a href="#openDotsMenu" >openDotsMenu</a>
+                            </li>
+                            <li>
+                                <a href="#taskSelected" >taskSelected</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>HostListeners</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#document:click" >document:click</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#isDotsMenuOpen" >isDotsMenuOpen</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(taskService: <a href="../injectables/TaskService.html" target="_self">TaskService</a>, contactService: <a href="../injectables/ContactService.html" target="_self">ContactService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/board/task/task.component.ts:94</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Injects services required for task and contact operations.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>taskService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TaskService.html" target="_self" >TaskService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Service for task data handling.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>contactService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ContactService.html" target="_self" >ContactService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Service for fetching contact information.</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="openedMenuTaskId"></a>
+                        <b>openedMenuTaskId</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/board/task/task.component.ts:76</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The ID of the task for which the contextual &quot;dots&quot; menu is currently open.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="subtaskList"></a>
+                        <b>subtaskList</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subtask[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/board/task/task.component.ts:56</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The list of subtasks associated with the task.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="task"></a>
+                        <b>task</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/board/task/task.component.ts:51</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>/**
+The task to be displayed in this component.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="changeTaskStatus"></a>
+                        <b>changeTaskStatus</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/board/task/task.component.ts:91</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emits a status change for the task, along with its ID.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="closeDotsMenu"></a>
+                        <b>closeDotsMenu</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/board/task/task.component.ts:86</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emits an event when the &quot;dots&quot; menu should be closed.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="contacts"></a>
+                        <b>contacts</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/board/task/task.component.ts:66</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emits the list of resolved contacts associated with the task.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="openDotsMenu"></a>
+                        <b>openDotsMenu</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/board/task/task.component.ts:81</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emits the ID of the task when the &quot;dots&quot; menu is opened.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="taskSelected"></a>
+                        <b>taskSelected</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/board/task/task.component.ts:61</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emits the selected task when the user opens the task detail view.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-methods">
+    <h3>HostListeners</h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="document:click"></a>
+                    <span class="name">
+                        <span ><b>document:click</b></span>
+                        <a href="#document:click"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <i>Arguments : </i><code>'$event' </code>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>document:click(event: MouseEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/board/task/task.component.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Detects clicks outside the &quot;dots&quot; menu and closes it if open.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Mouse click event on the document.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeStatus"></a>
+                    <span class="name">
+                        <span ><b>changeStatus</b></span>
+                        <a href="#changeStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>changeStatus(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, event: MouseEvent | undefined)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="152"
+                                    class="link-to-prism">src/app/board/task/task.component.ts:152</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Emits a task status change and closes the dots menu.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The new status to assign to the task.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>MouseEvent | undefined</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Optional mouse event to stop propagation.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCompletedSubtasksCount"></a>
+                    <span class="name">
+                        <span ><b>getCompletedSubtasksCount</b></span>
+                        <a href="#getCompletedSubtasksCount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getCompletedSubtasksCount(subtaskList: any[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="168"
+                                    class="link-to-prism">src/app/board/task/task.component.ts:168</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Returns the number of completed subtasks.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>subtaskList</td>
+                                            <td>
+                                                        <code>any[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The list of subtasks to evaluate.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>The number of completed subtasks.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getContactList"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getContactList</b></span>
+                        <a href="#getContactList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getContactList()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="223"
+                                    class="link-to-prism">src/app/board/task/task.component.ts:223</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Loads the full contact details for each assigned contact in the task
+and emits the resolved contact list.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getRemainingContactNames"></a>
+                    <span class="name">
+                        <span ><b>getRemainingContactNames</b></span>
+                        <a href="#getRemainingContactNames"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getRemainingContactNames(remainingContacts: <a href="../interfaces/Contact.html" target="_self">Contact[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="239"
+                                    class="link-to-prism">src/app/board/task/task.component.ts:239</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Joins the names of remaining contacts into a comma-separated string.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>remainingContacts</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Array of remaining Contact objects.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>A comma-separated string of contact names.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: SimpleChanges)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="139"
+                                    class="link-to-prism">src/app/board/task/task.component.ts:139</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Lifecycle hook that is called when any data-bound @Input properties change.
+This method checks whether the <code>task</code> input has changed (excluding the first change),
+and if so, resets and reloads the contact list based on the updated task data.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>changes</td>
+                                            <td>
+                                                        <code>SimpleChanges</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>An object of changed properties with current and previous values.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">src/app/board/task/task.component.ts:128</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Lifecycle hook that loads the contact list for the task on component init.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDocumentClick"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>onDocumentClick</b></span>
+                        <a href="#onDocumentClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onDocumentClick(event: MouseEvent)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@HostListener(&#x27;document:click&#x27;, [&#x27;$event&#x27;])<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/board/task/task.component.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Detects clicks outside the &quot;dots&quot; menu and closes it if open.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>MouseEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Mouse click event on the document.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openDotsMenuHandler"></a>
+                    <span class="name">
+                        <span ><b>openDotsMenuHandler</b></span>
+                        <a href="#openDotsMenuHandler"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openDotsMenuHandler(event: MouseEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="210"
+                                    class="link-to-prism">src/app/board/task/task.component.ts:210</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Toggles the dots menu open or closed for this task.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>MouseEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Mouse event to stop propagation.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openTaskDetails"></a>
+                    <span class="name">
+                        <span ><b>openTaskDetails</b></span>
+                        <a href="#openTaskDetails"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openTaskDetails(task: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="191"
+                                    class="link-to-prism">src/app/board/task/task.component.ts:191</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Emits the selected task to open its detail view.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>task</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The task to open.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="percentageCompleted"></a>
+                    <span class="name">
+                        <span ><b>percentageCompleted</b></span>
+                        <a href="#percentageCompleted"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>percentageCompleted(subtaskList: Subtask[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="180"
+                                    class="link-to-prism">src/app/board/task/task.component.ts:180</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Calculates the percentage of completed subtasks.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>subtaskList</td>
+                                            <td>
+                                                        <code>Subtask[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The list of subtasks to evaluate.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>The completion percentage as a number between 0 and 100.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="contactList"></a>
+                    <span class="name">
+                        <span ><b>contactList</b></span>
+                        <a href="#contactList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Contact.html" target="_self" >Contact[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/board/task/task.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The full list of contacts assigned to the task.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="contactService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>contactService</b></span>
+                        <a href="#contactService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ContactService.html" target="_self" >ContactService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/board/task/task.component.ts:104</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">Service for fetching contact information.</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedTask"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>selectedTask</b></span>
+                        <a href="#selectedTask"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/board/task/task.component.ts:71</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Holds the task currently selected to open its detail view.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="taskService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>taskService</b></span>
+                        <a href="#taskService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/TaskService.html" target="_self" >TaskService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/board/task/task.component.ts:103</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">Service for task data handling.</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isDotsMenuOpen"></a>
+                        <span class="name"><b>isDotsMenuOpen</b><a href="#isDotsMenuOpen"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>isDotsMenuOpen()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="201" class="link-to-prism">src/app/board/task/task.component.ts:201</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Checks if the dots menu is currently open for this task.</p>
+</div>
+
+                                <div>
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  HostListener,
+} from &#x27;@angular/core&#x27;;
+import { ContactService } from &#x27;../../services/contact.service&#x27;;
+import { Contact } from &#x27;../../services/contact.service&#x27;;
+import { TaskService } from &#x27;../../services/task.service&#x27;;
+import { Task } from &#x27;../../services/task.service&#x27;;
+import { Subtask } from &#x27;../../services/task.service&#x27;;
+import { SimpleChanges, OnChanges } from &#x27;@angular/core&#x27;;
+
+@Component({
+  selector: &#x27;app-task&#x27;,
+  imports: [CommonModule],
+  templateUrl: &#x27;./task.component.html&#x27;,
+  styleUrl: &#x27;./task.component.scss&#x27;,
+})
+export class TaskComponent {
+
+  /**
+   * The full list of contacts assigned to the task.
+   */
+  contactList: Contact[] &#x3D; [];
+
+  /**
+
+  /**
+   * The task to be displayed in this component.
+   */
+  @Input() task!: Task;
+
+  /**
+   * The list of subtasks associated with the task.
+   */
+  @Input() subtaskList: Subtask[] &#x3D; [];
+
+  /**
+   * Emits the selected task when the user opens the task detail view.
+   */
+  @Output() taskSelected &#x3D; new EventEmitter&lt;Task&gt;();
+
+  /**
+   * Emits the list of resolved contacts associated with the task.
+   */
+  @Output() contacts &#x3D; new EventEmitter&lt;Contact[]&gt;();
+
+  /**
+   * Holds the task currently selected to open its detail view.
+   */
+  selectedTask?: Task;
+
+  /**
+   * The ID of the task for which the contextual &quot;dots&quot; menu is currently open.
+   */
+  @Input() openedMenuTaskId: string | null &#x3D; null;
+
+  /**
+   * Emits the ID of the task when the &quot;dots&quot; menu is opened.
+   */
+  @Output() openDotsMenu &#x3D; new EventEmitter&lt;string&gt;();
+
+  /**
+   * Emits an event when the &quot;dots&quot; menu should be closed.
+   */
+  @Output() closeDotsMenu &#x3D; new EventEmitter&lt;void&gt;();
+
+  /**
+   * Emits a status change for the task, along with its ID.
+   */
+  @Output() changeTaskStatus &#x3D; new EventEmitter&lt;{
+    taskId: string;
+    status: string;
+  }&gt;();
+
+  /**
+   * Injects services required for task and contact operations.
+   * 
+   * @param taskService Service for task data handling.
+   * @param contactService Service for fetching contact information.
+   */
+  constructor(
+    public taskService: TaskService,
+    public contactService: ContactService
+  ) {}
+
+  /**
+   * Detects clicks outside the &quot;dots&quot; menu and closes it if open.
+   * 
+   * @param event Mouse click event on the document.
+   */
+  @HostListener(&#x27;document:click&#x27;, [&#x27;$event&#x27;])
+  onDocumentClick(event: MouseEvent) {
+    const target &#x3D; event.target as HTMLElement;
+    if (
+      !target.closest(&#x27;.dots-menu-btn&#x27;) &amp;&amp;
+      !target.closest(&#x27;.dots-menu-overlay&#x27;)
+    ) {
+      if (this.isDotsMenuOpen) {
+        this.closeDotsMenu.emit();
+      }
+    }
+  }
+
+  /**
+   * Lifecycle hook that loads the contact list for the task on component init.
+   */
+  ngOnInit(): void {
+    this.getContactList();
+  }
+
+  /**
+   * Lifecycle hook that is called when any data-bound @Input properties change.
+   * This method checks whether the &#x60;task&#x60; input has changed (excluding the first change),
+   * and if so, resets and reloads the contact list based on the updated task data.
+   *
+   * @param changes An object of changed properties with current and previous values.
+   */
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes[&#x27;task&#x27;] &amp;&amp; !changes[&#x27;task&#x27;].firstChange) {
+      this.contactList &#x3D; [];
+      this.getContactList();
+    }
+  }
+
+  /**
+   * Emits a task status change and closes the dots menu.
+   * 
+   * @param status The new status to assign to the task.
+   * @param event Optional mouse event to stop propagation.
+   */
+  changeStatus(status: string, event: MouseEvent | undefined) {
+    if (event) {
+      event.stopPropagation();
+    }
+    if (this.task.id) {
+      this.changeTaskStatus.emit({ taskId: this.task.id, status });
+      this.closeDotsMenu.emit();
+    }
+  }
+
+  /**
+   * Returns the number of completed subtasks.
+   * 
+   * @param subtaskList The list of subtasks to evaluate.
+   * @returns The number of completed subtasks.
+   */
+  getCompletedSubtasksCount(subtaskList: any[]): number {
+    return Array.isArray(subtaskList)
+      ? subtaskList.filter((el) &#x3D;&gt; el.isCompleted).length
+      : 0;
+  }
+
+  /**
+   * Calculates the percentage of completed subtasks.
+   * 
+   * @param subtaskList The list of subtasks to evaluate.
+   * @returns The completion percentage as a number between 0 and 100.
+   */
+  percentageCompleted(subtaskList: Subtask[]): number {
+    if (!subtaskList || subtaskList.length &#x3D;&#x3D;&#x3D; 0) return 0;
+    let completed &#x3D; this.getCompletedSubtasksCount(subtaskList);
+    return Math.round((completed / subtaskList.length) * 100);
+  }
+
+  /**
+   * Emits the selected task to open its detail view.
+   * 
+   * @param task The task to open.
+   */
+  openTaskDetails(task: Task) {
+    this.selectedTask &#x3D; task;
+    this.taskSelected.emit(this.selectedTask);
+  }
+
+  /**
+   * Checks if the dots menu is currently open for this task.
+   * 
+   * @returns A boolean indicating if the dots menu is open.
+   */
+  get isDotsMenuOpen() {
+    return this.openedMenuTaskId &#x3D;&#x3D;&#x3D; this.task.id;
+  }
+
+  /**
+   * Toggles the dots menu open or closed for this task.
+   * 
+   * @param event Mouse event to stop propagation.
+   */
+  openDotsMenuHandler(event: MouseEvent) {
+    event.stopPropagation();
+    if (this.isDotsMenuOpen) {
+      this.closeDotsMenu.emit();
+    } else {
+      this.openDotsMenu.emit(this.task.id);
+    }
+  }
+
+  /**
+   * Loads the full contact details for each assigned contact in the task
+   * and emits the resolved contact list.
+   */
+  async getContactList() {
+    if (this.task?.assignedTo?.length) {
+      for (let contactId of this.task.assignedTo) {
+        const contact &#x3D; await this.contactService.getContactById(contactId);
+        if (contact) this.contactList.push(contact);
+      }
+      this.contacts.emit(this.contactList);
+    }
+  }
+
+  /**
+   * Joins the names of remaining contacts into a comma-separated string.
+   * 
+   * @param remainingContacts Array of remaining Contact objects.
+   * @returns A comma-separated string of contact names.
+   */
+  getRemainingContactNames(remainingContacts: Contact[]): string {
+    return remainingContacts.map((contact) &#x3D;&gt; contact.name).join(&#x27;, &#x27;);
+  }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;card-layout&quot; (click)&#x3D;&quot;openTaskDetails(task)&quot;&gt;
+  &lt;div class&#x3D;&quot;wrapper-top&quot;&gt;
+    &lt;p
+      class&#x3D;&quot;category-flag-card&quot;
+      [style.background-color]&#x3D;&quot;
+        task.category &#x3D;&#x3D; &#x27;user story&#x27; ? &#x27;#0038ff&#x27; : &#x27;#1fd7c1&#x27;
+      &quot;
+    &gt;
+      {{ taskService.capitalize(task.category) }}
+    &lt;/p&gt;
+
+    &lt;button
+      class&#x3D;&quot;dots-menu-btn&quot;
+      type&#x3D;&quot;button&quot;
+      (click)&#x3D;&quot;openDotsMenuHandler($event)&quot;
+      aria-label&#x3D;&quot;Mehr Optionen&quot;
+    &gt;
+      &lt;span class&#x3D;&quot;dot&quot;&gt;&lt;/span&gt;
+      &lt;span class&#x3D;&quot;dot&quot;&gt;&lt;/span&gt;
+      &lt;span class&#x3D;&quot;dot&quot;&gt;&lt;/span&gt;
+    &lt;/button&gt;
+
+    &lt;div
+      class&#x3D;&quot;dots-menu-overlay&quot;
+      *ngIf&#x3D;&quot;isDotsMenuOpen&quot;
+      (click)&#x3D;&quot;$event.stopPropagation()&quot;
+    &gt;
+      &lt;a *ngIf&#x3D;&quot;task.status !&#x3D;&#x3D; &#x27;to-do&#x27;&quot; (click)&#x3D;&quot;changeStatus(&#x27;to-do&#x27;, $event)&quot;
+        &gt;To Do&lt;/a
+      &gt;
+      &lt;a
+        *ngIf&#x3D;&quot;task.status !&#x3D;&#x3D; &#x27;in-progress&#x27;&quot;
+        (click)&#x3D;&quot;changeStatus(&#x27;in-progress&#x27;, $event)&quot;
+        &gt;In Progress&lt;/a
+      &gt;
+      &lt;a
+        *ngIf&#x3D;&quot;task.status !&#x3D;&#x3D; &#x27;await-feedback&#x27;&quot;
+        (click)&#x3D;&quot;changeStatus(&#x27;await-feedback&#x27;, $event)&quot;
+        &gt;Awaiting Feedback&lt;/a
+      &gt;
+      &lt;a *ngIf&#x3D;&quot;task.status !&#x3D;&#x3D; &#x27;done&#x27;&quot; (click)&#x3D;&quot;changeStatus(&#x27;done&#x27;, $event)&quot;
+        &gt;Done&lt;/a
+      &gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;task-card&quot;&gt;
+    &lt;h1 class&#x3D;&quot;see-more&quot;&gt;{{ taskService.capitalize(task.title) }}&lt;/h1&gt;
+    &lt;p class&#x3D;&quot;task-description truncated&quot;&gt;
+      {{ taskService.capitalize(task.description) }}
+      &lt;span class&#x3D;&quot;see-more&quot;&gt;…&lt;/span&gt;
+    &lt;/p&gt;
+    &lt;div
+      class&#x3D;&quot;subtask-wrapper&quot;
+      [style.visibility]&#x3D;&quot;
+        subtaskList &amp;&amp; subtaskList.length &gt; 0 ? &#x27;visible&#x27; : &#x27;hidden&#x27;
+      &quot;
+    &gt;
+      &lt;div class&#x3D;&quot;subtask-bar-default&quot;&gt;
+        &lt;div
+          class&#x3D;&quot;subtask-bar-fill&quot;
+          [ngStyle]&#x3D;&quot;{ width: percentageCompleted(subtaskList) + &#x27;%&#x27; }&quot;
+        &gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;span&gt;
+        {{ getCompletedSubtasksCount(subtaskList) }} /
+        {{ subtaskList.length }} Subtasks
+      &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;card-bottom-wrapper&quot;&gt;
+      &lt;div class&#x3D;&quot;collaborators-wrapper&quot;&gt;
+        &lt;div class&#x3D;&quot;img-user-wrapper&quot;&gt;
+          @for (contact of contactList.slice(0, 4); track $index) {
+          &lt;div
+            class&#x3D;&quot;img-user&quot;
+            [style.background-color]&#x3D;&quot;
+              contactService.getContactColor(contact.name)
+            &quot;
+          &gt;
+            &lt;p class&#x3D;&quot;contact-initials&quot;&gt;
+              {{ contactService.getInitials(contact.name) }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+          }
+          &lt;div
+            class&#x3D;&quot;img-user more-count&quot;
+            *ngIf&#x3D;&quot;contactList.length &gt; 4&quot;
+            [title]&#x3D;&quot;getRemainingContactNames(contactList.slice(4))&quot;
+          &gt;
+            +{{ contactList.length - 4 }}
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;img
+        src&#x3D;&quot;assets/img/icons/prio-high.png&quot;
+        alt&#x3D;&quot;Priority High Icon&quot;
+        class&#x3D;&quot;card-priority&quot;
+        *ngIf&#x3D;&quot;task.priority &#x3D;&#x3D;&#x3D; &#x27;urgent&#x27;&quot;
+      /&gt;
+      &lt;img
+        src&#x3D;&quot;assets/img/icons/prio-medium.png&quot;
+        alt&#x3D;&quot;Priority Medium Icon&quot;
+        class&#x3D;&quot;card-priority&quot;
+        *ngIf&#x3D;&quot;task.priority &#x3D;&#x3D;&#x3D; &#x27;medium&#x27;&quot;
+      /&gt;
+      &lt;img
+        src&#x3D;&quot;assets/img/icons/prio-low.png&quot;
+        alt&#x3D;&quot;Priority Low Icon&quot;
+        class&#x3D;&quot;card-priority&quot;
+        *ngIf&#x3D;&quot;task.priority &#x3D;&#x3D;&#x3D; &#x27;low&#x27;&quot;
+      /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="card-layout" (click)="openTaskDetails(task)">  <div class="wrapper-top">    <p      class="category-flag-card"      [style.background-color]="        task.category == \'user story\' ? \'#0038ff\' : \'#1fd7c1\'      "    >      {{ taskService.capitalize(task.category) }}    </p>    <button      class="dots-menu-btn"      type="button"      (click)="openDotsMenuHandler($event)"      aria-label="Mehr Optionen"    >      <span class="dot"></span>      <span class="dot"></span>      <span class="dot"></span>    </button>    <div      class="dots-menu-overlay"      *ngIf="isDotsMenuOpen"      (click)="$event.stopPropagation()"    >      <a *ngIf="task.status !== \'to-do\'" (click)="changeStatus(\'to-do\', $event)"        >To Do</a      >      <a        *ngIf="task.status !== \'in-progress\'"        (click)="changeStatus(\'in-progress\', $event)"        >In Progress</a      >      <a        *ngIf="task.status !== \'await-feedback\'"        (click)="changeStatus(\'await-feedback\', $event)"        >Awaiting Feedback</a      >      <a *ngIf="task.status !== \'done\'" (click)="changeStatus(\'done\', $event)"        >Done</a      >    </div>  </div>  <div class="task-card">    <h1 class="see-more">{{ taskService.capitalize(task.title) }}</h1>    <p class="task-description truncated">      {{ taskService.capitalize(task.description) }}      <span class="see-more">…</span>    </p>    <div      class="subtask-wrapper"      [style.visibility]="        subtaskList && subtaskList.length > 0 ? \'visible\' : \'hidden\'      "    >      <div class="subtask-bar-default">        <div          class="subtask-bar-fill"          [ngStyle]="{ width: percentageCompleted(subtaskList) + \'%\' }"        ></div>      </div>      <span>        {{ getCompletedSubtasksCount(subtaskList) }} /        {{ subtaskList.length }} Subtasks      </span>    </div>    <div class="card-bottom-wrapper">      <div class="collaborators-wrapper">        <div class="img-user-wrapper">          @for (contact of contactList.slice(0, 4); track $index) {          <div            class="img-user"            [style.background-color]="              contactService.getContactColor(contact.name)            "          >            <p class="contact-initials">              {{ contactService.getInitials(contact.name) }}            </p>          </div>          }          <div            class="img-user more-count"            *ngIf="contactList.length > 4"            [title]="getRemainingContactNames(contactList.slice(4))"          >            +{{ contactList.length - 4 }}          </div>        </div>      </div>      <img        src="assets/img/icons/prio-high.png"        alt="Priority High Icon"        class="card-priority"        *ngIf="task.priority === \'urgent\'"      />      <img        src="assets/img/icons/prio-medium.png"        alt="Priority Medium Icon"        class="card-priority"        *ngIf="task.priority === \'medium\'"      />      <img        src="assets/img/icons/prio-low.png"        alt="Priority Low Icon"        class="card-priority"        *ngIf="task.priority === \'low\'"      />    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'TaskComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'TaskComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

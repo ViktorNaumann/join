@@ -1,0 +1,1514 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>join documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">join documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  TaskDetailsComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/board/task-details/task-details.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-task-details</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>FormsModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./task-details.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./task-details.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#contactService" >contactService</a>
+                            </li>
+                            <li>
+                                <a href="#showContent" >showContent</a>
+                            </li>
+                            <li>
+                                <a href="#subtasks" >subtasks</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#taskService" >taskService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#convertDate" >convertDate</a>
+                            </li>
+                            <li>
+                                <a href="#deleteTask" >deleteTask</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#loadAssignedContacts" >loadAssignedContacts</a>
+                            </li>
+                            <li>
+                                <a href="#loadSubtasks" >loadSubtasks</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onClose" >onClose</a>
+                            </li>
+                            <li>
+                                <a href="#onSubtaskToggle" >onSubtaskToggle</a>
+                            </li>
+                            <li>
+                                <a href="#openEditTask" >openEditTask</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#contactList" >contactList</a>
+                            </li>
+                            <li>
+                                <a href="#task" >task</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#closeTaskDetails" >closeTaskDetails</a>
+                            </li>
+                            <li>
+                                <a href="#editTask" >editTask</a>
+                            </li>
+                            <li>
+                                <a href="#subtaskChanged" >subtaskChanged</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(taskService: <a href="../injectables/TaskService.html" target="_self">TaskService</a>, contactService: <a href="../injectables/ContactService.html" target="_self">ContactService</a>, router: Router)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/board/task-details/task-details.component.ts:70</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor injects task and contact services, and the Angular Router.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>taskService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TaskService.html" target="_self" >TaskService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Service for handling tasks and subtasks.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>contactService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ContactService.html" target="_self" >ContactService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Service for fetching contacts.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Angular Router for navigation (currently unused).</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="contactList"></a>
+                        <b>contactList</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Contact.html" target="_self" >Contact[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/board/task-details/task-details.component.ts:60</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The list of contacts assigned to this task.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="task"></a>
+                        <b>task</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/board/task-details/task-details.component.ts:55</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The task whose details are being displayed.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="closeTaskDetails"></a>
+                        <b>closeTaskDetails</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/board/task-details/task-details.component.ts:40</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emits an event when the task detail view should be closed.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="editTask"></a>
+                        <b>editTask</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/board/task-details/task-details.component.ts:45</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emits an event when the user wants to edit the task.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="subtaskChanged"></a>
+                        <b>subtaskChanged</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/board/task-details/task-details.component.ts:50</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emits the updated subtask list when a subtask is toggled.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="convertDate"></a>
+                    <span class="name">
+                        <span ><b>convertDate</b></span>
+                        <a href="#convertDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>convertDate(date: Timestamp | Date)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:107</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Converts a Firebase Timestamp or Date to a formatted string.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>date</td>
+                                            <td>
+                                                        <code>Timestamp | Date</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The date or timestamp to convert.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>A string representation of the date.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteTask"></a>
+                    <span class="name">
+                        <span ><b>deleteTask</b></span>
+                        <a href="#deleteTask"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deleteTask(event?: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:130</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Deletes the task (if it has a valid ID), and closes the detail view.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Optional event to stop propagation and prevent default behavior.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadAssignedContacts"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>loadAssignedContacts</b></span>
+                        <a href="#loadAssignedContacts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadAssignedContacts()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="174"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:174</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Fetches detailed contact information for all assigned contact IDs
+and updates the contactList accordingly.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadSubtasks"></a>
+                    <span class="name">
+                        <span ><b>loadSubtasks</b></span>
+                        <a href="#loadSubtasks"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadSubtasks()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:162</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Loads subtasks associated with the current task from the database.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Lifecycle hook to load assigned contacts and subtasks on component initialization.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onClose"></a>
+                    <span class="name">
+                        <span ><b>onClose</b></span>
+                        <a href="#onClose"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onClose()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:96</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes the task detail view and emits the close event.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubtaskToggle"></a>
+                    <span class="name">
+                        <span ><b>onSubtaskToggle</b></span>
+                        <a href="#onSubtaskToggle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubtaskToggle(subtask: <a href="../interfaces/Subtask.html" target="_self">Subtask</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:147</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Toggles a subtask&#39;s completion status and updates it in the backend.
+Emits the updated list of subtasks.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>subtask</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Subtask.html" target="_self" >Subtask</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The subtask to toggle.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openEditTask"></a>
+                    <span class="name">
+                        <span ><b>openEditTask</b></span>
+                        <a href="#openEditTask"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openEditTask(event?: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:116</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Prepares the task for editing and emits the edit event.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Optional event to stop propagation and prevent default behavior.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="contactService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>contactService</b></span>
+                        <a href="#contactService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ContactService.html" target="_self" >ContactService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/board/task-details/task-details.component.ts:81</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">Service for fetching contacts.</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showContent"></a>
+                    <span class="name">
+                        <span ><b>showContent</b></span>
+                        <a href="#showContent"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/board/task-details/task-details.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controls whether the detail view content is shown.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subtasks"></a>
+                    <span class="name">
+                        <span ><b>subtasks</b></span>
+                        <a href="#subtasks"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subtask[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/board/task-details/task-details.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The list of subtasks associated with the task.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="taskService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>taskService</b></span>
+                        <a href="#taskService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/TaskService.html" target="_self" >TaskService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/board/task-details/task-details.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">Service for handling tasks and subtasks.</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Component, EventEmitter, Output, Input } from &#x27;@angular/core&#x27;;
+import { Task, TaskService } from &#x27;../../services/task.service&#x27;;
+import { Subtask } from &#x27;../../services/task.service&#x27;;
+import { Timestamp } from &#x27;@angular/fire/firestore&#x27;;
+import { ContactService } from &#x27;../../services/contact.service&#x27;;
+import { Contact } from &#x27;../../services/contact.service&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+
+@Component({
+  selector: &#x27;app-task-details&#x27;,
+  imports: [
+    CommonModule,
+    FormsModule
+  ],
+  templateUrl: &#x27;./task-details.component.html&#x27;,
+  styleUrl: &#x27;./task-details.component.scss&#x27;
+})
+export class TaskDetailsComponent {
+  /**
+   * Emits an event when the task detail view should be closed.
+   */
+  @Output() closeTaskDetails &#x3D; new EventEmitter&lt;string&gt;();
+
+  /**
+   * Emits an event when the user wants to edit the task.
+   */
+  @Output() editTask &#x3D; new EventEmitter&lt;string&gt;();
+
+  /**
+   * Emits the updated subtask list when a subtask is toggled.
+   */
+  @Output() subtaskChanged &#x3D; new EventEmitter&lt;Subtask[]&gt;();
+
+  /**
+   * The task whose details are being displayed.
+   */
+  @Input() task!: Task;
+
+  /**
+   * The list of contacts assigned to this task.
+   */
+  @Input() contactList: Contact[] &#x3D; [];
+
+  /**
+   * Controls whether the detail view content is shown.
+   */
+  showContent &#x3D; true;
+
+  /**
+   * The list of subtasks associated with the task.
+   */
+  subtasks: Subtask[] &#x3D; [];
+
+  /**
+   * Constructor injects task and contact services, and the Angular Router.
+   * 
+   * @param taskService Service for handling tasks and subtasks.
+   * @param contactService Service for fetching contacts.
+   * @param router Angular Router for navigation (currently unused).
+   */
+  constructor(
+    public taskService: TaskService,
+    public contactService: ContactService,
+    private router: Router
+  ) {}
+
+  /**
+   * Lifecycle hook to load assigned contacts and subtasks on component initialization.
+   */
+  ngOnInit(): void {
+    this.loadAssignedContacts();
+    this.loadSubtasks();
+  }
+
+  /**
+   * Closes the task detail view and emits the close event.
+   */
+  onClose() {
+    this.showContent &#x3D; false;
+    this.closeTaskDetails.emit(&#x27;close&#x27;);
+  }
+
+  /**
+   * Converts a Firebase Timestamp or Date to a formatted string.
+   * 
+   * @param date The date or timestamp to convert.
+   * @returns A string representation of the date.
+   */
+  convertDate(date: Timestamp | Date): string {
+    return this.taskService.convertDate(date);
+  }
+
+  /**
+   * Prepares the task for editing and emits the edit event.
+   * 
+   * @param event Optional event to stop propagation and prevent default behavior.
+   */
+  openEditTask(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    this.taskService.setEditingTask(this.task);
+    this.editTask.emit(&quot;edit&quot;);
+  }
+
+  /**
+   * Deletes the task (if it has a valid ID), and closes the detail view.
+   * 
+   * @param event Optional event to stop propagation and prevent default behavior.
+   */
+  deleteTask(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    if (this.task.id) {
+      this.taskService.deleteTask(this.task.id);
+      this.onClose();
+    }
+  }
+
+  /**
+   * Toggles a subtask&#x27;s completion status and updates it in the backend.
+   * Emits the updated list of subtasks.
+   * 
+   * @param subtask The subtask to toggle.
+   */
+  onSubtaskToggle(subtask: Subtask) {
+    if (!this.task.id || !subtask.id) return;
+
+    this.taskService.updateSubtask(this.task.id, subtask.id, subtask)
+      .then(() &#x3D;&gt; {
+        this.subtaskChanged.emit(this.subtasks);
+      })
+      .catch(error &#x3D;&gt; {
+        console.error(&#x27;Error updating subtask:&#x27;, error);
+      });
+  }
+
+  /**
+   * Loads subtasks associated with the current task from the database.
+   */
+  loadSubtasks() {
+    if (this.task?.id) {
+      this.taskService.getSubtasks(this.task.id).subscribe((subtasks: Subtask[]) &#x3D;&gt; {
+        this.subtasks &#x3D; subtasks;
+      });
+    }
+  }
+
+  /**
+   * Fetches detailed contact information for all assigned contact IDs
+   * and updates the contactList accordingly.
+   */
+  async loadAssignedContacts() {
+    this.contactList &#x3D; [];
+    if (this.task?.assignedTo?.length) {
+      for (let contactId of this.task.assignedTo) {
+        const contact &#x3D; await this.contactService.getContactById(contactId);
+        if (contact) {
+          this.contactList.push(contact);
+        }
+      }
+    }
+  }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;content-wrapper&quot; *ngIf&#x3D;&quot;showContent&quot;&gt;
+    &lt;div class&#x3D;&quot;wrapper-top&quot;&gt;
+        &lt;p class&#x3D;&quot;category-flag&quot; [style.background-color]&#x3D;&quot;task.category &#x3D;&#x3D; &#x27;user story&#x27; ? &#x27;#0038ff&#x27;: &#x27;#1fd7c1&#x27;&quot;&gt;{{taskService.capitalize(task.category)}}&lt;/p&gt;
+        &lt;button class&#x3D;&quot;btn-close&quot; (click)&#x3D;&quot;onClose()&quot; &gt;
+            &lt;svg width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; viewBox&#x3D;&quot;0 0 24 24&quot; fill&#x3D;&quot;none&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;&gt;
+                &lt;mask id&#x3D;&quot;mask0_331509_883&quot; style&#x3D;&quot;mask-type:alpha&quot; maskUnits&#x3D;&quot;userSpaceOnUse&quot; x&#x3D;&quot;0&quot; y&#x3D;&quot;0&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot;&gt;
+                    &lt;rect width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; fill&#x3D;&quot;#D9D9D9&quot;/&gt;
+                &lt;/mask&gt;
+                &lt;g mask&#x3D;&quot;url(#mask0_331509_883)&quot;&gt;
+                    &lt;path d&#x3D;&quot;M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z&quot; fill&#x3D;&quot;#2A3647&quot;/&gt;
+                &lt;/g&gt;
+            &lt;/svg&gt;
+        &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;task-content&quot;&gt;
+        &lt;h1&gt;{{ taskService.capitalize(task.title) }}&lt;/h1&gt;
+        &lt;p class&#x3D;&quot;description&quot;&gt;{{ taskService.capitalize(task.description) }}&lt;/p&gt;
+        &lt;div class&#x3D;&quot;date-row&quot;&gt;
+            &lt;span class&#x3D;&quot;row-title&quot;&gt;Due date:&lt;/span&gt;
+            &lt;span&gt;{{ convertDate(task.date) }}&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;priority-row&quot;&gt;
+            &lt;span class&#x3D;&quot;row-title&quot;&gt;Priority:&lt;/span&gt;
+            &lt;span&gt;{{ task.priority }}&lt;/span&gt;
+            &lt;div&gt;
+                &lt;img src&#x3D;&quot;assets/img/icons/prio-high.png&quot; alt&#x3D;&quot;Priority High Icon&quot; *ngIf&#x3D;&quot;task.priority &#x3D;&#x3D;&#x3D; &#x27;urgent&#x27;&quot;&gt;
+                &lt;img src&#x3D;&quot;assets/img/icons/prio-medium.png&quot; alt&#x3D;&quot;Priorit Medium Icon&quot; *ngIf&#x3D;&quot;task.priority &#x3D;&#x3D;&#x3D; &#x27;medium&#x27;&quot;&gt;
+                &lt;img src&#x3D;&quot;assets/img/icons/prio-low.png&quot; alt&#x3D;&quot;Priority Low Icon&quot; *ngIf&#x3D;&quot;task.priority &#x3D;&#x3D;&#x3D; &#x27;low&#x27;&quot;&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;assigned-to-row&quot;&gt;
+            &lt;span class&#x3D;&quot;row-title&quot;&gt;Assigned To:&lt;/span&gt;
+            &lt;span *ngIf&#x3D;&quot;contactList.length &lt;&#x3D; 0&quot; class&#x3D;&quot;info-no-selection&quot;&gt;No contact selected&lt;/span&gt;
+            &lt;div class&#x3D;&quot;contact-list&quot;&gt;
+                @for (contact of contactList; track $index) {
+                    &lt;div class&#x3D;&quot;contact-item&quot;&gt;
+                        &lt;div class&#x3D;&quot;img-user-wrapper&quot;&gt;
+                            &lt;div class&#x3D;&quot;img-user&quot; [style.background-color]&#x3D;&quot;contactService.getContactColor(contact.name)&quot;&gt;
+                                &lt;p class&#x3D;&quot;contact-initials&quot;&gt;{{ contactService.getInitials(contact.name) }}&lt;/p&gt;
+                            &lt;/div&gt;
+                            &lt;p class&#x3D;&quot;contact-name&quot;&gt;{{ contact.name }}&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                }
+            &lt;/div&gt;
+        &lt;/div&gt;
+       &lt;div class&#x3D;&quot;subtask-row&quot;&gt;
+            &lt;span class&#x3D;&quot;row-title&quot;&gt;Subtasks:&lt;/span&gt;
+            &lt;span *ngIf&#x3D;&quot;subtasks.length &lt;&#x3D; 0&quot; class&#x3D;&quot;info-no-selection&quot;&gt;No subtasks defined&lt;/span&gt;
+            &lt;div class&#x3D;&quot;subtask-list&quot;&gt;
+                @for (subtask of subtasks; track $index) {
+                    &lt;div class&#x3D;&quot;subtask-item&quot;&gt;
+                        &lt;input class&#x3D;&quot;checkbox&quot; [id]&#x3D;&quot;&#x27;subtask-cb&#x27; + $index&quot; type&#x3D;&quot;checkbox&quot;  (change)&#x3D;&quot;onSubtaskToggle(subtask)&quot; [(ngModel)]&#x3D;&quot;subtask.isCompleted&quot;&gt;
+                        &lt;label class&#x3D;&quot;checkbox-label&quot; [for]&#x3D;&quot;&#x27;subtask-cb&#x27; + $index&quot;&gt;&lt;/label&gt;
+                        &lt;span&gt;{{ subtask.title }}&lt;/span&gt;
+                    &lt;/div&gt;
+                }
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;btn-wrapper&quot;&gt;
+            &lt;button class&#x3D;&quot;btn-delete&quot; (click)&#x3D;&quot;deleteTask($event)&quot;&gt;
+                &lt;svg width&#x3D;&quot;25&quot; height&#x3D;&quot;24&quot; viewBox&#x3D;&quot;0 0 25 24&quot; fill&#x3D;&quot;none&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;&gt;
+                    &lt;mask id&#x3D;&quot;mask0_75592_9951&quot; style&#x3D;&quot;mask-type:alpha&quot; maskUnits&#x3D;&quot;userSpaceOnUse&quot; x&#x3D;&quot;0&quot; y&#x3D;&quot;0&quot; width&#x3D;&quot;25&quot; height&#x3D;&quot;24&quot;&gt;
+                    &lt;rect x&#x3D;&quot;0.144531&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; fill&#x3D;&quot;#D9D9D9&quot;/&gt;
+                    &lt;/mask&gt;
+                    &lt;g mask&#x3D;&quot;url(#mask0_75592_9951)&quot;&gt;
+                    &lt;path d&#x3D;&quot;M7.14453 21C6.59453 21 6.1237 20.8042 5.73203 20.4125C5.34036 20.0208 5.14453 19.55 5.14453 19V6C4.8612 6 4.6237 5.90417 4.43203 5.7125C4.24036 5.52083 4.14453 5.28333 4.14453 5C4.14453 4.71667 4.24036 4.47917 4.43203 4.2875C4.6237 4.09583 4.8612 4 5.14453 4H9.14453C9.14453 3.71667 9.24036 3.47917 9.43203 3.2875C9.6237 3.09583 9.8612 3 10.1445 3H14.1445C14.4279 3 14.6654 3.09583 14.857 3.2875C15.0487 3.47917 15.1445 3.71667 15.1445 4H19.1445C19.4279 4 19.6654 4.09583 19.857 4.2875C20.0487 4.47917 20.1445 4.71667 20.1445 5C20.1445 5.28333 20.0487 5.52083 19.857 5.7125C19.6654 5.90417 19.4279 6 19.1445 6V19C19.1445 19.55 18.9487 20.0208 18.557 20.4125C18.1654 20.8042 17.6945 21 17.1445 21H7.14453ZM7.14453 6V19H17.1445V6H7.14453ZM9.14453 16C9.14453 16.2833 9.24036 16.5208 9.43203 16.7125C9.6237 16.9042 9.8612 17 10.1445 17C10.4279 17 10.6654 16.9042 10.857 16.7125C11.0487 16.5208 11.1445 16.2833 11.1445 16V9C11.1445 8.71667 11.0487 8.47917 10.857 8.2875C10.6654 8.09583 10.4279 8 10.1445 8C9.8612 8 9.6237 8.09583 9.43203 8.2875C9.24036 8.47917 9.14453 8.71667 9.14453 9V16ZM13.1445 16C13.1445 16.2833 13.2404 16.5208 13.432 16.7125C13.6237 16.9042 13.8612 17 14.1445 17C14.4279 17 14.6654 16.9042 14.857 16.7125C15.0487 16.5208 15.1445 16.2833 15.1445 16V9C15.1445 8.71667 15.0487 8.47917 14.857 8.2875C14.6654 8.09583 14.4279 8 14.1445 8C13.8612 8 13.6237 8.09583 13.432 8.2875C13.2404 8.47917 13.1445 8.71667 13.1445 9V16Z&quot; fill&#x3D;&quot;#2A3647&quot;/&gt;
+                    &lt;/g&gt;
+                &lt;/svg&gt;
+                Delete
+            &lt;/button&gt;
+            &lt;div class&#x3D;&quot;separator&quot;&gt;&lt;/div&gt;
+            &lt;button class&#x3D;&quot;btn-edit&quot; (click)&#x3D;&quot;openEditTask($event)&quot;&gt;
+                &lt;svg width&#x3D;&quot;33&quot; height&#x3D;&quot;33&quot; viewBox&#x3D;&quot;0 0 33 33&quot; fill&#x3D;&quot;none&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;&gt;
+                    &lt;mask id&#x3D;&quot;mask0_75592_8413&quot; style&#x3D;&quot;mask-type:alpha&quot; maskUnits&#x3D;&quot;userSpaceOnUse&quot; x&#x3D;&quot;0&quot; y&#x3D;&quot;0&quot; width&#x3D;&quot;33&quot; height&#x3D;&quot;33&quot;&gt;
+                    &lt;rect x&#x3D;&quot;0.394531&quot; y&#x3D;&quot;0.80835&quot; width&#x3D;&quot;32&quot; height&#x3D;&quot;32&quot; fill&#x3D;&quot;#D9D9D9&quot;/&gt;
+                    &lt;/mask&gt;
+                    &lt;g mask&#x3D;&quot;url(#mask0_75592_8413)&quot;&gt;
+                    &lt;path d&#x3D;&quot;M7.0612 26.1418H8.92787L20.4279 14.6418L18.5612 12.7751L7.0612 24.2751V26.1418ZM26.1279 12.7084L20.4612 7.10843L22.3279 5.24176C22.839 4.73065 23.4668 4.4751 24.2112 4.4751C24.9556 4.4751 25.5834 4.73065 26.0945 5.24176L27.9612 7.10843C28.4723 7.61954 28.739 8.23621 28.7612 8.95843C28.7834 9.68065 28.539 10.2973 28.0279 10.8084L26.1279 12.7084ZM24.1945 14.6751L10.0612 28.8084H4.39453V23.1418L18.5279 9.00843L24.1945 14.6751Z&quot; fill&#x3D;&quot;#2A3647&quot;/&gt;
+                    &lt;/g&gt;
+                &lt;/svg&gt;
+                Edit
+            &lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="content-wrapper" *ngIf="showContent">    <div class="wrapper-top">        <p class="category-flag" [style.background-color]="task.category == \'user story\' ? \'#0038ff\': \'#1fd7c1\'">{{taskService.capitalize(task.category)}}</p>        <button class="btn-close" (click)="onClose()" >            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">                <mask id="mask0_331509_883" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">                    <rect width="24" height="24" fill="#D9D9D9"/>                </mask>                <g mask="url(#mask0_331509_883)">                    <path d="M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z" fill="#2A3647"/>                </g>            </svg>        </button>    </div>    <div class="task-content">        <h1>{{ taskService.capitalize(task.title) }}</h1>        <p class="description">{{ taskService.capitalize(task.description) }}</p>        <div class="date-row">            <span class="row-title">Due date:</span>            <span>{{ convertDate(task.date) }}</span>        </div>        <div class="priority-row">            <span class="row-title">Priority:</span>            <span>{{ task.priority }}</span>            <div>                <img src="assets/img/icons/prio-high.png" alt="Priority High Icon" *ngIf="task.priority === \'urgent\'">                <img src="assets/img/icons/prio-medium.png" alt="Priorit Medium Icon" *ngIf="task.priority === \'medium\'">                <img src="assets/img/icons/prio-low.png" alt="Priority Low Icon" *ngIf="task.priority === \'low\'">            </div>        </div>        <div class="assigned-to-row">            <span class="row-title">Assigned To:</span>            <span *ngIf="contactList.length <= 0" class="info-no-selection">No contact selected</span>            <div class="contact-list">                @for (contact of contactList; track $index) {                    <div class="contact-item">                        <div class="img-user-wrapper">                            <div class="img-user" [style.background-color]="contactService.getContactColor(contact.name)">                                <p class="contact-initials">{{ contactService.getInitials(contact.name) }}</p>                            </div>                            <p class="contact-name">{{ contact.name }}</p>                        </div>                    </div>                }            </div>        </div>       <div class="subtask-row">            <span class="row-title">Subtasks:</span>            <span *ngIf="subtasks.length <= 0" class="info-no-selection">No subtasks defined</span>            <div class="subtask-list">                @for (subtask of subtasks; track $index) {                    <div class="subtask-item">                        <input class="checkbox" [id]="\'subtask-cb\' + $index" type="checkbox"  (change)="onSubtaskToggle(subtask)" [(ngModel)]="subtask.isCompleted">                        <label class="checkbox-label" [for]="\'subtask-cb\' + $index"></label>                        <span>{{ subtask.title }}</span>                    </div>                }            </div>        </div>        <div class="btn-wrapper">            <button class="btn-delete" (click)="deleteTask($event)">                <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">                    <mask id="mask0_75592_9951" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">                    <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>                    </mask>                    <g mask="url(#mask0_75592_9951)">                    <path d="M7.14453 21C6.59453 21 6.1237 20.8042 5.73203 20.4125C5.34036 20.0208 5.14453 19.55 5.14453 19V6C4.8612 6 4.6237 5.90417 4.43203 5.7125C4.24036 5.52083 4.14453 5.28333 4.14453 5C4.14453 4.71667 4.24036 4.47917 4.43203 4.2875C4.6237 4.09583 4.8612 4 5.14453 4H9.14453C9.14453 3.71667 9.24036 3.47917 9.43203 3.2875C9.6237 3.09583 9.8612 3 10.1445 3H14.1445C14.4279 3 14.6654 3.09583 14.857 3.2875C15.0487 3.47917 15.1445 3.71667 15.1445 4H19.1445C19.4279 4 19.6654 4.09583 19.857 4.2875C20.0487 4.47917 20.1445 4.71667 20.1445 5C20.1445 5.28333 20.0487 5.52083 19.857 5.7125C19.6654 5.90417 19.4279 6 19.1445 6V19C19.1445 19.55 18.9487 20.0208 18.557 20.4125C18.1654 20.8042 17.6945 21 17.1445 21H7.14453ZM7.14453 6V19H17.1445V6H7.14453ZM9.14453 16C9.14453 16.2833 9.24036 16.5208 9.43203 16.7125C9.6237 16.9042 9.8612 17 10.1445 17C10.4279 17 10.6654 16.9042 10.857 16.7125C11.0487 16.5208 11.1445 16.2833 11.1445 16V9C11.1445 8.71667 11.0487 8.47917 10.857 8.2875C10.6654 8.09583 10.4279 8 10.1445 8C9.8612 8 9.6237 8.09583 9.43203 8.2875C9.24036 8.47917 9.14453 8.71667 9.14453 9V16ZM13.1445 16C13.1445 16.2833 13.2404 16.5208 13.432 16.7125C13.6237 16.9042 13.8612 17 14.1445 17C14.4279 17 14.6654 16.9042 14.857 16.7125C15.0487 16.5208 15.1445 16.2833 15.1445 16V9C15.1445 8.71667 15.0487 8.47917 14.857 8.2875C14.6654 8.09583 14.4279 8 14.1445 8C13.8612 8 13.6237 8.09583 13.432 8.2875C13.2404 8.47917 13.1445 8.71667 13.1445 9V16Z" fill="#2A3647"/>                    </g>                </svg>                Delete            </button>            <div class="separator"></div>            <button class="btn-edit" (click)="openEditTask($event)">                <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">                    <mask id="mask0_75592_8413" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="33" height="33">                    <rect x="0.394531" y="0.80835" width="32" height="32" fill="#D9D9D9"/>                    </mask>                    <g mask="url(#mask0_75592_8413)">                    <path d="M7.0612 26.1418H8.92787L20.4279 14.6418L18.5612 12.7751L7.0612 24.2751V26.1418ZM26.1279 12.7084L20.4612 7.10843L22.3279 5.24176C22.839 4.73065 23.4668 4.4751 24.2112 4.4751C24.9556 4.4751 25.5834 4.73065 26.0945 5.24176L27.9612 7.10843C28.4723 7.61954 28.739 8.23621 28.7612 8.95843C28.7834 9.68065 28.539 10.2973 28.0279 10.8084L26.1279 12.7084ZM24.1945 14.6751L10.0612 28.8084H4.39453V23.1418L18.5279 9.00843L24.1945 14.6751Z" fill="#2A3647"/>                    </g>                </svg>                Edit            </button>        </div>    </div></div></div>'
+    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'TaskDetailsComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'TaskDetailsComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

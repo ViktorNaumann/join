@@ -1,0 +1,3466 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>join documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">join documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  BoardComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/board/board.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+            <tr>
+                <td class="col-md-3">encapsulation</td>
+                <td class="col-md-9"><code>ViewEncapsulation.None</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-board</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="../components/TaskComponent.html" target="_self" >TaskComponent</a></code>
+                                <code><a href="../components/TaskDetailsComponent.html" target="_self" >TaskDetailsComponent</a></code>
+                            <code>CdkDropList</code>
+                            <code>CdkDrag</code>
+                            <code>CommonModule</code>
+                            <code>FormsModule</code>
+                                <code><a href="../components/AddTaskComponent.html" target="_self" >AddTaskComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./board.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./board.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#contactList" >contactList</a>
+                            </li>
+                            <li>
+                                <a href="#openedMenuTaskId" >openedMenuTaskId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#scrollSection" >scrollSection</a>
+                            </li>
+                            <li>
+                                <a href="#searchTerm" >searchTerm</a>
+                            </li>
+                            <li>
+                                <a href="#setTaskStatus" >setTaskStatus</a>
+                            </li>
+                            <li>
+                                <a href="#showBackToTop" >showBackToTop</a>
+                            </li>
+                            <li>
+                                <a href="#subtaskList" >subtaskList</a>
+                            </li>
+                            <li>
+                                <a href="#unsubContact" >unsubContact</a>
+                            </li>
+                            <li>
+                                <a href="#unsubSubtask" >unsubSubtask</a>
+                            </li>
+                            <li>
+                                <a href="#unsubTask" >unsubTask</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#changeTaskStatus" >changeTaskStatus</a>
+                            </li>
+                            <li>
+                                <a href="#clearSearch" >clearSearch</a>
+                            </li>
+                            <li>
+                                <a href="#closeDetailsOverlay" >closeDetailsOverlay</a>
+                            </li>
+                            <li>
+                                <a href="#drop" >drop</a>
+                            </li>
+                            <li>
+                                <a href="#getContactList" >getContactList</a>
+                            </li>
+                            <li>
+                                <a href="#getDragDelay" >getDragDelay</a>
+                            </li>
+                            <li>
+                                <a href="#getFilteredTasks" >getFilteredTasks</a>
+                            </li>
+                            <li>
+                                <a href="#getSubtasksForSelectedTask" >getSubtasksForSelectedTask</a>
+                            </li>
+                            <li>
+                                <a href="#getSubtasksForTask" >getSubtasksForTask</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterViewInit" >ngAfterViewInit</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onDragMoved" >onDragMoved</a>
+                            </li>
+                            <li>
+                                <a href="#onOverlayAnimationDone" >onOverlayAnimationDone</a>
+                            </li>
+                            <li>
+                                <a href="#onSearchInput" >onSearchInput</a>
+                            </li>
+                            <li>
+                                <a href="#onSectionScroll" >onSectionScroll</a>
+                            </li>
+                            <li>
+                                <a href="#onSubtaskUpdate" >onSubtaskUpdate</a>
+                            </li>
+                            <li>
+                                <a href="#openAddOrEditOverlay" >openAddOrEditOverlay</a>
+                            </li>
+                            <li>
+                                <a href="#openTaskDetail" >openTaskDetail</a>
+                            </li>
+                            <li>
+                                <a href="#removeBackground" >removeBackground</a>
+                            </li>
+                            <li>
+                                <a href="#saveTaskStatus" >saveTaskStatus</a>
+                            </li>
+                            <li>
+                                <a href="#scrollToTop" >scrollToTop</a>
+                            </li>
+                            <li>
+                                <a href="#setAnimationDirection" >setAnimationDirection</a>
+                            </li>
+                            <li>
+                                <a href="#trackByTaskId" >trackByTaskId</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#animationDirection" >animationDirection</a>
+                                </li>
+                                <li>
+                                    <a href="#backgroundVisible" >backgroundVisible</a>
+                                </li>
+                                <li>
+                                    <a href="#overlayVisible" >overlayVisible</a>
+                                </li>
+                                <li>
+                                    <a href="#showTaskDetails" >showTaskDetails</a>
+                                </li>
+                                <li>
+                                    <a href="#showAddOrEditTask" >showAddOrEditTask</a>
+                                </li>
+                                <li>
+                                    <a href="#selectedTask" >selectedTask</a>
+                                </li>
+                                <li>
+                                    <a href="#taskList" >taskList</a>
+                                </li>
+                                <li>
+                                    <a href="#subtasksByTaskId" >subtasksByTaskId</a>
+                                </li>
+                                <li>
+                                    <a href="#todo" >todo</a>
+                                </li>
+                                <li>
+                                    <a href="#inprogress" >inprogress</a>
+                                </li>
+                                <li>
+                                    <a href="#awaitfeedback" >awaitfeedback</a>
+                                </li>
+                                <li>
+                                    <a href="#done" >done</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(taskService: <a href="../injectables/TaskService.html" target="_self">TaskService</a>, router: Router, contactService: <a href="../injectables/ContactService.html" target="_self">ContactService</a>, taskListManager: <a href="../injectables/TaskListManager.html" target="_self">TaskListManager</a>, dragDropManager: <a href="../injectables/DragDropManager.html" target="_self">DragDropManager</a>, overlayManager: <a href="../injectables/OverlayManager.html" target="_self">OverlayManager</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">src/app/board/board.component.ts:156</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructs the BoardComponent with injected services for task management, navigation,
+and contact handling.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>taskService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TaskService.html" target="_self" >TaskService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Service for managing tasks and subtasks.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Angular Router for navigating to different views (e.g., add-task).</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>contactService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ContactService.html" target="_self" >ContactService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Service for managing contact data.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>taskListManager</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TaskListManager.html" target="_self" >TaskListManager</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>dragDropManager</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DragDropManager.html" target="_self" >DragDropManager</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>overlayManager</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/OverlayManager.html" target="_self" >OverlayManager</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeTaskStatus"></a>
+                    <span class="name">
+                        <span ><b>changeTaskStatus</b></span>
+                        <a href="#changeTaskStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>changeTaskStatus(event: literal type)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="384"
+                                    class="link-to-prism">src/app/board/board.component.ts:384</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Updates the status of a task and persists the change via the task service.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>An object containing taskId and the new status.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearSearch"></a>
+                    <span class="name">
+                        <span ><b>clearSearch</b></span>
+                        <a href="#clearSearch"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clearSearch()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="238"
+                                    class="link-to-prism">src/app/board/board.component.ts:238</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Clears the current search input.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeDetailsOverlay"></a>
+                    <span class="name">
+                        <span ><b>closeDetailsOverlay</b></span>
+                        <a href="#closeDetailsOverlay"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeDetailsOverlay(event: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="327"
+                                    class="link-to-prism">src/app/board/board.component.ts:327</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes the overlay for task details or task form.
+Also resets relevant state variables and clears editing data.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>A string indicating why the overlay is being closed (e.g., &#39;close&#39;, &#39;added&#39;).</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="drop"></a>
+                    <span class="name">
+                        <span ><b>drop</b></span>
+                        <a href="#drop"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>drop(event: <a href="../interfaces/Task.html" target="_self">CdkDragDrop&lt;Task[]&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="286"
+                                    class="link-to-prism">src/app/board/board.component.ts:286</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles drag-and-drop actions for tasks using the Angular CDK.
+Updates the task&#39;s status and reorders task lists accordingly.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Task.html" target="_self" >CdkDragDrop&lt;Task[]&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The CdkDragDrop event containing task data and drop context.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getContactList"></a>
+                    <span class="name">
+                        <span ><b>getContactList</b></span>
+                        <a href="#getContactList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getContactList(contactList: <a href="../interfaces/Contact.html" target="_self">Contact[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="355"
+                                    class="link-to-prism">src/app/board/board.component.ts:355</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Updates the internal list of available contacts.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>contactList</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Array of contact objects to store.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDragDelay"></a>
+                    <span class="name">
+                        <span ><b>getDragDelay</b></span>
+                        <a href="#getDragDelay"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getDragDelay()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="276"
+                                    class="link-to-prism">src/app/board/board.component.ts:276</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Returns the delay for starting a drag action based on screen width.
+Prevents accidental drags on small screens.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Drag delay in milliseconds.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getFilteredTasks"></a>
+                    <span class="name">
+                        <span ><b>getFilteredTasks</b></span>
+                        <a href="#getFilteredTasks"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getFilteredTasks(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="231"
+                                    class="link-to-prism">src/app/board/board.component.ts:231</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Filters tasks by given status and current search term (case-insensitive).</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Task status to filter by (&#39;to-do&#39;, &#39;in-progress&#39;, &#39;await-feedback&#39;, &#39;done&#39;).</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Task.html" target="_self" >Task[]</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Filtered list of tasks.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSubtasksForSelectedTask"></a>
+                    <span class="name">
+                        <span ><b>getSubtasksForSelectedTask</b></span>
+                        <a href="#getSubtasksForSelectedTask"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getSubtasksForSelectedTask()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="346"
+                                    class="link-to-prism">src/app/board/board.component.ts:346</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Returns the subtasks assigned to the currently selected task.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Array of subtasks, or an empty array if none are found.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSubtasksForTask"></a>
+                    <span class="name">
+                        <span ><b>getSubtasksForTask</b></span>
+                        <a href="#getSubtasksForTask"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getSubtasksForTask(taskId: string | undefined)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="337"
+                                    class="link-to-prism">src/app/board/board.component.ts:337</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Returns the subtasks for a given task ID.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>taskId</td>
+                                            <td>
+                                                        <code>string | undefined</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The ID of the task to retrieve subtasks for.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Subtask[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Array of subtasks, or an empty array if none exist.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <span ><b>ngAfterViewInit</b></span>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="185"
+                                    class="link-to-prism">src/app/board/board.component.ts:185</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Lifecycle hook that runs after the component’s view has been fully initialized.
+Adds a scroll event listener to the scrollable section.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="212"
+                                    class="link-to-prism">src/app/board/board.component.ts:212</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Lifecycle hook that runs on component initialization.
+Starts loading tasks from the task service.
+Lifecycle hook: Sets initial animation direction and attaches resize listener.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDragMoved"></a>
+                    <span class="name">
+                        <span ><b>onDragMoved</b></span>
+                        <a href="#onDragMoved"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDragMoved(event: CdkDragMove)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="397"
+                                    class="link-to-prism">src/app/board/board.component.ts:397</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles automatic scrolling while dragging near the top or bottom edge
+of the scrollable task section.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>CdkDragMove</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The CdkDragMove event containing the pointer position.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onOverlayAnimationDone"></a>
+                    <span class="name">
+                        <span ><b>onOverlayAnimationDone</b></span>
+                        <a href="#onOverlayAnimationDone"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onOverlayAnimationDone(event: AnimationEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="267"
+                                    class="link-to-prism">src/app/board/board.component.ts:267</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Callback for when the overlay slide-in animation is finished.
+Slight delay before making the background visible for smooth UX.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>AnimationEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>AnimationEvent from Angular.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSearchInput"></a>
+                    <span class="name">
+                        <span ><b>onSearchInput</b></span>
+                        <a href="#onSearchInput"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSearchInput()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="223"
+                                    class="link-to-prism">src/app/board/board.component.ts:223</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Placeholder for handling user input in the search field.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSectionScroll"></a>
+                    <span class="name">
+                        <span ><b>onSectionScroll</b></span>
+                        <a href="#onSectionScroll"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSectionScroll()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="195"
+                                    class="link-to-prism">src/app/board/board.component.ts:195</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles scroll events and toggles visibility of the &quot;back to top&quot; button
+if the scroll position exceeds a threshold.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubtaskUpdate"></a>
+                    <span class="name">
+                        <span ><b>onSubtaskUpdate</b></span>
+                        <a href="#onSubtaskUpdate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubtaskUpdate(updatedSubtasks: Subtask[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="364"
+                                    class="link-to-prism">src/app/board/board.component.ts:364</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Replaces the subtask list with a new array of updated subtasks.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>updatedSubtasks</td>
+                                            <td>
+                                                        <code>Subtask[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Array of updated subtask objects.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openAddOrEditOverlay"></a>
+                    <span class="name">
+                        <span ><b>openAddOrEditOverlay</b></span>
+                        <a href="#openAddOrEditOverlay"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openAddOrEditOverlay(event: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="308"
+                                    class="link-to-prism">src/app/board/board.component.ts:308</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Opens the overlay for adding or editing a task.
+On small screens, navigates to a separate route; otherwise opens the overlay inline.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Either &#39;open&#39; or &#39;edit&#39;, indicating the action type.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The status to prefill in the add/edit task form.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openTaskDetail"></a>
+                    <span class="name">
+                        <span ><b>openTaskDetail</b></span>
+                        <a href="#openTaskDetail"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openTaskDetail(selectedTask: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="317"
+                                    class="link-to-prism">src/app/board/board.component.ts:317</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Opens the overlay for viewing the details of a selected task.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>selectedTask</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The task object to display in detail.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeBackground"></a>
+                    <span class="name">
+                        <span ><b>removeBackground</b></span>
+                        <a href="#removeBackground"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeBackground(event: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="257"
+                                    class="link-to-prism">src/app/board/board.component.ts:257</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles removal of background and overlay if the event indicates closure.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>A string (expected: &#39;closed&#39;) that triggers background removal.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveTaskStatus"></a>
+                    <span class="name">
+                        <span ><b>saveTaskStatus</b></span>
+                        <a href="#saveTaskStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>saveTaskStatus(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="297"
+                                    class="link-to-prism">src/app/board/board.component.ts:297</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Stores the currently selected status for a new or edited task.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The task status to set (e.g., &#39;to-do&#39;, &#39;done&#39;).</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="scrollToTop"></a>
+                    <span class="name">
+                        <span ><b>scrollToTop</b></span>
+                        <a href="#scrollToTop"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>scrollToTop()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="203"
+                                    class="link-to-prism">src/app/board/board.component.ts:203</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Smoothly scrolls the scrollable section back to the top.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setAnimationDirection"></a>
+                    <span class="name">
+                        <span ><b>setAnimationDirection</b></span>
+                        <a href="#setAnimationDirection"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setAnimationDirection(width: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="248"
+                                    class="link-to-prism">src/app/board/board.component.ts:248</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets the animation direction based on screen width.
+Used for responsive slide-in overlays.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>width</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Current screen width.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="trackByTaskId"></a>
+                    <span class="name">
+                        <span ><b>trackByTaskId</b></span>
+                        <a href="#trackByTaskId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>trackByTaskId(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, task: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="375"
+                                    class="link-to-prism">src/app/board/board.component.ts:375</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>TrackBy function for use with ngFor to optimize rendering of tasks.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The index of the item in the array.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>task</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The task object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string | undefined</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>The unique task ID.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="contactList"></a>
+                    <span class="name">
+                        <span ><b>contactList</b></span>
+                        <a href="#contactList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Contact.html" target="_self" >Contact[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/board/board.component.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openedMenuTaskId"></a>
+                    <span class="name">
+                        <span ><b>openedMenuTaskId</b></span>
+                        <a href="#openedMenuTaskId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/board/board.component.ts:107</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="scrollSection"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>scrollSection</b></span>
+                        <a href="#scrollSection"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ElementRef&lt;HTMLElement&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;scrollSection&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="179" class="link-to-prism">src/app/board/board.component.ts:179</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reference to the scrollable board section element.
+Used to detect scrolling and show the &quot;back to top&quot; button.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchTerm"></a>
+                    <span class="name">
+                        <span ><b>searchTerm</b></span>
+                        <a href="#searchTerm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/board/board.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setTaskStatus"></a>
+                    <span class="name">
+                        <span ><b>setTaskStatus</b></span>
+                        <a href="#setTaskStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;to-do&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/board/board.component.ts:105</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showBackToTop"></a>
+                    <span class="name">
+                        <span ><b>showBackToTop</b></span>
+                        <a href="#showBackToTop"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/board/board.component.ts:106</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subtaskList"></a>
+                    <span class="name">
+                        <span ><b>subtaskList</b></span>
+                        <a href="#subtaskList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subtask[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/board/board.component.ts:103</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="unsubContact"></a>
+                    <span class="name">
+                        <span ><b>unsubContact</b></span>
+                        <a href="#unsubContact"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/board/board.component.ts:102</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="unsubSubtask"></a>
+                    <span class="name">
+                        <span ><b>unsubSubtask</b></span>
+                        <a href="#unsubSubtask"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/board/board.component.ts:101</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="unsubTask"></a>
+                    <span class="name">
+                        <span ><b>unsubTask</b></span>
+                        <a href="#unsubTask"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/board/board.component.ts:100</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="animationDirection"></a>
+                        <span class="name"><b>animationDirection</b><a href="#animationDirection"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>animationDirection()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/board/board.component.ts:112</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Getter for overlay states from OverlayManager</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>&quot;right&quot; | &quot;bottom&quot;</code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="backgroundVisible"></a>
+                        <span class="name"><b>backgroundVisible</b><a href="#backgroundVisible"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>backgroundVisible()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/app/board/board.component.ts:116</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="overlayVisible"></a>
+                        <span class="name"><b>overlayVisible</b><a href="#overlayVisible"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>overlayVisible()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">src/app/board/board.component.ts:120</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showTaskDetails"></a>
+                        <span class="name"><b>showTaskDetails</b><a href="#showTaskDetails"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>showTaskDetails()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/board/board.component.ts:124</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showAddOrEditTask"></a>
+                        <span class="name"><b>showAddOrEditTask</b><a href="#showAddOrEditTask"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>showAddOrEditTask()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">src/app/board/board.component.ts:128</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="selectedTask"></a>
+                        <span class="name"><b>selectedTask</b><a href="#selectedTask"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>selectedTask()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/app/board/board.component.ts:132</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="taskList"></a>
+                        <span class="name"><b>taskList</b><a href="#taskList"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>taskList()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="139" class="link-to-prism">src/app/board/board.component.ts:139</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Getter for task lists from TaskListManager</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="../interfaces/Task.html" target="_self" >Task[]</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="subtasksByTaskId"></a>
+                        <span class="name"><b>subtasksByTaskId</b><a href="#subtasksByTaskId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>subtasksByTaskId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/app/board/board.component.ts:142</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="todo"></a>
+                        <span class="name"><b>todo</b><a href="#todo"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>todo()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="145" class="link-to-prism">src/app/board/board.component.ts:145</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="inprogress"></a>
+                        <span class="name"><b>inprogress</b><a href="#inprogress"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>inprogress()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="148" class="link-to-prism">src/app/board/board.component.ts:148</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="awaitfeedback"></a>
+                        <span class="name"><b>awaitfeedback</b><a href="#awaitfeedback"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>awaitfeedback()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="151" class="link-to-prism">src/app/board/board.component.ts:151</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="done"></a>
+                        <span class="name"><b>done</b><a href="#done"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>done()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="154" class="link-to-prism">src/app/board/board.component.ts:154</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Component,
+  ViewEncapsulation,
+  ViewChild,
+  ElementRef,
+} from &#x27;@angular/core&#x27;;
+import { TaskComponent } from &#x27;./task/task.component&#x27;;
+import {
+  trigger,
+  style,
+  transition,
+  animate,
+  AnimationEvent,
+} from &#x27;@angular/animations&#x27;;
+import { TaskDetailsComponent } from &#x27;./task-details/task-details.component&#x27;;
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+  CdkDrag,
+  CdkDropList,
+  CdkDragMove,
+} from &#x27;@angular/cdk/drag-drop&#x27;;
+import { Task } from &#x27;../services/task.service&#x27;;
+import { TaskService } from &#x27;../services/task.service&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Subtask } from &#x27;../services/task.service&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
+import { ContactService } from &#x27;../services/contact.service&#x27;;
+import { Contact } from &#x27;../services/contact.service&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { AddTaskComponent } from &#x27;../add-task/add-task.component&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { TaskListManager } from &#x27;./task-list-manager&#x27;;
+import { DragDropManager } from &#x27;./drag-drop-manager&#x27;;
+import { OverlayManager } from &#x27;./overlay-manager&#x27;;
+
+@Component({
+  selector: &#x27;app-board&#x27;,
+  imports: [
+    TaskComponent,
+    TaskDetailsComponent,
+    CdkDropList,
+    CdkDrag,
+    CommonModule,
+    FormsModule,
+    AddTaskComponent,
+  ],
+  templateUrl: &#x27;./board.component.html&#x27;,
+  styleUrl: &#x27;./board.component.scss&#x27;,
+  encapsulation: ViewEncapsulation.None,
+  animations: [
+    trigger(&#x27;slideInOut&#x27;, [
+      transition(&#x27;void &#x3D;&gt; right&#x27;, [
+        style({ transform: &#x27;translateX(100%)&#x27;, opacity: 0 }),
+        animate(
+          &#x27;250ms ease-in-out&#x27;,
+          style({ transform: &#x27;translateX(0)&#x27;, opacity: 1 })
+        ),
+      ]),
+      transition(&#x27;right &#x3D;&gt; void&#x27;, [
+        animate(
+          &#x27;250ms ease-in-out&#x27;,
+          style({ transform: &#x27;translateX(100%)&#x27;, opacity: 0 })
+        ),
+      ]),
+      transition(&#x27;void &#x3D;&gt; bottom&#x27;, [
+        style({ transform: &#x27;translateY(100%)&#x27;, opacity: 0 }),
+        animate(
+          &#x27;250ms ease-in-out&#x27;,
+          style({ transform: &#x27;translateY(0)&#x27;, opacity: 1 })
+        ),
+      ]),
+      transition(&#x27;bottom &#x3D;&gt; void&#x27;, [
+        animate(
+          &#x27;250ms ease-in-out&#x27;,
+          style({ transform: &#x27;translateY(100%)&#x27;, opacity: 0 })
+        ),
+      ]),
+    ]),
+  ],
+})
+
+/**
+ * BoardComponent is the central component of the task management board.
+ * It manages task lists, their statuses, drag-and-drop functionality,
+ * overlays for task details and creation, as well as subtasks and contacts.
+ *
+ * Features:
+ * - Categorized task lists: &quot;to-do&quot;, &quot;in-progress&quot;, &quot;await-feedback&quot;, &quot;done&quot;
+ * - Drag &amp; drop task sorting and status changes (via Angular CDK)
+ * - Task filtering via search term
+ * - Animated overlay for task detail and add/edit view
+ * - Subtask management per task
+ * - Contact integration for assigning collaborators
+ * - Responsive design (mobile / desktop behavior)
+ */
+export class BoardComponent {
+  searchTerm: string &#x3D; &#x27;&#x27;;
+  unsubTask!: Subscription;
+  unsubSubtask!: Subscription;
+  unsubContact!: Subscription;
+  subtaskList: Subtask[] &#x3D; [];
+  contactList: Contact[] &#x3D; [];
+  setTaskStatus: string &#x3D; &#x27;to-do&#x27;;
+  showBackToTop &#x3D; false;
+  openedMenuTaskId: string | null &#x3D; null;
+
+  /**
+   * Getter for overlay states from OverlayManager
+   */
+  get animationDirection(): &#x27;right&#x27; | &#x27;bottom&#x27; {
+    return this.overlayManager.getAnimationDirection();
+  }
+
+  get backgroundVisible(): boolean {
+    return this.overlayManager.getBackgroundVisible();
+  }
+
+  get overlayVisible(): boolean {
+    return this.overlayManager.getOverlayVisible();
+  }
+
+  get showTaskDetails(): boolean {
+    return this.overlayManager.getShowTaskDetails();
+  }
+
+  get showAddOrEditTask(): boolean {
+    return this.overlayManager.getShowAddOrEditTask();
+  }
+
+  get selectedTask(): Task | undefined {
+    return this.overlayManager.getSelectedTask();
+  }
+
+  /**
+   * Getter for task lists from TaskListManager
+   */
+  get taskList(): Task[] {
+    return this.taskListManager.getTaskList();
+  }
+  get subtasksByTaskId(): { [taskId: string]: Subtask[] } {
+    return this.taskListManager.getSubtasksByTaskId();
+  }
+  get todo(): Task[] {
+    return this.taskListManager.getTodoTasks();
+  }
+  get inprogress(): Task[] {
+    return this.taskListManager.getInProgressTasks();
+  }
+  get awaitfeedback(): Task[] {
+    return this.taskListManager.getAwaitFeedbackTasks();
+  }
+  get done(): Task[] {
+    return this.taskListManager.getDoneTasks();
+  }
+
+  /**
+   * Constructs the BoardComponent with injected services for task management, navigation,
+   * and contact handling.
+   *
+   * @param taskService - Service for managing tasks and subtasks.
+   * @param router - Angular Router for navigating to different views (e.g., add-task).
+   * @param contactService - Service for managing contact data.
+   */
+  constructor(
+    private taskService: TaskService,
+    private router: Router,
+    private contactService: ContactService,
+    private taskListManager: TaskListManager,
+    private dragDropManager: DragDropManager,
+    private overlayManager: OverlayManager
+  ) { }
+
+  /**
+   * Reference to the scrollable board section element.
+   * Used to detect scrolling and show the &quot;back to top&quot; button.
+   */
+  @ViewChild(&#x27;scrollSection&#x27;) scrollSection!: ElementRef&lt;HTMLElement&gt;;
+
+  /**
+   * Lifecycle hook that runs after the component’s view has been fully initialized.
+   * Adds a scroll event listener to the scrollable section.
+   */
+  ngAfterViewInit() {
+    this.scrollSection.nativeElement.addEventListener(&#x27;scroll&#x27;, () &#x3D;&gt;
+      this.onSectionScroll()
+    );
+  }
+
+  /**
+   * Handles scroll events and toggles visibility of the &quot;back to top&quot; button
+   * if the scroll position exceeds a threshold.
+   */
+  onSectionScroll() {
+    const scrollTop &#x3D; this.scrollSection.nativeElement.scrollTop;
+    this.showBackToTop &#x3D; scrollTop &gt; 300;
+  }
+
+  /**
+   * Smoothly scrolls the scrollable section back to the top.
+   */
+  scrollToTop() {
+    this.scrollSection.nativeElement.scrollTo({ top: 0, behavior: &#x27;smooth&#x27; });
+  }
+
+  /**
+   * Lifecycle hook that runs on component initialization.
+   * Starts loading tasks from the task service.
+   * Lifecycle hook: Sets initial animation direction and attaches resize listener.
+   */
+  ngOnInit(): void {
+    this.taskListManager.loadTasks();
+    this.overlayManager.setAnimationDirection(window.innerWidth);
+    window.addEventListener(&#x27;resize&#x27;, () &#x3D;&gt; {
+      this.overlayManager.setAnimationDirection(window.innerWidth);
+    });
+  }
+
+  /**
+   * Placeholder for handling user input in the search field.
+   */
+  onSearchInput() { }
+
+  /**
+   * Filters tasks by given status and current search term (case-insensitive).
+   *
+   * @param status - Task status to filter by (&#x27;to-do&#x27;, &#x27;in-progress&#x27;, &#x27;await-feedback&#x27;, &#x27;done&#x27;).
+   * @returns Filtered list of tasks.
+   */
+  getFilteredTasks(status: string): Task[] {
+    return this.taskListManager.getFilteredTasks(status, this.searchTerm);
+  }
+
+  /**
+   * Clears the current search input.
+   */
+  clearSearch() {
+    this.searchTerm &#x3D; &#x27;&#x27;;
+  }
+
+  /**
+   * Sets the animation direction based on screen width.
+   * Used for responsive slide-in overlays.
+   *
+   * @param width - Current screen width.
+   */
+  setAnimationDirection(width: number) {
+    this.overlayManager.setAnimationDirection(width);
+  }
+
+  /**
+   * Handles removal of background and overlay if the event indicates closure.
+   *
+   * @param event - A string (expected: &#x27;closed&#x27;) that triggers background removal.
+   */
+  removeBackground(event: string) {
+    this.overlayManager.removeBackground(event);
+  }
+
+  /**
+   * Callback for when the overlay slide-in animation is finished.
+   * Slight delay before making the background visible for smooth UX.
+   *
+   * @param event - AnimationEvent from Angular.
+   */
+  onOverlayAnimationDone(event: AnimationEvent) {
+    this.overlayManager.onOverlayAnimationDone(event);
+  }
+  /**
+   * Returns the delay for starting a drag action based on screen width.
+   * Prevents accidental drags on small screens.
+   *
+   * @returns Drag delay in milliseconds.
+   */
+  getDragDelay(): number {
+    return this.dragDropManager.getDragDelay();
+  }
+
+  /**
+ * Handles drag-and-drop actions for tasks using the Angular CDK.
+ * Updates the task&#x27;s status and reorders task lists accordingly.
+ *
+ * @param event - The CdkDragDrop event containing task data and drop context.
+ */
+  drop(event: CdkDragDrop&lt;Task[]&gt;) {
+    this.dragDropManager.handleDrop(event, () &#x3D;&gt; {
+      this.taskListManager.updateTaskLists();
+    });
+  }
+
+  /**
+   * Stores the currently selected status for a new or edited task.
+   *
+   * @param status - The task status to set (e.g., &#x27;to-do&#x27;, &#x27;done&#x27;).
+   */
+  saveTaskStatus(status: string) {
+    this.setTaskStatus &#x3D; status;
+  }
+
+  /**
+   * Opens the overlay for adding or editing a task.
+   * On small screens, navigates to a separate route; otherwise opens the overlay inline.
+   *
+   * @param event - Either &#x27;open&#x27; or &#x27;edit&#x27;, indicating the action type.
+   * @param status - The status to prefill in the add/edit task form.
+   */
+  openAddOrEditOverlay(event: string, status: string) {
+    this.overlayManager.openAddOrEditOverlay(event, status);
+  }
+
+  /**
+   * Opens the overlay for viewing the details of a selected task.
+   *
+   * @param selectedTask - The task object to display in detail.
+   */
+  openTaskDetail(selectedTask: Task) {
+    this.overlayManager.openTaskDetail(selectedTask);
+  }
+
+  /**
+   * Closes the overlay for task details or task form.
+   * Also resets relevant state variables and clears editing data.
+   *
+   * @param event - A string indicating why the overlay is being closed (e.g., &#x27;close&#x27;, &#x27;added&#x27;).
+   */
+  closeDetailsOverlay(event: string) {
+    this.overlayManager.closeDetailsOverlay(event);
+  }
+
+  /**
+  * Returns the subtasks for a given task ID.
+  *
+  * @param taskId - The ID of the task to retrieve subtasks for.
+  * @returns Array of subtasks, or an empty array if none exist.
+  */
+  getSubtasksForTask(taskId: string | undefined): Subtask[] {
+    return this.taskListManager.getSubtasksForTask(taskId);
+  }
+
+  /**
+ * Returns the subtasks assigned to the currently selected task.
+ *
+ * @returns Array of subtasks, or an empty array if none are found.
+ */
+  getSubtasksForSelectedTask() {
+    return this.taskListManager.getSubtasksForSelectedTask(this.selectedTask);
+  }
+
+  /**
+ * Updates the internal list of available contacts.
+ *
+ * @param contactList - Array of contact objects to store.
+ */
+  getContactList(contactList: Contact[]) {
+    this.contactList &#x3D; contactList;
+  }
+
+  /**
+ * Replaces the subtask list with a new array of updated subtasks.
+ *
+ * @param updatedSubtasks - Array of updated subtask objects.
+ */
+  onSubtaskUpdate(updatedSubtasks: Subtask[]) {
+    this.subtaskList &#x3D; [...updatedSubtasks];
+  }
+
+  /**
+ * TrackBy function for use with ngFor to optimize rendering of tasks.
+ *
+ * @param index - The index of the item in the array.
+ * @param task - The task object.
+ * @returns The unique task ID.
+ */
+  trackByTaskId(index: number, task: Task): string | undefined {
+    return this.taskListManager.trackByTaskId(index, task);
+  }
+
+  /**
+ * Updates the status of a task and persists the change via the task service.
+ *
+ * @param event - An object containing taskId and the new status.
+ */
+  changeTaskStatus(event: { taskId: string; status: string }) {
+    const { taskId, status } &#x3D; event;
+    this.dragDropManager.changeTaskStatus(taskId, status, this.taskList, () &#x3D;&gt; {
+      this.taskListManager.loadTasks();
+    });
+  }
+
+  /**
+ * Handles automatic scrolling while dragging near the top or bottom edge
+ * of the scrollable task section.
+ *
+ * @param event - The CdkDragMove event containing the pointer position.
+ */
+  onDragMoved(event: CdkDragMove) {
+    this.dragDropManager.handleDragMove(event, this.scrollSection);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;section #scrollSection (scroll)&#x3D;&quot;onSectionScroll()&quot;&gt;
+  &lt;div class&#x3D;&quot;layout-container&quot;&gt;
+    &lt;div class&#x3D;&quot;board-header&quot;&gt;
+      &lt;div class&#x3D;&quot;header-headline&quot;&gt;
+        &lt;h1&gt;Board&lt;/h1&gt;
+        &lt;img
+          class&#x3D;&quot;add-icon&quot;
+          src&#x3D;&quot;assets/img/icons/add-box-fill.png&quot;
+          alt&#x3D;&quot;add task button&quot;
+          (click)&#x3D;&quot;openAddOrEditOverlay(&#x27;open&#x27;, &#x27;to-do&#x27;)&quot;
+          (click)&#x3D;&quot;saveTaskStatus(&#x27;to-do&#x27;)&quot;
+        /&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;header-controls&quot;&gt;
+        &lt;div class&#x3D;&quot;search-input-container&quot;&gt;
+          &lt;input
+            type&#x3D;&quot;text&quot;
+            placeholder&#x3D;&quot;Find Task&quot;
+            [(ngModel)]&#x3D;&quot;searchTerm&quot;
+            (input)&#x3D;&quot;onSearchInput()&quot;
+            #searchInput
+          /&gt;
+
+          @if (searchTerm.trim()) {
+          &lt;div
+            class&#x3D;&quot;clear-search-wrapper&quot;
+            (click)&#x3D;&quot;clearSearch(); searchInput.focus()&quot;
+          &gt;
+            &lt;img
+              src&#x3D;&quot;assets/img/icons/close.png&quot;
+              alt&#x3D;&quot;Clear search&quot;
+              class&#x3D;&quot;clear-search-icon&quot;
+            /&gt;
+          &lt;/div&gt;
+          }
+
+          &lt;div class&#x3D;&quot;separator&quot;&gt;&lt;/div&gt;
+          &lt;div class&#x3D;&quot;search-icon-wrapper&quot;&gt;
+            &lt;img
+              src&#x3D;&quot;assets/img/icons/search.png&quot;
+              alt&#x3D;&quot;Search&quot;
+              class&#x3D;&quot;search-icon&quot;
+            /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;button
+          (click)&#x3D;&quot;openAddOrEditOverlay(&#x27;open&#x27;, &#x27;to-do&#x27;)&quot;
+          (click)&#x3D;&quot;saveTaskStatus(&#x27;to-do&#x27;)&quot;
+        &gt;
+          Add Task +
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;task-columns&quot;&gt;
+      &lt;div class&#x3D;&quot;column&quot;&gt;
+        &lt;div class&#x3D;&quot;column-header&quot;&gt;
+          &lt;h2&gt;To do&lt;/h2&gt;
+          &lt;div
+            class&#x3D;&quot;icon-container&quot;
+            (click)&#x3D;&quot;openAddOrEditOverlay(&#x27;open&#x27;, &#x27;to-do&#x27;)&quot;
+            (click)&#x3D;&quot;saveTaskStatus(&#x27;to-do&#x27;)&quot;
+          &gt;
+            &lt;img
+              class&#x3D;&quot;default-icon&quot;
+              src&#x3D;&quot;assets/img/icons/add-box.png&quot;
+              alt&#x3D;&quot;Add new task&quot;
+            /&gt;
+            &lt;img
+              class&#x3D;&quot;hover-icon&quot;
+              src&#x3D;&quot;assets/img/icons/add-box-hover.png&quot;
+              alt&#x3D;&quot;Add new task&quot;
+            /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div
+          cdkDropList
+          #todoList&#x3D;&quot;cdkDropList&quot;
+          [cdkDropListData]&#x3D;&quot;todo&quot;
+          id&#x3D;&quot;todoList&quot;
+          [cdkDropListConnectedTo]&#x3D;&quot;[
+            inprogressList,
+            awaitfeedbackList,
+            doneList
+          ]&quot;
+          class&#x3D;&quot;drop-list&quot;
+          [class.drop-list-empty]&#x3D;&quot;getFilteredTasks(&#x27;to-do&#x27;).length &#x3D;&#x3D;&#x3D; 0&quot;
+          (cdkDropListDropped)&#x3D;&quot;drop($event)&quot;
+        &gt;
+          @if (getFilteredTasks(&#x27;to-do&#x27;).length &#x3D;&#x3D;&#x3D; 0) {
+          &lt;div class&#x3D;&quot;empty-column&quot;&gt;
+            @if (searchTerm.trim()) { No matching tasks found } @else { No tasks
+            To do }
+          &lt;/div&gt;
+          } @for (task of getFilteredTasks(&#x27;to-do&#x27;); track trackByTaskId($index,
+          task)) {
+          &lt;app-task
+            [cdkDragData]&#x3D;&quot;task&quot;
+            [cdkDragStartDelay]&#x3D;&quot;getDragDelay()&quot;
+            cdkDrag
+            (cdkDragMoved)&#x3D;&quot;onDragMoved($event)&quot;
+            (taskSelected)&#x3D;&quot;openTaskDetail($event)&quot;
+            [task]&#x3D;&quot;task&quot;
+            [subtaskList]&#x3D;&quot;getSubtasksForTask(task.id)&quot;
+            (contacts)&#x3D;&quot;getContactList($event)&quot;
+            [openedMenuTaskId]&#x3D;&quot;openedMenuTaskId&quot;
+            (openDotsMenu)&#x3D;&quot;openedMenuTaskId &#x3D; $event&quot;
+            (closeDotsMenu)&#x3D;&quot;openedMenuTaskId &#x3D; null&quot;
+            (changeTaskStatus)&#x3D;&quot;changeTaskStatus($event)&quot;
+          &gt;&lt;/app-task&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;column&quot;&gt;
+        &lt;div class&#x3D;&quot;column-header&quot;&gt;
+          &lt;h2&gt;In progress&lt;/h2&gt;
+          &lt;div
+            class&#x3D;&quot;icon-container&quot;
+            (click)&#x3D;&quot;openAddOrEditOverlay(&#x27;open&#x27;, &#x27;in-progress&#x27;)&quot;
+            (click)&#x3D;&quot;saveTaskStatus(&#x27;in-progress&#x27;)&quot;
+          &gt;
+            &lt;img
+              class&#x3D;&quot;default-icon&quot;
+              src&#x3D;&quot;assets/img/icons/add-box.png&quot;
+              alt&#x3D;&quot;Add new task&quot;
+            /&gt;
+            &lt;img
+              class&#x3D;&quot;hover-icon&quot;
+              src&#x3D;&quot;assets/img/icons/add-box-hover.png&quot;
+              alt&#x3D;&quot;Add new task&quot;
+            /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div
+          cdkDropList
+          #inprogressList&#x3D;&quot;cdkDropList&quot;
+          id&#x3D;&quot;inprogressList&quot;
+          [cdkDropListData]&#x3D;&quot;inprogress&quot;
+          [cdkDropListConnectedTo]&#x3D;&quot;[todoList, awaitfeedbackList, doneList]&quot;
+          class&#x3D;&quot;drop-list&quot;
+          [class.drop-list-empty]&#x3D;&quot;getFilteredTasks(&#x27;in-progress&#x27;).length &#x3D;&#x3D;&#x3D; 0&quot;
+          (cdkDropListDropped)&#x3D;&quot;drop($event)&quot;
+        &gt;
+          @if (getFilteredTasks(&#x27;in-progress&#x27;).length &#x3D;&#x3D;&#x3D; 0) {
+          &lt;div class&#x3D;&quot;empty-column&quot;&gt;
+            @if (searchTerm.trim()) { No matching tasks found } @else { No tasks
+            in progress }
+          &lt;/div&gt;
+          } @for (task of getFilteredTasks(&#x27;in-progress&#x27;); track
+          trackByTaskId($index, task)) {
+          &lt;app-task
+            [cdkDragData]&#x3D;&quot;task&quot;
+            [cdkDragStartDelay]&#x3D;&quot;getDragDelay()&quot;
+            cdkDrag
+            (cdkDragMoved)&#x3D;&quot;onDragMoved($event)&quot;
+            (taskSelected)&#x3D;&quot;openTaskDetail($event)&quot;
+            [task]&#x3D;&quot;task&quot;
+            [subtaskList]&#x3D;&quot;getSubtasksForTask(task.id)&quot;
+            (contacts)&#x3D;&quot;getContactList($event)&quot;
+            [openedMenuTaskId]&#x3D;&quot;openedMenuTaskId&quot;
+            (openDotsMenu)&#x3D;&quot;openedMenuTaskId &#x3D; $event&quot;
+            (closeDotsMenu)&#x3D;&quot;openedMenuTaskId &#x3D; null&quot;
+            (changeTaskStatus)&#x3D;&quot;changeTaskStatus($event)&quot;
+          &gt;&lt;/app-task&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;column&quot;&gt;
+        &lt;div class&#x3D;&quot;column-header&quot;&gt;
+          &lt;h2&gt;Await feedback&lt;/h2&gt;
+          &lt;div
+            class&#x3D;&quot;icon-container&quot;
+            (click)&#x3D;&quot;openAddOrEditOverlay(&#x27;open&#x27;, &#x27;await-feedback&#x27;)&quot;
+            (click)&#x3D;&quot;saveTaskStatus(&#x27;await-feedback&#x27;)&quot;
+          &gt;
+            &lt;img
+              class&#x3D;&quot;default-icon&quot;
+              src&#x3D;&quot;assets/img/icons/add-box.png&quot;
+              alt&#x3D;&quot;Add new task&quot;
+            /&gt;
+            &lt;img
+              class&#x3D;&quot;hover-icon&quot;
+              src&#x3D;&quot;assets/img/icons/add-box-hover.png&quot;
+              alt&#x3D;&quot;Add new task&quot;
+            /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div
+          cdkDropList
+          #awaitfeedbackList&#x3D;&quot;cdkDropList&quot;
+          [cdkDropListData]&#x3D;&quot;awaitfeedback&quot;
+          id&#x3D;&quot;awaitfeedbackList&quot;
+          [cdkDropListConnectedTo]&#x3D;&quot;[todoList, inprogressList, doneList]&quot;
+          class&#x3D;&quot;drop-list&quot;
+          [class.drop-list-empty]&#x3D;&quot;
+            getFilteredTasks(&#x27;await-feedback&#x27;).length &#x3D;&#x3D;&#x3D; 0
+          &quot;
+          (cdkDropListDropped)&#x3D;&quot;drop($event)&quot;
+        &gt;
+          @if (getFilteredTasks(&#x27;await-feedback&#x27;).length &#x3D;&#x3D;&#x3D; 0) {
+          &lt;div class&#x3D;&quot;empty-column&quot;&gt;
+            @if (searchTerm.trim()) { No matching tasks found } @else { No tasks
+            for feedback }
+          &lt;/div&gt;
+          } @for (task of getFilteredTasks(&#x27;await-feedback&#x27;); track task.id) {
+          &lt;app-task
+            [cdkDragData]&#x3D;&quot;task&quot;
+            [cdkDragStartDelay]&#x3D;&quot;getDragDelay()&quot;
+            cdkDrag
+            (cdkDragMoved)&#x3D;&quot;onDragMoved($event)&quot;
+            (taskSelected)&#x3D;&quot;openTaskDetail($event)&quot;
+            [task]&#x3D;&quot;task&quot;
+            [subtaskList]&#x3D;&quot;getSubtasksForTask(task.id)&quot;
+            (contacts)&#x3D;&quot;getContactList($event)&quot;
+            [openedMenuTaskId]&#x3D;&quot;openedMenuTaskId&quot;
+            (openDotsMenu)&#x3D;&quot;openedMenuTaskId &#x3D; $event&quot;
+            (closeDotsMenu)&#x3D;&quot;openedMenuTaskId &#x3D; null&quot;
+            (changeTaskStatus)&#x3D;&quot;changeTaskStatus($event)&quot;
+          &gt;&lt;/app-task&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;column&quot;&gt;
+        &lt;div class&#x3D;&quot;column-header&quot;&gt;
+          &lt;h2&gt;Done&lt;/h2&gt;
+        &lt;/div&gt;
+
+        &lt;div
+          cdkDropList
+          #doneList&#x3D;&quot;cdkDropList&quot;
+          [cdkDropListData]&#x3D;&quot;done&quot;
+          id&#x3D;&quot;doneList&quot;
+          [cdkDropListConnectedTo]&#x3D;&quot;[
+            todoList,
+            inprogressList,
+            awaitfeedbackList
+          ]&quot;
+          class&#x3D;&quot;drop-list&quot;
+          [class.drop-list-empty]&#x3D;&quot;getFilteredTasks(&#x27;done&#x27;).length &#x3D;&#x3D;&#x3D; 0&quot;
+          (cdkDropListDropped)&#x3D;&quot;drop($event)&quot;
+        &gt;
+          @if (getFilteredTasks(&#x27;done&#x27;).length &#x3D;&#x3D;&#x3D; 0) {
+          &lt;div class&#x3D;&quot;empty-column&quot;&gt;
+            @if (searchTerm.trim()) { No matching tasks found } @else { No tasks
+            done }
+          &lt;/div&gt;
+          } @for (task of getFilteredTasks(&#x27;done&#x27;); track trackByTaskId($index,
+          task)) {
+          &lt;app-task
+            [cdkDragData]&#x3D;&quot;task&quot;
+            [cdkDragStartDelay]&#x3D;&quot;getDragDelay()&quot;
+            cdkDrag
+            (cdkDragMoved)&#x3D;&quot;onDragMoved($event)&quot;
+            (taskSelected)&#x3D;&quot;openTaskDetail($event)&quot;
+            [task]&#x3D;&quot;task&quot;
+            [subtaskList]&#x3D;&quot;getSubtasksForTask(task.id)&quot;
+            (contacts)&#x3D;&quot;getContactList($event)&quot;
+            [openedMenuTaskId]&#x3D;&quot;openedMenuTaskId&quot;
+            (openDotsMenu)&#x3D;&quot;openedMenuTaskId &#x3D; $event&quot;
+            (closeDotsMenu)&#x3D;&quot;openedMenuTaskId &#x3D; null&quot;
+            (changeTaskStatus)&#x3D;&quot;changeTaskStatus($event)&quot;
+          &gt;&lt;/app-task&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;button class&#x3D;&quot;back-to-top&quot; (click)&#x3D;&quot;scrollToTop()&quot; *ngIf&#x3D;&quot;showBackToTop&quot;&gt;
+    &lt;span class&#x3D;&quot;arrow-up&quot;&gt;↑&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/section&gt;
+
+&lt;div
+  class&#x3D;&quot;task-overlay&quot;
+  [@slideInOut]&#x3D;&quot;animationDirection&quot;
+  (@slideInOut.done)&#x3D;&quot;onOverlayAnimationDone($event)&quot;
+  [class.backgroundVisible]&#x3D;&quot;backgroundVisible&quot;
+  *ngIf&#x3D;&quot;overlayVisible&quot;
+&gt;
+  &lt;div class&#x3D;&quot;max-width-container&quot;&gt;
+    &lt;div class&#x3D;&quot;content-wrapper&quot; *ngIf&#x3D;&quot;showAddOrEditTask&quot;&gt;
+      &lt;app-add-task
+        *ngIf&#x3D;&quot;showAddOrEditTask&quot;
+        (taskAdded)&#x3D;&quot;closeDetailsOverlay($event)&quot;
+        (closeOverlay)&#x3D;&quot;closeDetailsOverlay(&#x27;close&#x27;)&quot;
+        [defaultStatus]&#x3D;&quot;setTaskStatus&quot;
+        [isOverlayMode]&#x3D;&quot;true&quot;
+      &gt;&lt;/app-add-task&gt;
+    &lt;/div&gt;
+    &lt;app-task-details
+      class&#x3D;&quot;task-details&quot;
+      *ngIf&#x3D;&quot;showTaskDetails &amp;&amp; selectedTask&quot;
+      (closeTaskDetails)&#x3D;&quot;closeDetailsOverlay($event)&quot;
+      (editTask)&#x3D;&quot;openAddOrEditOverlay(&#x27;edit&#x27;, &#x27;&#x27;)&quot;
+      (subtaskChanged)&#x3D;&quot;onSubtaskUpdate($event)&quot;
+      [task]&#x3D;&quot;selectedTask&quot;
+      [contactList]&#x3D;&quot;contactList&quot;
+    &gt;&lt;/app-task-details&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><section #scrollSection (scroll)="onSectionScroll()">  <div class="layout-container">    <div class="board-header">      <div class="header-headline">        <h1>Board</h1>        <img          class="add-icon"          src="assets/img/icons/add-box-fill.png"          alt="add task button"          (click)="openAddOrEditOverlay(\'open\', \'to-do\')"          (click)="saveTaskStatus(\'to-do\')"        />      </div>      <div class="header-controls">        <div class="search-input-container">          <input            type="text"            placeholder="Find Task"            [(ngModel)]="searchTerm"            (input)="onSearchInput()"            #searchInput          />          @if (searchTerm.trim()) {          <div            class="clear-search-wrapper"            (click)="clearSearch(); searchInput.focus()"          >            <img              src="assets/img/icons/close.png"              alt="Clear search"              class="clear-search-icon"            />          </div>          }          <div class="separator"></div>          <div class="search-icon-wrapper">            <img              src="assets/img/icons/search.png"              alt="Search"              class="search-icon"            />          </div>        </div>        <button          (click)="openAddOrEditOverlay(\'open\', \'to-do\')"          (click)="saveTaskStatus(\'to-do\')"        >          Add Task +        </button>      </div>    </div>    <div class="task-columns">      <div class="column">        <div class="column-header">          <h2>To do</h2>          <div            class="icon-container"            (click)="openAddOrEditOverlay(\'open\', \'to-do\')"            (click)="saveTaskStatus(\'to-do\')"          >            <img              class="default-icon"              src="assets/img/icons/add-box.png"              alt="Add new task"            />            <img              class="hover-icon"              src="assets/img/icons/add-box-hover.png"              alt="Add new task"            />          </div>        </div>        <div          cdkDropList          #todoList="cdkDropList"          [cdkDropListData]="todo"          id="todoList"          [cdkDropListConnectedTo]="[            inprogressList,            awaitfeedbackList,            doneList          ]"          class="drop-list"          [class.drop-list-empty]="getFilteredTasks(\'to-do\').length === 0"          (cdkDropListDropped)="drop($event)"        >          @if (getFilteredTasks(\'to-do\').length === 0) {          <div class="empty-column">            @if (searchTerm.trim()) { No matching tasks found } @else { No tasks            To do }          </div>          } @for (task of getFilteredTasks(\'to-do\'); track trackByTaskId($index,          task)) {          <app-task            [cdkDragData]="task"            [cdkDragStartDelay]="getDragDelay()"            cdkDrag            (cdkDragMoved)="onDragMoved($event)"            (taskSelected)="openTaskDetail($event)"            [task]="task"            [subtaskList]="getSubtasksForTask(task.id)"            (contacts)="getContactList($event)"            [openedMenuTaskId]="openedMenuTaskId"            (openDotsMenu)="openedMenuTaskId = $event"            (closeDotsMenu)="openedMenuTaskId = null"            (changeTaskStatus)="changeTaskStatus($event)"          ></app-task>          }        </div>      </div>      <div class="column">        <div class="column-header">          <h2>In progress</h2>          <div            class="icon-container"            (click)="openAddOrEditOverlay(\'open\', \'in-progress\')"            (click)="saveTaskStatus(\'in-progress\')"          >            <img              class="default-icon"              src="assets/img/icons/add-box.png"              alt="Add new task"            />            <img              class="hover-icon"              src="assets/img/icons/add-box-hover.png"              alt="Add new task"            />          </div>        </div>        <div          cdkDropList          #inprogressList="cdkDropList"          id="inprogressList"          [cdkDropListData]="inprogress"          [cdkDropListConnectedTo]="[todoList, awaitfeedbackList, doneList]"          class="drop-list"          [class.drop-list-empty]="getFilteredTasks(\'in-progress\').length === 0"          (cdkDropListDropped)="drop($event)"        >          @if (getFilteredTasks(\'in-progress\').length === 0) {          <div class="empty-column">            @if (searchTerm.trim()) { No matching tasks found } @else { No tasks            in progress }          </div>          } @for (task of getFilteredTasks(\'in-progress\'); track          trackByTaskId($index, task)) {          <app-task            [cdkDragData]="task"            [cdkDragStartDelay]="getDragDelay()"            cdkDrag            (cdkDragMoved)="onDragMoved($event)"            (taskSelected)="openTaskDetail($event)"            [task]="task"            [subtaskList]="getSubtasksForTask(task.id)"            (contacts)="getContactList($event)"            [openedMenuTaskId]="openedMenuTaskId"            (openDotsMenu)="openedMenuTaskId = $event"            (closeDotsMenu)="openedMenuTaskId = null"            (changeTaskStatus)="changeTaskStatus($event)"          ></app-task>          }        </div>      </div>      <div class="column">        <div class="column-header">          <h2>Await feedback</h2>          <div            class="icon-container"            (click)="openAddOrEditOverlay(\'open\', \'await-feedback\')"            (click)="saveTaskStatus(\'await-feedback\')"          >            <img              class="default-icon"              src="assets/img/icons/add-box.png"              alt="Add new task"            />            <img              class="hover-icon"              src="assets/img/icons/add-box-hover.png"              alt="Add new task"            />          </div>        </div>        <div          cdkDropList          #awaitfeedbackList="cdkDropList"          [cdkDropListData]="awaitfeedback"          id="awaitfeedbackList"          [cdkDropListConnectedTo]="[todoList, inprogressList, doneList]"          class="drop-list"          [class.drop-list-empty]="            getFilteredTasks(\'await-feedback\').length === 0          "          (cdkDropListDropped)="drop($event)"        >          @if (getFilteredTasks(\'await-feedback\').length === 0) {          <div class="empty-column">            @if (searchTerm.trim()) { No matching tasks found } @else { No tasks            for feedback }          </div>          } @for (task of getFilteredTasks(\'await-feedback\'); track task.id) {          <app-task            [cdkDragData]="task"            [cdkDragStartDelay]="getDragDelay()"            cdkDrag            (cdkDragMoved)="onDragMoved($event)"            (taskSelected)="openTaskDetail($event)"            [task]="task"            [subtaskList]="getSubtasksForTask(task.id)"            (contacts)="getContactList($event)"            [openedMenuTaskId]="openedMenuTaskId"            (openDotsMenu)="openedMenuTaskId = $event"            (closeDotsMenu)="openedMenuTaskId = null"            (changeTaskStatus)="changeTaskStatus($event)"          ></app-task>          }        </div>      </div>      <div class="column">        <div class="column-header">          <h2>Done</h2>        </div>        <div          cdkDropList          #doneList="cdkDropList"          [cdkDropListData]="done"          id="doneList"          [cdkDropListConnectedTo]="[            todoList,            inprogressList,            awaitfeedbackList          ]"          class="drop-list"          [class.drop-list-empty]="getFilteredTasks(\'done\').length === 0"          (cdkDropListDropped)="drop($event)"        >          @if (getFilteredTasks(\'done\').length === 0) {          <div class="empty-column">            @if (searchTerm.trim()) { No matching tasks found } @else { No tasks            done }          </div>          } @for (task of getFilteredTasks(\'done\'); track trackByTaskId($index,          task)) {          <app-task            [cdkDragData]="task"            [cdkDragStartDelay]="getDragDelay()"            cdkDrag            (cdkDragMoved)="onDragMoved($event)"            (taskSelected)="openTaskDetail($event)"            [task]="task"            [subtaskList]="getSubtasksForTask(task.id)"            (contacts)="getContactList($event)"            [openedMenuTaskId]="openedMenuTaskId"            (openDotsMenu)="openedMenuTaskId = $event"            (closeDotsMenu)="openedMenuTaskId = null"            (changeTaskStatus)="changeTaskStatus($event)"          ></app-task>          }        </div>      </div>    </div>  </div>  <button class="back-to-top" (click)="scrollToTop()" *ngIf="showBackToTop">    <span class="arrow-up">↑</span>  </button></section><div  class="task-overlay"  [@slideInOut]="animationDirection"  (@slideInOut.done)="onOverlayAnimationDone($event)"  [class.backgroundVisible]="backgroundVisible"  *ngIf="overlayVisible">  <div class="max-width-container">    <div class="content-wrapper" *ngIf="showAddOrEditTask">      <app-add-task        *ngIf="showAddOrEditTask"        (taskAdded)="closeDetailsOverlay($event)"        (closeOverlay)="closeDetailsOverlay(\'close\')"        [defaultStatus]="setTaskStatus"        [isOverlayMode]="true"      ></app-add-task>    </div>    <app-task-details      class="task-details"      *ngIf="showTaskDetails && selectedTask"      (closeTaskDetails)="closeDetailsOverlay($event)"      (editTask)="openAddOrEditOverlay(\'edit\', \'\')"      (subtaskChanged)="onSubtaskUpdate($event)"      [task]="selectedTask"      [contactList]="contactList"    ></app-task-details>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'BoardComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'BoardComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
