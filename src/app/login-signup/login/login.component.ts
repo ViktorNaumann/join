@@ -52,7 +52,7 @@ import { Router, RouterModule } from '@angular/router';
         opacity: 0
       })),
       transition('start => moved', [
-        animate('2s 0.5s ease-in-out')
+        animate('2s 0.7s ease-in-out')
       ])
     ])
   ]
