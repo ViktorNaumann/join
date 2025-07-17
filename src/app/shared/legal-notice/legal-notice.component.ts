@@ -31,5 +31,4 @@ export class LegalNoticeComponent {
   goBack(): void {
     this.navigationService.navigateBack();
   }
-
 }
