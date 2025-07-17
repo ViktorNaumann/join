@@ -1,3 +1,20 @@
+/**
+ * HeaderComponent represents the top navigation bar of the application.
+ * It includes a responsive mobile menu with slide-in/out animation,
+ * handles authentication actions, and adapts its layout based on window size.
+ * 
+ * Features:
+ * - Responsive behavior: adapts menu layout for mobile and desktop views
+ * - Slide animation for menu transitions
+ * - Closes the menu when clicking outside
+ * - User logout functionality
+ * - Displays the current user's name
+ * 
+ * Dependencies:
+ * - Angular animations for menu transitions
+ * - AuthService for managing user authentication
+ */
+
 import { Component, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { CommonModule } from '@angular/common';
@@ -29,14 +46,33 @@ import { AuthService } from '../services/auth.service';
   ],
 })
 export class HeaderComponent {
+  /**
+   * Tracks whether the mobile menu is currently open.
+   */
   menuOpen = false;
+
+  /**
+   * Indicates if the current viewport is considered mobile (width < 1000px).
+   */
   isMobile = window.innerWidth < 1000;
 
-  // NEU!
+  /**
+   * Reference to the menu DOM element, used for detecting outside clicks.
+   */
   @ViewChild('menu') menuRef!: ElementRef;
 
+  /**
+   * Initializes the header component and injects the authentication service.
+   * @param authService Service responsible for user authentication.
+   */
   constructor(private authService: AuthService) {}
 
+  /**
+   * Updates the `isMobile` flag and closes the menu on window resize
+   * if the new width corresponds to a desktop view.
+   * 
+   * @param event The resize event from the window.
+   */
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     const width = (event.target as Window).innerWidth;
@@ -46,7 +82,12 @@ export class HeaderComponent {
     }
   }
 
-  // NEU!
+  /**
+   * Detects clicks outside the menu to automatically close it
+   * when it is open and the user clicks elsewhere in the document.
+   * 
+   * @param event The mouse click event.
+   */
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     if (
@@ -58,17 +99,33 @@ export class HeaderComponent {
     }
   }
 
+  /**
+   * Toggles the visibility of the mobile menu.
+   * Stops propagation to prevent triggering the outside click handler.
+   * 
+   * @param event The click event on the toggle button.
+   */
   toggleMenu(event: Event) {
     event.stopPropagation();
     this.menuOpen = !this.menuOpen;
   }
 
+  /**
+   * Logs the user out by calling the authentication service,
+   * clears session storage, and closes the menu.
+   */
   async logout(): Promise<void> {
     await this.authService.signOutUser();
-    sessionStorage.removeItem('greetingShown'); // Begrüßung zurücksetzen
+    sessionStorage.removeItem('greetingShown');
     this.menuOpen = false;
   }
 
+  /**
+   * Returns the display name or email of the currently authenticated user.
+   * If no user is found, returns a default label.
+   * 
+   * @returns The display name, email, or a fallback string ('User').
+   */
   getCurrentUserName(): string {
     const user = this.authService.getCurrentUser();
     return user?.displayName || user?.email || 'User';

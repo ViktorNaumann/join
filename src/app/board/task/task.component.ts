@@ -1,3 +1,20 @@
+/**
+ * TaskComponent represents an individual task item within a task board.
+ * It handles interactions such as opening task details, managing subtasks,
+ * showing contact assignments, and changing the task status.
+ * 
+ * Features:
+ * - Displays task and assigned contacts
+ * - Emits selected task for detail view
+ * - Handles subtasks and calculates completion percentage
+ * - Toggles a contextual dots menu for task actions
+ * - Emits changes to task status
+ * - Loads associated contact details
+ * 
+ * Dependencies:
+ * - TaskService for task-related operations
+ * - ContactService for retrieving assigned contact information
+ */
 import { CommonModule } from '@angular/common';
 import {
   Component,
@@ -6,7 +23,6 @@ import {
   EventEmitter,
   HostListener,
 } from '@angular/core';
-// import type { SimpleChanges } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
 import { Contact } from '../../services/contact.service';
 import { TaskService } from '../../services/task.service';
@@ -20,35 +36,79 @@ import { Subtask } from '../../services/task.service';
   styleUrl: './task.component.scss',
 })
 export class TaskComponent {
-  // dotsMenuOpen = false;
 
+  /**
+   * The full list of contacts assigned to the task.
+   */
   contactList: Contact[] = [];
-  @Input() task!: Task;
-  @Input() subtaskList: Subtask[] = [];
-  @Output() taskSelected = new EventEmitter<Task>();
-  @Output() contacts = new EventEmitter<Contact[]>();
-  selectedTask?: Task;
-  // taskCompleted:boolean = false;
 
-  // NEU:
+  /**
+   * The task to be displayed in this component.
+   */
+  @Input() task!: Task;
+
+  /**
+   * The list of subtasks associated with the task.
+   */
+  @Input() subtaskList: Subtask[] = [];
+
+  /**
+   * Emits the selected task when the user opens the task detail view.
+   */
+  @Output() taskSelected = new EventEmitter<Task>();
+
+  /**
+   * Emits the list of resolved contacts associated with the task.
+   */
+  @Output() contacts = new EventEmitter<Contact[]>();
+
+  /**
+   * Holds the task currently selected to open its detail view.
+   */
+  selectedTask?: Task;
+
+  /**
+   * The ID of the task for which the contextual "dots" menu is currently open.
+   */
   @Input() openedMenuTaskId: string | null = null;
+
+  /**
+   * Emits the ID of the task when the "dots" menu is opened.
+   */
   @Output() openDotsMenu = new EventEmitter<string>();
+
+  /**
+   * Emits an event when the "dots" menu should be closed.
+   */
   @Output() closeDotsMenu = new EventEmitter<void>();
+
+  /**
+   * Emits a status change for the task, along with its ID.
+   */
   @Output() changeTaskStatus = new EventEmitter<{
     taskId: string;
     status: string;
   }>();
 
+  /**
+   * Injects services required for task and contact operations.
+   * 
+   * @param taskService Service for task data handling.
+   * @param contactService Service for fetching contact information.
+   */
   constructor(
     public taskService: TaskService,
     public contactService: ContactService
   ) {}
 
-  // NEU:
+  /**
+   * Detects clicks outside the "dots" menu and closes it if open.
+   * 
+   * @param event Mouse click event on the document.
+   */
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    // Prüfe, ob der Klick innerhalb des Buttons oder Overlays war
     if (
       !target.closest('.dots-menu-btn') &&
       !target.closest('.dots-menu-overlay')
@@ -59,23 +119,21 @@ export class TaskComponent {
     }
   }
 
+  /**
+   * Lifecycle hook that loads the contact list for the task on component init.
+   */
   ngOnInit(): void {
     this.getContactList();
   }
 
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   if (changes['subtaskList'] && this.task?.id && !this.taskCompleted && this.task.status !== 'await-feedback' && this.task.status !== 'done') {
-  //     const percentage = this.percentageCompleted(this.subtaskList);
-  //     if (percentage === 100) {
-  //       this.changeTaskStatus.emit({ taskId: this.task.id, status: 'await-feedback' });
-  //       this.taskCompleted = true;
-  //     }
-  //   }
-  // }
-
-  // NEU:
+  /**
+   * Emits a task status change and closes the dots menu.
+   * 
+   * @param status The new status to assign to the task.
+   * @param event Optional mouse event to stop propagation.
+   */
   changeStatus(status: string, event: MouseEvent | undefined) {
-    if(event){
+    if (event) {
       event.stopPropagation();
     }
     if (this.task.id) {
@@ -84,29 +142,54 @@ export class TaskComponent {
     }
   }
 
+  /**
+   * Returns the number of completed subtasks.
+   * 
+   * @param subtaskList The list of subtasks to evaluate.
+   * @returns The number of completed subtasks.
+   */
   getCompletedSubtasksCount(subtaskList: any[]): number {
     return Array.isArray(subtaskList)
       ? subtaskList.filter((el) => el.isCompleted).length
       : 0;
   }
 
+  /**
+   * Calculates the percentage of completed subtasks.
+   * 
+   * @param subtaskList The list of subtasks to evaluate.
+   * @returns The completion percentage as a number between 0 and 100.
+   */
   percentageCompleted(subtaskList: Subtask[]): number {
     if (!subtaskList || subtaskList.length === 0) return 0;
     let completed = this.getCompletedSubtasksCount(subtaskList);
     return Math.round((completed / subtaskList.length) * 100);
   }
 
+  /**
+   * Emits the selected task to open its detail view.
+   * 
+   * @param task The task to open.
+   */
   openTaskDetails(task: Task) {
     this.selectedTask = task;
     this.taskSelected.emit(this.selectedTask);
   }
 
-  // NEU:
+  /**
+   * Checks if the dots menu is currently open for this task.
+   * 
+   * @returns A boolean indicating if the dots menu is open.
+   */
   get isDotsMenuOpen() {
     return this.openedMenuTaskId === this.task.id;
   }
 
-  // NEU:
+  /**
+   * Toggles the dots menu open or closed for this task.
+   * 
+   * @param event Mouse event to stop propagation.
+   */
   openDotsMenuHandler(event: MouseEvent) {
     event.stopPropagation();
     if (this.isDotsMenuOpen) {
@@ -116,6 +199,10 @@ export class TaskComponent {
     }
   }
 
+  /**
+   * Loads the full contact details for each assigned contact in the task
+   * and emits the resolved contact list.
+   */
   async getContactList() {
     if (this.task?.assignedTo?.length) {
       for (let contactId of this.task.assignedTo) {
@@ -126,6 +213,12 @@ export class TaskComponent {
     }
   }
 
+  /**
+   * Joins the names of remaining contacts into a comma-separated string.
+   * 
+   * @param remainingContacts Array of remaining Contact objects.
+   * @returns A comma-separated string of contact names.
+   */
   getRemainingContactNames(remainingContacts: Contact[]): string {
     return remainingContacts.map((contact) => contact.name).join(', ');
   }
