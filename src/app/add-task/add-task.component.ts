@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { ContactService, Contact } from '../services/contact.service';
 import { TaskService, Task } from '../services/task.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SubtaskManager, Subtask } from './subtask-manager';
+import { ContactManager } from './contact-manager';
+import { CategoryManager } from './category-manager';
 
 /**
  * AddTaskComponent provides a comprehensive form for creating and editing tasks.
@@ -33,17 +36,7 @@ export class AddTaskComponent implements OnInit {
 
   selectedPriority: string = 'medium';
   contacts: Contact[] = [];
-  selectedContacts: Contact[] = [];
-  showContactDropdown: boolean = false;
-  showCategoryDropdown: boolean = false;
-  showSubtaskConfirmation: boolean = false;
   subtaskInputFocused = false;
-  selectedCategory: string = '';
-  subtasks: { id: string | number; text: string; completed: boolean }[] = [];
-  subtaskInput: string = '';
-  nextSubtaskId: number = 1;
-  editingSubtaskId: string | number | null = null;
-  editingSubtaskText: string = '';
   isCreatingTask: boolean = false;
   showTitleError: boolean = false;
   showCategoryError: boolean = false;
@@ -53,18 +46,13 @@ export class AddTaskComponent implements OnInit {
   isEditingMode: boolean = false;
   editingTaskId: string | undefined;
   originalTaskStatus: 'to-do' | 'in-progress' | 'await-feedback' | 'done' = 'to-do';
-  originalSubtasks: { id: string | number; text: string; completed: boolean }[] = [];
+  originalSubtasks: Subtask[] = [];
   
   formData = {
     title: '',
     description: '',
     dueDate: ''
   };
-  
-  categories = [
-    { value: 'technical', label: 'Technical Task', color: '#1FD7C1' },
-    { value: 'user story', label: 'User Story', color: '#0038FF' }
-  ];
 
   /**
    * Constructor injecting required services for task management.
@@ -72,8 +60,19 @@ export class AddTaskComponent implements OnInit {
    * @param taskService - Service for managing task operations.
    * @param router - Angular Router for navigation.
    * @param route - ActivatedRoute for accessing route parameters.
+   * @param subtaskManager - Service for managing subtask operations.
+   * @param contactManager - Service for managing contact operations.
+   * @param categoryManager - Service for managing category operations.
    */
-  constructor(private contactService: ContactService, private taskService: TaskService, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private contactService: ContactService, 
+    private taskService: TaskService, 
+    private router: Router, 
+    private route: ActivatedRoute,
+    public subtaskManager: SubtaskManager,
+    public contactManager: ContactManager,
+    public categoryManager: CategoryManager
+  ) {}
 
   /**
    * Initializes the component by loading the status and contacts.
@@ -138,21 +137,22 @@ export class AddTaskComponent implements OnInit {
       this.formData.dueDate = dateValue.toISOString().split('T')[0];
     }
     this.selectedPriority = task.priority || 'medium';
-    this.selectedCategory = task.category || '';
+    this.categoryManager.setSelectedCategory(task.category || '');
     if (task.assignedTo && task.assignedTo.length > 0) {
-      this.selectedContacts = this.contacts.filter(contact => 
+      const selectedContacts = this.contacts.filter(contact => 
         task.assignedTo.includes(contact.id)
       );
+      this.contactManager.setSelectedContacts(selectedContacts);
     }
     if (task.id) {
       this.taskService.getSubtasks(task.id).subscribe(subtasks => {
-        this.subtasks = subtasks.map((subtask) => ({
+        const mappedSubtasks = subtasks.map((subtask) => ({
           id: subtask.id || '',
           text: subtask.title,
           completed: subtask.isCompleted
         }));
-        this.originalSubtasks = [...this.subtasks];
-        this.nextSubtaskId = this.subtasks.length + 1;
+        this.subtaskManager.setSubtasks(mappedSubtasks);
+        this.originalSubtasks = [...mappedSubtasks];
       });
     }
   }
@@ -165,8 +165,8 @@ export class AddTaskComponent implements OnInit {
   onDocumentClick(event: Event) {
     const target = event.target as HTMLElement;
     if (!target.closest('.dropdown') && !target.closest('.subtask-input')) {
-      this.showContactDropdown = false;
-      this.showCategoryDropdown = false;
+      this.contactManager.setShowContactDropdown(false);
+      this.categoryManager.setShowCategoryDropdown(false);
     }
   }
 
@@ -182,70 +182,16 @@ export class AddTaskComponent implements OnInit {
    * Toggles the contact dropdown visibility.
    */
   toggleContactDropdown() {
-    this.showContactDropdown = !this.showContactDropdown;
-    this.showCategoryDropdown = false;
+    this.contactManager.toggleContactDropdown();
+    this.categoryManager.setShowCategoryDropdown(false);
   }
 
   /**
    * Toggles the category dropdown visibility.
    */
   toggleCategoryDropdown() {
-    this.showCategoryDropdown = !this.showCategoryDropdown;
-    this.showContactDropdown = false;
-  }
-
-  /**
-   * Handles subtask input click to clear the input if confirmation is not shown.
-   */
-  onSubtaskInputClick() {
-    if (!this.showSubtaskConfirmation) {
-      this.subtaskInput = '';
-    }
-  }
-
-  /**
-   * Handles Enter key press on subtask input to add the subtask.
-   * @param event - The keyboard event.
-   */
-  onSubtaskEnter(event: Event) {
-    event.preventDefault();
-    if (this.subtaskInput && this.subtaskInput.trim()) {
-      this.addSubtask();
-    }
-  }
-
-  /**
-   * Confirms and adds the subtask.
-   * @param event - The event that triggered the confirmation.
-   */
-  confirmSubtask(event: Event) {
-    if(event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    this.addSubtask();
-    this.showSubtaskConfirmation = false;
-  }
-
-  /**
-   * Cancels subtask creation and clears the input.
-   */
-  cancelSubtask() {
-    this.subtaskInput = '';
-    this.showSubtaskConfirmation = false;
-  }
-
-  /**
-   * Toggles the selection state of a contact.
-   * @param contact - The contact to select or deselect.
-   */
-  selectContact(contact: Contact) {
-    const index = this.selectedContacts.findIndex(c => c.id === contact.id);
-    if (index === -1) {
-      this.selectedContacts.push(contact);
-    } else {
-      this.selectedContacts.splice(index, 1);
-    }
+    this.categoryManager.toggleCategoryDropdown();
+    this.contactManager.setShowContactDropdown(false);
   }
 
   /**
@@ -253,176 +199,8 @@ export class AddTaskComponent implements OnInit {
    * @param category - The category to select.
    */
   selectCategory(category: any) {
-    this.selectedCategory = category.value;
-    this.showCategoryDropdown = false;
+    this.categoryManager.selectCategory(category);
     this.onCategorySelect();
-  }
-
-  /**
-   * Checks if a contact is currently selected.
-   * @param contact - The contact to check.
-   * @returns True if the contact is selected, false otherwise.
-   */
-  isContactSelected(contact: Contact): boolean {
-    return this.selectedContacts.some(c => c.id === contact.id);
-  }
-
-  /**
-   * Returns the text to display for selected contacts.
-   * @returns The text to display in the contact selector.
-   */
-  getSelectedContactsText(): string {
-    return 'Select contacts to assign';
-  }
-
-  /**
-   * Returns the text to display for the selected category.
-   * @returns The category label or default text.
-   */
-  getCategoryText(): string {
-    if (!this.selectedCategory) {
-      return 'Select task category';
-    }
-    const category = this.categories.find(c => c.value === this.selectedCategory);
-    return category ? category.label : 'Select task category';
-  }
-
-  /**
-   * Returns the color for the selected category.
-   * @returns The category color or default color.
-   */
-  getCategoryColor(): string {
-    if (!this.selectedCategory) {
-      return '#ccc';
-    }
-    const category = this.categories.find(c => c.value === this.selectedCategory);
-    return category ? category.color : '#ccc';
-  }
-
-  /**
-   * Returns the initials for a contact.
-   * @param contact - The contact to get initials for.
-   * @returns The contact's initials.
-   */
-  getContactInitials(contact: Contact): string {
-    return this.contactService.getInitials(contact.name);
-  }
-
-  /**
-   * Returns the color for a contact.
-   * @param contact - The contact to get color for.
-   * @returns The contact's color.
-   */
-  getContactColor(contact: Contact): string {
-    return this.contactService.getContactColor(contact.name);
-  }
-
-  /**
-   * Returns a comma-separated string of remaining contact names.
-   * @param remainingContacts - The remaining contacts to display.
-   * @returns A comma-separated string of contact names.
-   */
-  getRemainingContactNames(remainingContacts: Contact[]): string {
-    return remainingContacts.map((contact) => contact.name).join(', ');
-  }
-
-  /**
-   * Adds a new subtask to the task.
-   */
-  addSubtask() {
-    if (this.subtaskInput && this.subtaskInput.trim()) {
-      const newSubtask = {
-        id: this.nextSubtaskId++,
-        text: this.subtaskInput.trim(),
-        completed: false
-      };
-      this.subtasks.push(newSubtask);
-      this.subtaskInput = '';
-      this.showSubtaskConfirmation = false;
-    }
-  }
-
-  /**
-   * Deletes a subtask by its ID.
-   * @param id - The ID of the subtask to delete.
-   */
-  deleteSubtask(id: string | number) {
-    this.subtasks = this.subtasks.filter(subtask => subtask.id !== id);
-  }
-
-  /**
-   * Edits the text of a subtask.
-   * @param id - The ID of the subtask to edit.
-   * @param newText - The new text for the subtask.
-   */
-  editSubtask(id: string | number, newText: string) {
-    const subtask = this.subtasks.find(s => s.id === id);
-    if (subtask) {
-      subtask.text = newText.trim();
-    }
-  }
-
-  /**
-   * Initiates editing mode for a subtask.
-   * @param id - The ID of the subtask to edit.
-   * @param currentText - The current text of the subtask.
-   */
-  editSubtaskPrompt(id: string | number, currentText: string) {
-    this.editingSubtaskId = id;
-    this.editingSubtaskText = currentText;
-    setTimeout(() => {
-      const inputElement = document.querySelector('.subtask-edit-input') as HTMLInputElement;
-      if (inputElement) {
-        inputElement.value = this.editingSubtaskText;
-        inputElement.focus();
-        inputElement.setSelectionRange(inputElement.value.length, inputElement.value.length);
-      }
-    }, 100);
-  }
-
-  /**
-   * Saves the edited subtask text.
-   */
-  saveSubtaskEdit() {
-    if (this.editingSubtaskId !== null) {
-      if (this.editingSubtaskText && this.editingSubtaskText.trim()) {
-        this.editSubtask(this.editingSubtaskId, this.editingSubtaskText.trim());
-      }
-      this.cancelSubtaskEdit();
-    }
-  }
-
-  /**
-   * Cancels subtask editing mode.
-   */
-  cancelSubtaskEdit() {
-    this.editingSubtaskId = null;
-    this.editingSubtaskText = '';
-  }
-
-  /**
-   * Handles keyboard shortcuts for subtask editing.
-   * @param event - The keyboard event.
-   */
-  onSubtaskEditKeydown(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      this.saveSubtaskEdit();
-    } else if (event.key === 'Escape') {
-      event.preventDefault();
-      this.cancelSubtaskEdit();
-    }
-  }
-
-  /**
-   * Toggles the completion state of a subtask.
-   * @param id - The ID of the subtask to toggle.
-   */
-  toggleSubtaskCompletion(id: string | number) {
-    const subtask = this.subtasks.find(s => s.id === id);
-    if (subtask) {
-      subtask.completed = !subtask.completed;
-    }
   }
 
   /**
@@ -435,14 +213,9 @@ export class AddTaskComponent implements OnInit {
       dueDate: ''
     };
     this.selectedPriority = 'medium';
-    this.selectedContacts = [];
-    this.selectedCategory = '';
-    this.subtasks = [];
-    this.subtaskInput = '';
-    this.nextSubtaskId = 1;
-    this.showContactDropdown = false;
-    this.showCategoryDropdown = false;
-    this.showSubtaskConfirmation = false;
+    this.contactManager.clearAll();
+    this.categoryManager.clearAll();
+    this.subtaskManager.clearAll();
     this.isCreatingTask = false;
     this.showTitleError = false;
     this.showCategoryError = false;
@@ -463,30 +236,24 @@ export class AddTaskComponent implements OnInit {
     this.showTitleError = false;
     this.showCategoryError = false;
     this.showDateError = false;
-
     let hasErrors = false;
-
     if (!this.formData.title.trim()) {
       this.showTitleError = true;
       hasErrors = true;
     }
-
-    if (!this.selectedCategory) {
+    if (!this.categoryManager.hasSelectedCategory()) {
       this.showCategoryError = true;
       hasErrors = true;
     }
-
     if (!this.formData.dueDate) {
       this.showDateError = true;
       hasErrors = true;
     }
-
     if (hasErrors) {
       return;
     }
 
     this.isCreatingTask = true;
-
     try {
       if (this.isEditingMode && this.editingTaskId) {
         await this.updateTask();
@@ -494,7 +261,6 @@ export class AddTaskComponent implements OnInit {
         await this.addNewTask();
       }
       this.taskAdded.emit('added');
-      
       this.showSuccessMessage = true;
       setTimeout(() => {
         this.clearForm();
@@ -514,19 +280,20 @@ export class AddTaskComponent implements OnInit {
     if(!this.defaultStatus){
       this.defaultStatus = 'to-do';
     } 
+    const selectedContacts = this.contactManager.getSelectedContacts();
     const newTask: Task = {
       title: this.formData.title.trim(),
       description: this.formData.description?.trim() || '',
       date: new Date(this.formData.dueDate),
       priority: this.selectedPriority as 'low' | 'medium' | 'urgent',
       status: this.defaultStatus,
-      assignedTo: this.selectedContacts.map(contact => contact.id).filter(id => id !== undefined) as string[],
-      category: this.selectedCategory as 'technical' | 'user story'
+      assignedTo: selectedContacts.map(contact => contact.id).filter(id => id !== undefined) as string[],
+      category: this.categoryManager.getSelectedCategory() as 'technical' | 'user story'
     };
     const savedTask = await this.taskService.addTask(newTask);
-    
-    if (savedTask && this.subtasks.length > 0 && savedTask.id) {
-      for (const subtask of this.subtasks) {
+    const subtasks = this.subtaskManager.getSubtasks();
+    if (savedTask && subtasks.length > 0 && savedTask.id) {
+      for (const subtask of subtasks) {
         await this.taskService.addSubtask(savedTask.id, {
           title: subtask.text,
           isCompleted: subtask.completed
@@ -540,7 +307,7 @@ export class AddTaskComponent implements OnInit {
    */
   async updateTask() {
     if (!this.editingTaskId) return;
-
+    const selectedContacts = this.contactManager.getSelectedContacts();
     const updatedTask: Task = {
       id: this.editingTaskId,
       title: this.formData.title.trim(),
@@ -548,23 +315,23 @@ export class AddTaskComponent implements OnInit {
       date: new Date(this.formData.dueDate),
       priority: this.selectedPriority as 'low' | 'medium' | 'urgent',
       status: this.originalTaskStatus,
-      assignedTo: this.selectedContacts.map(contact => contact.id).filter(id => id !== undefined) as string[],
-      category: this.selectedCategory as 'technical' | 'user story'
+      assignedTo: selectedContacts.map(contact => contact.id).filter(id => id !== undefined) as string[],
+      category: this.categoryManager.getSelectedCategory() as 'technical' | 'user story'
     };
-
     await this.taskService.updateTask(this.editingTaskId, updatedTask);
     if (this.editingTaskId) {
+      const currentSubtasks = this.subtaskManager.getSubtasks();
       const deletedSubtasks = this.originalSubtasks.filter(original => 
         typeof original.id === 'string' && 
         original.id.length > 0 &&
-        !this.subtasks.some(current => current.id === original.id)
+        !currentSubtasks.some(current => current.id === original.id)
       );
       for (const deletedSubtask of deletedSubtasks) {
         if (typeof deletedSubtask.id === 'string') {
           await this.taskService.deleteSubtask(this.editingTaskId, deletedSubtask.id);
         }
       }
-      for (const subtask of this.subtasks) {
+      for (const subtask of currentSubtasks) {
         if (typeof subtask.id === 'string' && subtask.id.length > 0) {
           await this.taskService.updateSubtask(
             this.editingTaskId,
@@ -596,7 +363,7 @@ export class AddTaskComponent implements OnInit {
    * Handles category selection and clears error state.
    */
   onCategorySelect() {
-    if (this.selectedCategory) {
+    if (this.categoryManager.hasSelectedCategory()) {
       this.showCategoryError = false;
     }
   }
