@@ -24,6 +24,12 @@
         height: 72px;
         width: 64px;
     }
+
+    @media (max-width: 406px){
+        height: 48px;
+        width: auto;
+        margin: 0 4px;
+    }
 }
 
 .wanna-signup-wrapper {
