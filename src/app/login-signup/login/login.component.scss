@@ -36,12 +36,12 @@
         @media (max-width: 406px){
             height: 48px;
             width: auto;
-            margin: 0 4px;
+            margin: 12px 15px;
         }
     }
 
     .dark-logo-wrapper img.load {
-        animation: logoTransition 1s ease forwards;
+        animation: logoTransition 1s ease forwards;    
     }
    
 }
