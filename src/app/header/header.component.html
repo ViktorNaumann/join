@@ -24,7 +24,7 @@
           <a class="mobile-help-link" routerLink="/help">Help</a>
           <a routerLink="/privacy-policy">Privacy Policy</a>
           <a routerLink="/legal-notice">Legal notice</a>
-          <a (click)="logout()">Log out</a>
+          <a (click)="logout()" *ngIf="isLoggedIn()">Log out</a>
         </div>
       </div>
     </div>

@@ -130,4 +130,12 @@ export class HeaderComponent {
     const user = this.authService.getCurrentUser();
     return user?.displayName || user?.email || 'User';
   }
+
+   /**
+   * Checks whether the user is currently logged in.
+   * @returns True if the user is authenticated, otherwise false
+   */
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
 }
