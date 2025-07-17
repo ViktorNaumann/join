@@ -177,7 +177,8 @@ export class SignupComponent implements OnInit {
     if (field === 'confirmPassword') {
       const passwordMismatch = this.signupform.errors?.['passwordsDontMatch'];
       const touched = control?.touched || this.signupform.get('password')?.touched;
-      if (passwordMismatch && touched) {
+      const dirty = control?.dirty || this.signupform.get('password')?.dirty;
+      if (passwordMismatch && (touched || dirty)) {
         return 'Passwords do not match';
       }
     }

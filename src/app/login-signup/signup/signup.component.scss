@@ -14,6 +14,16 @@
             height: 72px;
             width: 64px;
         }
+
+        @media (max-width: 406px){
+            height: 48px;
+            width: auto;
+            margin: 0 4px;
+        }
+    }
+
+    @media (max-width: 406px){
+        padding: 12px;
     }
 }
 
@@ -29,15 +39,24 @@
   align-items: center;
   gap: clamp(24px, 2.5vh, 36px);
   margin-top: 1rem;
+  overflow-x: hidden;
+
 
   @media (max-width: 768px){
     width: 90vw;
-    padding: 16px 12px;
+    padding: 24px 12px;
     gap: 20px;
     box-sizing: border-box;
     overflow-x: hidden;
-    max-height: 500px;
+    max-height: 536px;
   }
+
+
+  @media (max-width: 406px){
+    margin-top: 0.5rem;
+    overflow-y: auto;
+  }
+
 }  
 
 .signup-header {
@@ -73,12 +92,26 @@
         margin: 12px auto 0;
         border-radius: 3px;
         }
+
+       @media (max-width: 768px){
+            font-family: "Inter";
+            font-weight: 700;
+            font-size: 36px;
+        }
+
+        @media (max-width: 406px){
+            font-family: "Inter";
+            font-weight: 700;
+            font-size: 26px;
+        }
     }
 }    
 
 form {
-    padding: 0;
+    padding: 8px 33px;
+
 }
+
 
 .form-group-wrapper {
     display: flex;
@@ -87,9 +120,11 @@ form {
     width: 100%;
     margin-bottom: 20px;
 
+    /*
     @media(max-width: 768px) {
         gap: 16px;
     }
+    */
 }
 
 .form-group {
@@ -113,6 +148,10 @@ form {
         opacity: 1; 
     }
 
+    input.invalid {
+        border: 2px solid var(--text-color-error);
+    }
+
     .input-icon {
         position: absolute;
         right: clamp(12px, 2vw, 18px);
@@ -127,7 +166,7 @@ form {
         width: 100%;
 
         input {
-            width: 100%;
+            //width: 100%;
             font-size: 15px;
             height: 14px;
         }
@@ -177,6 +216,12 @@ form {
         text-decoration: none;
         cursor: pointer;
     }
+
+    @media (max-width: 406px){
+        font-size: 12px;
+        gap: 4px;
+        margin: 4px;
+    }
 }
 
 .btn-wrapper {
@@ -204,6 +249,12 @@ form {
         color: #666;
         cursor: not-allowed;
         opacity: 0.6;
+    }
+
+    @media (max-width: 406px){
+        font-size: 16px;
+        height: 32px;
+        min-width: 96px;
     }
 }
 

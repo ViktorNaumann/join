@@ -30,6 +30,12 @@
             height: 72px;
             width: 64px;
         }
+
+        @media (max-width: 406px){
+            height: 48px;
+            width: auto;
+            margin: 0 4px;
+        }
     }
 
     .dark-logo-wrapper img.load {
@@ -78,12 +84,26 @@
         margin: 12px auto 0;
         border-radius: 3px;
         }
+
+        @media (max-width: 768px){
+            font-family: "Inter";
+            font-weight: 700;
+            font-size: 36px;
+        }
+
+        @media (max-width: 406px){
+            font-family: "Inter";
+            font-weight: 700;
+            font-size: 30px;
+        }
     }
 
     @media(max-width: 768px) {
         padding: 24px 16px;
         margin-top: 2rem;
     }
+
+
 }
 
 .form-group-wrapper {
@@ -182,6 +202,12 @@
         min-width: 150px;
         background-color: white;
         justify-content: center;
+    }
+
+    @media (max-width: 406px){
+        font-size: 16px;
+        height: 64px;
+        min-width: 72px;
     }
 }
 
