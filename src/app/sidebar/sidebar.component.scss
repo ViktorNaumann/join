@@ -63,8 +63,8 @@
         align-items: center;
 
         img {
-        width: 24px;
-        height: 24px;
+          width: 24px;
+          height: 24px;
         }
 
         span {
@@ -79,7 +79,6 @@
         background-color: #2a3d59;
 
         a {
-          
           span {
             color: white;
           }
@@ -251,7 +250,7 @@
 
 @media (max-width: 1170px){
   .sidebar {
-  width: 180px;
+    width: 180px;
   }
 }
 
@@ -271,6 +270,23 @@
     z-index: 1000;
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
     margin-top: 0;
+
+    .navigation ul li:nth-child(3) {
+      // "Board"
+      order: 2;
+    }
+    .navigation ul li:nth-child(2) {
+      // "Add Task"
+      order: 3;
+    }
+    .navigation ul li:nth-child(1) {
+      // "Summary"
+      order: 1;
+    }
+    .navigation ul li:nth-child(4) {
+      // "Contacts"
+      order: 4;
+    }
 
     .logo-section {
       display: none;
@@ -325,8 +341,8 @@
 
           a {
             span {
-            color: white;
-          }
+              color: white;
+            }
 
             img {
               filter: brightness(0) invert(1);
