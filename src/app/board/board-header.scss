@@ -1,0 +1,198 @@
+@import "./../../styles.scss";
+
+.board-header {
+  @include flex-between();
+  width: 100%;
+  height: 200px;
+  padding: 0 clamp(20px, calc(2vw + 10px), 40px);
+
+  h1 {
+    margin: 0;
+    @include inter700-fs61;
+    color: var(--text-color-dark);
+  }
+
+  .add-icon {
+    display: none;
+  }
+
+  .header-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    .search-input-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 251px;
+      height: 51px;
+      cursor: pointer;
+
+      input {
+        width: 100%;
+        height: 48px;
+        border: 1px solid var(--background-default-dark);
+        border-radius: 10px;
+        padding: 12px 50px 12px 16px;
+        @include inter400-fs16();
+        background: var(--background-light);
+        cursor: pointer;
+
+        &::placeholder {
+          color: var(--text-color-medium);
+        }
+
+        &:focus {
+          outline: none;
+          border-color: var(--accent-primary-color);
+        }
+      }
+
+      .separator {
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1px;
+        height: 20px;
+        background-color: #ccc;
+      }
+
+      .search-icon-wrapper {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        .search-icon {
+          width: 16px;
+          height: 16px;
+        }
+      }
+
+      .clear-search-wrapper {
+        position: absolute;
+        right: 50px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 2;
+
+        .clear-search-icon {
+          width: 14px;
+          height: 14px;
+          opacity: 0.5;
+          transition: opacity 0.2s ease, transform 0.1s ease;
+
+          &:hover {
+            opacity: 0.8;
+            transform: scale(1.1);
+          }
+
+          &:active {
+            transform: scale(0.95);
+          }
+        }
+      }
+    }
+
+    button {
+      height: 48px;
+      padding: 0 20px;
+      min-width: 120px;
+      border: none;
+      border-radius: 8px;
+      background-color: var(--background-dark);
+      color: white;
+      @include inter700-fs21();
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: var(--accent-primary-color);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.258);
+      }
+    }
+  }
+}
+
+@media (max-width: 830px) {
+  .board-header {
+    height: auto;
+    padding: 20px;
+
+    .header-headline {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      gap: 8px;
+
+      .add-icon {
+        display: unset;
+        width: 38px;
+        height: 38px;
+        flex-shrink: 0;
+      }
+    }
+
+    .add-icon {
+      display: unset;
+    }
+
+    .header-controls {
+      > button {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .board-header {
+    flex-direction: column;
+    padding-top: 40px;
+    padding-bottom: 30px;
+    gap: 40px;
+
+    .header-headline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .header-controls {
+      width: 100%;
+      gap: 0;
+
+      > button {
+        display: none;
+      }
+
+      .search-input-container {
+        width: 100%;
+        max-width: none;
+
+        input {
+          width: 100%;
+          box-sizing: border-box;
+        }
+      }
+    }
+  }
+}
