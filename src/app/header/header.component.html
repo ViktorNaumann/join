@@ -18,7 +18,7 @@
         <img class="help-icon" src="assets/img/icons/help.png" alt="" />
       </div>
 
-      <div class="user-profile" (click)="toggleMenu($event)">
+      <div class="user-profile" (click)="toggleMenu($event)" *ngIf="isLoggedIn()">
         <p>{{ getCurrentUserName().charAt(0).toUpperCase() }}</p>
         <div #menu class="user-menu-links" *ngIf="menuOpen" @slideInOut>
           <a class="mobile-help-link" routerLink="/help">Help</a>
