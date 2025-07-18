@@ -5,18 +5,14 @@
     @include inter400-fs16();
     @include flex-center();
     gap: 3rem;
-    margin-top: 2rem;
+    margin-top: 10rem;
 
     a {
         text-decoration: none;
         color: var( --text-color-medium);
     }
 
-    @media(max-width: 768px) {
-       margin-top: 1rem;
-    }
-
     @media (max-width: 406px){
-        margin-top: 1rem;
+        margin-top: 2.5rem;
     }
 }

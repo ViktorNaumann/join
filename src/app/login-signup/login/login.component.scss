@@ -209,6 +209,12 @@
         background-color: white;
         justify-content: center;
     }
+
+    @media (max-width: 770px) {
+        flex-direction: column;
+        @include flex-center;
+        gap: 12px;
+    }
 }
 
 .input-icon.toggle-eye {
