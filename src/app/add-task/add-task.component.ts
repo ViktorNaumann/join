@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  HostListener,
-  Output,
-  Input,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, Output, Input, EventEmitter, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ContactService, Contact } from '../services/contact.service';
@@ -22,8 +15,8 @@ import { CategoryManager } from './category-manager';
  * and handles both creating new tasks and editing existing ones.
  *
  * @example
- * <app-add-task
- *   [defaultStatus]="'to-do'"
+ * <app-add-task 
+ *   [defaultStatus]="'to-do'" 
  *   [isOverlayMode]="true"
  *   (taskAdded)="handleTaskAdded($event)"
  *   (closeOverlay)="handleClose()">
@@ -33,10 +26,10 @@ import { CategoryManager } from './category-manager';
   selector: 'app-add-task',
   imports: [CommonModule, FormsModule],
   templateUrl: './add-task.component.html',
-  styleUrl: './add-task.component.scss',
+  styleUrl: './add-task.component.scss'
 })
-export class AddTaskComponent implements OnInit {
-  @Output() taskAdded = new EventEmitter<string>();
+export class AddTaskComponent implements OnInit, OnDestroy {
+  @Output() taskAdded = new EventEmitter<string>;
   @Output() closeOverlay = new EventEmitter<void>();
   @Input() defaultStatus = '';
   @Input() isOverlayMode = false;
@@ -49,17 +42,16 @@ export class AddTaskComponent implements OnInit {
   showCategoryError: boolean = false;
   showDateError: boolean = false;
   showSuccessMessage: boolean = false;
-
+  
   isEditingMode: boolean = false;
   editingTaskId: string | undefined;
-  originalTaskStatus: 'to-do' | 'in-progress' | 'await-feedback' | 'done' =
-    'to-do';
+  originalTaskStatus: 'to-do' | 'in-progress' | 'await-feedback' | 'done' = 'to-do';
   originalSubtasks: Subtask[] = [];
-
+  
   formData = {
     title: '',
     description: '',
-    dueDate: '',
+    dueDate: ''
   };
 
   /**
@@ -73,9 +65,9 @@ export class AddTaskComponent implements OnInit {
    * @param categoryManager - Service for managing category operations.
    */
   constructor(
-    private contactService: ContactService,
-    private taskService: TaskService,
-    private router: Router,
+    private contactService: ContactService, 
+    private taskService: TaskService, 
+    private router: Router, 
     private route: ActivatedRoute,
     public subtaskManager: SubtaskManager,
     public contactManager: ContactManager,
@@ -88,13 +80,22 @@ export class AddTaskComponent implements OnInit {
   ngOnInit() {
     this.loadStatus();
     this.loadContacts();
+    
+  }
+
+  /**
+   * Lifecycle hook that runs when the component is destroyed.
+   * Clears all form data and manager states to prevent state leaking.
+   */
+  ngOnDestroy() {
+    this.clearForm();
   }
 
   /**
    * Loads the default status from route query parameters.
    */
   loadStatus() {
-    this.route.queryParams.subscribe((params) => {
+    this.route.queryParams.subscribe(params => {
       if (params['status']) {
         this.defaultStatus = params['status'];
       }
@@ -105,7 +106,7 @@ export class AddTaskComponent implements OnInit {
    * Loads all contacts from the ContactService and then loads any task being edited.
    */
   loadContacts() {
-    this.contactService.getContacts().subscribe((contacts) => {
+    this.contactService.getContacts().subscribe(contacts => {
       this.contacts = contacts;
       this.loadEditingTask();
     });
@@ -121,6 +122,11 @@ export class AddTaskComponent implements OnInit {
       this.editingTaskId = editingTask.id;
       this.populateFormWithTaskData(editingTask);
       this.taskService.clearEditingTask();
+    } else {
+      // If no task is being edited, clear all managers to prevent state leaking
+      this.contactManager.clearAll();
+      this.categoryManager.clearAll();
+      this.subtaskManager.clearAll();
     }
   }
 
@@ -129,70 +135,34 @@ export class AddTaskComponent implements OnInit {
    * @param task - The task object containing the data to populate the form with.
    */
   async populateFormWithTaskData(task: any) {
-    this.setFormBasicFields(task);
-    this.setFormDate(task);
-    this.setPriorityAndCategory(task);
-    this.setAssignedContacts(task);
-    await this.loadSubtasksIfNeeded(task);
-  }
-
-  /**
-   * Sets the basic fields of the form using the provided task data.
-   * @param task - The task object containing title, description, and status.
-   */
-  private setFormBasicFields(task: any) {
     this.formData.title = task.title || '';
     this.formData.description = task.description || '';
     this.originalTaskStatus = task.status || 'to-do';
-  }
-
-  /**
-   * Sets the due date field of the form using the provided task data.
-   * @param task - The task object containing the date.
-   */
-  private setFormDate(task: any) {
     if (task.date) {
       let dateValue: Date;
-      if (task.date.toDate) dateValue = task.date.toDate();
-      else if (task.date instanceof Date) dateValue = task.date;
-      else dateValue = new Date(task.date);
+      if (task.date.toDate) {
+        dateValue = task.date.toDate();
+      } else if (task.date instanceof Date) {
+        dateValue = task.date;
+      } else {
+        dateValue = new Date(task.date);
+      }
       this.formData.dueDate = dateValue.toISOString().split('T')[0];
     }
-  }
-
-  /**
-   * Sets the priority and category fields of the form using the provided task data.
-   * @param task - The task object containing priority and category.
-   */
-  private setPriorityAndCategory(task: any) {
     this.selectedPriority = task.priority || 'medium';
     this.categoryManager.setSelectedCategory(task.category || '');
-  }
-
-  /**
-   * Sets the assigned contacts in the form using the provided task data.
-   * @param task - The task object containing assigned contacts.
-   */
-  private setAssignedContacts(task: any) {
     if (task.assignedTo && task.assignedTo.length > 0) {
-      const selectedContacts = this.contacts.filter((contact) =>
+      const selectedContacts = this.contacts.filter(contact => 
         task.assignedTo.includes(contact.id)
       );
       this.contactManager.setSelectedContacts(selectedContacts);
     }
-  }
-
-  /**
-   * Loads subtasks for the given task if an ID is present.
-   * @param task - The task object containing the ID.
-   */
-  private async loadSubtasksIfNeeded(task: any) {
     if (task.id) {
-      this.taskService.getSubtasks(task.id).subscribe((subtasks) => {
+      this.taskService.getSubtasks(task.id).subscribe(subtasks => {
         const mappedSubtasks = subtasks.map((subtask) => ({
           id: subtask.id || '',
           text: subtask.title,
-          completed: subtask.isCompleted,
+          completed: subtask.isCompleted
         }));
         this.subtaskManager.setSubtasks(mappedSubtasks);
         this.originalSubtasks = [...mappedSubtasks];
@@ -253,7 +223,7 @@ export class AddTaskComponent implements OnInit {
     this.formData = {
       title: '',
       description: '',
-      dueDate: '',
+      dueDate: ''
     };
     this.selectedPriority = 'medium';
     this.contactManager.clearAll();
@@ -275,26 +245,10 @@ export class AddTaskComponent implements OnInit {
    * @param event - The form submission event.
    */
   async createTask(event: Event) {
-    event.preventDefault();
-    this.resetErrorStates();
-    if (this.hasFormErrors()) return;
-    await this.handleTaskCreation();
-  }
-
-  /**
-   * Resets all error state flags for the form.
-   */
-  private resetErrorStates() {
+    event.preventDefault(); 
     this.showTitleError = false;
     this.showCategoryError = false;
     this.showDateError = false;
-  }
-
-  /**
-   * Checks the form for validation errors.
-   * @returns True if there are errors, otherwise false.
-   */
-  private hasFormErrors(): boolean {
     let hasErrors = false;
     if (!this.formData.title.trim()) {
       this.showTitleError = true;
@@ -308,17 +262,23 @@ export class AddTaskComponent implements OnInit {
       this.showDateError = true;
       hasErrors = true;
     }
-    return hasErrors;
-  }
+    if (hasErrors) {
+      return;
+    }
 
-  /**
-   * Handles the creation or update of a task, including showing success and error handling.
-   */
-  private async handleTaskCreation() {
     this.isCreatingTask = true;
     try {
-      await this.saveTask();
-      this.showSuccessAndNavigate();
+      if (this.isEditingMode && this.editingTaskId) {
+        await this.updateTask();
+      } else {
+        await this.addNewTask();
+      }
+      this.taskAdded.emit('added');
+      this.showSuccessMessage = true;
+      setTimeout(() => {
+        this.clearForm();
+        this.router.navigate(['/board']);
+      }, 2000);
     } catch (error) {
       console.error('Fehler beim Erstellen/Bearbeiten der Task:', error);
     } finally {
@@ -327,79 +287,32 @@ export class AddTaskComponent implements OnInit {
   }
 
   /**
-   * Saves the current task, either by updating or adding a new one.
-   */
-  private async saveTask() {
-    if (this.isEditingMode && this.editingTaskId) {
-      await this.updateTask();
-    } else {
-      await this.addNewTask();
-    }
-    this.taskAdded.emit('added');
-  }
-
-  /**
-   * Shows a success message and navigates to the board after a short delay.
-   */
-  private showSuccessAndNavigate() {
-    this.showSuccessMessage = true;
-    setTimeout(() => {
-      this.clearForm();
-      this.router.navigate(['/board']);
-    }, 2000);
-  }
-
-  /**
    * Adds a new task to the system.
    */
   async addNewTask() {
-    this.setDefaultStatusIfNeeded();
-    const newTask = this.buildNewTask();
-    const savedTask = await this.taskService.addTask(newTask);
-    await this.saveSubtasksForNewTask(savedTask);
-  }
-
-  /**
-   * Sets the default status if none is provided.
-   */
-  private setDefaultStatusIfNeeded() {
-    if (!this.defaultStatus) {
+    if(!this.defaultStatus){
       this.defaultStatus = 'to-do';
-    }
-  }
-
-  /**
-   * Builds a new Task object from the current form data.
-   * @returns The constructed Task object.
-   */
-  private buildNewTask(): Task {
+    } 
     const selectedContacts = this.contactManager.getSelectedContacts();
-    return {
+    // Remove duplicates from assignedTo array
+    const uniqueContactIds = [...new Set(selectedContacts.map(contact => contact.id).filter(id => id !== undefined))] as string[];
+    
+    const newTask: Task = {
       title: this.formData.title.trim(),
       description: this.formData.description?.trim() || '',
       date: new Date(this.formData.dueDate),
       priority: this.selectedPriority as 'low' | 'medium' | 'urgent',
       status: this.defaultStatus,
-      assignedTo: selectedContacts
-        .map((contact) => contact.id)
-        .filter((id) => id !== undefined) as string[],
-      category: this.categoryManager.getSelectedCategory() as
-        | 'technical'
-        | 'user story',
+      assignedTo: uniqueContactIds,
+      category: this.categoryManager.getSelectedCategory() as 'technical' | 'user story'
     };
-  }
-
-  /**
-   * Saves all subtasks for a newly created task.
-   * @param savedTask - The newly created task object.
-   */
-  private async saveSubtasksForNewTask(savedTask: Task | null | undefined) {
+    const savedTask = await this.taskService.addTask(newTask);
     const subtasks = this.subtaskManager.getSubtasks();
     if (savedTask && subtasks.length > 0 && savedTask.id) {
       for (const subtask of subtasks) {
         await this.taskService.addSubtask(savedTask.id, {
           title: subtask.text,
-          isCompleted: subtask.completed,
+          isCompleted: subtask.completed
         });
       }
     }
@@ -410,79 +323,48 @@ export class AddTaskComponent implements OnInit {
    */
   async updateTask() {
     if (!this.editingTaskId) return;
-    const updatedTask = this.buildUpdatedTask();
-    await this.taskService.updateTask(this.editingTaskId, updatedTask);
-    await this.handleSubtasksUpdate();
-  }
-
-  /**
-   * Builds an updated Task object from the current form data.
-   * @returns The constructed Task object.
-   */
-  private buildUpdatedTask(): Task {
     const selectedContacts = this.contactManager.getSelectedContacts();
-    return {
-      id: this.editingTaskId!,
+    // Remove duplicates from assignedTo array
+    const uniqueContactIds = [...new Set(selectedContacts.map(contact => contact.id).filter(id => id !== undefined))] as string[];
+    
+    const updatedTask: Task = {
+      id: this.editingTaskId,
       title: this.formData.title.trim(),
       description: this.formData.description?.trim() || '',
       date: new Date(this.formData.dueDate),
       priority: this.selectedPriority as 'low' | 'medium' | 'urgent',
       status: this.originalTaskStatus,
-      assignedTo: selectedContacts
-        .map((contact) => contact.id)
-        .filter((id) => id !== undefined) as string[],
-      category: this.categoryManager.getSelectedCategory() as
-        | 'technical'
-        | 'user story',
+      assignedTo: uniqueContactIds,
+      category: this.categoryManager.getSelectedCategory() as 'technical' | 'user story'
     };
-  }
-
-  /**
-   * Handles updating subtasks for an edited task.
-   */
-  private async handleSubtasksUpdate() {
-    if (!this.editingTaskId) return;
-    await this.deleteRemovedSubtasks();
-    await this.updateOrAddSubtasks();
-  }
-
-  /**
-   * Deletes subtasks that have been removed from the original list.
-   */
-  private async deleteRemovedSubtasks() {
-    const currentSubtasks = this.subtaskManager.getSubtasks();
-    const deletedSubtasks = this.originalSubtasks.filter(
-      (original) =>
-        typeof original.id === 'string' &&
+    await this.taskService.updateTask(this.editingTaskId, updatedTask);
+    if (this.editingTaskId) {
+      const currentSubtasks = this.subtaskManager.getSubtasks();
+      const deletedSubtasks = this.originalSubtasks.filter(original => 
+        typeof original.id === 'string' && 
         original.id.length > 0 &&
-        !currentSubtasks.some((current) => current.id === original.id)
-    );
-    for (const deletedSubtask of deletedSubtasks) {
-      if (typeof deletedSubtask.id === 'string') {
-        await this.taskService.deleteSubtask(
-          this.editingTaskId!,
-          deletedSubtask.id
-        );
+        !currentSubtasks.some(current => current.id === original.id)
+      );
+      for (const deletedSubtask of deletedSubtasks) {
+        if (typeof deletedSubtask.id === 'string') {
+          await this.taskService.deleteSubtask(this.editingTaskId, deletedSubtask.id);
+        }
       }
-    }
-  }
-
-  /**
-   * Updates existing subtasks or adds new ones for the current task.
-   */
-  private async updateOrAddSubtasks() {
-    const currentSubtasks = this.subtaskManager.getSubtasks();
-    for (const subtask of currentSubtasks) {
-      if (typeof subtask.id === 'string' && subtask.id.length > 0) {
-        await this.taskService.updateSubtask(this.editingTaskId!, subtask.id, {
-          title: subtask.text,
-          isCompleted: subtask.completed,
-        });
-      } else {
-        await this.taskService.addSubtask(this.editingTaskId!, {
-          title: subtask.text,
-          isCompleted: subtask.completed,
-        });
+      for (const subtask of currentSubtasks) {
+        if (typeof subtask.id === 'string' && subtask.id.length > 0) {
+          await this.taskService.updateSubtask(
+            this.editingTaskId,
+            subtask.id,
+            {
+              title: subtask.text,
+              isCompleted: subtask.completed
+            });
+        } else {
+          await this.taskService.addSubtask(this.editingTaskId, {
+            title: subtask.text,
+            isCompleted: subtask.completed
+          });
+        }
       }
     }
   }
@@ -525,8 +407,10 @@ export class AddTaskComponent implements OnInit {
 
   /**
    * Closes the overlay mode by emitting the close event.
+   * Also clears form data to prevent state leaking.
    */
   closeOverlayMode() {
+    this.clearForm();
     this.closeOverlay.emit();
   }
 }
