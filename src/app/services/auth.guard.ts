@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AuthService } from './auth.service';
+import { Observable, combineLatest, map, filter, take } from 'rxjs';
 
 /**
  * Route guard that prevents access to certain routes
@@ -24,15 +25,25 @@ export class AuthGuard implements CanActivate {
   /**
    * Determines whether a route can be activated.
    * If the user is not authenticated, redirects to the login page.
+   * Waits for Firebase Auth to initialize before making the decision.
    *
-   * @returns True if the user is logged in, otherwise false
+   * @returns Observable<boolean> that resolves to true if user is logged in
    */
-  canActivate(): boolean {
-    if (this.authService.isLoggedIn()) {
-      return true;
-    } else {
-      this.router.navigate(['/login']);
-      return false;
-    }
+  canActivate(): Observable<boolean> {
+    return combineLatest([
+      this.authService.currentUser$,
+      this.authService.authInitialized$
+    ]).pipe(
+      filter(([user, initialized]) => initialized), // Warte bis Auth initialisiert ist
+      take(1), // Nimm nur den ersten Wert nach der Initialisierung
+      map(([user, initialized]) => {
+        if (user) {
+          return true;
+        } else {
+          this.router.navigate(['/login']);
+          return false;
+        }
+      })
+    );
   }
 }
