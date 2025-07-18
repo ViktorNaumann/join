@@ -253,7 +253,6 @@ export class TaskComponent {
    * @returns A comma-separated string of contact names.
    */
   getRemainingContactNames(remainingContacts: Contact[]): string {
-    // Ensure we don't have duplicates in the remaining contacts
     const uniqueRemaining = remainingContacts.filter((contact, index, self) => 
       index === self.findIndex(c => c.id === contact.id)
     );
