@@ -31,7 +31,7 @@ export const appConfig: ApplicationConfig = {
         pointerDirectionChangeThreshold: 5,
         zIndex: 1000,
         scrollSpeed: 30,          
-        scrollProximity: 100,     // Distance to border
+        scrollProximity: 100,
       },
     },
   ],
