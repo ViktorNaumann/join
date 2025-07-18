@@ -153,6 +153,9 @@ export class SummaryComponent implements OnInit {
         tasks,
         'await-feedback'
       );
+      this.nextDeadlineCount = tasks.filter(
+        (t) => t.priority === 'urgent'
+      ).length;
 
       const now = new Date();
       const futureTasks = tasks
@@ -174,12 +177,8 @@ export class SummaryComponent implements OnInit {
         futureTasks.sort((a, b) => a.dateObj!.getTime() - b.dateObj!.getTime());
         const nextDate = futureTasks[0].dateObj!;
         this.nextDeadlineDate = nextDate;
-        this.nextDeadlineCount = futureTasks.filter(
-          (t) => t.dateObj!.getTime() === nextDate.getTime()
-        ).length;
       } else {
         this.nextDeadlineDate = null;
-        this.nextDeadlineCount = 0;
       }
     });
   }
