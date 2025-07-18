@@ -223,12 +223,27 @@ export class TaskComponent {
   async getContactList() {
     this.contactList = [];
     if (this.task?.assignedTo?.length) {
-      for (let contactId of this.task.assignedTo) {
+      const uniqueContactIds = [...new Set(this.task.assignedTo)];
+      for (let contactId of uniqueContactIds) {
         const contact = await this.contactService.getContactById(contactId);
         if (contact) this.contactList.push(contact);
       }
       this.contacts.emit(this.contactList);
     }
+  }
+
+  /**
+   * Returns a unique list of contacts (removes duplicates based on ID)
+   * and limits to first 4 contacts for display.
+   */
+  getUniqueContacts(): Contact[] {
+    if (!this.contactList || this.contactList.length === 0) {
+      return [];
+    }
+    const uniqueContacts = this.contactList.filter((contact, index, self) => 
+      index === self.findIndex(c => c.id === contact.id)
+    );
+    return uniqueContacts.slice(0, 4);
   }
 
   /**
@@ -238,6 +253,10 @@ export class TaskComponent {
    * @returns A comma-separated string of contact names.
    */
   getRemainingContactNames(remainingContacts: Contact[]): string {
-    return remainingContacts.map((contact) => contact.name).join(', ');
+    // Ensure we don't have duplicates in the remaining contacts
+    const uniqueRemaining = remainingContacts.filter((contact, index, self) => 
+      index === self.findIndex(c => c.id === contact.id)
+    );
+    return uniqueRemaining.map((contact) => contact.name).join(', ');
   }
 }

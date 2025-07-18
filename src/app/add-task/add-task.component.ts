@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Output, Input, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, Output, Input, EventEmitter, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ContactService, Contact } from '../services/contact.service';
@@ -28,7 +28,7 @@ import { CategoryManager } from './category-manager';
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
-export class AddTaskComponent implements OnInit {
+export class AddTaskComponent implements OnInit, OnDestroy {
   @Output() taskAdded = new EventEmitter<string>;
   @Output() closeOverlay = new EventEmitter<void>();
   @Input() defaultStatus = '';
@@ -84,6 +84,14 @@ export class AddTaskComponent implements OnInit {
   }
 
   /**
+   * Lifecycle hook that runs when the component is destroyed.
+   * Clears all form data and manager states to prevent state leaking.
+   */
+  ngOnDestroy() {
+    this.clearForm();
+  }
+
+  /**
    * Loads the default status from route query parameters.
    */
   loadStatus() {
@@ -114,6 +122,11 @@ export class AddTaskComponent implements OnInit {
       this.editingTaskId = editingTask.id;
       this.populateFormWithTaskData(editingTask);
       this.taskService.clearEditingTask();
+    } else {
+      // If no task is being edited, clear all managers to prevent state leaking
+      this.contactManager.clearAll();
+      this.categoryManager.clearAll();
+      this.subtaskManager.clearAll();
     }
   }
 
@@ -281,13 +294,16 @@ export class AddTaskComponent implements OnInit {
       this.defaultStatus = 'to-do';
     } 
     const selectedContacts = this.contactManager.getSelectedContacts();
+    // Remove duplicates from assignedTo array
+    const uniqueContactIds = [...new Set(selectedContacts.map(contact => contact.id).filter(id => id !== undefined))] as string[];
+    
     const newTask: Task = {
       title: this.formData.title.trim(),
       description: this.formData.description?.trim() || '',
       date: new Date(this.formData.dueDate),
       priority: this.selectedPriority as 'low' | 'medium' | 'urgent',
       status: this.defaultStatus,
-      assignedTo: selectedContacts.map(contact => contact.id).filter(id => id !== undefined) as string[],
+      assignedTo: uniqueContactIds,
       category: this.categoryManager.getSelectedCategory() as 'technical' | 'user story'
     };
     const savedTask = await this.taskService.addTask(newTask);
@@ -308,6 +324,9 @@ export class AddTaskComponent implements OnInit {
   async updateTask() {
     if (!this.editingTaskId) return;
     const selectedContacts = this.contactManager.getSelectedContacts();
+    // Remove duplicates from assignedTo array
+    const uniqueContactIds = [...new Set(selectedContacts.map(contact => contact.id).filter(id => id !== undefined))] as string[];
+    
     const updatedTask: Task = {
       id: this.editingTaskId,
       title: this.formData.title.trim(),
@@ -315,7 +334,7 @@ export class AddTaskComponent implements OnInit {
       date: new Date(this.formData.dueDate),
       priority: this.selectedPriority as 'low' | 'medium' | 'urgent',
       status: this.originalTaskStatus,
-      assignedTo: selectedContacts.map(contact => contact.id).filter(id => id !== undefined) as string[],
+      assignedTo: uniqueContactIds,
       category: this.categoryManager.getSelectedCategory() as 'technical' | 'user story'
     };
     await this.taskService.updateTask(this.editingTaskId, updatedTask);
@@ -388,8 +407,10 @@ export class AddTaskComponent implements OnInit {
 
   /**
    * Closes the overlay mode by emitting the close event.
+   * Also clears form data to prevent state leaking.
    */
   closeOverlayMode() {
+    this.clearForm();
     this.closeOverlay.emit();
   }
 }
