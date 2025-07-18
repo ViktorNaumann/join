@@ -3,7 +3,7 @@
 .sidebar {
   position: relative;
   width: 232px;
-  height: 100vh;
+  height: 100dvh;
   background-color: #2a3647;
   color: white;
   display: flex;
@@ -91,7 +91,8 @@
     }
   }
 
-  .login-navigation {
+  @media(min-width: 1000px) {
+    .login-navigation {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -115,7 +116,8 @@
       padding: 12px 0;
       cursor: pointer;
       transition: background-color 0.2s ease;
-      width: 232px;
+      height: 48px;
+      width: 200px;
       box-sizing: border-box;
       margin-left: calc((232px - 200px) / 2 * -1);
       padding-left: calc(32px + (232px - 200px) / 2);
@@ -154,8 +156,9 @@
       }
     }
   }
+  }
 
-  .legal-links {
+  .legal-links{
     position: absolute;
     bottom: 32px;
     left: 50%;
@@ -189,7 +192,63 @@
   }
 }
 
-@media (max-width: 1170px) {
+.login-navigation {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  ul {
+    width: 120px;
+    li {
+      width: 100px;
+      padding-right: 0;
+      border-radius: 10px;
+      &:hover {
+        background-color: #2a3d59;
+      }
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        color: #a8a8a8;
+        height: 50px;
+      }
+    }
+  }
+
+  .login-legal-links {
+    display: flex;
+    justify-content: flex-end;
+    font-family: var(--font-primary);
+    flex: 1;
+    gap: 8px;
+    padding: 0 16px 0 0 ;
+    display: flex;
+    a {
+      width: fit-content;
+      color: #a8a8a8;
+      cursor: pointer;
+      padding: 2px 0;
+      font-size: 15px;
+      &:hover {
+          color: #29abe2;
+          font-weight: 700;
+          transform: scale(1.05);
+        }
+    }
+    @media(min-width: 1000px) {
+      display: none;
+    }
+    @media(max-width: 330px) {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+}
+}
+
+@media (max-width: 1170px){
   .sidebar {
     width: 180px;
   }
@@ -233,8 +292,7 @@
       display: none;
     }
 
-    .navigation,
-    .login-navigation {
+    .navigation{
       flex: 1;
       width: 100%;
       display: flex;

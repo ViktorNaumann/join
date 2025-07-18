@@ -221,6 +221,7 @@ export class TaskComponent {
    * and emits the resolved contact list.
    */
   async getContactList() {
+    this.contactList = [];
     if (this.task?.assignedTo?.length) {
       for (let contactId of this.task.assignedTo) {
         const contact = await this.contactService.getContactById(contactId);
