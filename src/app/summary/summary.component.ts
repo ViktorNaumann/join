@@ -145,7 +145,6 @@ export class SummaryComponent implements OnInit {
 
     this.taskService.getTasks().subscribe((tasks: Task[]) => {
       this.taskList = tasks;
-
       this.todoCount = this.countTasksByStatus(tasks, 'to-do');
       this.doneCount = this.countTasksByStatus(tasks, 'done');
       this.inProgressCount = this.countTasksByStatus(tasks, 'in-progress');
@@ -153,6 +152,7 @@ export class SummaryComponent implements OnInit {
         tasks,
         'await-feedback'
       );
+      
       this.nextDeadlineCount = tasks.filter(
         (t) => t.priority === 'urgent'
       ).length;
