@@ -1,5 +1,7 @@
+// Main imports
 @import "./../../styles.scss";
 
+// Variables
 $form-width: 920px;
 $input-width: 440px;
 $border-color: #D1D1D1;
@@ -8,11 +10,13 @@ $form-padding: clamp(20px, calc(2vw + 10px), 40px);
 $mobile-breakpoint: 768px;
 $small-mobile-breakpoint: 480px;
 
-@mixin flex-center { display: flex; justify-content: center; align-items: center; }
-@mixin flex-column { display: flex; flex-direction: column; }
-@mixin flex-between { display: flex; justify-content: space-between; align-items: center; }
-@mixin icon-size($size) { width: $size; height: $size; cursor: pointer; &:hover { opacity: 0.7; } }
+// Import component modules
+@import './mixins';
+@import './form-elements';
+@import './dropdown';
+@import './subtasks';
 
+// Main layout
 .layout-container {
   display: flex;
   flex-direction: column;
@@ -23,84 +27,7 @@ $small-mobile-breakpoint: 480px;
   }
 }
 
-%form-element-base {
-  width: 100%;
-  max-width: $input-width;
-  height: 48px;
-  border: 1px solid $border-color;
-  border-radius: $border-radius;
-  padding: 12px 16px;
-  background-color: var(--background-light);
-  color: var(--text-color-dark);
-  @include inter400-fs16();
-  &::placeholder { color: var(--text-color-medium); }
-}
-
-%dropdown-base {
-  position: relative;
-  @extend %form-element-base;
-  @include flex-between;
-  cursor: pointer;
-  
-  &.open {
-    border-color: var(--accent-primary-color);
-    .dropdown-arrow { transform: rotate(180deg); }
-  }
-  
-  input {
-    border: none;
-    padding: 0;
-    width: 100%;
-    cursor: pointer;
-    background: transparent;
-    @include inter400-fs16();
-    color: var(--text-color-dark);
-    &::placeholder { color: var(--text-color-medium); }
-  }
-}
-
-%dropdown-menu-base {
-  position: absolute;
-  top: 100%;
-  left: -1px;
-  right: -1px;
-  background: var(--background-light);
-  border: 1px solid $border-color;
-  border-radius: 0 0 $border-radius $border-radius;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  max-height: 200px;
-  overflow-y: auto;
-
-  @media (max-width: $small-mobile-breakpoint) {
-    max-height: 150px;
-  }
-
-  &.error {
-    border-color: var(--text-color-error);
-    background-color: rgba(255, 61, 0, 0.1);
-  }
-}
-
-%menu-item-base {
-  display: flex;
-  align-items: center;
-  padding: 12px 16px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  &:hover:not(.selected) { background-color: #f5f5f5; }
-}
-
-%avatar-base {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  @include flex-center;
-  color: white;
-  font-weight: 600;
-  font-size: 14px;
-}
-
+// Header
 .add-task-header {
   width: 100%;
   height: 140px;
@@ -178,8 +105,26 @@ $small-mobile-breakpoint: 480px;
       }
     }
   }
+
+  @media (max-width: 310px) {
+    height: 80px;
+    padding: 0 12px;
+    
+    h1 { font-size: 24px; }
+    
+    .btn-close-overlay {
+      right: 12px;
+      padding: 4px;
+      
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
 }
 
+// Content areas
 .add-task-content { 
   padding: 0 $form-padding;
   display: block;
@@ -199,6 +144,10 @@ $small-mobile-breakpoint: 480px;
   @media (max-width: $small-mobile-breakpoint) {
     padding: 16px;
     padding-bottom: 100px;
+  }
+
+  @media (max-width: 310px) {
+    padding: 12px;
   }
 }
 
@@ -265,533 +214,8 @@ $small-mobile-breakpoint: 480px;
       margin-top: 12px;
     }
   }
-  
-  .form-actions {
-    display: flex;
-    gap: 16px;
-    margin-top: 8px;
-    justify-content: flex-end;
-    
-    @media (max-width: $mobile-breakpoint) {
-      position: fixed !important;
-      bottom: 70px;
-      left: 0;
-      right: 0;
-      width: 100%;
-      background-color: #f6f7f8;
-      padding: 16px 12px;
-      z-index: 100;
-      margin-top: 0;
-      justify-content: space-between;
-      gap: 12px;
-    }
-    
-    .btn-clear { 
-      @include btn(); 
-      @include btn-light(); 
-      width: 110px; 
-      height: 56px; 
-      border-radius: $border-radius; 
-      border: 1px solid #2A3647;
-      transition: box-shadow 0.2s ease;
-      
-      &:hover {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
-      }
-      
-      @media (max-width: $mobile-breakpoint) {
-        flex: 1;
-        max-width: calc(50% - 6px);
-        height: 48px;
-        font-size: 14px;
-      }
-    }
-    
-    .btn-create { 
-      @include btn(); 
-      @include btn-dark(); 
-      width: 183px; 
-      height: 56px; 
-      border-radius: $border-radius;
-      transition: box-shadow 0.2s ease;
-      
-      &:hover {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
-      }
-      
-      @media (max-width: $mobile-breakpoint) {
-        flex: 1;
-        max-width: calc(50% - 6px);
-        height: 48px;
-        font-size: 14px;
-      }
-    }
-  }
 }
 
-.form-group {
-  @include flex-column;
-  gap: 8px;
-  width: 100%;
-  
-  @media (max-width: $mobile-breakpoint) {
-    width: 100%;
-    max-width: 100%;
-  }
-  
-  label {
-    @include inter400-fs20();
-    color: var(--text-color-dark);
-    font-weight: 500;
-    text-align: left;
-    width: 100%;
-    align-self: flex-start;
-    
-    .required { color: var(--text-color-error); margin-left: 2px; }
-  }
-  
-  input, textarea { 
-    @extend %form-element-base;
-    
-    @media (max-width: $mobile-breakpoint) {
-      width: 100%;
-    }
-  }
-  
-  textarea { 
-    min-height: 120px; 
-    height: auto; 
-    resize: vertical; 
-    white-space: normal; 
-    overflow: auto;
-  }
-}
-
-.priority-buttons {
-  display: flex;
-  gap: 8px;
-  width: 100%;
-  
-  @media (max-width: $mobile-breakpoint) {
-    justify-content: space-between;
-    flex-wrap: nowrap;
-  }
-  
-  @media (max-width: $small-mobile-breakpoint) {
-    gap: 8px;
-  }
-  
-  .priority-btn {
-    @include btn();
-    @include btn-light();
-    @include flex-center;
-    gap: 8px;
-    flex: 1;
-    min-width: 0;
-    height: 56px;
-    border-radius: $border-radius;
-    transition: box-shadow 0.2s ease;
-    
-    &:hover:not(.active) {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
-      border-color: inherit !important;
-      color: inherit !important;
-    }
-    
-    @media (max-width: $mobile-breakpoint) {
-      padding: 8px 4px;
-    }
-    
-    @media (max-width: $small-mobile-breakpoint) {
-      font-size: 14px;
-      gap: 4px;
-    }
-
-    &.active {
-      color: var(--text-color-light);
-      border-color: transparent;
-      &.urgent { background-color: #FF3D00; border-color: #FF3D00; }
-      &.medium { background-color: #FFA800; border-color: #FFA800; }
-      &.low { background-color: #7AE229; border-color: #7AE229; }
-      & svg path{
-        fill: var(--background-light)
-      }
-    }
-
-    svg { 
-      width: 20px !important; 
-      height: 20px !important;
-      flex-shrink: 0;
-      
-      @media (max-width: 1220px) {
-        width: 20px !important;
-        height: 20px !important;
-      }
-      
-      @media (max-width: $mobile-breakpoint) {
-        width: 18px !important;
-        height: 18px !important;
-      }
-      
-      @media (max-width: $small-mobile-breakpoint) {
-        width: 16px !important;
-        height: 16px !important;
-      }
-    }
-  }
-}
-
-.dropdown {
-  @extend %dropdown-base;
-  
-  .dropdown-arrow { @include icon-size(8px); height: 5px; transition: transform 0.2s ease; }
-
-  .dropdown-menu {
-    @extend %dropdown-menu-base;
-
-    .contact-item {
-      @extend %menu-item-base;
-      justify-content: space-between;
-
-      &.selected {
-        background-color: #2A3647;
-        color: #ffffff;
-        
-        .contact-info {
-          .contact-name { color: #ffffff; }
-          .contact-avatar { border: 2px solid #FFFFFF; }
-        }
-        
-        .contact-checkbox img { filter: brightness(0) invert(1); }
-        &:hover { background-color: #091931; opacity: 1; }
-      }
-
-      .contact-info {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-
-        .contact-avatar { @extend %avatar-base; }
-        .contact-name { @include inter400-fs16(); color: var(--text-color-dark); }
-      }
-
-      .contact-checkbox img { @include icon-size(16px); }
-    }
-
-    .category-item {
-      @extend %menu-item-base;
-
-      .category-info {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-
-        .category-color { width: 16px; height: 16px; border-radius: 50%; }
-        .category-name { @include inter400-fs16(); color: var(--text-color-dark); }
-      }
-    }
-  }
-}
-
-.subtask-input {
-  @extend %dropdown-base;
-  
-  &.confirmation { border-color: var(--primary-color); }
-  input { &[readonly] { cursor: default; } }
-  
-  .add-icon { @include icon-size(20px); }
-
-  .confirmation-icons {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-
-    .cancel-icon { @include icon-size(24px); }
-    .confirm-icon { @include icon-size(14px); }
-  }
-}
-
-.subtask-input-container {
-  margin-bottom: 1rem;
-  
-  @media (max-width: $mobile-breakpoint) {
-    margin-bottom: 0.5rem;
-  }
-}
-
-.subtask-list-container {
-  max-height: fit-content;
-  
-  @media (max-width: $mobile-breakpoint) {
-    max-height: none;
-    overflow-y: visible;
-  }
-}
-
-.subtasks-list { 
-  @include flex-column; 
-  gap: 8px; 
-  height: 60px;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--background-default-light) white;
-}
-
-.subtask-item-simple {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px 0;
-  transition: all 0.2s ease;
-  
-  .bullet {
-    font-size: 16px;
-    color: var(--text-color-dark);
-    font-weight: bold;
-    min-width: 16px;
-  }
-  
-  .subtask-text-simple {
-    @include inter400-fs16();
-    color: var(--text-color-dark);
-    flex: 1;
-    
-    &.completed {
-      text-decoration: line-through;
-      color: var(--text-color-medium);
-      opacity: 0.7;
-    }
-  }
-  
-  .subtask-display {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-    
-    .subtask-text-simple { flex: 1; }
-  }
-  
-  .subtask-edit {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-    
-    .subtask-edit-input {
-      @include inter400-fs16();
-      flex: 1;
-      padding: 4px 8px;
-      border: 1px solid var(--accent-primary-color);
-      border-radius: 4px;
-      background-color: var(--background-light);
-      color: var(--text-color-dark);
-      
-      &:focus {
-        outline: none;
-        border-color: var(--accent-primary-color);
-        box-shadow: 0 0 0 2px rgba(42, 54, 71, 0.1);
-      }
-    }
-  }
-  
-  .subtask-actions {
-    display: flex;
-    gap: 8px;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    margin-left: auto;
-    
-    .action-icon { 
-      @include icon-size(16px);
-      cursor: pointer;
-      
-      &:hover { opacity: 0.7; }
-    }
-  }
-  
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.02);
-    border-radius: 4px;
-    padding: 4px 4px;
-    
-    .subtask-actions { opacity: 1; }
-  }
-  
-  .subtask-edit .subtask-actions { opacity: 1; }
-}
-
-.selected-contacts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 16px;
-  
-  @media (max-width: $small-mobile-breakpoint) {
-    gap: 6px;
-    margin-top: 12px;
-  }
-  
-  .selected-contact-avatar {
-    @extend %avatar-base;
-    border-radius: 45px;
-    color: #ffffff;
-    font-family: "Inter", sans-serif;
-    font-weight: 400;
-    font-size: 12px;
-    border: 2px solid transparent;
-    transition: border 0.2s ease;
-    cursor: default;
-    
-    @media (max-width: $small-mobile-breakpoint) {
-      width: 28px;
-      height: 28px;
-      font-size: 11px;
-    }
-    
-    &:hover { 
-      transform: scale(1.1); 
-      transition: transform 0.2s ease;
-      
-      @media (max-width: $small-mobile-breakpoint) {
-        transform: scale(1.05);
-      }
-    }
-  }
-}
-
-.error-message {
-  color: #FF4A4A;
-  font-size: 12px;
-  margin-top: 4px;
-  @include inter400-fs16();
-  font-size: 12px;
-}
-
-input.error, textarea.error {
-  border-color: #FF4A4A !important;
-  
-  &:focus {
-    border-color: #FF4A4A !important;
-    box-shadow: 0 0 0 2px rgba(255, 74, 74, 0.1);
-  }
-}
-
-.success-message {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--text-color-light);
-  background-color: var(--background-dark);
-  padding: 20px 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
-  text-align: center;
-  @include inter400-fs20;
-  
-  @media (max-width: $small-mobile-breakpoint) {
-    width: calc(100% - 32px);
-    max-width: 300px;
-    padding: 16px 20px;
-  }
-  
-  .success-content {
-    @include flex-column;
-    gap: 8px;
-    font-size: 18px;
-    font-weight: 600;
-    @include inter400-fs20;
-    
-    span:first-child {
-      @include inter400-fs20;
-      @media (max-width: $small-mobile-breakpoint) {
-        font-size: 16px;
-      }
-    }
-    
-    .redirect-text {
-      font-size: 14px;
-      opacity: 0.9;
-      
-      @media (max-width: $small-mobile-breakpoint) {
-        font-size: 12px;
-      }
-    }
-  }
-}
-
-.subtask-checkbox-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  min-width: 24px;
-  margin-right: 4px;
-}
-
-.subtask-checkbox {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-.checkbox-label {
-  cursor: pointer;
-  width: 24px;
-  height: 24px;
-  background-image: url('./../../../public//assets/img/icons/checkbox.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  display: block;
-  transition: all 0.2s ease;
-}
-
-.subtask-checkbox:checked + .checkbox-label {
-  background-image: url('./../../../public//assets/img/icons/checkbox-checked.png');
-}
-
-@media (max-width: 310px) {
-  .add-task-header {
-    height: 80px;
-    padding: 0 12px;
-    
-    h1 { font-size: 24px; }
-    
-    .btn-close-overlay {
-      right: 12px;
-      padding: 4px;
-      
-      svg {
-        width: 16px;
-        height: 16px;
-      }
-    }
-  }
-  
-  .add-task-content { padding: 12px; }
-  
-  .form-group {
-    gap: 6px;
-    label { font-size: 16px; }
-  }
-  
-  .priority-buttons { gap: 4px; }
-  
-  .priority-btn {
-    height: 48px !important;
-    font-size: 12px;
-    padding: 4px 2px !important;
-    
-    svg {
-      width: 14px !important;
-      height: 14px !important;
-    }
-  }
-}
 
 
 

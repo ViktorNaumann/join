@@ -1,0 +1,137 @@
+// Dropdown Styles
+%dropdown-base {
+  position: relative;
+  @extend %form-element-base;
+  @include flex-between;
+  cursor: pointer;
+  
+  &.open {
+    border-color: var(--accent-primary-color);
+    .dropdown-arrow { transform: rotate(180deg); }
+  }
+  
+  input {
+    border: none;
+    padding: 0;
+    width: 100%;
+    cursor: pointer;
+    background: transparent;
+    @include inter400-fs16();
+    color: var(--text-color-dark);
+    &::placeholder { color: var(--text-color-medium); }
+  }
+}
+
+%dropdown-menu-base {
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  right: -1px;
+  background: var(--background-light);
+  border: 1px solid $border-color;
+  border-radius: 0 0 $border-radius $border-radius;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+
+  @media (max-width: $small-mobile-breakpoint) {
+    max-height: 150px;
+  }
+
+  &.error {
+    border-color: var(--text-color-error);
+    background-color: rgba(255, 61, 0, 0.1);
+  }
+}
+
+.dropdown {
+  @extend %dropdown-base;
+  
+  .dropdown-arrow { @include icon-size(8px); height: 5px; transition: transform 0.2s ease; }
+
+  .dropdown-menu {
+    @extend %dropdown-menu-base;
+
+    .contact-item {
+      @extend %menu-item-base;
+      justify-content: space-between;
+
+      &.selected {
+        background-color: #2A3647;
+        color: #ffffff;
+        
+        .contact-info {
+          .contact-name { color: #ffffff; }
+          .contact-avatar { border: 2px solid #FFFFFF; }
+        }
+        
+        .contact-checkbox img { filter: brightness(0) invert(1); }
+        &:hover { background-color: #091931; opacity: 1; }
+      }
+
+      .contact-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .contact-avatar { @extend %avatar-base; }
+        .contact-name { @include inter400-fs16(); color: var(--text-color-dark); }
+      }
+
+      .contact-checkbox img { @include icon-size(16px); }
+    }
+
+    .category-item {
+      @extend %menu-item-base;
+
+      .category-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .category-color { width: 16px; height: 16px; border-radius: 50%; }
+        .category-name { @include inter400-fs16(); color: var(--text-color-dark); }
+      }
+    }
+  }
+}
+
+.selected-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+  
+  @media (max-width: $small-mobile-breakpoint) {
+    gap: 6px;
+    margin-top: 12px;
+  }
+  
+  .selected-contact-avatar {
+    @extend %avatar-base;
+    border-radius: 45px;
+    color: #ffffff;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    border: 2px solid transparent;
+    transition: border 0.2s ease;
+    cursor: default;
+    
+    @media (max-width: $small-mobile-breakpoint) {
+      width: 28px;
+      height: 28px;
+      font-size: 11px;
+    }
+    
+    &:hover { 
+      transform: scale(1.1); 
+      transition: transform 0.2s ease;
+
+      @media (max-width: $small-mobile-breakpoint) {
+        transform: scale(1.05);
+      }
+    }
+  }
+}

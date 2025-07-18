@@ -1,0 +1,37 @@
+// Mixins and Placeholders for Add Task Component
+@mixin flex-center { display: flex; justify-content: center; align-items: center; }
+@mixin flex-column { display: flex; flex-direction: column; }
+@mixin flex-between { display: flex; justify-content: space-between; align-items: center; }
+@mixin icon-size($size) { width: $size; height: $size; cursor: pointer; &:hover { opacity: 0.7; } }
+
+%form-element-base {
+  width: 100%;
+  max-width: $input-width;
+  height: 48px;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  padding: 12px 16px;
+  background-color: var(--background-light);
+  color: var(--text-color-dark);
+  @include inter400-fs16();
+  &::placeholder { color: var(--text-color-medium); }
+}
+
+%avatar-base {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  @include flex-center;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+%menu-item-base {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  &:hover:not(.selected) { background-color: #f5f5f5; }
+}
