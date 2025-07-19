@@ -14,9 +14,9 @@ export interface Category {
   providedIn: 'root'
 })
 export class CategoryManager {
+  showCategoryError: boolean = false;
   private selectedCategory: string = '';
   private showCategoryDropdown: boolean = false;
-  
   private categories: Category[] = [
     { value: 'technical', label: 'Technical Task', color: '#1FD7C1' },
     { value: 'user story', label: 'User Story', color: '#0038FF' }
@@ -111,5 +111,14 @@ export class CategoryManager {
   clearAll(): void {
     this.selectedCategory = '';
     this.showCategoryDropdown = false;
+  }
+
+   /**
+   * Handles category selection and clears error state.
+   */
+  onCategorySelect() {
+    if (this.hasSelectedCategory()) {
+      this.showCategoryError = false;
+    }
   }
 }

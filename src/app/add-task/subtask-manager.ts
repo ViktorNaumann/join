@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TaskService, Task } from '../services/task.service';
 
 export interface Subtask {
   id: string | number;
@@ -20,6 +21,9 @@ export class SubtaskManager {
   private editingSubtaskText: string = '';
   private subtaskInput: string = '';
   private showSubtaskConfirmation: boolean = false;
+  originalSubtasks: Subtask[] = [];
+
+  constructor( private taskService: TaskService ){}
 
   /**
    * Gets all subtasks
@@ -236,4 +240,85 @@ export class SubtaskManager {
     this.editingSubtaskText = '';
     this.showSubtaskConfirmation = false;
   }
+
+  /**
+   * Saves all given subtasks to the task with the specified ID.
+   * 
+   * @param taskId - The ID of the task to add subtasks to.
+   * @param subtasks - The list of subtasks to be saved.
+   */
+  public async saveAllSubtasks(taskId: string, subtasks: any[]): Promise<void> {
+    for (const subtask of subtasks) {
+      await this.taskService.addSubtask(taskId, {
+        title: subtask.text,
+        isCompleted: subtask.completed
+      });
+    }
+  }
+
+  /**
+   * Returns a list of original subtasks that have been deleted.
+   * 
+   * @param currentSubtasks - The current list of subtasks in the form.
+   */
+  public getDeletedSubtasks(currentSubtasks: any[]): any[] {
+    return this.originalSubtasks.filter(original =>
+      typeof original.id === 'string' &&
+      original.id.length > 0 &&
+      !currentSubtasks.some(current => current.id === original.id)
+    );
+  }
+
+  /**
+   * Deletes the given subtasks from the specified task.
+   * 
+   * @param taskId - The ID of the task.
+   * @param subtasks - The subtasks to delete.
+   */
+  public async deleteSubtasks(taskId: string, subtasks: any[]): Promise<void> {
+    for (const subtask of subtasks) {
+      if (typeof subtask.id === 'string') {
+        await this.taskService.deleteSubtask(taskId, subtask.id);
+      }
+    }
+  }
+
+  /**
+   * Syncs all current subtasks (add or update) with the backend.
+   * 
+   * @param taskId - The ID of the task to sync with.
+   * @param subtasks - The current list of subtasks in the form.
+   */
+  public async syncSubtasks(taskId: string, subtasks: any[]): Promise<void> {
+    for (const subtask of subtasks) {
+      const subtaskData = {
+        title: subtask.text,
+        isCompleted: subtask.completed
+      };
+
+      if (typeof subtask.id === 'string' && subtask.id.length > 0) {
+        await this.taskService.updateSubtask(taskId, subtask.id, subtaskData);
+      } else {
+        await this.taskService.addSubtask(taskId, subtaskData);
+      }
+    }
+  }
+
+   /**
+   * Loads subtasks for the given task ID and sets them in the subtask manager.
+   *
+   * @param taskId - The ID of the task whose subtasks should be loaded.
+   */
+  public loadAndSetSubtasks(taskId: string): void {
+    this.taskService.getSubtasks(taskId).subscribe(subtasks => {
+      const mappedSubtasks = subtasks.map(subtask => ({
+        id: subtask.id || '',
+        text: subtask.title,
+        completed: subtask.isCompleted,
+      }));
+      this.setSubtasks(mappedSubtasks);
+      this.originalSubtasks = [...mappedSubtasks];
+    });
+  }
+
 }

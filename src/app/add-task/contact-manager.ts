@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Contact, ContactService } from '../services/contact.service';
+import { EditTask } from './edit-task';
+import { AddTaskComponent } from './add-task.component';
+import { CategoryManager } from './category-manager';
 
 /**
  * ContactManager handles all contact-related operations for the AddTaskComponent.
@@ -12,8 +15,22 @@ export class ContactManager {
   private selectedContacts: Contact[] = [];
   private showContactDropdown: boolean = false;
 
-  constructor(private contactService: ContactService) {}
+  constructor(
+    private contactService: ContactService,
+    public editTaskManager: EditTask,
+    public addTaskManager: AddTaskComponent,
+    public categoryManager: CategoryManager
+  ) {}
 
+    /**
+   * Loads all contacts from the ContactService and then loads any task being edited.
+   */
+  loadContacts() {
+    this.contactService.getContacts().subscribe(contacts => {
+      this.addTaskManager.contacts = contacts;
+      this.editTaskManager.loadEditingTask();
+    });
+  }
   /**
    * Gets all selected contacts
    */
@@ -48,7 +65,7 @@ export class ContactManager {
   /**
    * Toggles the contact dropdown visibility.
    */
-  toggleContactDropdown(): void {
+  toggleDropdown(): void {
     this.showContactDropdown = !this.showContactDropdown;
   }
 

@@ -7,12 +7,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { SubtaskManager, Subtask } from './subtask-manager';
 import { ContactManager } from './contact-manager';
 import { CategoryManager } from './category-manager';
+import { PriorityManager } from './priority-manager';
+import { EditTask } from './edit-task';
 
 /**
  * AddTaskComponent provides a comprehensive form for creating and editing tasks.
- * It supports task creation with priority, category, assigned contacts, due dates,
- * and subtasks. The component can operate in both standalone mode and overlay mode,
- * and handles both creating new tasks and editing existing ones.
+ * It supports task creation with priority, category, assigned contacts, due dates and subtasks.
+ * The component can operate in both standalone mode and overlay mode, and handles both creating new tasks and editing existing ones.
  *
  * @example
  * <app-add-task 
@@ -34,19 +35,13 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   @Input() defaultStatus = '';
   @Input() isOverlayMode = false;
 
-  selectedPriority: string = 'medium';
   contacts: Contact[] = [];
   subtaskInputFocused = false;
   isCreatingTask: boolean = false;
   showTitleError: boolean = false;
-  showCategoryError: boolean = false;
   showDateError: boolean = false;
   showSuccessMessage: boolean = false;
-
-  isEditingMode: boolean = false;
-  editingTaskId: string | undefined;
   originalTaskStatus: 'to-do' | 'in-progress' | 'await-feedback' | 'done' = 'to-do';
-  originalSubtasks: Subtask[] = [];
 
   formData = {
     title: '',
@@ -71,7 +66,9 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public subtaskManager: SubtaskManager,
     public contactManager: ContactManager,
-    public categoryManager: CategoryManager
+    public categoryManager: CategoryManager,
+    public priorityManager: PriorityManager,
+    public editTaskManager: EditTask
   ) { }
 
   /**
@@ -79,8 +76,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.loadStatus();
-    this.loadContacts();
-
+    this.contactManager.loadContacts();
   }
 
   /**
@@ -103,37 +99,10 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Loads all contacts from the ContactService and then loads any task being edited.
-   */
-  loadContacts() {
-    this.contactService.getContacts().subscribe(contacts => {
-      this.contacts = contacts;
-      this.loadEditingTask();
-    });
-  }
-
-  /**
-  * Loads a task currently being edited from the TaskService and
-  * populates the form with its data. Clears managers if no task is loaded.
-  */
-  loadEditingTask(): void {
-    const editingTask = this.taskService.getEditingTask();
-
-    if (editingTask) {
-      this.isEditingMode = true;
-      this.editingTaskId = editingTask.id;
-      this.populateFormWithTaskData(editingTask);
-      this.taskService.clearEditingTask();
-    } else {
-      this.clearAllManagers();
-    }
-  }
-
-  /**
    * Clears all internal managers (contact, category, subtask)
    * to prevent leaking state between tasks.
    */
-  private clearAllManagers(): void {
+  public clearAllManagers(): void {
     this.contactManager.clearAll();
     this.categoryManager.clearAll();
     this.subtaskManager.clearAll();
@@ -147,11 +116,10 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   async populateFormWithTaskData(task: any): Promise<void> {
     this.setBasicFormData(task);
     this.setDueDate(task.date);
-    this.setPriorityAndCategory(task);
+    this.priorityManager.setPriorityAndCategory(task);
     this.setAssignedContacts(task.assignedTo);
-
     if (task.id) {
-      this.loadAndSetSubtasks(task.id);
+      this.subtaskManager.loadAndSetSubtasks(task.id);
     }
   }
 
@@ -173,7 +141,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   private setDueDate(date: any): void {
     if (!date) return;
-
     let dateValue: Date;
     if (date.toDate) {
       dateValue = date.toDate();
@@ -182,18 +149,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     } else {
       dateValue = new Date(date);
     }
-
     this.formData.dueDate = dateValue.toISOString().split('T')[0];
-  }
-
-  /**
-   * Sets the selected priority and category in their respective managers.
-   *
-   * @param task - The task object.
-   */
-  private setPriorityAndCategory(task: any): void {
-    this.selectedPriority = task.priority || 'medium';
-    this.categoryManager.setSelectedCategory(task.category || '');
   }
 
   /**
@@ -203,32 +159,11 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   private setAssignedContacts(assignedToIds: string[]): void {
     if (!assignedToIds || assignedToIds.length === 0) return;
-
     const selectedContacts = this.contacts
       .filter(contact => contact.id !== undefined)
       .filter(contact => assignedToIds.includes(contact.id as string));
-
     this.contactManager.setSelectedContacts(selectedContacts);
   }
-
-  /**
-   * Loads subtasks for the given task ID and sets them in the subtask manager.
-   *
-   * @param taskId - The ID of the task whose subtasks should be loaded.
-   */
-  private loadAndSetSubtasks(taskId: string): void {
-    this.taskService.getSubtasks(taskId).subscribe(subtasks => {
-      const mappedSubtasks = subtasks.map(subtask => ({
-        id: subtask.id || '',
-        text: subtask.title,
-        completed: subtask.isCompleted,
-      }));
-
-      this.subtaskManager.setSubtasks(mappedSubtasks);
-      this.originalSubtasks = [...mappedSubtasks];
-    });
-  }
-
 
   /**
    * Handles clicks outside of dropdowns to close them.
@@ -244,18 +179,10 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Sets the task priority.
-   * @param priority - The priority level to set ('low', 'medium', 'urgent').
-   */
-  setPriority(priority: string) {
-    this.selectedPriority = priority;
-  }
-
-  /**
    * Toggles the contact dropdown visibility.
    */
   toggleContactDropdown() {
-    this.contactManager.toggleContactDropdown();
+    this.contactManager.toggleDropdown();
     this.categoryManager.setShowCategoryDropdown(false);
   }
 
@@ -273,7 +200,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   selectCategory(category: any) {
     this.categoryManager.selectCategory(category);
-    this.onCategorySelect();
+    this.categoryManager.onCategorySelect();
   }
 
   /**
@@ -294,11 +221,8 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   async createTask(event: Event): Promise<void> {
     event.preventDefault();
     this.resetValidationErrors();
-
     if (this.formHasErrors()) return;
-
     this.setCreatingState(true);
-
     try {
       await this.saveTaskWithSuccessFeedback();
     } catch (error) {
@@ -315,7 +239,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     await this.saveTask();
     this.taskAdded.emit('added');
     this.showSuccessMessage = true;
-
     setTimeout(() => {
       this.clearFormAndNavigate();
     }, 2000);
@@ -356,7 +279,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
       description: '',
       dueDate: ''
     };
-    this.selectedPriority = 'medium';
+    this.priorityManager.selectedPriority = 'medium';
   }
 
   /**
@@ -364,10 +287,10 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   private resetStateFlags(): void {
     this.isCreatingTask = false;
-    this.isEditingMode = false;
-    this.editingTaskId = undefined;
+    this.editTaskManager.isEditingMode = false;
+    this.editTaskManager.editingTaskId = undefined;
     this.originalTaskStatus = 'to-do';
-    this.originalSubtasks = [];
+    this.subtaskManager.originalSubtasks = [];
     this.showSuccessMessage = false;
     this.resetValidationErrors();
   }
@@ -386,7 +309,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   private resetValidationErrors(): void {
     this.showTitleError = false;
-    this.showCategoryError = false;
+    this.categoryManager.showCategoryError = false;
     this.showDateError = false;
   }
 
@@ -399,7 +322,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     const titleError = this.validateTitle();
     const categoryError = this.validateCategory();
     const dateError = this.validateDueDate();
-
     return titleError || categoryError || dateError;
   }
 
@@ -421,7 +343,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   private validateCategory(): boolean {
     const isInvalid = !this.categoryManager.hasSelectedCategory();
-    this.showCategoryError = isInvalid;
+    this.categoryManager.showCategoryError = isInvalid;
     return isInvalid;
   }
 
@@ -441,7 +363,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    * Creates or updates the task depending on the mode.
    */
   private async saveTask(): Promise<void> {
-    if (this.isEditingMode && this.editingTaskId) {
+    if (this.editTaskManager.isEditingMode && this.editTaskManager.editingTaskId) {
       await this.updateTask();
     } else {
       await this.addNewTask();
@@ -453,29 +375,22 @@ export class AddTaskComponent implements OnInit, OnDestroy {
  */
   async addNewTask(): Promise<void> {
     this.ensureDefaultStatus();
-
     const newTask: Task = this.buildTask(this.defaultStatus);
     const savedTask = await this.taskService.addTask(newTask);
-
-    if (savedTask?.id) {
-      await this.saveAllSubtasks(savedTask.id, this.subtaskManager.getSubtasks());
-    }
+    if (savedTask?.id) { await this.subtaskManager.saveAllSubtasks(savedTask.id, this.subtaskManager.getSubtasks()) }
   }
 
   /**
    * Updates an existing task and its subtasks.
    */
   async updateTask(): Promise<void> {
-    if (!this.editingTaskId) return;
-
-    const updatedTask: Task = this.buildTask(this.originalTaskStatus, this.editingTaskId);
-    await this.taskService.updateTask(this.editingTaskId, updatedTask);
-
+    if (!this.editTaskManager.editingTaskId) return;
+    const updatedTask: Task = this.buildTask(this.originalTaskStatus, this.editTaskManager.editingTaskId);
+    await this.taskService.updateTask(this.editTaskManager.editingTaskId, updatedTask);
     const currentSubtasks = this.subtaskManager.getSubtasks();
-    const deleted = this.getDeletedSubtasks(currentSubtasks);
-
-    await this.deleteSubtasks(this.editingTaskId, deleted);
-    await this.syncSubtasks(this.editingTaskId, currentSubtasks);
+    const deleted = this.subtaskManager.getDeletedSubtasks(currentSubtasks);
+    await this.subtaskManager.deleteSubtasks(this.editTaskManager.editingTaskId, deleted);
+    await this.subtaskManager.syncSubtasks(this.editTaskManager.editingTaskId, currentSubtasks);
   }
 
   /**
@@ -496,13 +411,12 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   private buildTask(status: string, id?: string): Task {
     const uniqueContactIds = this.getUniqueAssignedContactIds();
-
     return {
       id,
       title: this.formData.title.trim(),
       description: this.formData.description?.trim() || '',
       date: new Date(this.formData.dueDate),
-      priority: this.selectedPriority as 'low' | 'medium' | 'urgent',
+      priority: this.priorityManager.selectedPriority as 'low' | 'medium' | 'urgent',
       status,
       assignedTo: uniqueContactIds,
       category: this.categoryManager.getSelectedCategory() as 'technical' | 'user story'
@@ -518,83 +432,11 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Saves all given subtasks to the task with the specified ID.
-   * 
-   * @param taskId - The ID of the task to add subtasks to.
-   * @param subtasks - The list of subtasks to be saved.
-   */
-  private async saveAllSubtasks(taskId: string, subtasks: any[]): Promise<void> {
-    for (const subtask of subtasks) {
-      await this.taskService.addSubtask(taskId, {
-        title: subtask.text,
-        isCompleted: subtask.completed
-      });
-    }
-  }
-
-  /**
-   * Returns a list of original subtasks that have been deleted.
-   * 
-   * @param currentSubtasks - The current list of subtasks in the form.
-   */
-  private getDeletedSubtasks(currentSubtasks: any[]): any[] {
-    return this.originalSubtasks.filter(original =>
-      typeof original.id === 'string' &&
-      original.id.length > 0 &&
-      !currentSubtasks.some(current => current.id === original.id)
-    );
-  }
-
-  /**
-   * Deletes the given subtasks from the specified task.
-   * 
-   * @param taskId - The ID of the task.
-   * @param subtasks - The subtasks to delete.
-   */
-  private async deleteSubtasks(taskId: string, subtasks: any[]): Promise<void> {
-    for (const subtask of subtasks) {
-      if (typeof subtask.id === 'string') {
-        await this.taskService.deleteSubtask(taskId, subtask.id);
-      }
-    }
-  }
-
-  /**
-   * Syncs all current subtasks (add or update) with the backend.
-   * 
-   * @param taskId - The ID of the task to sync with.
-   * @param subtasks - The current list of subtasks in the form.
-   */
-  private async syncSubtasks(taskId: string, subtasks: any[]): Promise<void> {
-    for (const subtask of subtasks) {
-      const subtaskData = {
-        title: subtask.text,
-        isCompleted: subtask.completed
-      };
-
-      if (typeof subtask.id === 'string' && subtask.id.length > 0) {
-        await this.taskService.updateSubtask(taskId, subtask.id, subtaskData);
-      } else {
-        await this.taskService.addSubtask(taskId, subtaskData);
-      }
-    }
-  }
-
-  /**
    * Handles title input changes and clears error state.
    */
   onTitleInput() {
     if (this.formData.title.trim()) {
       this.showTitleError = false;
-    }
-  }
-
-  /**
-   * Handles category selection and clears error state.
-   */
-  onCategorySelect() {
-    if (this.categoryManager.hasSelectedCategory()) {
-      this.showCategoryError = false;
     }
   }
 
