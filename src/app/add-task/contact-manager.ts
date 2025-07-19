@@ -25,7 +25,10 @@ export class ContactManager {
    * Sets the selected contacts array
    */
   setSelectedContacts(contacts: Contact[]): void {
-    this.selectedContacts = contacts;
+    const uniqueContacts = contacts.filter((contact, index, self) => 
+      index === self.findIndex(c => c.id === contact.id)
+    );
+    this.selectedContacts = uniqueContacts;
   }
 
   /**

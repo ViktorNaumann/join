@@ -69,7 +69,7 @@
     <div class="card-bottom-wrapper">
       <div class="collaborators-wrapper">
         <div class="img-user-wrapper">
-          @for (contact of contactList.slice(0, 4); track $index) {
+          @for (contact of getUniqueContacts(); track contact.id) {
           <div
             class="img-user"
             [style.background-color]="
@@ -83,10 +83,10 @@
           }
           <div
             class="img-user more-count"
-            *ngIf="contactList.length > 4"
-            [title]="getRemainingContactNames(contactList.slice(4))"
+            *ngIf="getUniqueContacts().length > 4"
+            [title]="getRemainingContactNames(getUniqueContacts().slice(4))"
           >
-            +{{ contactList.length - 4 }}
+            +{{ getUniqueContacts().length - 4 }}
           </div>
         </div>
       </div>
