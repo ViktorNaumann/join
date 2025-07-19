@@ -190,7 +190,7 @@ form {
         width: 20px;
         height: 20px;
         cursor: pointer;
-        background-image: url("./../../../../../public/assets/img/icons/checkbox.png");
+        background-image: url("./../../../../public/assets/img/icons/checkbox.png");
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
@@ -201,7 +201,7 @@ form {
     }
 
     input[type="checkbox"]:checked {
-        background-image: url("./../../../../../public/assets/img/icons/checkbox-checked.png");
+        background-image: url("./../../../../public/assets/img/icons/checkbox-checked.png");
     }
 
     .highlight {
