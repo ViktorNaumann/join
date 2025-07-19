@@ -106,31 +106,76 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Handles form submission. Validates input, creates or updates the contact
-   * using the ContactService, emits the new contact (if applicable),
-   * and closes the form.
-   */
-  async onSubmit() {
-    if (this.contactForm.valid) {
-      const { name, email, phone } = this.contactForm.value;
-      const contact: Contact = {
-        name: name.trim(),
-        email: email.trim(),
-        phone: phone.trim()
-      };
+  * Handles form submission. Validates input, creates or updates the contact
+  * using the ContactService, emits the new contact (if applicable),
+  * and closes the form.
+  */
+  async onSubmit(): Promise<void> {
+    if (!this.contactForm.valid) return;
 
-      if (this.contactToEdit?.id) {
-        this.contactService.updateContact(this.contactToEdit.id, contact);
-      } else {
-        const newContact = await this.contactService.addContact(contact);
-        if (newContact) {
-          this.addedContact.emit(newContact);
-        }
-      }
+    const contact = this.buildContactFromForm();
 
-      this.clearInputs();
-      this.onClose();
+    if (this.isEditMode()) {
+      this.updateContact(contact);
+    } else {
+      await this.addNewContact(contact);
     }
+
+    this.finalizeSubmission();
+  }
+
+  /**
+   * Builds a trimmed Contact object from form values.
+   * 
+   * @returns A Contact object based on form input.
+   */
+  private buildContactFromForm(): Contact {
+    const { name, email, phone } = this.contactForm.value;
+    return {
+      name: name.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
+    };
+  }
+
+  /**
+   * Determines whether the form is in edit mode.
+   * 
+   * @returns True if editing an existing contact, false if creating a new one.
+   */
+  private isEditMode(): boolean {
+    return !!this.contactToEdit?.id;
+  }
+
+  /**
+   * Updates an existing contact using the ContactService.
+   * 
+   * @param contact - The contact data to be saved.
+   */
+  private updateContact(contact: Contact): void {
+    if (this.contactToEdit && this.contactToEdit.id) {
+      this.contactService.updateContact(this.contactToEdit.id, contact);
+    }
+  }
+
+  /**
+   * Adds a new contact using the ContactService and emits it if successful.
+   * 
+   * @param contact - The new contact data to be added.
+   */
+  private async addNewContact(contact: Contact): Promise<void> {
+    const newContact = await this.contactService.addContact(contact);
+    if (newContact) {
+      this.addedContact.emit(newContact);
+    }
+  }
+
+  /**
+   * Clears form inputs and closes the form after submission.
+   */
+  private finalizeSubmission(): void {
+    this.clearInputs();
+    this.onClose();
   }
 
   /**

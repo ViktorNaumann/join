@@ -78,7 +78,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private contactService: ContactService,
     private elementRef: ElementRef
-  ) {}
+  ) { }
 
   /**
    * Triggered when clicking outside the mobile menu.
@@ -89,12 +89,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event) {
     const target = event.target as HTMLElement;
-    const mobileMenu =
-      this.elementRef.nativeElement.querySelector('.mobile-menu');
-    const mobileOptions = this.elementRef.nativeElement.querySelector(
-      '.mobile-options-btn'
-    );
-
+    const mobileMenu = this.elementRef.nativeElement.querySelector('.mobile-menu');
+    const mobileOptions = this.elementRef.nativeElement.querySelector('.mobile-options-btn');
     if (
       this.menuOpen &&
       !mobileMenu?.contains(target) &&
@@ -138,56 +134,95 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Initializes the component, subscribes to contact changes, and controls animations.
-   */
+ * Initializes the component, subscribes to selected and all contacts,
+ * and handles visibility and animation transitions.
+ */
   ngOnInit(): void {
+    this.subscribeToSelectedContact();
+  }
+
+  /**
+   * Subscribes to changes in the selected contact and all contacts.
+   * Ensures synced data, updates animation state, and manages visibility.
+   */
+  private subscribeToSelectedContact(): void {
     this.subscription = combineLatest([
       this.contactService.selectedContact$,
       this.contactService.getContacts(),
     ])
-      .pipe(
-        map(([selectedContact, allContacts]) => {
-          if (!selectedContact) return null;
-          return (
-            allContacts.find((contact) => contact.id === selectedContact.id) ||
-            selectedContact
-          );
-        })
-      )
-
+      .pipe(map(([selected, all]) => this.resolveSelectedContact(selected, all)))
       .subscribe({
-        next: (contact) => {
-          const wasEmpty = !this.contact;
-          const isContactChange = contact && contact !== this.contact;
-
-          this.contact = contact || undefined;
-
-          if (!contact) {
-            this.isDeleting = false;
-            this.isEditing = false;
-            this.contactVisible = false;
-
-            setTimeout(() => {
-              this.noContactVisible.emit();
-            }, 100);
-          } else if (isContactChange) {
-            this.isEditing = false;
-
-            if (
-              !this.isDeleting &&
-              (this.firstLoad || wasEmpty || isContactChange)
-            ) {
-              this.contactVisible = false;
-
-              setTimeout(() => {
-                this.contactVisible = true;
-                this.animationState++;
-                this.firstLoad = false;
-              }, 10);
-            }
-          }
-        },
+        next: (contact) => this.handleContactChange(contact),
       });
+  }
+
+  /**
+   * Matches the selected contact with the full contact list to ensure it exists.
+   * Falls back to the selected contact if no match is found.
+   *
+   * @param selected - The selected contact object.
+   * @param all - All available contacts.
+   * @returns A resolved contact object or null.
+   */
+  private resolveSelectedContact(
+    selected: Contact | null,
+    all: Contact[]
+  ): Contact | null {
+    if (!selected) return null;
+    return all.find((c) => c.id === selected.id) || selected;
+  }
+
+  /**
+   * Handles contact changes, visibility state, and animations.
+   *
+   * @param contact - The resolved contact to display, or null if none.
+   */
+  private handleContactChange(contact: Contact | null): void {
+    const wasEmpty = !this.contact;
+    const isContactChange = contact && contact !== this.contact;
+
+    this.contact = contact || undefined;
+
+    if (!contact) {
+      this.resetContactState();
+      return;
+    }
+
+    if (isContactChange) {
+      this.prepareContactTransition(wasEmpty);
+    }
+  }
+
+  /**
+   * Resets state when no contact is selected and emits visibility change.
+   */
+  private resetContactState(): void {
+    this.isDeleting = false;
+    this.isEditing = false;
+    this.contactVisible = false;
+
+    setTimeout(() => {
+      this.noContactVisible.emit();
+    }, 100);
+  }
+
+  /**
+   * Prepares animation and visibility transition when a new contact is selected.
+   *
+   * @param wasEmpty - Indicates if the previous contact was undefined.
+   */
+  private prepareContactTransition(wasEmpty: boolean): void {
+    this.isEditing = false;
+
+    if (!this.isDeleting && (this.firstLoad || wasEmpty)) {
+      this.contactVisible = false;
+
+      setTimeout(() => {
+        this.contactVisible = true;
+        this.animationState++;
+        this.firstLoad = false;
+      }, 10);
+    }
   }
 
   /**

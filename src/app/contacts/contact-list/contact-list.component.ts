@@ -20,32 +20,57 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ContactListComponent implements OnInit, OnDestroy {
 
-    /**
-   * Initializes the component by loading and grouping contacts,
-   * identifying the current user, and subscribing to contact selection.
-   */
+  /**
+  * Initializes the component by loading contacts,
+  * grouping them by initial, identifying the current user,
+  * and handling errors and contact selection.
+  */
   ngOnInit(): void {
-    this.contactsSubscription = this.contactService.getContacts().subscribe({
-      next: (contacts) => {
-        this.groupedContacts = this.groupByInitial(contacts);
-        if (this.currentUserEmail) {
-          const matchedContact = contacts.find(c => c.email === this.currentUserEmail);
-          if (matchedContact) {
-            this.onContactSelect(matchedContact);
-          }
-        }
-      },
-      error: (error) => {
-        console.error('Error loading contacts:', error);
-      }
-    });
+    this.subscribeToContacts();
     this.getCurrentUser();
+  }
+
+  /**
+   * Subscribes to the contact list, groups them by initial letter,
+   * and selects the current user’s contact if available.
+   */
+  private subscribeToContacts(): void {
+    this.contactsSubscription = this.contactService.getContacts().subscribe({
+      next: (contacts) => this.handleContactsLoaded(contacts),
+      error: (error) => this.handleContactsError(error),
+    });
+  }
+
+  /**
+   * Processes the loaded contacts by grouping them
+   * and selecting the current user's contact if present.
+   * 
+   * @param contacts - The array of contact objects.
+   */
+  private handleContactsLoaded(contacts: Contact[]): void {
+    this.groupedContacts = this.groupByInitial(contacts);
+
+    if (this.currentUserEmail) {
+      const matchedContact = contacts.find(c => c.email === this.currentUserEmail);
+      if (matchedContact) {
+        this.onContactSelect(matchedContact);
+      }
+    }
+  }
+
+  /**
+   * Handles an error that occurred while loading contacts.
+   * 
+   * @param error - The error object returned from the subscription.
+   */
+  private handleContactsError(error: any): void {
+    console.error('Error loading contacts:', error);
   }
 
   /**
    * Identifying the current user to directly select this user in the contact list.
    */
-  getCurrentUser(){
+  getCurrentUser() {
     const user = this.authService.getCurrentUser();
     this.currentUser = user?.displayName || null;
     this.currentUserEmail = user?.email || null;
@@ -91,7 +116,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
   constructor(
     public contactService: ContactService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   /**
    * Unsubscribes from all subscriptions to avoid memory leaks.
