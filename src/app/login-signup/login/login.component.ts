@@ -104,7 +104,7 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-  ) {}
+  ) { }
 
   /**
    * Lifecycle hook: initializes the login form, touch detection,
@@ -113,7 +113,7 @@ export class LoginComponent {
   ngOnInit(): void {
     this.initializeForm();
     this.checkIfTouchDevice();
-    this.initializeAnimation();    
+    this.initializeAnimation();
   }
 
   /**
@@ -134,54 +134,78 @@ export class LoginComponent {
   }
 
   /**
-   * Triggers a delayed logo animation if it hasn't already occurred.
-   * Stores a flag in session storage to prevent repeat animation.
-   */
+ * Triggers a delayed logo animation if it hasn't already occurred.
+ * Stores a flag in session storage to prevent repeat animation.
+ */
   private initializeAnimation(): void {
     if (!sessionStorage.getItem('logoMoved')) {
-      setTimeout(() => {
-        this.pageLoaded = true;
-        this.logoState = 'moved';
-        sessionStorage.setItem('logoMoved', 'true');
-      }, 100);
+      this.runLogoAnimationWithDelay();
     } else {
       this.logoState = 'moved';
     }
   }
 
   /**
-   * Handles user login using credentials from the form.
-   * Shows loading indicator and displays errors if authentication fails.
+   * Performs the delayed logo animation and sets the session flag.
+   */
+  private runLogoAnimationWithDelay(): void {
+    setTimeout(() => {
+      this.pageLoaded = true;
+      this.logoState = 'moved';
+      sessionStorage.setItem('logoMoved', 'true');
+    }, 100);
+  }
+
+  /**
+   * Handles user login using form credentials.
+   * Displays a loading indicator, validates form input,
+   * and navigates on success or shows an error message.
    */
   async onLogin(): Promise<void> {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
     }
-    this.isLoading = true;
-    this.errorMessage = '';
+
+    this.startLoading();
     const { email, password } = this.loginForm.value;
     const result = await this.authService.signIn(email, password);
-    if (result.success) {
-      this.router.navigate(['/summary']);
-    } else {
-      this.errorMessage = result.message || 'Login failed';
-    }
-    this.isLoading = false;
+    this.handleAuthResult(result, 'Login failed');
   }
 
   /**
    * Logs in as a guest user using the AuthService.
-   * Navigates to the summary page on success or displays an error.
+   * Navigates to the summary page on success or shows an error.
    */
   async onGuestLogin(): Promise<void> {
+    this.startLoading();
+    const result = await this.authService.signInAsGuest();
+    this.handleAuthResult(result, 'Guest login failed');
+  }
+
+  /**
+   * Starts loading state and resets the error message.
+   */
+  private startLoading(): void {
     this.isLoading = true;
     this.errorMessage = '';
-    const result = await this.authService.signInAsGuest();
+  }
+
+  /**
+   * Handles the result of an authentication attempt.
+   * Navigates on success or displays a fallback error message.
+   *
+   * @param result - The result object returned from the auth service.
+   * @param fallbackError - The fallback error message if no message is provided.
+   */
+  private handleAuthResult(
+    result: { success: boolean; message?: string },
+    fallbackError: string
+  ): void {
     if (result.success) {
       this.router.navigate(['/summary']);
     } else {
-      this.errorMessage = result.message || 'Guest login failed';
+      this.errorMessage = result.message || fallbackError;
     }
     this.isLoading = false;
   }

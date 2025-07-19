@@ -81,14 +81,14 @@ export class SignupComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private contactService: ContactService,
-  ) {}
+  ) { }
 
   /**
    * Lifecycle hook: creates the signup form with all necessary validators.
    */
   ngOnInit(): void {
     this.signupform = this.form.group({
-      name : ['', [Validators.required, Validators.minLength(2)]],
+      name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [
         Validators.required,
@@ -113,20 +113,43 @@ export class SignupComponent implements OnInit {
   }
 
   /**
-   * Handles the form submission process, including validation,
-   * user registration, contact saving, and navigation on success.
-   */
+  * Handles the form submission process:
+  * Validates input, attempts user registration,
+  * saves the new user as a contact, and navigates on success.
+  */
   async onSubmit(): Promise<void> {
     if (this.signupform.invalid) {
       this.signupform.markAllAsTouched();
       return;
     }
+
+    this.startLoading();
+    const { name, email, password } = this.signupform.value;
+    const result = await this.authService.signUp(email, password, name);
+
+    this.saveNewContact(name, email);
+    this.handleRegistrationResult(result);
+  }
+
+  /**
+   * Sets loading state, clears previous messages.
+   */
+  private startLoading(): void {
     this.isLoading = true;
     this.errorMessage = '';
     this.successMessage = '';
-    const { name, email, password } = this.signupform.value;
-    const result = await this.authService.signUp(email, password, name);
-    this.saveNewContact(name, email);
+  }
+
+  /**
+   * Handles the result of the registration process.
+   * Shows success message and redirects on success,
+   * or displays an error message.
+   *
+   * @param result - Result object returned from signUp attempt.
+   */
+  private handleRegistrationResult(
+    result: { success: boolean; message?: string }
+  ): void {
     if (result.success) {
       this.successMessage = 'Registration successful! You will be redirected...';
       setTimeout(() => {
@@ -165,34 +188,65 @@ export class SignupComponent implements OnInit {
   }
 
   /**
-   * Returns a user-friendly validation message for the given form field.
-   * Includes special handling for mismatched passwords.
-   * 
-   * @param field The name of the form control.
-   * @returns A descriptive validation message or empty string.
-   */
+ * Returns a user-friendly validation message for the given form field.
+ * Delegates error interpretation to specialized helper functions.
+ * 
+ * @param field - The name of the form control.
+ * @returns A descriptive validation message or empty string.
+ */
   getValidationMessage(field: string): string {
-    const control = this.signupform.get(field);
-
     if (field === 'confirmPassword') {
-      const passwordMismatch = this.signupform.errors?.['passwordsDontMatch'];
-      const touched = control?.touched || this.signupform.get('password')?.touched;
-      const dirty = control?.dirty || this.signupform.get('password')?.dirty;
-      if (passwordMismatch && (touched || dirty)) {
-        return 'Passwords do not match';
-      }
+      return this.getPasswordMismatchMessage();
     }
+
+    const control = this.signupform.get(field);
     if (!control || !control.touched || !control.errors) return '';
-    if (control.errors['required']) return 'This field is required';
-    if (control.errors['email']) return 'Please enter a valid email address';
-    if (control.errors['minlength']) {
+
+    return this.getFieldErrorMessage(control);
+  }
+
+  /**
+   * Returns a validation message if the password and confirmation do not match.
+   * Only shown if either password field has been touched or changed.
+   * 
+   * @returns Password mismatch message or empty string.
+   */
+  private getPasswordMismatchMessage(): string {
+    const confirmControl = this.signupform.get('confirmPassword');
+    const passwordControl = this.signupform.get('password');
+    const mismatch = this.signupform.errors?.['passwordsDontMatch'];
+
+    const touched = confirmControl?.touched || passwordControl?.touched;
+    const dirty = confirmControl?.dirty || passwordControl?.dirty;
+
+    if (mismatch && (touched || dirty)) {
+      return 'Passwords do not match';
+    }
+    return '';
+  }
+
+  /**
+   * Returns a general validation error message for a given form control.
+   * 
+   * @param control - The FormControl instance to evaluate.
+   * @returns The corresponding validation message or an empty string.
+   */
+  private getFieldErrorMessage(control: AbstractControl): string {
+    if (control.errors?.['required']) {
+      return 'This field is required';
+    }
+    if (control.errors?.['email']) {
+      return 'Please enter a valid email address';
+    }
+    if (control.errors?.['minlength']) {
       return `Minimum ${control.errors['minlength'].requiredLength} characters required`;
     }
-    if (control.errors['pattern']) {
+    if (control.errors?.['pattern']) {
       return 'Password must contain uppercase, numbers and special characters';
     }
-    if (control.errors['requiredTrue']) return 'You must accept the privacy policy';
-
+    if (control.errors?.['requiredTrue']) {
+      return 'You must accept the privacy policy';
+    }
     return '';
   }
 }
