@@ -114,13 +114,23 @@ export class SummaryComponent implements OnInit {
     this.router.navigate(['/board']);
   }
 
-  /**
-   * Initializes the component, loads user data and tasks,
-   * calculates statistics, and controls the welcome greeting display.
-   */
-  ngOnInit() {
-    this.isMobile = window.innerWidth < 1000;
+ /**
+ * Initializes the component by determining device type,
+ * loading user greeting, and loading tasks with statistics.
+ */
+ngOnInit() {
+  this.isMobile = window.innerWidth < 1000;
 
+  this.loadUserGreeting();
+  this.loadAndProcessTasks();
+}
+
+  /**
+   * Loads current user data and sets a personalized greeting.
+   * If on mobile and greeting hasn't been shown in this session,
+   * triggers an animated greeting display.
+   */
+  private loadUserGreeting(): void {
     this.authService.getCurrentUserData().then((userData) => {
       this.userName = userData?.displayName?.trim()
         ? userData.displayName
@@ -129,57 +139,86 @@ export class SummaryComponent implements OnInit {
 
       const greetingShown = sessionStorage.getItem('greetingShown');
       if (this.isMobile && !greetingShown) {
-        this.showGreeting = true;
-        this.greetingState = 'start';
-        setTimeout(() => {
-          this.greetingState = 'moved';
-          setTimeout(() => {
-            this.showGreeting = false;
-            sessionStorage.setItem('greetingShown', 'true');
-          }, 2000);
-        }, 500);
+        this.showAnimatedGreeting();
       } else {
         this.showGreeting = false;
       }
     });
+  }
 
+  /**
+   * Animates a greeting sequence for mobile devices.
+   * Hides the greeting after the animation and stores the display state in sessionStorage.
+   */
+  private showAnimatedGreeting(): void {
+    this.showGreeting = true;
+    this.greetingState = 'start';
+    setTimeout(() => {
+      this.greetingState = 'moved';
+      setTimeout(() => {
+        this.showGreeting = false;
+        sessionStorage.setItem('greetingShown', 'true');
+      }, 2000);
+    }, 500);
+  }
+
+  /**
+   * Subscribes to task data and processes statistics and deadline information.
+   */
+  private loadAndProcessTasks(): void {
     this.taskService.getTasks().subscribe((tasks: Task[]) => {
       this.taskList = tasks;
-      this.todoCount = this.countTasksByStatus(tasks, 'to-do');
-      this.doneCount = this.countTasksByStatus(tasks, 'done');
-      this.inProgressCount = this.countTasksByStatus(tasks, 'in-progress');
-      this.awaitingFeedbackCount = this.countTasksByStatus(
-        tasks,
-        'await-feedback'
-      );
-      
-      this.nextDeadlineCount = tasks.filter(
-        (t) => t.priority === 'urgent'
-      ).length;
-
-      const now = new Date();
-      const futureTasks = tasks
-        .filter((t) => t.date && t.status !== 'done')
-        .map((t) => {
-          let dateObj: Date | null = null;
-          if (t.date instanceof Date) {
-            dateObj = t.date;
-          } else if (this.isFirestoreTimestamp(t.date)) {
-            dateObj = t.date.toDate();
-          } else if (typeof t.date === 'string' || typeof t.date === 'number') {
-            dateObj = new Date(t.date);
-          }
-          return { ...t, dateObj };
-        })
-        .filter((t) => t.dateObj && t.dateObj > now);
-
-      if (futureTasks.length > 0) {
-        futureTasks.sort((a, b) => a.dateObj!.getTime() - b.dateObj!.getTime());
-        const nextDate = futureTasks[0].dateObj!;
-        this.nextDeadlineDate = nextDate;
-      } else {
-        this.nextDeadlineDate = null;
-      }
+      this.setTaskCounts(tasks);
+      this.setNextDeadline(tasks);
     });
+  }
+
+  /**
+   * Sets the count of tasks by specific statuses and urgency.
+   * 
+   * @param tasks - Array of task objects to be analyzed.
+   */
+  private setTaskCounts(tasks: Task[]): void {
+    this.todoCount = this.countTasksByStatus(tasks, 'to-do');
+    this.doneCount = this.countTasksByStatus(tasks, 'done');
+    this.inProgressCount = this.countTasksByStatus(tasks, 'in-progress');
+    this.awaitingFeedbackCount = this.countTasksByStatus(tasks, 'await-feedback');
+    this.nextDeadlineCount = tasks.filter((t) => t.priority === 'urgent').length;
+  }
+
+  /**
+   * Determines the next upcoming deadline from the list of tasks.
+   * 
+   * @param tasks - Array of task objects containing dates.
+   */
+  private setNextDeadline(tasks: Task[]): void {
+    const now = new Date();
+    const futureTasks = tasks
+      .filter((t) => t.date && t.status !== 'done')
+      .map((t) => {
+        const dateObj = this.parseDate(t.date);
+        return { ...t, dateObj };
+      })
+      .filter((t) => t.dateObj && t.dateObj > now);
+
+    if (futureTasks.length > 0) {
+      futureTasks.sort((a, b) => a.dateObj!.getTime() - b.dateObj!.getTime());
+      this.nextDeadlineDate = futureTasks[0].dateObj!;
+    } else {
+      this.nextDeadlineDate = null;
+    }
+  }
+
+  /**
+   * Converts a date value of various possible formats into a JavaScript Date object.
+   * 
+   * @param date - Date input which could be a string, number, Date, or Firestore timestamp.
+   * @returns A valid Date object or null if conversion is not possible.
+   */
+  private parseDate(date: any): Date | null {
+    if (date instanceof Date) return date;
+    if (this.isFirestoreTimestamp(date)) return date.toDate();
+    if (typeof date === 'string' || typeof date === 'number') return new Date(date);
+    return null;
   }
 }

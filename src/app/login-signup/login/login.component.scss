@@ -215,6 +215,12 @@
         width: 150px;
         transition: background-color 0.2s ease;
         justify-content: center;
+        &:disabled {
+            background-color: #ccc;
+            color: #666;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
     }
 
     .btn-guestlogin {
