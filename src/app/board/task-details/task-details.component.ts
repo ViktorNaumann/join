@@ -146,7 +146,6 @@ export class TaskDetailsComponent {
    */
   onSubtaskToggle(subtask: Subtask) {
     if (!this.task.id || !subtask.id) return;
-
     this.taskService.updateSubtask(this.task.id, subtask.id, subtask)
       .then(() => {
         this.subtaskChanged.emit(this.subtasks);

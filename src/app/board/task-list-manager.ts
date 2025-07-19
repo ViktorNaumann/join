@@ -13,14 +13,14 @@ export class TaskListManager {
   private taskList: Task[] = [];
   private subtasksByTaskId: { [taskId: string]: Subtask[] } = {};
   private unsubTask!: Subscription;
-  
+
   // Task status arrays
   private todo: Task[] = [];
   private inprogress: Task[] = [];
   private awaitfeedback: Task[] = [];
   private done: Task[] = [];
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService) { }
 
   /**
    * Gets all tasks
@@ -56,28 +56,46 @@ export class TaskListManager {
   }
 
   /**
-   * Filters tasks by given status and search term (case-insensitive).
-   *
-   * @param status - Task status to filter by ('to-do', 'in-progress', 'await-feedback', 'done').
-   * @param searchTerm - Search term to filter by.
-   * @returns Filtered list of tasks.
-   */
+ * Filters tasks by given status and search term (case-insensitive).
+ *
+ * @param status - Task status to filter by ('to-do', 'in-progress', 'await-feedback', 'done').
+ * @param searchTerm - Search term to filter by.
+ * @returns Filtered list of tasks.
+ */
   getFilteredTasks(status: string, searchTerm: string): Task[] {
-    const statusArrayMap: { [key: string]: Task[] } = {
+    const tasksForStatus = this.getTasksByStatus(status);
+    return this.filterTasksBySearchTerm(tasksForStatus, searchTerm);
+  }
+
+  /**
+   * Returns tasks from the internal status arrays based on status key.
+   *
+   * @param status - Status key.
+   * @returns Array of tasks matching the given status.
+   */
+  private getTasksByStatus(status: string): Task[] {
+    const statusArrayMap: Record<string, Task[]> = {
       'to-do': this.todo,
       'in-progress': this.inprogress,
       'await-feedback': this.awaitfeedback,
-      done: this.done,
+      'done': this.done,
     };
-    const tasksForStatus = statusArrayMap[status] || [];
-    if (!searchTerm.trim()) {
-      return tasksForStatus;
-    }
-    const searchLower = searchTerm.toLowerCase();
-    return tasksForStatus.filter(
-      (task) =>
-        task.title.toLowerCase().includes(searchLower) ||
-        task.description?.toLowerCase().includes(searchLower)
+    return statusArrayMap[status] || [];
+  }
+
+  /**
+   * Filters a list of tasks by the provided search term (case-insensitive).
+   *
+   * @param tasks - The array of tasks to filter.
+   * @param searchTerm - The term to filter by.
+   * @returns Filtered tasks array.
+   */
+  private filterTasksBySearchTerm(tasks: Task[], searchTerm: string): Task[] {
+    const trimmed = searchTerm.trim().toLowerCase();
+    if (!trimmed) return tasks;
+    return tasks.filter(task =>
+      task.title.toLowerCase().includes(trimmed) ||
+      task.description?.toLowerCase().includes(trimmed)
     );
   }
 
@@ -89,11 +107,11 @@ export class TaskListManager {
    * @returns Sorted task array.
    */
   sortTasksByDueDate(tasks: Task[], ascending: boolean = true): Task[] {
-    return [...tasks].sort((a, b) => {
-      const dateA = this.getDateValue(a.date);
-      const dateB = this.getDateValue(b.date);
-      return ascending ? dateA - dateB : dateB - dateA;
-    });
+    return [...tasks].sort((a, b) =>
+      ascending
+        ? this.getDateValue(a.date) - this.getDateValue(b.date)
+        : this.getDateValue(b.date) - this.getDateValue(a.date)
+    );
   }
 
   /**
@@ -103,7 +121,7 @@ export class TaskListManager {
    * @returns Numeric timestamp, or Number.MAX_SAFE_INTEGER if invalid.
    */
   private getDateValue(date: Date | any): number {
-    if (date && typeof date.toDate === 'function') {
+    if (date?.toDate instanceof Function) {
       return date.toDate().getTime();
     } else if (date instanceof Date) {
       return date.getTime();
@@ -130,39 +148,45 @@ export class TaskListManager {
    *
    * @returns A function to unsubscribe from the task observable.
    */
-  loadTasks(): (() => void) {
-    this.unsubTask = this.taskService.getTasks().subscribe((tasks: Task[]) => {
+  loadTasks(): () => void {
+    this.unsubTask = this.taskService.getTasks().subscribe((tasks) => {
       this.taskList = tasks;
-      this.emptyArrays();
-      for (const task of tasks) {
-        switch (task.status) {
-          case 'to-do':
-            this.todo.push(task);
-            break;
-          case 'in-progress':
-            this.inprogress.push(task);
-            break;
-          case 'await-feedback':
-            this.awaitfeedback.push(task);
-            break;
-          case 'done':
-            this.done.push(task);
-            break;
-          default:
-            console.warn(
-              `Unbekannter Status bei Task ${task.title}:`,
-              task.status
-            );
-        }
-      }
-      this.todo = this.sortTasksByDueDate(this.todo);
-      this.inprogress = this.sortTasksByDueDate(this.inprogress);
-      this.awaitfeedback = this.sortTasksByDueDate(this.awaitfeedback);
-      this.done = this.sortTasksByDueDate(this.done);
+      this.distributeTasksByStatus(tasks);
+      this.sortAllStatusArrays();
       this.loadSubtasks();
     });
     return () => this.unsubTask.unsubscribe();
   }
+
+  /**
+   * Clears all status arrays and distributes tasks into the appropriate lists.
+   *
+   * @param tasks - The full list of tasks to distribute.
+   */
+  private distributeTasksByStatus(tasks: Task[]): void {
+    this.emptyArrays();
+    for (const task of tasks) {
+      switch (task.status) {
+        case 'to-do': this.todo.push(task); break;
+        case 'in-progress': this.inprogress.push(task); break;
+        case 'await-feedback': this.awaitfeedback.push(task); break;
+        case 'done': this.done.push(task); break;
+        default:
+          console.warn(`Unknown status in task ${task.title}:`, task.status);
+      }
+    }
+  }
+
+  /**
+   * Sorts all status-based task arrays by due date.
+   */
+  private sortAllStatusArrays(): void {
+    this.todo = this.sortTasksByDueDate(this.todo);
+    this.inprogress = this.sortTasksByDueDate(this.inprogress);
+    this.awaitfeedback = this.sortTasksByDueDate(this.awaitfeedback);
+    this.done = this.sortTasksByDueDate(this.done);
+  }
+
 
   /**
    * Empties all task lists (to-do, in-progress, await-feedback, done).

@@ -15,8 +15,6 @@ import {
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import {
   CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
   CdkDrag,
   CdkDropList,
   CdkDragMove,
@@ -139,18 +137,23 @@ export class BoardComponent {
   get taskList(): Task[] {
     return this.taskListManager.getTaskList();
   }
+
   get subtasksByTaskId(): { [taskId: string]: Subtask[] } {
     return this.taskListManager.getSubtasksByTaskId();
   }
+
   get todo(): Task[] {
     return this.taskListManager.getTodoTasks();
   }
+
   get inprogress(): Task[] {
     return this.taskListManager.getInProgressTasks();
   }
+
   get awaitfeedback(): Task[] {
     return this.taskListManager.getAwaitFeedbackTasks();
   }
+
   get done(): Task[] {
     return this.taskListManager.getDoneTasks();
   }
@@ -164,9 +167,6 @@ export class BoardComponent {
    * @param contactService - Service for managing contact data.
    */
   constructor(
-    private taskService: TaskService,
-    private router: Router,
-    private contactService: ContactService,
     private taskListManager: TaskListManager,
     private dragDropManager: DragDropManager,
     private overlayManager: OverlayManager
