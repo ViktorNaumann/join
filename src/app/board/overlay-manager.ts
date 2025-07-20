@@ -112,6 +112,7 @@ export class OverlayManager {
     const isSmallScreen = window.innerWidth < 1000;
     if (event === 'open' || event === 'edit') {
       if (isSmallScreen) {
+        this.resetOverlayState();
         this.router.navigate(['/add-task'], { queryParams: { status } });
       } else {
         this.showTaskDetails = false;
@@ -119,6 +120,16 @@ export class OverlayManager {
         this.overlayVisible = true;
       }
     }
+  }
+
+  /**
+   * Reset the overlay state.
+   */
+  resetOverlayState(): void {
+    this.overlayVisible = false;
+    this.showTaskDetails = false;
+    this.showAddOrEditTask = false;
+    this.selectedTask = undefined;
   }
 
   /**
