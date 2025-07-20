@@ -421,6 +421,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     const deleted = this.subtaskManager.getDeletedSubtasks(currentSubtasks);
     await this.subtaskManager.deleteSubtasks(this.editingTaskId, deleted);
     await this.subtaskManager.syncSubtasks(this.editingTaskId, currentSubtasks);
+    this.taskService.clearEditingTask();
   }
 
   /**

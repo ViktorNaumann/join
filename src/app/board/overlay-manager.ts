@@ -116,9 +116,9 @@ export class OverlayManager {
       } else {
         this.showTaskDetails = false;
         this.showAddOrEditTask = true;
+        this.overlayVisible = true;
       }
     }
-    this.overlayVisible = true;
   }
 
   /**
