@@ -23,7 +23,7 @@ section {
     margin-right: auto;
   }
 
-  @media (max-width: 495px) {
+  @media (max-width: 600px) {
     margin-left: 0;
     margin-right: 0;
     max-width: 100vw;
@@ -100,7 +100,7 @@ section {
       gap: 8px;
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       margin-bottom: 0;
     }
 
@@ -197,13 +197,12 @@ section {
         }
       }
 
-      // Skalierung für kleinere Bildschirme
       @media (max-width: 1000px) {
         transform: scale(0.85);
         transform-origin: top center;
       }
 
-      @media (max-width: 500px) {
+      @media (max-width: 600px) {
         transform: scale(0.7);
         transform-origin: top center;
       }
