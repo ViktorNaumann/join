@@ -128,7 +128,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   */
    loadEditingTask(): void {
     const editingTask = this.taskService.getEditingTask();
-
     if (editingTask) {
       this.isEditingMode = true;
       this.editingTaskId = editingTask.id;

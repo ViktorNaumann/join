@@ -140,7 +140,6 @@ export class TaskComponent {
     if (changes['task'] && !changes['task'].firstChange) {
       this.contactList = [];
       this.getContactList();
-      console.log('ngOnChanges:', changes);
     }
   }
 
@@ -233,18 +232,23 @@ export class TaskComponent {
     }
   }
 
-  /**
+   /**
    * Returns a unique list of contacts (removes duplicates based on ID)
-   * and limits to first 4 contacts for display.
    */
-  getUniqueContacts(): Contact[] {
+  getAllUniqueContacts(): Contact[] {
     if (!this.contactList || this.contactList.length === 0) {
       return [];
     }
-    const uniqueContacts = this.contactList.filter((contact, index, self) => 
+    return this.contactList.filter((contact, index, self) =>
       index === self.findIndex(c => c.id === contact.id)
     );
-    return uniqueContacts.slice(0, 4);
+  }
+
+  /**
+   * Returns the first 4 contacts for display.
+   */
+  getUniqueContacts(): Contact[] {
+    return this.getAllUniqueContacts().slice(0, 4);
   }
 
   /**
@@ -253,10 +257,9 @@ export class TaskComponent {
    * @param remainingContacts Array of remaining Contact objects.
    * @returns A comma-separated string of contact names.
    */
-  getRemainingContactNames(remainingContacts: Contact[]): string {
-    const uniqueRemaining = remainingContacts.filter((contact, index, self) => 
-      index === self.findIndex(c => c.id === contact.id)
-    );
-    return uniqueRemaining.map((contact) => contact.name).join(', ');
+  getRemainingContactNames(): string {
+    const all = this.getAllUniqueContacts();
+    const remaining = all.slice(4);
+    return remaining.map((c) => c.name).join(', ');
   }
 }
