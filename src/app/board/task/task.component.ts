@@ -140,6 +140,7 @@ export class TaskComponent {
     if (changes['task'] && !changes['task'].firstChange) {
       this.contactList = [];
       this.getContactList();
+      console.log('ngOnChanges:', changes);
     }
   }
 

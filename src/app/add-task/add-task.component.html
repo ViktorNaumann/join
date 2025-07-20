@@ -1,6 +1,6 @@
 <section class="layout-container">
   <div class="add-task-header">
-    <h1>{{ editTaskManager.isEditingMode ? 'Edit Task' : 'Add Task' }}</h1>
+    <h1>{{ isEditingMode ? 'Edit Task' : 'Add Task' }}</h1>
     <button *ngIf="isOverlayMode" class="btn-close-overlay" (click)="closeOverlayMode()" type="button">
       <svg
         width="24"
@@ -31,7 +31,7 @@
   </div>
   <div class="success-message" *ngIf="showSuccessMessage">
     <div class="success-content">
-      <span>✓ Task successfully {{ editTaskManager.isEditingMode ? 'updated' : 'created' }}!</span>
+      <span>✓ Task successfully {{ isEditingMode ? 'updated' : 'created' }}!</span>
       <span class="redirect-text">Redirecting to board...</span>
     </div>
   </div>
@@ -183,8 +183,8 @@
                 readonly
                 (click)="toggleCategoryDropdown()"
                 [class.error]="categoryManager.showCategoryError"
-                [disabled]="editTaskManager.isEditingMode"
-                [ngStyle]="editTaskManager.isEditingMode ? {
+                [disabled]="isEditingMode"
+                [ngStyle]="isEditingMode ? {
                   'color': 'var(--background-default-dark)',
                   'cursor': 'not-allowed'
                 } : {}">
@@ -252,7 +252,7 @@
               <div class="subtasks-list">
                 <div class="subtask-item-simple" *ngFor="let subtask of subtaskManager.getSubtasks()">
                   <div *ngIf="subtaskManager.getEditingSubtaskId() !== subtask.id" class="subtask-display">
-                    <div *ngIf="editTaskManager.isEditingMode" class="subtask-checkbox-container">
+                    <div *ngIf="isEditingMode" class="subtask-checkbox-container">
                       <input 
                         type="checkbox" 
                         class="subtask-checkbox"
@@ -261,8 +261,8 @@
                         [id]="'subtask-' + subtask.id">
                       <label [for]="'subtask-' + subtask.id" class="checkbox-label"></label>
                     </div>
-                    <span *ngIf="!editTaskManager.isEditingMode" class="bullet">•</span>
-                    <span class="subtask-text-simple" [class.completed]="editTaskManager.isEditingMode && subtask.completed">{{ subtask.text }}</span>
+                    <span *ngIf="!isEditingMode" class="bullet">•</span>
+                    <span class="subtask-text-simple" [class.completed]="isEditingMode && subtask.completed">{{ subtask.text }}</span>
                     <div class="subtask-actions">
                       <img 
                         src="assets/img/icons/edit-single.png" 
@@ -277,7 +277,7 @@
                     </div>
                   </div>
                   <div *ngIf="subtaskManager.getEditingSubtaskId() === subtask.id" class="subtask-edit">
-                    <div *ngIf="editTaskManager.isEditingMode" class="subtask-checkbox-container">
+                    <div *ngIf="isEditingMode" class="subtask-checkbox-container">
                       <input 
                         type="checkbox" 
                         class="subtask-checkbox"
@@ -286,7 +286,7 @@
                         [id]="'subtask-edit-' + subtask.id">
                       <label [for]="'subtask-edit-' + subtask.id" class="checkbox-label"></label>
                     </div>
-                    <span *ngIf="!editTaskManager.isEditingMode" class="bullet">•</span>
+                    <span *ngIf="!isEditingMode" class="bullet">•</span>
                     <input 
                       type="text" 
                       class="subtask-edit-input"
@@ -314,7 +314,7 @@
           <div class="form-actions">
             <button type="button" class="btn-clear" (click)="clearForm()" [disabled]="isCreatingTask">Clear</button>
             <button type="submit" class="btn-create" [disabled]="isCreatingTask">
-              {{ isCreatingTask ? (editTaskManager.isEditingMode ? 'Updating...' : 'Creating...') : (editTaskManager.isEditingMode ? 'Update Task' : 'Create Task') }}
+              {{ isCreatingTask ? (isEditingMode ? 'Updating...' : 'Creating...') : (isEditingMode ? 'Update Task' : 'Create Task') }}
             </button>
           </div>
         </div>

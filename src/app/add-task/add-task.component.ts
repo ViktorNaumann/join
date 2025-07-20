@@ -8,7 +8,6 @@ import { SubtaskManager, Subtask } from './subtask-manager';
 import { ContactManager } from './contact-manager';
 import { CategoryManager } from './category-manager';
 import { PriorityManager } from './priority-manager';
-import { EditTask } from './edit-task';
 
 /**
  * AddTaskComponent provides a comprehensive form for creating and editing tasks.
@@ -42,6 +41,8 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   showDateError: boolean = false;
   showSuccessMessage: boolean = false;
   originalTaskStatus: 'to-do' | 'in-progress' | 'await-feedback' | 'done' = 'to-do';
+  isEditingMode: boolean = false;
+  editingTaskId: string | undefined;
 
   formData = {
     title: '',
@@ -67,8 +68,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     public subtaskManager: SubtaskManager,
     public contactManager: ContactManager,
     public categoryManager: CategoryManager,
-    public priorityManager: PriorityManager,
-    public editTaskManager: EditTask
+    public priorityManager: PriorityManager
   ) { }
 
   /**
@@ -77,10 +77,10 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadStatus();
     this.loadContacts();
-    this.editTaskManager.loadEditingTask(
-      (task) => this.populateFormWithTaskData(task),
-      () => this.clearAllManagers()
-    );
+    // this.editTaskManager.loadEditingTask(
+    //   (task) => this.populateFormWithTaskData(task),
+    //   () => this.clearAllManagers()
+    // );
   }
 
   /**
@@ -108,7 +108,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   loadContacts() {
     this.contactService.getContacts().subscribe(contacts => {
       this.contacts = contacts;
-      // this.editTaskManager.loadEditingTask();
+      this.loadEditingTask();
     });
   }
 
@@ -120,6 +120,23 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     this.contactManager.clearAll();
     this.categoryManager.clearAll();
     this.subtaskManager.clearAll();
+  }
+
+    /**
+  * Loads a task currently being edited from the TaskService and
+  * populates the form with its data. Clears managers if no task is loaded.
+  */
+   loadEditingTask(): void {
+    const editingTask = this.taskService.getEditingTask();
+
+    if (editingTask) {
+      this.isEditingMode = true;
+      this.editingTaskId = editingTask.id;
+      this.populateFormWithTaskData(editingTask);
+      this.taskService.clearEditingTask();
+    } else {
+      this.clearAllManagers();
+    }
   }
 
   /**
@@ -301,8 +318,8 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   private resetStateFlags(): void {
     this.isCreatingTask = false;
-    this.editTaskManager.isEditingMode = false;
-    this.editTaskManager.editingTaskId = undefined;
+    this.isEditingMode = false;
+    this.editingTaskId = undefined;
     this.originalTaskStatus = 'to-do';
     this.subtaskManager.originalSubtasks = [];
     this.showSuccessMessage = false;
@@ -377,7 +394,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    * Creates or updates the task depending on the mode.
    */
   private async saveTask(): Promise<void> {
-    if (this.editTaskManager.isEditingMode && this.editTaskManager.editingTaskId) {
+    if (this.isEditingMode && this.editingTaskId) {
       await this.updateTask();
     } else {
       await this.addNewTask();
@@ -398,13 +415,13 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    * Updates an existing task and its subtasks.
    */
   async updateTask(): Promise<void> {
-    if (!this.editTaskManager.editingTaskId) return;
-    const updatedTask: Task = this.buildTask(this.originalTaskStatus, this.editTaskManager.editingTaskId);
-    await this.taskService.updateTask(this.editTaskManager.editingTaskId, updatedTask);
+    if (!this.editingTaskId) return;
+    const updatedTask: Task = this.buildTask(this.originalTaskStatus, this.editingTaskId);
+    await this.taskService.updateTask(this.editingTaskId, updatedTask);
     const currentSubtasks = this.subtaskManager.getSubtasks();
     const deleted = this.subtaskManager.getDeletedSubtasks(currentSubtasks);
-    await this.subtaskManager.deleteSubtasks(this.editTaskManager.editingTaskId, deleted);
-    await this.subtaskManager.syncSubtasks(this.editTaskManager.editingTaskId, currentSubtasks);
+    await this.subtaskManager.deleteSubtasks(this.editingTaskId, deleted);
+    await this.subtaskManager.syncSubtasks(this.editingTaskId, currentSubtasks);
   }
 
   /**

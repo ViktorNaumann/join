@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Contact, ContactService } from '../services/contact.service';
-import { EditTask } from './edit-task';
 import { CategoryManager } from './category-manager';
 
 /**
@@ -16,7 +15,6 @@ export class ContactManager {
 
   constructor(
     private contactService: ContactService,
-    public editTaskManager: EditTask,
     public categoryManager: CategoryManager
   ) {}
 
