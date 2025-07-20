@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Contact, ContactService } from '../services/contact.service';
 import { EditTask } from './edit-task';
-import { AddTaskComponent } from './add-task.component';
 import { CategoryManager } from './category-manager';
 
 /**
@@ -18,19 +17,9 @@ export class ContactManager {
   constructor(
     private contactService: ContactService,
     public editTaskManager: EditTask,
-    public addTaskManager: AddTaskComponent,
     public categoryManager: CategoryManager
   ) {}
 
-    /**
-   * Loads all contacts from the ContactService and then loads any task being edited.
-   */
-  loadContacts() {
-    this.contactService.getContacts().subscribe(contacts => {
-      this.addTaskManager.contacts = contacts;
-      this.editTaskManager.loadEditingTask();
-    });
-  }
   /**
    * Gets all selected contacts
    */

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Contact, ContactService } from '../services/contact.service';
 import { TaskService, Task } from '../services/task.service';
-import { AddTaskComponent } from './add-task.component';
+// import { AddTaskComponent } from './add-task.component';
 
 /**
  * EditTask handles all task-related editing operations for the AddTaskComponent.
@@ -16,23 +16,26 @@ export class EditTask {
     constructor(
         private contactService: ContactService,
         private taskService: TaskService,
-        public addTaskManager: AddTaskComponent
+        // public addTaskManager: AddTaskComponent
     ) {}
 
    /**
   * Loads a task currently being edited from the TaskService and
   * populates the form with its data. Clears managers if no task is loaded.
   */
-  loadEditingTask(): void {
+   loadEditingTask(
+    populateFormWithTaskData: (task: Task) => void,
+    clearAllManagers: () => void
+  ): void {
     const editingTask = this.taskService.getEditingTask();
 
     if (editingTask) {
       this.isEditingMode = true;
       this.editingTaskId = editingTask.id;
-      this.addTaskManager.populateFormWithTaskData(editingTask);
+      populateFormWithTaskData(editingTask);
       this.taskService.clearEditingTask();
     } else {
-      this.addTaskManager.clearAllManagers();
+      clearAllManagers();
     }
   }
 }

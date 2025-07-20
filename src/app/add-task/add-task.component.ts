@@ -76,7 +76,11 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.loadStatus();
-    this.contactManager.loadContacts();
+    this.loadContacts();
+    this.editTaskManager.loadEditingTask(
+      (task) => this.populateFormWithTaskData(task),
+      () => this.clearAllManagers()
+    );
   }
 
   /**
@@ -95,6 +99,16 @@ export class AddTaskComponent implements OnInit, OnDestroy {
       if (params['status']) {
         this.defaultStatus = params['status'];
       }
+    });
+  }
+
+     /**
+   * Loads all contacts from the ContactService and then loads any task being edited.
+   */
+  loadContacts() {
+    this.contactService.getContacts().subscribe(contacts => {
+      this.contacts = contacts;
+      // this.editTaskManager.loadEditingTask();
     });
   }
 
