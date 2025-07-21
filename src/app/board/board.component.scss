@@ -3,7 +3,7 @@
 @import "./board-dragging.scss";
 
 section {
-  height: calc(100vh - 100px);
+  height: calc(100dvh - 140px);
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -14,6 +14,7 @@ section {
 }
 
 .layout-container {
+  height: calc(100dvh - 140px);
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
@@ -202,6 +203,11 @@ section {
 @media (max-width: 1000px) {
   section {
     height: calc(100dvh - 180px);
+    padding-bottom: 8px;
+  }
+
+  .layout-container {
+    height: calc(100dvh - 180px);
   }
 
   .task-columns {
@@ -249,10 +255,10 @@ section {
 
 @media (max-width: 830px) {
   .layout-container {
-    height: auto;
     max-height: unset;
     overflow-y: visible;
     overflow-x: visible;
+    padding-right: 16px;
   }
 
   .task-columns {
