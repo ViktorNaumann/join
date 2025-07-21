@@ -156,7 +156,6 @@
 
 //#region custom properties
 :root {
-  // Farben
   --accent-primary-color: #29aae2;
   --text-color-main: #000000;
   --text-color-light: #ffffff;
@@ -169,11 +168,7 @@
   --background-light: #ffffff;
   --background-default-light: #e7e7e7;
   --background-default-dark: #d1d1d1;
-
-  // Fonts
   --font-primary: "Inter", sans-serif;
-  // --font-secondary: 'Open Sans', sans-serif;
-  // --font-heading: 'Montserrat', serif;
 }
 
 @mixin truncated-3lh {
