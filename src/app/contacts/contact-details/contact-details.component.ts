@@ -25,7 +25,6 @@ import { map } from 'rxjs/operators';
   imports: [CommonModule],
   templateUrl: './contact-details.component.html',
   styleUrl: './contact-details.component.scss',
-
   animations: [
     trigger('slideInFromRight', [
       transition(':enter', [
@@ -43,7 +42,6 @@ import { map } from 'rxjs/operators';
         ),
       ]),
     ],),
-
     trigger('slideInOut', [
       transition(':enter', [
         style({ transform: 'translateX(100%)', opacity: 0 }),
@@ -61,6 +59,7 @@ import { map } from 'rxjs/operators';
     ]),
   ],
 })
+
 export class ContactDetailsComponent implements OnInit, OnDestroy {
   contactVisible = false;
   contact?: Contact;
@@ -134,9 +133,9 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
- * Initializes the component, subscribes to selected and all contacts,
- * and handles visibility and animation transitions.
- */
+   * Initializes the component, subscribes to selected and all contacts,
+   * and handles visibility and animation transitions.
+   */
   ngOnInit(): void {
     this.subscribeToSelectedContact();
   }
@@ -180,14 +179,11 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   private handleContactChange(contact: Contact | null): void {
     const wasEmpty = !this.contact;
     const isContactChange = contact && contact !== this.contact;
-
     this.contact = contact || undefined;
-
     if (!contact) {
       this.resetContactState();
       return;
     }
-
     if (isContactChange) {
       this.prepareContactTransition(wasEmpty);
     }

@@ -124,7 +124,6 @@ export class ContactsComponent {
   startMessageAnimation() {
     this.toastAnimationState = this.animationDirection;
     this.toastMessageVisible = true;
-
     setTimeout(() => {
       this.toastMessageVisible = false;
       this.toastAnimationState = 'void';

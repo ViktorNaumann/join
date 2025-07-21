@@ -24,6 +24,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './contact-form.component.html',
   styleUrl: './contact-form.component.scss',
 })
+
 export class ContactFormComponent implements OnInit, OnDestroy {
 
   /**
@@ -106,10 +107,10 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   }
 
   /**
-  * Handles form submission. Validates input, creates or updates the contact
-  * using the ContactService, emits the new contact (if applicable),
-  * and closes the form.
-  */
+   * Handles form submission. Validates input, creates or updates the contact
+   * using the ContactService, emits the new contact (if applicable),
+   * and closes the form.
+   */
   async onSubmit(): Promise<void> {
     if (!this.contactForm.valid) return;
 
