@@ -9,6 +9,7 @@ import { CategoryManager } from './category-manager';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ContactManager {
   private selectedContacts: Contact[] = [];
   private showContactDropdown: boolean = false;

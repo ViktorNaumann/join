@@ -28,6 +28,7 @@ import { PriorityManager } from './priority-manager';
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
+
 export class AddTaskComponent implements OnInit, OnDestroy {
   @Output() taskAdded = new EventEmitter<string>;
   @Output() closeOverlay = new EventEmitter<void>();
@@ -77,10 +78,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadStatus();
     this.loadContacts();
-    // this.editTaskManager.loadEditingTask(
-    //   (task) => this.populateFormWithTaskData(task),
-    //   () => this.clearAllManagers()
-    // );
   }
 
   /**
@@ -102,7 +99,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     });
   }
 
-     /**
+  /**
    * Loads all contacts from the ContactService and then loads any task being edited.
    */
   loadContacts() {
@@ -122,10 +119,10 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     this.subtaskManager.clearAll();
   }
 
-    /**
-  * Loads a task currently being edited from the TaskService and
-  * populates the form with its data. Clears managers if no task is loaded.
-  */
+  /**
+   * Loads a task currently being edited from the TaskService and
+   * populates the form with its data. Clears managers if no task is loaded.
+   */
    loadEditingTask(): void {
     const editingTask = this.taskService.getEditingTask();
     if (editingTask) {
@@ -243,11 +240,11 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   /**
- * Handles task creation or editing after form validation.
- * Emits an event and navigates to the board on success.
- *
- * @param event - The form submission event.
- */
+   * Handles task creation or editing after form validation.
+   * Emits an event and navigates to the board on success.
+   *
+   * @param event - The form submission event.
+   */
   async createTask(event: Event): Promise<void> {
     event.preventDefault();
     this.resetValidationErrors();
@@ -344,10 +341,10 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   /**
-  * Validates the form fields and sets error flags.
-  *
-  * @returns True if the form has validation errors.
-  */
+   * Validates the form fields and sets error flags.
+   *
+   * @returns True if the form has validation errors.
+   */
   private formHasErrors(): boolean {
     const titleError = this.validateTitle();
     const categoryError = this.validateCategory();
@@ -401,8 +398,8 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   /**
-    * Adds a new task with optional subtasks.
-    */
+   * Adds a new task with optional subtasks.
+   */
   async addNewTask(): Promise<void> {
     this.ensureDefaultStatus();
     const newTask: Task = this.buildTask(this.defaultStatus);

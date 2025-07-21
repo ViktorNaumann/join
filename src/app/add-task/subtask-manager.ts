@@ -14,6 +14,7 @@ export interface Subtask {
 @Injectable({
   providedIn: 'root'
 })
+
 export class SubtaskManager {
   private subtasks: Subtask[] = [];
   private nextSubtaskId: number = 1;
