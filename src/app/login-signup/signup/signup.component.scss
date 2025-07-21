@@ -29,6 +29,10 @@
     @media (max-width: 406px){
         padding: 12px;
     }
+
+    @media(min-width: 768px) {
+        height: 180px;
+    }
 }
 
 .signup-frame {

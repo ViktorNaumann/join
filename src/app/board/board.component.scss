@@ -16,7 +16,7 @@ section {
 }
 
 .layout-container {
-  flex: 1 1 auto;
+  flex: unset;
   display: flex;
   flex-direction: column;
   overflow: visible;
@@ -34,19 +34,20 @@ section {
   gap: 20px;
   padding: 0 clamp(20px, calc(2vw + 10px), 40px);
   @include inter400-fs12;
+  @media (max-width: 1000px) and (min-width: 830px) {
+  }
 }
 
 .column {
   max-width: 250px;
   min-width: 200px;
   height: auto;
-  max-height: unset;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
   position: relative;
-  flex: 1;
+  flex: 0 0 auto;
 
   .column-header {
     width: 100%;
@@ -210,6 +211,10 @@ section {
     padding-bottom: 100px;
   }
 
+  .layout-container {
+    height: calc(100dvh - 180px);
+  }
+
   .task-columns {
     flex-wrap: nowrap;
     gap: 0;
@@ -240,10 +245,6 @@ section {
 }
 
 @media (max-width: 890px) {
-  section {
-    padding-bottom: 50px;
-  }
-
   .task-columns {
     gap: 8px;
     max-width: 100%;

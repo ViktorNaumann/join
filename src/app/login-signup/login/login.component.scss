@@ -58,17 +58,17 @@
     }
 }
 
-.upper-content-wrapper {
+.main-content-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: calc(100dvh - 200px);
+    height: calc(100dvh - 186px);
 
     @media(max-width: 768px) {
-        height: calc(100dvh - 150px);
+        height: calc(100dvh - 136px);
     }
      @media (max-width: 406px){
-        height: calc(100dvh - 80px);
+        height: calc(100dvh - 76px);
     }
 }
 
