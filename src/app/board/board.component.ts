@@ -93,6 +93,7 @@ import { OverlayManager } from './overlay-manager';
  * - Contact integration for assigning collaborators
  * - Responsive design (mobile / desktop behavior)
  */
+
 export class BoardComponent {
   searchTerm: string = '';
   unsubTask!: Subscription;
@@ -278,11 +279,11 @@ export class BoardComponent {
   }
 
   /**
- * Handles drag-and-drop actions for tasks using the Angular CDK.
- * Updates the task's status and reorders task lists accordingly.
- *
- * @param event - The CdkDragDrop event containing task data and drop context.
- */
+   * Handles drag-and-drop actions for tasks using the Angular CDK.
+   * Updates the task's status and reorders task lists accordingly.
+   *
+   * @param event - The CdkDragDrop event containing task data and drop context.
+   */
   drop(event: CdkDragDrop<Task[]>) {
     this.dragDropManager.handleDrop(event, () => {
       this.taskListManager.updateTaskLists();
@@ -339,48 +340,48 @@ export class BoardComponent {
   }
 
   /**
- * Returns the subtasks assigned to the currently selected task.
- *
- * @returns Array of subtasks, or an empty array if none are found.
- */
+   * Returns the subtasks assigned to the currently selected task.
+   *
+   * @returns Array of subtasks, or an empty array if none are found.
+   */
   getSubtasksForSelectedTask() {
     return this.taskListManager.getSubtasksForSelectedTask(this.selectedTask);
   }
 
   /**
- * Updates the internal list of available contacts.
- *
- * @param contactList - Array of contact objects to store.
- */
+   * Updates the internal list of available contacts.
+   *
+   * @param contactList - Array of contact objects to store.
+   */
   getContactList(contactList: Contact[]) {
     this.contactList = contactList;
   }
 
   /**
- * Replaces the subtask list with a new array of updated subtasks.
- *
- * @param updatedSubtasks - Array of updated subtask objects.
- */
+   * Replaces the subtask list with a new array of updated subtasks.
+   *
+   * @param updatedSubtasks - Array of updated subtask objects.
+   */
   onSubtaskUpdate(updatedSubtasks: Subtask[]) {
     this.subtaskList = [...updatedSubtasks];
   }
 
   /**
- * TrackBy function for use with ngFor to optimize rendering of tasks.
- *
- * @param index - The index of the item in the array.
- * @param task - The task object.
- * @returns The unique task ID.
- */
+   * TrackBy function for use with ngFor to optimize rendering of tasks.
+   *
+   * @param index - The index of the item in the array.
+   * @param task - The task object.
+   * @returns The unique task ID.
+   */
   trackByTaskId(index: number, task: Task): string | undefined {
     return this.taskListManager.trackByTaskId(index, task);
   }
 
   /**
- * Updates the status of a task and persists the change via the task service.
- *
- * @param event - An object containing taskId and the new status.
- */
+   * Updates the status of a task and persists the change via the task service.
+   *
+   * @param event - An object containing taskId and the new status.
+   */
   changeTaskStatus(event: { taskId: string; status: string }) {
     const { taskId, status } = event;
     this.dragDropManager.changeTaskStatus(taskId, status, this.taskList, () => {
@@ -389,11 +390,11 @@ export class BoardComponent {
   }
 
   /**
- * Handles automatic scrolling while dragging near the top or bottom edge
- * of the scrollable task section.
- *
- * @param event - The CdkDragMove event containing the pointer position.
- */
+   * Handles automatic scrolling while dragging near the top or bottom edge
+   * of the scrollable task section.
+   *
+   * @param event - The CdkDragMove event containing the pointer position.
+   */
   onDragMoved(event: CdkDragMove) {
     this.dragDropManager.handleDragMove(event, this.scrollSection);
   }
