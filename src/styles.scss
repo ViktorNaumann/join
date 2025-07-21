@@ -102,9 +102,7 @@
   font-weight: 700;
   font-size: 16px;
 }
-//#endregion
 
-//#region global default styles
 * {
   margin: 0;
   padding: 0;
@@ -129,10 +127,8 @@
   width: 100%;
 }
 
-// Globale CDK Drag Overrides
 .cdk-drag-dragging {
   cursor: grabbing !important;
-  // transform: rotate(5deg) !important;
   rotate: 5deg;
 
   &,
@@ -152,9 +148,6 @@
   }
 }
 
-//#endregion
-
-//#region custom properties
 :root {
   --accent-primary-color: #29aae2;
   --text-color-main: #000000;
@@ -268,10 +261,6 @@
   }
 }
 
-// ======================
-// Mixins Summary Section
-// ======================
-
 @mixin cards {
   width: 150px;
   height: 150px;
@@ -295,7 +284,6 @@
   transition: all 0.2s ease-in-out;
 }
 
-
 @mixin summary-card-responsive {
   width: 159px;
   height: 100px;
@@ -307,8 +295,6 @@
   box-shadow: 5px 10px 18px #888888;
   transition: all 0.2s ease-in-out;
 }
-
-
 
 @mixin summary-card-hover($svg-path-prop: fill, $svg-path-color: #2a3647) {
   background-color: var(--background-dark);
@@ -339,5 +325,3 @@
     }
   }
 }
-
-//#endregion

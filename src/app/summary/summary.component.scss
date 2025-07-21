@@ -33,7 +33,7 @@ section {
   @media (max-width: 375px) {
     height: 100vh;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch; // für sanftes Scrollen auf iOS
+    -webkit-overflow-scrolling: touch;
   }
 
   .greeting-overlay {
