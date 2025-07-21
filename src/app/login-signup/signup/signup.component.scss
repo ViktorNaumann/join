@@ -43,8 +43,7 @@
   align-items: center;
   gap: clamp(24px, 2.5vh, 36px);
   margin-top: 1rem;
-  overflow-x: hidden;
-
+  height: 490px;
 
   @media (max-width: 768px){
     width: 90vw;
@@ -115,7 +114,6 @@ form {
     padding: 8px 33px;
 
 }
-
 
 .form-group-wrapper {
     display: flex;
