@@ -1,9 +1,13 @@
 @import "./../../../styles.scss";
 
 .signup-content {
-    position:relative;
+    position: relative;
     max-width: 1440px;
     margin: 0 auto;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .dark-logo-wrapper {
@@ -53,7 +57,7 @@
 
 
   @media (max-width: 406px){
-    margin-top: 0.5rem;
+    margin-top: 2rem;
     overflow-y: auto;
   }
 
