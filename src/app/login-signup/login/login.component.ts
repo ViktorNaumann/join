@@ -57,6 +57,7 @@ import { Router, RouterModule } from '@angular/router';
     ])
   ]
 })
+
 export class LoginComponent {
   /**
    * State of the logo animation. `'start'` before animation, `'moved'` after.
@@ -134,9 +135,9 @@ export class LoginComponent {
   }
 
   /**
- * Triggers a delayed logo animation if it hasn't already occurred.
- * Stores a flag in session storage to prevent repeat animation.
- */
+   * Triggers a delayed logo animation if it hasn't already occurred.
+   * Stores a flag in session storage to prevent repeat animation.
+   */
   private initializeAnimation(): void {
     if (!sessionStorage.getItem('logoMoved')) {
       this.runLogoAnimationWithDelay();

@@ -14,7 +14,6 @@
  * - Angular animations for menu transitions
  * - AuthService for managing user authentication
  */
-
 import { Component, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { CommonModule } from '@angular/common';
@@ -45,6 +44,7 @@ import { AuthService } from '../services/auth.service';
     ]),
   ],
 })
+
 export class HeaderComponent {
   /**
    * Tracks whether the mobile menu is currently open.

@@ -16,6 +16,7 @@ import { NavigationHistoryService } from '../../services/navigation-history.serv
   templateUrl: './help.component.html',
   styleUrl: './help.component.scss'
 })
+
 export class HelpComponent {
 
   /**

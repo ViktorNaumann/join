@@ -28,6 +28,7 @@ interface FirestoreTimestamp {
     ]),
   ],
 })
+
 export class SummaryComponent implements OnInit {
   taskList: Task[] = [];
   userName: string = '';
@@ -114,16 +115,16 @@ export class SummaryComponent implements OnInit {
     this.router.navigate(['/board']);
   }
 
- /**
- * Initializes the component by determining device type,
- * loading user greeting, and loading tasks with statistics.
- */
-ngOnInit() {
-  this.isMobile = window.innerWidth < 1000;
+  /**
+   * Initializes the component by determining device type,
+   * loading user greeting, and loading tasks with statistics.
+   */
+  ngOnInit() {
+    this.isMobile = window.innerWidth < 1000;
 
-  this.loadUserGreeting();
-  this.loadAndProcessTasks();
-}
+    this.loadUserGreeting();
+    this.loadAndProcessTasks();
+  }
 
   /**
    * Loads current user data and sets a personalized greeting.

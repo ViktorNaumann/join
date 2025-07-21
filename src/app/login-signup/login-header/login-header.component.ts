@@ -19,12 +19,9 @@ import {
   animate
 } from '@angular/animations';
 
-
 @Component({
   selector: 'app-login-header',
-  imports: [
-    RouterModule,
-  ],
+  imports: [ RouterModule ],
   templateUrl: './login-header.component.html',
   styleUrl: './login-header.component.scss',
   animations: [
@@ -41,6 +38,7 @@ import {
     ])
   ]
 })
+
 export class LoginHeaderComponent {
   /**
    * The current state of the logo animation.

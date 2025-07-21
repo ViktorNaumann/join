@@ -16,6 +16,7 @@ import { NavigationHistoryService } from '../../services/navigation-history.serv
   templateUrl: './legal-notice.component.html',
   styleUrl: './legal-notice.component.scss'
 })
+
 export class LegalNoticeComponent {
 
   /**
