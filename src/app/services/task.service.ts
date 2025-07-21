@@ -67,6 +67,7 @@ export interface Subtask {
 @Injectable({
   providedIn: 'root'
 })
+
 export class TaskService {
   private editingTask: Task | null = null;
 

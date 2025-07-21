@@ -33,6 +33,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './task-details.component.html',
   styleUrl: './task-details.component.scss'
 })
+
 export class TaskDetailsComponent {
   /**
    * Emits an event when the task detail view should be closed.

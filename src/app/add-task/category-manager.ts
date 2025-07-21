@@ -13,6 +13,7 @@ export interface Category {
 @Injectable({
   providedIn: 'root'
 })
+
 export class CategoryManager {
   showCategoryError: boolean = false;
   private selectedCategory: string = '';
