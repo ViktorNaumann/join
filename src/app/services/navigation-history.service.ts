@@ -11,6 +11,7 @@ import { filter } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
+
 export class NavigationHistoryService {
   /** Internal array holding the last 3 visited URLs */
   private history: string[] = [];

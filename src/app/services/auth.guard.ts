@@ -10,6 +10,7 @@ import { Observable, combineLatest, map, filter, take } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthGuard implements CanActivate {
 
   /**
@@ -34,8 +35,8 @@ export class AuthGuard implements CanActivate {
       this.authService.currentUser$,
       this.authService.authInitialized$
     ]).pipe(
-      filter(([user, initialized]) => initialized), // Warte bis Auth initialisiert ist
-      take(1), // Nimm nur den ersten Wert nach der Initialisierung
+      filter(([user, initialized]) => initialized),
+      take(1),
       map(([user, initialized]) => {
         if (user) {
           return true;
