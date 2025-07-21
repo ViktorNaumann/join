@@ -44,6 +44,7 @@ import { trigger, style, transition, animate, AnimationEvent } from '@angular/an
     ]),
   ],
 })
+
 export class ContactsComponent {
 
   /**

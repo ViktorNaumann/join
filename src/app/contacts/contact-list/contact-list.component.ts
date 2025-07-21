@@ -18,6 +18,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.scss']
 })
+
 export class ContactListComponent implements OnInit, OnDestroy {
 
   /**
