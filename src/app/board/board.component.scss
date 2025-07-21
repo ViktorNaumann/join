@@ -3,14 +3,16 @@
 @import "./board-dragging.scss";
 
 section {
-  height: calc(100vh - 100px);
   width: 100%;
+  height: calc(100vh - 140px);
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: var(--background-default-light) white;
   display: flex;
   flex-direction: column;
+  padding-bottom: 18px;
+  box-sizing: border-box;
 }
 
 .layout-container {
@@ -22,26 +24,29 @@ section {
 }
 
 .task-columns {
+  height: auto;
+  min-height: unset;
   flex: 1 1 auto;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   overflow: visible;
-  height: auto;
   gap: 20px;
   padding: 0 clamp(20px, calc(2vw + 10px), 40px);
   @include inter400-fs12;
 }
 
 .column {
+  max-width: 250px;
+  min-width: 200px;
+  height: auto;
+  max-height: unset;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
   position: relative;
   flex: 1;
-  max-width: 250px;
-  min-width: 200px;
 
   .column-header {
     width: 100%;
@@ -202,6 +207,7 @@ section {
 @media (max-width: 1000px) {
   section {
     height: calc(100dvh - 180px);
+    padding-bottom: 100px;
   }
 
   .task-columns {
@@ -234,6 +240,10 @@ section {
 }
 
 @media (max-width: 890px) {
+  section {
+    padding-bottom: 50px;
+  }
+
   .task-columns {
     gap: 8px;
     max-width: 100%;
@@ -248,6 +258,10 @@ section {
 }
 
 @media (max-width: 830px) {
+  section {
+    padding-bottom: 0px;
+  }
+
   .layout-container {
     height: auto;
     max-height: unset;
@@ -257,16 +271,15 @@ section {
 
   .task-columns {
     width: 100%;
+    min-height: calc(100vh - 140px);
     flex: 0 0 auto;
     overflow-y: visible;
-    padding: 0 0 120px 20px;
+    padding: 0 0 0 20px;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center;
     gap: 8px;
-
-    min-height: calc(100vh - 140px);
   }
 
   .column {
