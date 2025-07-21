@@ -9,6 +9,7 @@ import { Task, TaskService } from '../services/task.service';
 @Injectable({
   providedIn: 'root'
 })
+
 export class DragDropManager {
   constructor(private taskService: TaskService) { }
 
@@ -23,12 +24,12 @@ export class DragDropManager {
   }
 
   /**
- * Handles drag-and-drop actions for tasks using the Angular CDK.
- * Updates the task's status and reorders task lists accordingly.
- *
- * @param event - The CdkDragDrop event containing task data and drop context.
- * @param updateCallback - Callback function to update task lists after drop.
- */
+   * Handles drag-and-drop actions for tasks using the Angular CDK.
+   * Updates the task's status and reorders task lists accordingly.
+   *
+   * @param event - The CdkDragDrop event containing task data and drop context.
+   * @param updateCallback - Callback function to update task lists after drop.
+   */
   handleDrop(event: CdkDragDrop<Task[]>, updateCallback: () => void): void {
     const task = event.item.data as Task;
     const newStatus = this.getDropTargetStatus(event.container.id);

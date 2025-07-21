@@ -9,12 +9,11 @@ import { Subscription } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class TaskListManager {
   private taskList: Task[] = [];
   private subtasksByTaskId: { [taskId: string]: Subtask[] } = {};
   private unsubTask!: Subscription;
-
-  // Task status arrays
   private todo: Task[] = [];
   private inprogress: Task[] = [];
   private awaitfeedback: Task[] = [];
@@ -56,16 +55,16 @@ export class TaskListManager {
   }
 
   /**
- * Filters tasks by given status and search term (case-insensitive).
- *
- * @param status - Task status to filter by ('to-do', 'in-progress', 'await-feedback', 'done').
- * @param searchTerm - Search term to filter by.
- * @returns Filtered list of tasks.
- */
-  getFilteredTasks(status: string, searchTerm: string): Task[] {
-    const tasksForStatus = this.getTasksByStatus(status);
-    return this.filterTasksBySearchTerm(tasksForStatus, searchTerm);
-  }
+   * Filters tasks by given status and search term (case-insensitive).
+   *
+   * @param status - Task status to filter by ('to-do', 'in-progress', 'await-feedback', 'done').
+   * @param searchTerm - Search term to filter by.
+   * @returns Filtered list of tasks.
+   */
+    getFilteredTasks(status: string, searchTerm: string): Task[] {
+      const tasksForStatus = this.getTasksByStatus(status);
+      return this.filterTasksBySearchTerm(tasksForStatus, searchTerm);
+    }
 
   /**
    * Returns tasks from the internal status arrays based on status key.
