@@ -257,7 +257,31 @@
                                 <a href="#isFirestoreTimestamp" >isFirestoreTimestamp</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadAndProcessTasks" >loadAndProcessTasks</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadUserGreeting" >loadUserGreeting</a>
+                            </li>
+                            <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#parseDate" >parseDate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#setNextDeadline" >setNextDeadline</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#setTaskCounts" >setTaskCounts</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#showAnimatedGreeting" >showAnimatedGreeting</a>
                             </li>
                         </ul>
                     </td>
@@ -296,7 +320,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/summary/summary.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/summary/summary.component.ts:47</a></div>
                             </td>
                         </tr>
 
@@ -389,8 +413,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="62"
-                                    class="link-to-prism">src/app/summary/summary.component.ts:62</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="63"
+                                    class="link-to-prism">src/app/summary/summary.component.ts:63</a></div>
                         </td>
                     </tr>
 
@@ -484,8 +508,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="97"
-                                    class="link-to-prism">src/app/summary/summary.component.ts:97</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/app/summary/summary.component.ts:98</a></div>
                         </td>
                     </tr>
 
@@ -527,8 +551,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">src/app/summary/summary.component.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">src/app/summary/summary.component.ts:114</a></div>
                         </td>
                     </tr>
 
@@ -568,8 +592,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="73"
-                                    class="link-to-prism">src/app/summary/summary.component.ts:73</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/summary/summary.component.ts:74</a></div>
                         </td>
                     </tr>
 
@@ -629,6 +653,90 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="loadAndProcessTasks"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadAndProcessTasks</b></span>
+                        <a href="#loadAndProcessTasks"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadAndProcessTasks()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="169"
+                                    class="link-to-prism">src/app/summary/summary.component.ts:169</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Subscribes to task data and processes statistics and deadline information.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadUserGreeting"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadUserGreeting</b></span>
+                        <a href="#loadUserGreeting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadUserGreeting()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="134"
+                                    class="link-to-prism">src/app/summary/summary.component.ts:134</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Loads current user data and sets a personalized greeting.
+If on mobile and greeting hasn&#39;t been shown in this session,
+triggers an animated greeting display.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="ngOnInit"></a>
                     <span class="name">
                         <span ><b>ngOnInit</b></span>
@@ -645,16 +753,293 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="121"
-                                    class="link-to-prism">src/app/summary/summary.component.ts:121</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">src/app/summary/summary.component.ts:122</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Initializes the component, loads user data and tasks,
-calculates statistics, and controls the welcome greeting display.</p>
+                        <div class="io-description"><p>Initializes the component by determining device type,
+loading user greeting, and loading tasks with statistics.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="parseDate"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>parseDate</b></span>
+                        <a href="#parseDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>parseDate(date: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="219"
+                                    class="link-to-prism">src/app/summary/summary.component.ts:219</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Converts a date value of various possible formats into a JavaScript Date object.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>date</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Date input which could be a string, number, Date, or Firestore timestamp.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Date | null</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>A valid Date object or null if conversion is not possible.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setNextDeadline"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>setNextDeadline</b></span>
+                        <a href="#setNextDeadline"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setNextDeadline(tasks: <a href="../interfaces/Task.html" target="_self">Task[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="195"
+                                    class="link-to-prism">src/app/summary/summary.component.ts:195</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Determines the next upcoming deadline from the list of tasks.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>tasks</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Task.html" target="_self" >Task[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Array of task objects containing dates.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setTaskCounts"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>setTaskCounts</b></span>
+                        <a href="#setTaskCounts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setTaskCounts(tasks: <a href="../interfaces/Task.html" target="_self">Task[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="182"
+                                    class="link-to-prism">src/app/summary/summary.component.ts:182</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets the count of tasks by specific statuses and urgency.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>tasks</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Task.html" target="_self" >Task[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Array of task objects to be analyzed.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showAnimatedGreeting"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>showAnimatedGreeting</b></span>
+                        <a href="#showAnimatedGreeting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showAnimatedGreeting()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/summary/summary.component.ts:154</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Animates a greeting sequence for mobile devices.
+Hides the greeting after the animation and stores the display state in sessionStorage.</p>
 </div>
 
                         <div class="io-description">
@@ -695,7 +1080,7 @@ calculates statistics, and controls the welcome greeting display.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/summary/summary.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/summary/summary.component.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -726,7 +1111,7 @@ calculates statistics, and controls the welcome greeting display.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/summary/summary.component.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/summary/summary.component.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -757,7 +1142,7 @@ calculates statistics, and controls the welcome greeting display.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/summary/summary.component.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/summary/summary.component.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -788,7 +1173,7 @@ calculates statistics, and controls the welcome greeting display.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/summary/summary.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/summary/summary.component.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -819,7 +1204,7 @@ calculates statistics, and controls the welcome greeting display.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/summary/summary.component.ts:45</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/summary/summary.component.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -844,7 +1229,7 @@ calculates statistics, and controls the welcome greeting display.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/summary/summary.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/summary/summary.component.ts:38</a></div>
                         </td>
                     </tr>
 
@@ -875,7 +1260,7 @@ calculates statistics, and controls the welcome greeting display.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/summary/summary.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/summary/summary.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -906,7 +1291,7 @@ calculates statistics, and controls the welcome greeting display.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/summary/summary.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/summary/summary.component.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -931,7 +1316,7 @@ calculates statistics, and controls the welcome greeting display.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/summary/summary.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/summary/summary.component.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -962,7 +1347,7 @@ calculates statistics, and controls the welcome greeting display.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/summary/summary.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/summary/summary.component.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -993,7 +1378,7 @@ calculates statistics, and controls the welcome greeting display.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/summary/summary.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/summary/summary.component.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -1024,7 +1409,7 @@ calculates statistics, and controls the welcome greeting display.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/summary/summary.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/summary/summary.component.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -1053,7 +1438,7 @@ calculates statistics, and controls the welcome greeting display.</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/summary/summary.component.ts:83</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/summary/summary.component.ts:84</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1107,6 +1492,7 @@ interface FirestoreTimestamp {
     ]),
   ],
 })
+
 export class SummaryComponent implements OnInit {
   taskList: Task[] &#x3D; [];
   userName: string &#x3D; &#x27;&#x27;;
@@ -1194,12 +1580,22 @@ export class SummaryComponent implements OnInit {
   }
 
   /**
-   * Initializes the component, loads user data and tasks,
-   * calculates statistics, and controls the welcome greeting display.
+   * Initializes the component by determining device type,
+   * loading user greeting, and loading tasks with statistics.
    */
   ngOnInit() {
     this.isMobile &#x3D; window.innerWidth &lt; 1000;
 
+    this.loadUserGreeting();
+    this.loadAndProcessTasks();
+  }
+
+  /**
+   * Loads current user data and sets a personalized greeting.
+   * If on mobile and greeting hasn&#x27;t been shown in this session,
+   * triggers an animated greeting display.
+   */
+  private loadUserGreeting(): void {
     this.authService.getCurrentUserData().then((userData) &#x3D;&gt; {
       this.userName &#x3D; userData?.displayName?.trim()
         ? userData.displayName
@@ -1208,59 +1604,87 @@ export class SummaryComponent implements OnInit {
 
       const greetingShown &#x3D; sessionStorage.getItem(&#x27;greetingShown&#x27;);
       if (this.isMobile &amp;&amp; !greetingShown) {
-        this.showGreeting &#x3D; true;
-        this.greetingState &#x3D; &#x27;start&#x27;;
-        setTimeout(() &#x3D;&gt; {
-          this.greetingState &#x3D; &#x27;moved&#x27;;
-          setTimeout(() &#x3D;&gt; {
-            this.showGreeting &#x3D; false;
-            sessionStorage.setItem(&#x27;greetingShown&#x27;, &#x27;true&#x27;);
-          }, 2000);
-        }, 500);
+        this.showAnimatedGreeting();
       } else {
         this.showGreeting &#x3D; false;
       }
     });
+  }
 
+  /**
+   * Animates a greeting sequence for mobile devices.
+   * Hides the greeting after the animation and stores the display state in sessionStorage.
+   */
+  private showAnimatedGreeting(): void {
+    this.showGreeting &#x3D; true;
+    this.greetingState &#x3D; &#x27;start&#x27;;
+    setTimeout(() &#x3D;&gt; {
+      this.greetingState &#x3D; &#x27;moved&#x27;;
+      setTimeout(() &#x3D;&gt; {
+        this.showGreeting &#x3D; false;
+        sessionStorage.setItem(&#x27;greetingShown&#x27;, &#x27;true&#x27;);
+      }, 2000);
+    }, 500);
+  }
+
+  /**
+   * Subscribes to task data and processes statistics and deadline information.
+   */
+  private loadAndProcessTasks(): void {
     this.taskService.getTasks().subscribe((tasks: Task[]) &#x3D;&gt; {
       this.taskList &#x3D; tasks;
-
-      this.todoCount &#x3D; this.countTasksByStatus(tasks, &#x27;to-do&#x27;);
-      this.doneCount &#x3D; this.countTasksByStatus(tasks, &#x27;done&#x27;);
-      this.inProgressCount &#x3D; this.countTasksByStatus(tasks, &#x27;in-progress&#x27;);
-      this.awaitingFeedbackCount &#x3D; this.countTasksByStatus(
-        tasks,
-        &#x27;await-feedback&#x27;
-      );
-
-      const now &#x3D; new Date();
-      const futureTasks &#x3D; tasks
-        .filter((t) &#x3D;&gt; t.date &amp;&amp; t.status !&#x3D;&#x3D; &#x27;done&#x27;)
-        .map((t) &#x3D;&gt; {
-          let dateObj: Date | null &#x3D; null;
-          if (t.date instanceof Date) {
-            dateObj &#x3D; t.date;
-          } else if (this.isFirestoreTimestamp(t.date)) {
-            dateObj &#x3D; t.date.toDate();
-          } else if (typeof t.date &#x3D;&#x3D;&#x3D; &#x27;string&#x27; || typeof t.date &#x3D;&#x3D;&#x3D; &#x27;number&#x27;) {
-            dateObj &#x3D; new Date(t.date);
-          }
-          return { ...t, dateObj };
-        })
-        .filter((t) &#x3D;&gt; t.dateObj &amp;&amp; t.dateObj &gt; now);
-
-      if (futureTasks.length &gt; 0) {
-        futureTasks.sort((a, b) &#x3D;&gt; a.dateObj!.getTime() - b.dateObj!.getTime());
-        const nextDate &#x3D; futureTasks[0].dateObj!;
-        this.nextDeadlineDate &#x3D; nextDate;
-        this.nextDeadlineCount &#x3D; futureTasks.filter(
-          (t) &#x3D;&gt; t.dateObj!.getTime() &#x3D;&#x3D;&#x3D; nextDate.getTime()
-        ).length;
-      } else {
-        this.nextDeadlineDate &#x3D; null;
-        this.nextDeadlineCount &#x3D; 0;
-      }
+      this.setTaskCounts(tasks);
+      this.setNextDeadline(tasks);
     });
+  }
+
+  /**
+   * Sets the count of tasks by specific statuses and urgency.
+   * 
+   * @param tasks - Array of task objects to be analyzed.
+   */
+  private setTaskCounts(tasks: Task[]): void {
+    this.todoCount &#x3D; this.countTasksByStatus(tasks, &#x27;to-do&#x27;);
+    this.doneCount &#x3D; this.countTasksByStatus(tasks, &#x27;done&#x27;);
+    this.inProgressCount &#x3D; this.countTasksByStatus(tasks, &#x27;in-progress&#x27;);
+    this.awaitingFeedbackCount &#x3D; this.countTasksByStatus(tasks, &#x27;await-feedback&#x27;);
+    this.nextDeadlineCount &#x3D; tasks.filter((t) &#x3D;&gt; t.priority &#x3D;&#x3D;&#x3D; &#x27;urgent&#x27;).length;
+  }
+
+  /**
+   * Determines the next upcoming deadline from the list of tasks.
+   * 
+   * @param tasks - Array of task objects containing dates.
+   */
+  private setNextDeadline(tasks: Task[]): void {
+    const now &#x3D; new Date();
+    const futureTasks &#x3D; tasks
+      .filter((t) &#x3D;&gt; t.date &amp;&amp; t.status !&#x3D;&#x3D; &#x27;done&#x27;)
+      .map((t) &#x3D;&gt; {
+        const dateObj &#x3D; this.parseDate(t.date);
+        return { ...t, dateObj };
+      })
+      .filter((t) &#x3D;&gt; t.dateObj &amp;&amp; t.dateObj &gt; now);
+
+    if (futureTasks.length &gt; 0) {
+      futureTasks.sort((a, b) &#x3D;&gt; a.dateObj!.getTime() - b.dateObj!.getTime());
+      this.nextDeadlineDate &#x3D; futureTasks[0].dateObj!;
+    } else {
+      this.nextDeadlineDate &#x3D; null;
+    }
+  }
+
+  /**
+   * Converts a date value of various possible formats into a JavaScript Date object.
+   * 
+   * @param date - Date input which could be a string, number, Date, or Firestore timestamp.
+   * @returns A valid Date object or null if conversion is not possible.
+   */
+  private parseDate(date: any): Date | null {
+    if (date instanceof Date) return date;
+    if (this.isFirestoreTimestamp(date)) return date.toDate();
+    if (typeof date &#x3D;&#x3D;&#x3D; &#x27;string&#x27; || typeof date &#x3D;&#x3D;&#x3D; &#x27;number&#x27;) return new Date(date);
+    return null;
   }
 }
 </code></pre>

@@ -238,6 +238,10 @@
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
+                                <a href="#handleAuthResult" >handleAuthResult</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
                                 <a href="#initializeAnimation" >initializeAnimation</a>
                             </li>
                             <li>
@@ -257,6 +261,14 @@
                             <li>
                                     <span class="modifier">Async</span>
                                 <a href="#onLogin" >onLogin</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#runLogoAnimationWithDelay" >runLogoAnimationWithDelay</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#startLoading" >startLoading</a>
                             </li>
                         </ul>
                     </td>
@@ -281,7 +293,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/login-signup/login/login.component.ts:94</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/login-signup/login/login.component.ts:95</a></div>
                             </td>
                         </tr>
 
@@ -389,8 +401,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="122"
-                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:122</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="123"
+                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:123</a></div>
                         </td>
                     </tr>
 
@@ -428,8 +440,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="195"
-                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:195</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="220"
+                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:220</a></div>
                         </td>
                     </tr>
 
@@ -487,6 +499,103 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="handleAuthResult"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>handleAuthResult</b></span>
+                        <a href="#handleAuthResult"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleAuthResult(result: literal type, fallbackError: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="202"
+                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:202</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles the result of an authentication attempt.
+Navigates on success or displays a fallback error message.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>result</td>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The result object returned from the auth service.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>fallbackError</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The fallback error message if no message is provided.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="initializeAnimation"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
@@ -505,8 +614,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="140"
-                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:140</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="141"
+                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:141</a></div>
                         </td>
                     </tr>
 
@@ -547,8 +656,8 @@ Stores a flag in session storage to prevent repeat animation.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="129"
-                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:129</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:130</a></div>
                         </td>
                     </tr>
 
@@ -586,8 +695,8 @@ Stores a flag in session storage to prevent repeat animation.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="207"
-                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:207</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="232"
+                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:232</a></div>
                         </td>
                     </tr>
 
@@ -625,8 +734,8 @@ Stores a flag in session storage to prevent repeat animation.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:114</a></div>
                         </td>
                     </tr>
 
@@ -667,8 +776,8 @@ and triggers logo animation on first visit.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="177"
-                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:177</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="181"
+                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:181</a></div>
                         </td>
                     </tr>
 
@@ -676,7 +785,7 @@ and triggers logo animation on first visit.</p>
             <tr>
                 <td class="col-md-4">
                         <div class="io-description"><p>Logs in as a guest user using the AuthService.
-Navigates to the summary page on success or displays an error.</p>
+Navigates to the summary page on success or shows an error.</p>
 </div>
 
                         <div class="io-description">
@@ -709,20 +818,103 @@ Navigates to the summary page on success or displays an error.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="156"
-                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:156</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="165"
+                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:165</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Handles user login using credentials from the form.
-Shows loading indicator and displays errors if authentication fails.</p>
+                        <div class="io-description"><p>Handles user login using form credentials.
+Displays a loading indicator, validates form input,
+and navigates on success or shows an error message.</p>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="runLogoAnimationWithDelay"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>runLogoAnimationWithDelay</b></span>
+                        <a href="#runLogoAnimationWithDelay"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>runLogoAnimationWithDelay()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="152"
+                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:152</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Performs the delayed logo animation and sets the session flag.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="startLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>startLoading</b></span>
+                        <a href="#startLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>startLoading()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="190"
+                                    class="link-to-prism">src/app/login-signup/login/login.component.ts:190</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Starts loading state and resets the error message.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
                 </td>
@@ -759,7 +951,7 @@ Shows loading indicator and displays errors if authentication fails.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/login-signup/login/login.component.ts:79</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/login-signup/login/login.component.ts:80</a></div>
                         </td>
                     </tr>
 
@@ -796,7 +988,7 @@ Shows loading indicator and displays errors if authentication fails.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/login-signup/login/login.component.ts:84</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/login-signup/login/login.component.ts:85</a></div>
                         </td>
                     </tr>
 
@@ -827,7 +1019,7 @@ Shows loading indicator and displays errors if authentication fails.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/login-signup/login/login.component.ts:94</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/login-signup/login/login.component.ts:95</a></div>
                         </td>
                     </tr>
 
@@ -859,7 +1051,7 @@ Shows loading indicator and displays errors if authentication fails.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/login-signup/login/login.component.ts:74</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/login-signup/login/login.component.ts:75</a></div>
                         </td>
                     </tr>
 
@@ -896,7 +1088,7 @@ Shows loading indicator and displays errors if authentication fails.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/login-signup/login/login.component.ts:64</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/login-signup/login/login.component.ts:65</a></div>
                         </td>
                     </tr>
 
@@ -927,7 +1119,7 @@ Shows loading indicator and displays errors if authentication fails.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/login-signup/login/login.component.ts:69</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/login-signup/login/login.component.ts:70</a></div>
                         </td>
                     </tr>
 
@@ -964,7 +1156,7 @@ Shows loading indicator and displays errors if authentication fails.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/login-signup/login/login.component.ts:89</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/login-signup/login/login.component.ts:90</a></div>
                         </td>
                     </tr>
 
@@ -1020,11 +1212,12 @@ import { Router, RouterModule } from &#x27;@angular/router&#x27;;
         opacity: 0
       })),
       transition(&#x27;start &#x3D;&gt; moved&#x27;, [
-        animate(&#x27;2s 0.5s ease-in-out&#x27;)
+        animate(&#x27;2s 0.7s ease-in-out&#x27;)
       ])
     ])
   ]
 })
+
 export class LoginComponent {
   /**
    * State of the logo animation. &#x60;&#x27;start&#x27;&#x60; before animation, &#x60;&#x27;moved&#x27;&#x60; after.
@@ -1072,7 +1265,7 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-  ) {}
+  ) { }
 
   /**
    * Lifecycle hook: initializes the login form, touch detection,
@@ -1081,7 +1274,7 @@ export class LoginComponent {
   ngOnInit(): void {
     this.initializeForm();
     this.checkIfTouchDevice();
-    this.initializeAnimation();    
+    this.initializeAnimation();
   }
 
   /**
@@ -1107,49 +1300,73 @@ export class LoginComponent {
    */
   private initializeAnimation(): void {
     if (!sessionStorage.getItem(&#x27;logoMoved&#x27;)) {
-      setTimeout(() &#x3D;&gt; {
-        this.pageLoaded &#x3D; true;
-        this.logoState &#x3D; &#x27;moved&#x27;;
-        sessionStorage.setItem(&#x27;logoMoved&#x27;, &#x27;true&#x27;);
-      }, 100);
+      this.runLogoAnimationWithDelay();
     } else {
       this.logoState &#x3D; &#x27;moved&#x27;;
     }
   }
 
   /**
-   * Handles user login using credentials from the form.
-   * Shows loading indicator and displays errors if authentication fails.
+   * Performs the delayed logo animation and sets the session flag.
+   */
+  private runLogoAnimationWithDelay(): void {
+    setTimeout(() &#x3D;&gt; {
+      this.pageLoaded &#x3D; true;
+      this.logoState &#x3D; &#x27;moved&#x27;;
+      sessionStorage.setItem(&#x27;logoMoved&#x27;, &#x27;true&#x27;);
+    }, 100);
+  }
+
+  /**
+   * Handles user login using form credentials.
+   * Displays a loading indicator, validates form input,
+   * and navigates on success or shows an error message.
    */
   async onLogin(): Promise&lt;void&gt; {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
     }
-    this.isLoading &#x3D; true;
-    this.errorMessage &#x3D; &#x27;&#x27;;
+
+    this.startLoading();
     const { email, password } &#x3D; this.loginForm.value;
     const result &#x3D; await this.authService.signIn(email, password);
-    if (result.success) {
-      this.router.navigate([&#x27;/summary&#x27;]);
-    } else {
-      this.errorMessage &#x3D; result.message || &#x27;Login failed&#x27;;
-    }
-    this.isLoading &#x3D; false;
+    this.handleAuthResult(result, &#x27;Login failed&#x27;);
   }
 
   /**
    * Logs in as a guest user using the AuthService.
-   * Navigates to the summary page on success or displays an error.
+   * Navigates to the summary page on success or shows an error.
    */
   async onGuestLogin(): Promise&lt;void&gt; {
+    this.startLoading();
+    const result &#x3D; await this.authService.signInAsGuest();
+    this.handleAuthResult(result, &#x27;Guest login failed&#x27;);
+  }
+
+  /**
+   * Starts loading state and resets the error message.
+   */
+  private startLoading(): void {
     this.isLoading &#x3D; true;
     this.errorMessage &#x3D; &#x27;&#x27;;
-    const result &#x3D; await this.authService.signInAsGuest();
+  }
+
+  /**
+   * Handles the result of an authentication attempt.
+   * Navigates on success or displays a fallback error message.
+   *
+   * @param result - The result object returned from the auth service.
+   * @param fallbackError - The fallback error message if no message is provided.
+   */
+  private handleAuthResult(
+    result: { success: boolean; message?: string },
+    fallbackError: string
+  ): void {
     if (result.success) {
       this.router.navigate([&#x27;/summary&#x27;]);
     } else {
-      this.errorMessage &#x3D; result.message || &#x27;Guest login failed&#x27;;
+      this.errorMessage &#x3D; result.message || fallbackError;
     }
     this.isLoading &#x3D; false;
   }
@@ -1183,60 +1400,62 @@ export class LoginComponent {
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;login-content&quot;&gt;
     &lt;app-login-header class&#x3D;&quot;login-header&quot;&gt;&lt;/app-login-header&gt;
     &lt;div 
-     class&#x3D;&quot;dark-logo-wrapper&quot; 
-     [@fadeOutWrapper]&#x3D;&quot;logoState&quot;
-     [ngStyle]&#x3D;&quot;{&#x27;background&#x27;: isTouchDevice ? &#x27;#2a3647&#x27; : &#x27;transparent&#x27;}&quot;&gt;
+    class&#x3D;&quot;dark-logo-wrapper&quot; 
+    [@fadeOutWrapper]&#x3D;&quot;logoState&quot;
+    [ngStyle]&#x3D;&quot;{&#x27;background&#x27;: isTouchDevice ? &#x27;#2a3647&#x27; : &#x27;transparent&#x27;}&quot;&gt;
         &lt;img 
         [src]&#x3D;&quot;isTouchDevice ? &#x27;./assets/img/logo/logo.png&#x27; : &#x27;./assets/img/logo/favicon.png&#x27;&quot;
         alt&#x3D;&quot;Join Logo&quot; 
         [ngClass]&#x3D;&quot;{&#x27;load&#x27;:pageLoaded}&quot;&gt;
     &lt;/div&gt;
-
-    &lt;section class&#x3D;&quot;login-frame&quot;&gt;
-        &lt;h2&gt;Log in&lt;/h2&gt;
-        &lt;form [formGroup]&#x3D;&quot;loginForm&quot; (ngSubmit)&#x3D;&quot;onLogin()&quot;&gt;
-            &lt;div class&#x3D;&quot;form-group-wrapper flex-center&quot;&gt;
-                &lt;div&gt;
-                    &lt;div class&#x3D;&quot;form-group&quot; [ngClass]&#x3D;&quot;{&#x27;colorError&#x27;: loginForm.get(&#x27;email&#x27;)?.invalid &amp;&amp; loginForm.get(&#x27;email&#x27;)?.touched}&quot;&gt;
-                        &lt;label for&#x3D;&quot;email&quot;&gt;&lt;/label&gt;
-                        &lt;input id&#x3D;&quot;email&quot; type&#x3D;&quot;email&quot; placeholder&#x3D;&quot;Email&quot; formControlName&#x3D;&quot;email&quot;&gt;
-                        &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/mail.png&quot; alt&#x3D;&quot;Mail Icon&quot;&gt;
+    &lt;div class&#x3D;&quot;main-content-wrapper&quot;&gt;
+        &lt;section class&#x3D;&quot;login-frame&quot;&gt;
+            &lt;h2&gt;Log in&lt;/h2&gt;
+            &lt;form [formGroup]&#x3D;&quot;loginForm&quot; (ngSubmit)&#x3D;&quot;onLogin()&quot;&gt;
+                &lt;div class&#x3D;&quot;form-group-wrapper flex-center&quot;&gt;
+                    &lt;div&gt;
+                        &lt;div class&#x3D;&quot;form-group&quot; [ngClass]&#x3D;&quot;{&#x27;colorError&#x27;: loginForm.get(&#x27;email&#x27;)?.invalid &amp;&amp; loginForm.get(&#x27;email&#x27;)?.touched}&quot;&gt;
+                            &lt;label for&#x3D;&quot;email&quot;&gt;&lt;/label&gt;
+                            &lt;input id&#x3D;&quot;email&quot; type&#x3D;&quot;email&quot; placeholder&#x3D;&quot;Email&quot; formControlName&#x3D;&quot;email&quot;&gt;
+                            &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/mail.png&quot; alt&#x3D;&quot;Mail Icon&quot;&gt;
+                        &lt;/div&gt;
+                        &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;loginForm.get(&#x27;email&#x27;)?.invalid &amp;&amp; loginForm.get(&#x27;email&#x27;)?.touched&quot;&gt;
+                            {{ getValidationMessage(&#x27;email&#x27;) }}
+                        &lt;/p&gt;
                     &lt;/div&gt;
-                    &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;loginForm.get(&#x27;email&#x27;)?.invalid &amp;&amp; loginForm.get(&#x27;email&#x27;)?.touched&quot;&gt;
-                        {{ getValidationMessage(&#x27;email&#x27;) }}
-                    &lt;/p&gt;
-                &lt;/div&gt;
-                &lt;div&gt;
-                    &lt;div class&#x3D;&quot;form-group&quot; [ngClass]&#x3D;&quot;{&#x27;colorError&#x27;: loginForm.get(&#x27;password&#x27;)?.invalid &amp;&amp; loginForm.get(&#x27;password&#x27;)?.touched}&quot;&gt;
-                        &lt;label for&#x3D;&quot;password&quot;&gt;&lt;/label&gt;
-                        &lt;input id&#x3D;&quot;password&quot; [type]&#x3D;&quot;showPassword ? &#x27;text&#x27; : &#x27;password&#x27;&quot; placeholder&#x3D;&quot;Password&quot; formControlName&#x3D;&quot;password&quot;&gt;
-                        &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/lock.png&quot; alt&#x3D;&quot;Lock Icon&quot; *ngIf&#x3D;&quot;!loginForm.get(&#x27;password&#x27;)?.value&quot;&gt;
-                        &lt;img class&#x3D;&quot;input-icon toggle-eye&quot; [src]&#x3D;&quot;showPassword ? &#x27;assets/img/icons/visibility.png&#x27; : &#x27;assets/img/icons/visibility-off.png&#x27;&quot; alt&#x3D;&quot;Toggle Password Visibility&quot; *ngIf&#x3D;&quot;loginForm.get(&#x27;password&#x27;)?.value&quot; (click)&#x3D;&quot;showPassword &#x3D; !showPassword&quot;&gt;
+                    &lt;div&gt;
+                        &lt;div class&#x3D;&quot;form-group&quot; [ngClass]&#x3D;&quot;{&#x27;colorError&#x27;: loginForm.get(&#x27;password&#x27;)?.invalid &amp;&amp; loginForm.get(&#x27;password&#x27;)?.touched}&quot;&gt;
+                            &lt;label for&#x3D;&quot;password&quot;&gt;&lt;/label&gt;
+                            &lt;input id&#x3D;&quot;password&quot; [type]&#x3D;&quot;showPassword ? &#x27;text&#x27; : &#x27;password&#x27;&quot; placeholder&#x3D;&quot;Password&quot; formControlName&#x3D;&quot;password&quot;&gt;
+                            &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/lock.png&quot; alt&#x3D;&quot;Lock Icon&quot; *ngIf&#x3D;&quot;!loginForm.get(&#x27;password&#x27;)?.value&quot;&gt;
+                            &lt;img class&#x3D;&quot;input-icon toggle-eye&quot; [src]&#x3D;&quot;showPassword ? &#x27;assets/img/icons/visibility.png&#x27; : &#x27;assets/img/icons/visibility-off.png&#x27;&quot; alt&#x3D;&quot;Toggle Password Visibility&quot; *ngIf&#x3D;&quot;loginForm.get(&#x27;password&#x27;)?.value&quot; (click)&#x3D;&quot;showPassword &#x3D; !showPassword&quot;&gt;
+                        &lt;/div&gt;
+                        &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;loginForm.get(&#x27;password&#x27;)?.invalid &amp;&amp; loginForm.get(&#x27;password&#x27;)?.touched&quot;&gt;
+                            {{ getValidationMessage(&#x27;password&#x27;) }}
+                        &lt;/p&gt;
                     &lt;/div&gt;
-                    &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;loginForm.get(&#x27;password&#x27;)?.invalid &amp;&amp; loginForm.get(&#x27;password&#x27;)?.touched&quot;&gt;
-                        {{ getValidationMessage(&#x27;password&#x27;) }}
-                    &lt;/p&gt;
+                    &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;errorMessage&quot;&gt;{{ errorMessage }}&lt;/p&gt;
                 &lt;/div&gt;
-                &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;errorMessage&quot;&gt;{{ errorMessage }}&lt;/p&gt;
+                &lt;div class&#x3D;&quot;btn-wrapper&quot;&gt;
+                    &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn-login&quot; [disabled]&#x3D;&quot;loginForm.invalid || isLoading&quot;&gt;
+                        {{ isLoading ? &#x27;Loading...&#x27; : &#x27;Log in&#x27; }}
+                    &lt;/button&gt;
+                    &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-guestlogin&quot; (click)&#x3D;&quot;onGuestLogin()&quot; [disabled]&#x3D;&quot;isLoading&quot;&gt;
+                        {{ isLoading ? &#x27;Loading...&#x27; : &#x27;Guest Log in&#x27; }}
+                    &lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+        &lt;/section&gt;
+       &lt;div class&#x3D;&quot;lower-content-wrapper&quot;&gt;
+            &lt;div class&#x3D;&quot;wanna-signup-wrapper&quot;&gt;
+                &lt;span&gt;Not a Join user?&lt;/span&gt;
+                &lt;div routerLink&#x3D;&quot;/signup&quot; class&#x3D;&quot;btn-wrapper&quot;&gt;
+                    &lt;button class&#x3D;&quot;btn-signup&quot;&gt;Sign up&lt;/button&gt;
+                &lt;/div&gt;
             &lt;/div&gt;
-            &lt;div class&#x3D;&quot;btn-wrapper&quot;&gt;
-                &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn-login&quot; [disabled]&#x3D;&quot;isLoading&quot;&gt;
-                    {{ isLoading ? &#x27;Loading...&#x27; : &#x27;Log in&#x27; }}
-                &lt;/button&gt;
-                &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-guestlogin&quot; (click)&#x3D;&quot;onGuestLogin()&quot; [disabled]&#x3D;&quot;isLoading&quot;&gt;
-                    {{ isLoading ? &#x27;Loading...&#x27; : &#x27;Guest Log in&#x27; }}
-                &lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/form&gt;
-    &lt;/section&gt;
-
-    &lt;a routerLink&#x3D;&quot;/signup&quot; class&#x3D;&quot;wanna-signup-wrapper&quot;&gt;
-        &lt;span&gt;Not a Join user?&lt;/span&gt;
-        &lt;div class&#x3D;&quot;btn-wrapper&quot;&gt;
-            &lt;button class&#x3D;&quot;btn-signup&quot;&gt;Sign up&lt;/button&gt;
+            &lt;app-footer&gt;&lt;/app-footer&gt;
         &lt;/div&gt;
-    &lt;/a&gt;
-    &lt;app-footer&gt;&lt;/app-footer&gt;
+    &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
     </div>
@@ -1267,7 +1486,7 @@ export class LoginComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="login-content">    <app-login-header class="login-header"></app-login-header>    <div      class="dark-logo-wrapper"      [@fadeOutWrapper]="logoState"     [ngStyle]="{\'background\': isTouchDevice ? \'#2a3647\' : \'transparent\'}">        <img         [src]="isTouchDevice ? \'./assets/img/logo/logo.png\' : \'./assets/img/logo/favicon.png\'"        alt="Join Logo"         [ngClass]="{\'load\':pageLoaded}">    </div>    <section class="login-frame">        <h2>Log in</h2>        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">            <div class="form-group-wrapper flex-center">                <div>                    <div class="form-group" [ngClass]="{\'colorError\': loginForm.get(\'email\')?.invalid && loginForm.get(\'email\')?.touched}">                        <label for="email"></label>                        <input id="email" type="email" placeholder="Email" formControlName="email">                        <img class="input-icon" src="assets/img/icons/mail.png" alt="Mail Icon">                    </div>                    <p class="error-message" *ngIf="loginForm.get(\'email\')?.invalid && loginForm.get(\'email\')?.touched">                        {{ getValidationMessage(\'email\') }}                    </p>                </div>                <div>                    <div class="form-group" [ngClass]="{\'colorError\': loginForm.get(\'password\')?.invalid && loginForm.get(\'password\')?.touched}">                        <label for="password"></label>                        <input id="password" [type]="showPassword ? \'text\' : \'password\'" placeholder="Password" formControlName="password">                        <img class="input-icon" src="assets/img/icons/lock.png" alt="Lock Icon" *ngIf="!loginForm.get(\'password\')?.value">                        <img class="input-icon toggle-eye" [src]="showPassword ? \'assets/img/icons/visibility.png\' : \'assets/img/icons/visibility-off.png\'" alt="Toggle Password Visibility" *ngIf="loginForm.get(\'password\')?.value" (click)="showPassword = !showPassword">                    </div>                    <p class="error-message" *ngIf="loginForm.get(\'password\')?.invalid && loginForm.get(\'password\')?.touched">                        {{ getValidationMessage(\'password\') }}                    </p>                </div>                <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>            </div>            <div class="btn-wrapper">                <button type="submit" class="btn-login" [disabled]="isLoading">                    {{ isLoading ? \'Loading...\' : \'Log in\' }}                </button>                <button type="button" class="btn-guestlogin" (click)="onGuestLogin()" [disabled]="isLoading">                    {{ isLoading ? \'Loading...\' : \'Guest Log in\' }}                </button>            </div>        </form>    </section>    <a routerLink="/signup" class="wanna-signup-wrapper">        <span>Not a Join user?</span>        <div class="btn-wrapper">            <button class="btn-signup">Sign up</button>        </div>    </a>    <app-footer></app-footer></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="login-content">    <app-login-header class="login-header"></app-login-header>    <div     class="dark-logo-wrapper"     [@fadeOutWrapper]="logoState"    [ngStyle]="{\'background\': isTouchDevice ? \'#2a3647\' : \'transparent\'}">        <img         [src]="isTouchDevice ? \'./assets/img/logo/logo.png\' : \'./assets/img/logo/favicon.png\'"        alt="Join Logo"         [ngClass]="{\'load\':pageLoaded}">    </div>    <div class="main-content-wrapper">        <section class="login-frame">            <h2>Log in</h2>            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">                <div class="form-group-wrapper flex-center">                    <div>                        <div class="form-group" [ngClass]="{\'colorError\': loginForm.get(\'email\')?.invalid && loginForm.get(\'email\')?.touched}">                            <label for="email"></label>                            <input id="email" type="email" placeholder="Email" formControlName="email">                            <img class="input-icon" src="assets/img/icons/mail.png" alt="Mail Icon">                        </div>                        <p class="error-message" *ngIf="loginForm.get(\'email\')?.invalid && loginForm.get(\'email\')?.touched">                            {{ getValidationMessage(\'email\') }}                        </p>                    </div>                    <div>                        <div class="form-group" [ngClass]="{\'colorError\': loginForm.get(\'password\')?.invalid && loginForm.get(\'password\')?.touched}">                            <label for="password"></label>                            <input id="password" [type]="showPassword ? \'text\' : \'password\'" placeholder="Password" formControlName="password">                            <img class="input-icon" src="assets/img/icons/lock.png" alt="Lock Icon" *ngIf="!loginForm.get(\'password\')?.value">                            <img class="input-icon toggle-eye" [src]="showPassword ? \'assets/img/icons/visibility.png\' : \'assets/img/icons/visibility-off.png\'" alt="Toggle Password Visibility" *ngIf="loginForm.get(\'password\')?.value" (click)="showPassword = !showPassword">                        </div>                        <p class="error-message" *ngIf="loginForm.get(\'password\')?.invalid && loginForm.get(\'password\')?.touched">                            {{ getValidationMessage(\'password\') }}                        </p>                    </div>                    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>                </div>                <div class="btn-wrapper">                    <button type="submit" class="btn-login" [disabled]="loginForm.invalid || isLoading">                        {{ isLoading ? \'Loading...\' : \'Log in\' }}                    </button>                    <button type="button" class="btn-guestlogin" (click)="onGuestLogin()" [disabled]="isLoading">                        {{ isLoading ? \'Loading...\' : \'Guest Log in\' }}                    </button>                </div>            </form>        </section>       <div class="lower-content-wrapper">            <div class="wanna-signup-wrapper">                <span>Not a Join user?</span>                <div routerLink="/signup" class="btn-wrapper">                    <button class="btn-signup">Sign up</button>                </div>            </div>            <app-footer></app-footer>        </div>    </div></div></div>'
     var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LoginComponent'};

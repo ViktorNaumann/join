@@ -274,6 +274,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { TaskService, Task } from &#x27;../services/task.service&#x27;;
 
 export interface Subtask {
   id: string | number;
@@ -288,6 +289,7 @@ export interface Subtask {
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
+
 export class SubtaskManager {
   private subtasks: Subtask[] &#x3D; [];
   private nextSubtaskId: number &#x3D; 1;
@@ -295,6 +297,9 @@ export class SubtaskManager {
   private editingSubtaskText: string &#x3D; &#x27;&#x27;;
   private subtaskInput: string &#x3D; &#x27;&#x27;;
   private showSubtaskConfirmation: boolean &#x3D; false;
+  originalSubtasks: Subtask[] &#x3D; [];
+
+  constructor( private taskService: TaskService ){}
 
   /**
    * Gets all subtasks
@@ -511,6 +516,87 @@ export class SubtaskManager {
     this.editingSubtaskText &#x3D; &#x27;&#x27;;
     this.showSubtaskConfirmation &#x3D; false;
   }
+
+  /**
+   * Saves all given subtasks to the task with the specified ID.
+   * 
+   * @param taskId - The ID of the task to add subtasks to.
+   * @param subtasks - The list of subtasks to be saved.
+   */
+  public async saveAllSubtasks(taskId: string, subtasks: any[]): Promise&lt;void&gt; {
+    for (const subtask of subtasks) {
+      await this.taskService.addSubtask(taskId, {
+        title: subtask.text,
+        isCompleted: subtask.completed
+      });
+    }
+  }
+
+  /**
+   * Returns a list of original subtasks that have been deleted.
+   * 
+   * @param currentSubtasks - The current list of subtasks in the form.
+   */
+  public getDeletedSubtasks(currentSubtasks: any[]): any[] {
+    return this.originalSubtasks.filter(original &#x3D;&gt;
+      typeof original.id &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp;
+      original.id.length &gt; 0 &amp;&amp;
+      !currentSubtasks.some(current &#x3D;&gt; current.id &#x3D;&#x3D;&#x3D; original.id)
+    );
+  }
+
+  /**
+   * Deletes the given subtasks from the specified task.
+   * 
+   * @param taskId - The ID of the task.
+   * @param subtasks - The subtasks to delete.
+   */
+  public async deleteSubtasks(taskId: string, subtasks: any[]): Promise&lt;void&gt; {
+    for (const subtask of subtasks) {
+      if (typeof subtask.id &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+        await this.taskService.deleteSubtask(taskId, subtask.id);
+      }
+    }
+  }
+
+  /**
+   * Syncs all current subtasks (add or update) with the backend.
+   * 
+   * @param taskId - The ID of the task to sync with.
+   * @param subtasks - The current list of subtasks in the form.
+   */
+  public async syncSubtasks(taskId: string, subtasks: any[]): Promise&lt;void&gt; {
+    for (const subtask of subtasks) {
+      const subtaskData &#x3D; {
+        title: subtask.text,
+        isCompleted: subtask.completed
+      };
+
+      if (typeof subtask.id &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp; subtask.id.length &gt; 0) {
+        await this.taskService.updateSubtask(taskId, subtask.id, subtaskData);
+      } else {
+        await this.taskService.addSubtask(taskId, subtaskData);
+      }
+    }
+  }
+
+   /**
+   * Loads subtasks for the given task ID and sets them in the subtask manager.
+   *
+   * @param taskId - The ID of the task whose subtasks should be loaded.
+   */
+  public loadAndSetSubtasks(taskId: string): void {
+    this.taskService.getSubtasks(taskId).subscribe(subtasks &#x3D;&gt; {
+      const mappedSubtasks &#x3D; subtasks.map(subtask &#x3D;&gt; ({
+        id: subtask.id || &#x27;&#x27;,
+        text: subtask.title,
+        completed: subtask.isCompleted,
+      }));
+      this.setSubtasks(mappedSubtasks);
+      this.originalSubtasks &#x3D; [...mappedSubtasks];
+    });
+  }
+
 }
 </code></pre>
     </div>

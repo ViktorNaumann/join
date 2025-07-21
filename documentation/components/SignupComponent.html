@@ -236,7 +236,19 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getFieldErrorMessage" >getFieldErrorMessage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getPasswordMismatchMessage" >getPasswordMismatchMessage</a>
+                            </li>
+                            <li>
                                 <a href="#getValidationMessage" >getValidationMessage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#handleRegistrationResult" >handleRegistrationResult</a>
                             </li>
                             <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
@@ -253,6 +265,10 @@
                             </li>
                             <li>
                                 <a href="#saveNewContact" >saveNewContact</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#startLoading" >startLoading</a>
                             </li>
                         </ul>
                     </td>
@@ -383,6 +399,131 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getFieldErrorMessage"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getFieldErrorMessage</b></span>
+                        <a href="#getFieldErrorMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getFieldErrorMessage(control: AbstractControl)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="230"
+                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:230</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Returns a general validation error message for a given form control.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>control</td>
+                                            <td>
+                                                        <code>AbstractControl</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The FormControl instance to evaluate.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>The corresponding validation message or an empty string.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPasswordMismatchMessage"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getPasswordMismatchMessage</b></span>
+                        <a href="#getPasswordMismatchMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getPasswordMismatchMessage()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="210"
+                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:210</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Returns a validation message if the password and confirmation do not match.
+Only shown if either password field has been touched or changed.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Password mismatch message or empty string.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getValidationMessage"></a>
                     <span class="name">
                         <span ><b>getValidationMessage</b></span>
@@ -399,8 +540,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="174"
-                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:174</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="195"
+                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:195</a></div>
                         </td>
                     </tr>
 
@@ -408,7 +549,7 @@
             <tr>
                 <td class="col-md-4">
                         <div class="io-description"><p>Returns a user-friendly validation message for the given form field.
-Includes special handling for mismatched passwords.</p>
+Delegates error interpretation to specialized helper functions.</p>
 </div>
 
                             <div class="io-description">
@@ -436,7 +577,9 @@ Includes special handling for mismatched passwords.</p>
 
 
                                             <td>
-                                                    <p>The name of the form control.</p>
+                                                    <ul>
+<li>The name of the form control.</li>
+</ul>
 
                                             </td>
                                         </tr>
@@ -450,6 +593,86 @@ Includes special handling for mismatched passwords.</p>
                             <div class="io-description">
                                 <p>A descriptive validation message or empty string.</p>
 
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleRegistrationResult"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>handleRegistrationResult</b></span>
+                        <a href="#handleRegistrationResult"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleRegistrationResult(result: literal type)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="148"
+                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:148</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles the result of the registration process.
+Shows success message and redirects on success,
+or displays an error message.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>result</td>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Result object returned from signUp attempt.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
                             </div>
                 </td>
             </tr>
@@ -514,8 +737,8 @@ Includes special handling for mismatched passwords.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="160"
-                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:160</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="181"
+                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:181</a></div>
                         </td>
                     </tr>
 
@@ -556,16 +779,17 @@ Uses <code>skipLocationChange</code> to avoid adding the redirect to browser his
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="119"
-                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:119</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:120</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Handles the form submission process, including validation,
-user registration, contact saving, and navigation on success.</p>
+                        <div class="io-description"><p>Handles the form submission process:
+Validates input, attempts user registration,
+saves the new user as a contact, and navigates on success.</p>
 </div>
 
                         <div class="io-description">
@@ -671,8 +895,8 @@ user registration, contact saving, and navigation on success.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="147"
-                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:147</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="168"
+                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:168</a></div>
                         </td>
                     </tr>
 
@@ -737,6 +961,47 @@ user registration, contact saving, and navigation on success.</p>
                             <div class="io-description">
                                 
                             </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="startLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>startLoading</b></span>
+                        <a href="#startLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>startLoading()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="135"
+                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:135</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets loading state, clears previous messages.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -1035,14 +1300,14 @@ export class SignupComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private contactService: ContactService,
-  ) {}
+  ) { }
 
   /**
    * Lifecycle hook: creates the signup form with all necessary validators.
    */
   ngOnInit(): void {
     this.signupform &#x3D; this.form.group({
-      name : [&#x27;&#x27;, [Validators.required, Validators.minLength(2)]],
+      name: [&#x27;&#x27;, [Validators.required, Validators.minLength(2)]],
       email: [&#x27;&#x27;, [Validators.required, Validators.email]],
       password: [&#x27;&#x27;, [
         Validators.required,
@@ -1067,20 +1332,41 @@ export class SignupComponent implements OnInit {
   }
 
   /**
-   * Handles the form submission process, including validation,
-   * user registration, contact saving, and navigation on success.
-   */
+  * Handles the form submission process:
+  * Validates input, attempts user registration,
+  * saves the new user as a contact, and navigates on success.
+  */
   async onSubmit(): Promise&lt;void&gt; {
     if (this.signupform.invalid) {
       this.signupform.markAllAsTouched();
       return;
     }
-    this.isLoading &#x3D; true;
-    this.errorMessage &#x3D; &#x27;&#x27;;
-    this.successMessage &#x3D; &#x27;&#x27;;
+    this.startLoading();
     const { name, email, password } &#x3D; this.signupform.value;
     const result &#x3D; await this.authService.signUp(email, password, name);
     this.saveNewContact(name, email);
+    this.handleRegistrationResult(result);
+  }
+
+  /**
+   * Sets loading state, clears previous messages.
+   */
+  private startLoading(): void {
+    this.isLoading &#x3D; true;
+    this.errorMessage &#x3D; &#x27;&#x27;;
+    this.successMessage &#x3D; &#x27;&#x27;;
+  }
+
+  /**
+   * Handles the result of the registration process.
+   * Shows success message and redirects on success,
+   * or displays an error message.
+   *
+   * @param result - Result object returned from signUp attempt.
+   */
+  private handleRegistrationResult(
+    result: { success: boolean; message?: string }
+  ): void {
     if (result.success) {
       this.successMessage &#x3D; &#x27;Registration successful! You will be redirected...&#x27;;
       setTimeout(() &#x3D;&gt; {
@@ -1120,130 +1406,155 @@ export class SignupComponent implements OnInit {
 
   /**
    * Returns a user-friendly validation message for the given form field.
-   * Includes special handling for mismatched passwords.
+   * Delegates error interpretation to specialized helper functions.
    * 
-   * @param field The name of the form control.
+   * @param field - The name of the form control.
    * @returns A descriptive validation message or empty string.
    */
   getValidationMessage(field: string): string {
-    const control &#x3D; this.signupform.get(field);
-
     if (field &#x3D;&#x3D;&#x3D; &#x27;confirmPassword&#x27;) {
-      const passwordMismatch &#x3D; this.signupform.errors?.[&#x27;passwordsDontMatch&#x27;];
-      const touched &#x3D; control?.touched || this.signupform.get(&#x27;password&#x27;)?.touched;
-      const dirty &#x3D; control?.dirty || this.signupform.get(&#x27;password&#x27;)?.dirty;
-      if (passwordMismatch &amp;&amp; (touched || dirty)) {
-        return &#x27;Passwords do not match&#x27;;
-      }
+      return this.getPasswordMismatchMessage();
     }
+    const control &#x3D; this.signupform.get(field);
     if (!control || !control.touched || !control.errors) return &#x27;&#x27;;
-    if (control.errors[&#x27;required&#x27;]) return &#x27;This field is required&#x27;;
-    if (control.errors[&#x27;email&#x27;]) return &#x27;Please enter a valid email address&#x27;;
-    if (control.errors[&#x27;minlength&#x27;]) {
+    return this.getFieldErrorMessage(control);
+  }
+
+  /**
+   * Returns a validation message if the password and confirmation do not match.
+   * Only shown if either password field has been touched or changed.
+   * 
+   * @returns Password mismatch message or empty string.
+   */
+  private getPasswordMismatchMessage(): string {
+    const confirmControl &#x3D; this.signupform.get(&#x27;confirmPassword&#x27;);
+    const passwordControl &#x3D; this.signupform.get(&#x27;password&#x27;);
+    const mismatch &#x3D; this.signupform.errors?.[&#x27;passwordsDontMatch&#x27;];
+
+    const touched &#x3D; confirmControl?.touched || passwordControl?.touched;
+    const dirty &#x3D; confirmControl?.dirty || passwordControl?.dirty;
+
+    if (mismatch &amp;&amp; (touched || dirty)) {
+      return &#x27;Passwords do not match&#x27;;
+    }
+    return &#x27;&#x27;;
+  }
+
+  /**
+   * Returns a general validation error message for a given form control.
+   * 
+   * @param control - The FormControl instance to evaluate.
+   * @returns The corresponding validation message or an empty string.
+   */
+  private getFieldErrorMessage(control: AbstractControl): string {
+    if (control.errors?.[&#x27;required&#x27;]) {
+      return &#x27;This field is required&#x27;;
+    }
+    if (control.errors?.[&#x27;email&#x27;]) {
+      return &#x27;Please enter a valid email address&#x27;;
+    }
+    if (control.errors?.[&#x27;minlength&#x27;]) {
       return &#x60;Minimum ${control.errors[&#x27;minlength&#x27;].requiredLength} characters required&#x60;;
     }
-    if (control.errors[&#x27;pattern&#x27;]) {
+    if (control.errors?.[&#x27;pattern&#x27;]) {
       return &#x27;Password must contain uppercase, numbers and special characters&#x27;;
     }
-    if (control.errors[&#x27;requiredTrue&#x27;]) return &#x27;You must accept the privacy policy&#x27;;
-
+    if (control.errors?.[&#x27;requiredTrue&#x27;]) {
+      return &#x27;You must accept the privacy policy&#x27;;
+    }
     return &#x27;&#x27;;
   }
 }</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;signup-content&quot;&gt;    
-    &lt;div class&#x3D;&quot;dark-logo-wrapper&quot;&gt;
-        &lt;img src&#x3D;&quot;./assets/img/logo/favicon.png&quot; alt&#x3D;&quot;Dark Join Logo&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;signup-content&quot;&gt;  
+    &lt;div class&#x3D;&quot;upper-content&quot;&gt;   
+        &lt;div class&#x3D;&quot;dark-logo-wrapper&quot;&gt;
+            &lt;img src&#x3D;&quot;./assets/img/logo/favicon.png&quot; alt&#x3D;&quot;Dark Join Logo&quot;&gt;
+        &lt;/div&gt;   
+        &lt;section class&#x3D;&quot;signup-frame&quot;&gt;
+            &lt;div class&#x3D;&quot;signup-header&quot;&gt;
+                &lt;a class&#x3D;&quot;btn-back&quot; (click)&#x3D;&quot;onBackToLogin()&quot;&gt;
+                    &lt;img src&#x3D;&quot;assets/img/icons/arrow-back.png&quot; alt&#x3D;&quot;Back Icon&quot;&gt;
+                &lt;/a&gt;
+                &lt;h2&gt;Sign up&lt;/h2&gt;
+            &lt;/div&gt;
+                &lt;form [formGroup]&#x3D;&quot;signupform&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot;&gt;
+                    &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt;
+                        &lt;div&gt;
+                            &lt;div class&#x3D;&quot;form-group&quot; [ngClass]&#x3D;&quot;{&#x27;colorError&#x27;: signupform.get(&#x27;name&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;name&#x27;)?.touched}&quot;&gt;
+                                &lt;label for&#x3D;&quot;name&quot;&gt;&lt;/label&gt;
+                                &lt;input id&#x3D;&quot;name&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Name&quot; formControlName&#x3D;&quot;name&quot;&gt;
+                                &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/person.png&quot; alt&#x3D;&quot;Person Icon&quot;&gt;
+                            &lt;/div&gt;
+                            &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;signupform.get(&#x27;name&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;name&#x27;)?.touched&quot;&gt;
+                                {{ getValidationMessage(&#x27;name&#x27;) }}
+                            &lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;   
+                    &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt;
+                        &lt;div&gt;
+                            &lt;div class&#x3D;&quot;form-group&quot; [ngClass]&#x3D;&quot;{&#x27;colorError&#x27;: signupform.get(&#x27;email&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;email&#x27;)?.touched}&quot;&gt;
+                                &lt;label for&#x3D;&quot;email&quot;&gt;&lt;/label&gt;
+                                &lt;input id&#x3D;&quot;email&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Email&quot; formControlName&#x3D;&quot;email&quot;&gt;
+                                &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/mail.png&quot; alt&#x3D;&quot;Mail Icon&quot;&gt;
+                            &lt;/div&gt;
+                            &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;signupform.get(&#x27;email&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;email&#x27;)?.touched&quot;&gt;
+                                {{ getValidationMessage(&#x27;email&#x27;) }}
+                            &lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;    
+                    &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt;
+                        &lt;div&gt;
+                            &lt;div class&#x3D;&quot;form-group&quot; [ngClass]&#x3D;&quot;{&#x27;colorError&#x27;: signupform.get(&#x27;password&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;password&#x27;)?.touched}&quot;&gt;
+                                &lt;label for&#x3D;&quot;password&quot;&gt;&lt;/label&gt;
+                                &lt;input id&#x3D;&quot;password&quot; [type]&#x3D;&quot;showPassword ? &#x27;text&#x27; : &#x27;password&#x27;&quot; placeholder&#x3D;&quot;Password&quot; formControlName&#x3D;&quot;password&quot;&gt;
+                                &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/lock.png&quot; alt&#x3D;&quot;Lock Icon&quot; *ngIf&#x3D;&quot;!signupform.get(&#x27;password&#x27;)?.value&quot;&gt;
+                                &lt;img class&#x3D;&quot;input-icon toggle-eye&quot; [src]&#x3D;&quot;showPassword ? &#x27;assets/img/icons/visibility.png&#x27; : &#x27;assets/img/icons/visibility-off.png&#x27;&quot; alt&#x3D;&quot;Toggle Password Visibility&quot; *ngIf&#x3D;&quot;signupform.get(&#x27;password&#x27;)?.value&quot; (click)&#x3D;&quot;showPassword &#x3D; !showPassword&quot; /&gt;
+                            &lt;/div&gt;
+                            &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;signupform.get(&#x27;password&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;password&#x27;)?.touched&quot;&gt;
+                                {{ getValidationMessage(&#x27;password&#x27;) }}
+                            &lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;    
+                    &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt; 
+                        &lt;div&gt;
+                            &lt;div class&#x3D;&quot;form-group&quot;   [ngClass]&#x3D;&quot;{&#x27;colorError&#x27;: signupform.get(&#x27;confirmPassword&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;confirmPassword&#x27;)?.touched}&quot;&gt;
+                                &lt;label for&#x3D;&quot;confirmPassword&quot;&gt;&lt;/label&gt;
+                                &lt;input id&#x3D;&quot;confirmPassword&quot; [type]&#x3D;&quot;showConfirmPassword ? &#x27;text&#x27; : &#x27;password&#x27;&quot; placeholder&#x3D;&quot;Confirm Password&quot; formControlName&#x3D;&quot;confirmPassword&quot;&gt;
+                                &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/lock.png&quot; alt&#x3D;&quot;Lock Icon&quot; *ngIf&#x3D;&quot;!signupform.get(&#x27;confirmPassword&#x27;)?.value&quot;&gt;
+                                &lt;img class&#x3D;&quot;input-icon toggle-eye&quot; [src]&#x3D;&quot;showConfirmPassword ? &#x27;assets/img/icons/visibility.png&#x27; : &#x27;assets/img/icons/visibility-off.png&#x27;&quot; alt&#x3D;&quot;Toggle Confirm Password Visibility&quot; *ngIf&#x3D;&quot;signupform.get(&#x27;confirmPassword&#x27;)?.value&quot; (click)&#x3D;&quot;showConfirmPassword &#x3D; !showConfirmPassword&quot;/&gt;
+                            &lt;/div&gt;
+                            &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;getValidationMessage(&#x27;confirmPassword&#x27;)&quot;&gt;
+                                {{ getValidationMessage(&#x27;confirmPassword&#x27;) }}
+                            &lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt;    
+                        &lt;label for&#x3D;&quot;checkbox-label&quot; class&#x3D;&quot;checkbox-label&quot;&gt;
+                            &lt;input id&#x3D;&quot;checkbox-label&quot; type&#x3D;&quot;checkbox&quot; formControlName&#x3D;&quot;privacyPolicy&quot; /&gt;
+                            I accept the &lt;a routerLink&#x3D;&quot;/privacy-policy&quot; class&#x3D;&quot;highlight&quot;&gt;Privacy policy&lt;/a&gt;
+                        &lt;/label&gt;
+                    &lt;/div&gt;    
+                    &lt;div class&#x3D;&quot;btn-wrapper&quot;&gt;
+                        &lt;button class&#x3D;&quot;btn-signup&quot; type&#x3D;&quot;submit&quot; [disabled]&#x3D;&quot;signupform.invalid || isLoading&quot;&gt;
+                            &lt;ng-container *ngIf&#x3D;&quot;!isLoading&quot;&gt;Sign Up&lt;/ng-container&gt;
+                            &lt;ng-container *ngIf&#x3D;&quot;isLoading&quot;&gt;
+                                &lt;span class&#x3D;&quot;spinner&quot;&gt;&lt;/span&gt;
+                                Signing up...
+                            &lt;/ng-container&gt;
+                        &lt;/button&gt;
+                    &lt;/div&gt;
+                    &lt;p class&#x3D;&quot;success-message&quot; *ngIf&#x3D;&quot;successMessage&quot;&gt;{{ successMessage }}&lt;/p&gt;
+                    &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;errorMessage&quot;&gt;{{ errorMessage }}&lt;/p&gt;
+                &lt;/form&gt;    
+        &lt;/section&gt;
     &lt;/div&gt;
-
-    &lt;section class&#x3D;&quot;signup-frame&quot;&gt;
-        &lt;div class&#x3D;&quot;signup-header&quot;&gt;
-            &lt;a class&#x3D;&quot;btn-back&quot; (click)&#x3D;&quot;onBackToLogin()&quot;&gt;
-                &lt;img src&#x3D;&quot;assets/img/icons/arrow-back.png&quot; alt&#x3D;&quot;Back Icon&quot;&gt;
-            &lt;/a&gt;
-            &lt;h2&gt;Sign up&lt;/h2&gt;
-        &lt;/div&gt;
-            &lt;form [formGroup]&#x3D;&quot;signupform&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot;&gt;
-                &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt;
-                    &lt;div&gt;
-                        &lt;div class&#x3D;&quot;form-group&quot; [ngClass]&#x3D;&quot;{&#x27;colorError&#x27;: signupform.get(&#x27;name&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;name&#x27;)?.touched}&quot;&gt;
-                            &lt;label for&#x3D;&quot;name&quot;&gt;&lt;/label&gt;
-                            &lt;input id&#x3D;&quot;name&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Name&quot; formControlName&#x3D;&quot;name&quot;&gt;
-                            &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/person.png&quot; alt&#x3D;&quot;Person Icon&quot;&gt;
-                        &lt;/div&gt;
-                        &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;signupform.get(&#x27;name&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;name&#x27;)?.touched&quot;&gt;
-                            {{ getValidationMessage(&#x27;name&#x27;) }}
-                        &lt;/p&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;   
-                &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt;
-                    &lt;div&gt;
-                        &lt;div class&#x3D;&quot;form-group&quot; [ngClass]&#x3D;&quot;{&#x27;colorError&#x27;: signupform.get(&#x27;email&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;email&#x27;)?.touched}&quot;&gt;
-                            &lt;label for&#x3D;&quot;email&quot;&gt;&lt;/label&gt;
-                            &lt;input id&#x3D;&quot;email&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Email&quot; formControlName&#x3D;&quot;email&quot;&gt;
-                            &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/mail.png&quot; alt&#x3D;&quot;Mail Icon&quot;&gt;
-                        &lt;/div&gt;
-                        &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;signupform.get(&#x27;email&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;email&#x27;)?.touched&quot;&gt;
-                            {{ getValidationMessage(&#x27;email&#x27;) }}
-                        &lt;/p&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;    
-                &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt;
-                    &lt;div&gt;
-                        &lt;div class&#x3D;&quot;form-group&quot; [ngClass]&#x3D;&quot;{&#x27;colorError&#x27;: signupform.get(&#x27;password&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;password&#x27;)?.touched}&quot;&gt;
-                            &lt;label for&#x3D;&quot;password&quot;&gt;&lt;/label&gt;
-                            &lt;input id&#x3D;&quot;password&quot; [type]&#x3D;&quot;showPassword ? &#x27;text&#x27; : &#x27;password&#x27;&quot; placeholder&#x3D;&quot;Password&quot; formControlName&#x3D;&quot;password&quot;&gt;
-                            &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/lock.png&quot; alt&#x3D;&quot;Lock Icon&quot; *ngIf&#x3D;&quot;!signupform.get(&#x27;password&#x27;)?.value&quot;&gt;
-                            &lt;img class&#x3D;&quot;input-icon toggle-eye&quot; [src]&#x3D;&quot;showPassword ? &#x27;assets/img/icons/visibility.png&#x27; : &#x27;assets/img/icons/visibility-off.png&#x27;&quot; alt&#x3D;&quot;Toggle Password Visibility&quot; *ngIf&#x3D;&quot;signupform.get(&#x27;password&#x27;)?.value&quot; (click)&#x3D;&quot;showPassword &#x3D; !showPassword&quot; /&gt;
-                        &lt;/div&gt;
-                        &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;signupform.get(&#x27;password&#x27;)?.invalid &amp;&amp; signupform.get(&#x27;password&#x27;)?.touched&quot;&gt;
-                            {{ getValidationMessage(&#x27;password&#x27;) }}
-                        &lt;/p&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;    
-                &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt; 
-
-
-
-                    &lt;div&gt;
-                        &lt;div class&#x3D;&quot;form-group&quot;   [class.invalid]&#x3D;&quot;signupform.hasError(&#x27;passwordsDontMatch&#x27;) &amp;&amp; signupform.get(&#x27;confirmPassword&#x27;)?.touched&quot;&gt;
-                            &lt;label for&#x3D;&quot;confirmPassword&quot;&gt;&lt;/label&gt;
-                            &lt;input id&#x3D;&quot;confirmPassword&quot; [type]&#x3D;&quot;showConfirmPassword ? &#x27;text&#x27; : &#x27;password&#x27;&quot; placeholder&#x3D;&quot;Confirm Password&quot; formControlName&#x3D;&quot;confirmPassword&quot;&gt;
-                            &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/lock.png&quot; alt&#x3D;&quot;Lock Icon&quot; *ngIf&#x3D;&quot;!signupform.get(&#x27;confirmPassword&#x27;)?.value&quot;&gt;
-                            &lt;img class&#x3D;&quot;input-icon toggle-eye&quot; [src]&#x3D;&quot;showConfirmPassword ? &#x27;assets/img/icons/visibility.png&#x27; : &#x27;assets/img/icons/visibility-off.png&#x27;&quot; alt&#x3D;&quot;Toggle Confirm Password Visibility&quot; *ngIf&#x3D;&quot;signupform.get(&#x27;confirmPassword&#x27;)?.value&quot; (click)&#x3D;&quot;showConfirmPassword &#x3D; !showConfirmPassword&quot;/&gt;
-                        &lt;/div&gt;
-                        &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;getValidationMessage(&#x27;confirmPassword&#x27;)&quot;&gt;
-                            {{ getValidationMessage(&#x27;confirmPassword&#x27;) }}
-                        &lt;/p&gt;
-                    &lt;/div&gt;
-
-
-
-                &lt;/div&gt;
-                &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt;    
-                    &lt;label class&#x3D;&quot;checkbox-label&quot;&gt;
-                        &lt;input type&#x3D;&quot;checkbox&quot; formControlName&#x3D;&quot;privacyPolicy&quot; /&gt;
-                        I accept the &lt;a routerLink&#x3D;&quot;/privacy-policy&quot; class&#x3D;&quot;highlight&quot;&gt;Privacy policy&lt;/a&gt;
-                    &lt;/label&gt;
-                &lt;/div&gt;    
-                &lt;div class&#x3D;&quot;btn-wrapper&quot;&gt;
-                    &lt;button class&#x3D;&quot;btn-signup&quot; type&#x3D;&quot;submit&quot; [disabled]&#x3D;&quot;signupform.invalid || isLoading&quot;&gt;
-                        &lt;ng-container *ngIf&#x3D;&quot;!isLoading&quot;&gt;Sign Up&lt;/ng-container&gt;
-                        &lt;ng-container *ngIf&#x3D;&quot;isLoading&quot;&gt;
-                            &lt;span class&#x3D;&quot;spinner&quot;&gt;&lt;/span&gt;
-                            Signing up...
-                        &lt;/ng-container&gt;
-                    &lt;/button&gt;
-                &lt;/div&gt;
-                &lt;p class&#x3D;&quot;success-message&quot; *ngIf&#x3D;&quot;successMessage&quot;&gt;{{ successMessage }}&lt;/p&gt;
-                &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;errorMessage&quot;&gt;{{ errorMessage }}&lt;/p&gt;
-            &lt;/form&gt;    
-    &lt;/section&gt;
+    &lt;app-footer&gt;&lt;/app-footer&gt;    
 &lt;/div&gt;
 
-&lt;app-footer&gt;&lt;/app-footer&gt;
+
 
 </code></pre>
     </div>
@@ -1255,13 +1566,17 @@ export class SignupComponent implements OnInit {
                 <pre class="line-numbers"><code class="language-scss">@import &quot;./../../../styles.scss&quot;;
 
 .signup-content {
-    position:relative;
+    position: relative;
     max-width: 1440px;
     margin: 0 auto;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .dark-logo-wrapper {
-    padding: 32px;
+    padding: 32px 40px;
 
     img {
         @media (max-width: 768px) {
@@ -1279,6 +1594,10 @@ export class SignupComponent implements OnInit {
     @media (max-width: 406px){
         padding: 12px;
     }
+
+    @media(min-width: 768px) {
+        height: 180px;
+    }
 }
 
 .signup-frame {
@@ -1287,17 +1606,19 @@ export class SignupComponent implements OnInit {
   padding: clamp(32px, calc(1.8vw + 20px), 64px);
   box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.05);
   width: clamp(440px, 5vw + 440px, 560px);
+  max-width: 500px;
   margin: 0 auto;
   @include flex-center;
   flex-direction: column;
   align-items: center;
   gap: clamp(24px, 2.5vh, 36px);
   margin-top: 1rem;
-  overflow-x: hidden;
+  height: 65dvh;
+  max-height: 650px;
 
-
-  @media (max-width: 768px){
+  @media (max-width: 600px){
     width: 90vw;
+    max-width: 400px;
     padding: 24px 12px;
     gap: 20px;
     box-sizing: border-box;
@@ -1307,7 +1628,7 @@ export class SignupComponent implements OnInit {
 
 
   @media (max-width: 406px){
-    margin-top: 0.5rem;
+    margin-top: 2rem;
     overflow-y: auto;
   }
 
@@ -1366,19 +1687,12 @@ form {
 
 }
 
-
 .form-group-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     margin-bottom: 20px;
-
-    /*
-    @media(max-width: 768px) {
-        gap: 16px;
-    }
-    */
 }
 
 .form-group {
@@ -1420,7 +1734,6 @@ form {
         width: 100%;
 
         input {
-            //width: 100%;
             font-size: 15px;
             height: 14px;
         }
@@ -1451,7 +1764,7 @@ form {
         width: 20px;
         height: 20px;
         cursor: pointer;
-        background-image: url(&quot;/assets/img/icons/checkbox.png&quot;);
+        background-image: url(&quot;./../../../../public/assets/img/icons/checkbox.png&quot;);
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
@@ -1462,7 +1775,7 @@ form {
     }
 
     input[type&#x3D;&quot;checkbox&quot;]:checked {
-        background-image: url(&quot;/assets/img/icons/checkbox-checked.png&quot;);
+        background-image: url(&quot;./../../../../public/assets/img/icons/checkbox-checked.png&quot;);
     }
 
     .highlight {
@@ -1607,7 +1920,7 @@ input:focus {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="signup-content">        <div class="dark-logo-wrapper">        <img src="./assets/img/logo/favicon.png" alt="Dark Join Logo">    </div>    <section class="signup-frame">        <div class="signup-header">            <a class="btn-back" (click)="onBackToLogin()">                <img src="assets/img/icons/arrow-back.png" alt="Back Icon">            </a>            <h2>Sign up</h2>        </div>            <form [formGroup]="signupform" (ngSubmit)="onSubmit()">                <div class="form-group-wrapper">                    <div>                        <div class="form-group" [ngClass]="{\'colorError\': signupform.get(\'name\')?.invalid && signupform.get(\'name\')?.touched}">                            <label for="name"></label>                            <input id="name" type="text" placeholder="Name" formControlName="name">                            <img class="input-icon" src="assets/img/icons/person.png" alt="Person Icon">                        </div>                        <p class="error-message" *ngIf="signupform.get(\'name\')?.invalid && signupform.get(\'name\')?.touched">                            {{ getValidationMessage(\'name\') }}                        </p>                    </div>                </div>                   <div class="form-group-wrapper">                    <div>                        <div class="form-group" [ngClass]="{\'colorError\': signupform.get(\'email\')?.invalid && signupform.get(\'email\')?.touched}">                            <label for="email"></label>                            <input id="email" type="text" placeholder="Email" formControlName="email">                            <img class="input-icon" src="assets/img/icons/mail.png" alt="Mail Icon">                        </div>                        <p class="error-message" *ngIf="signupform.get(\'email\')?.invalid && signupform.get(\'email\')?.touched">                            {{ getValidationMessage(\'email\') }}                        </p>                    </div>                </div>                    <div class="form-group-wrapper">                    <div>                        <div class="form-group" [ngClass]="{\'colorError\': signupform.get(\'password\')?.invalid && signupform.get(\'password\')?.touched}">                            <label for="password"></label>                            <input id="password" [type]="showPassword ? \'text\' : \'password\'" placeholder="Password" formControlName="password">                            <img class="input-icon" src="assets/img/icons/lock.png" alt="Lock Icon" *ngIf="!signupform.get(\'password\')?.value">                            <img class="input-icon toggle-eye" [src]="showPassword ? \'assets/img/icons/visibility.png\' : \'assets/img/icons/visibility-off.png\'" alt="Toggle Password Visibility" *ngIf="signupform.get(\'password\')?.value" (click)="showPassword = !showPassword" />                        </div>                        <p class="error-message" *ngIf="signupform.get(\'password\')?.invalid && signupform.get(\'password\')?.touched">                            {{ getValidationMessage(\'password\') }}                        </p>                    </div>                </div>                    <div class="form-group-wrapper">                     <div>                        <div class="form-group"   [class.invalid]="signupform.hasError(\'passwordsDontMatch\') && signupform.get(\'confirmPassword\')?.touched">                            <label for="confirmPassword"></label>                            <input id="confirmPassword" [type]="showConfirmPassword ? \'text\' : \'password\'" placeholder="Confirm Password" formControlName="confirmPassword">                            <img class="input-icon" src="assets/img/icons/lock.png" alt="Lock Icon" *ngIf="!signupform.get(\'confirmPassword\')?.value">                            <img class="input-icon toggle-eye" [src]="showConfirmPassword ? \'assets/img/icons/visibility.png\' : \'assets/img/icons/visibility-off.png\'" alt="Toggle Confirm Password Visibility" *ngIf="signupform.get(\'confirmPassword\')?.value" (click)="showConfirmPassword = !showConfirmPassword"/>                        </div>                        <p class="error-message" *ngIf="getValidationMessage(\'confirmPassword\')">                            {{ getValidationMessage(\'confirmPassword\') }}                        </p>                    </div>                </div>                <div class="form-group-wrapper">                        <label class="checkbox-label">                        <input type="checkbox" formControlName="privacyPolicy" />                        I accept the <a routerLink="/privacy-policy" class="highlight">Privacy policy</a>                    </label>                </div>                    <div class="btn-wrapper">                    <button class="btn-signup" type="submit" [disabled]="signupform.invalid || isLoading">                        <ng-container *ngIf="!isLoading">Sign Up</ng-container>                        <ng-container *ngIf="isLoading">                            <span class="spinner"></span>                            Signing up...                        </ng-container>                    </button>                </div>                <p class="success-message" *ngIf="successMessage">{{ successMessage }}</p>                <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>            </form>        </section></div><app-footer></app-footer></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="signup-content">      <div class="upper-content">           <div class="dark-logo-wrapper">            <img src="./assets/img/logo/favicon.png" alt="Dark Join Logo">        </div>           <section class="signup-frame">            <div class="signup-header">                <a class="btn-back" (click)="onBackToLogin()">                    <img src="assets/img/icons/arrow-back.png" alt="Back Icon">                </a>                <h2>Sign up</h2>            </div>                <form [formGroup]="signupform" (ngSubmit)="onSubmit()">                    <div class="form-group-wrapper">                        <div>                            <div class="form-group" [ngClass]="{\'colorError\': signupform.get(\'name\')?.invalid && signupform.get(\'name\')?.touched}">                                <label for="name"></label>                                <input id="name" type="text" placeholder="Name" formControlName="name">                                <img class="input-icon" src="assets/img/icons/person.png" alt="Person Icon">                            </div>                            <p class="error-message" *ngIf="signupform.get(\'name\')?.invalid && signupform.get(\'name\')?.touched">                                {{ getValidationMessage(\'name\') }}                            </p>                        </div>                    </div>                       <div class="form-group-wrapper">                        <div>                            <div class="form-group" [ngClass]="{\'colorError\': signupform.get(\'email\')?.invalid && signupform.get(\'email\')?.touched}">                                <label for="email"></label>                                <input id="email" type="text" placeholder="Email" formControlName="email">                                <img class="input-icon" src="assets/img/icons/mail.png" alt="Mail Icon">                            </div>                            <p class="error-message" *ngIf="signupform.get(\'email\')?.invalid && signupform.get(\'email\')?.touched">                                {{ getValidationMessage(\'email\') }}                            </p>                        </div>                    </div>                        <div class="form-group-wrapper">                        <div>                            <div class="form-group" [ngClass]="{\'colorError\': signupform.get(\'password\')?.invalid && signupform.get(\'password\')?.touched}">                                <label for="password"></label>                                <input id="password" [type]="showPassword ? \'text\' : \'password\'" placeholder="Password" formControlName="password">                                <img class="input-icon" src="assets/img/icons/lock.png" alt="Lock Icon" *ngIf="!signupform.get(\'password\')?.value">                                <img class="input-icon toggle-eye" [src]="showPassword ? \'assets/img/icons/visibility.png\' : \'assets/img/icons/visibility-off.png\'" alt="Toggle Password Visibility" *ngIf="signupform.get(\'password\')?.value" (click)="showPassword = !showPassword" />                            </div>                            <p class="error-message" *ngIf="signupform.get(\'password\')?.invalid && signupform.get(\'password\')?.touched">                                {{ getValidationMessage(\'password\') }}                            </p>                        </div>                    </div>                        <div class="form-group-wrapper">                         <div>                            <div class="form-group"   [ngClass]="{\'colorError\': signupform.get(\'confirmPassword\')?.invalid && signupform.get(\'confirmPassword\')?.touched}">                                <label for="confirmPassword"></label>                                <input id="confirmPassword" [type]="showConfirmPassword ? \'text\' : \'password\'" placeholder="Confirm Password" formControlName="confirmPassword">                                <img class="input-icon" src="assets/img/icons/lock.png" alt="Lock Icon" *ngIf="!signupform.get(\'confirmPassword\')?.value">                                <img class="input-icon toggle-eye" [src]="showConfirmPassword ? \'assets/img/icons/visibility.png\' : \'assets/img/icons/visibility-off.png\'" alt="Toggle Confirm Password Visibility" *ngIf="signupform.get(\'confirmPassword\')?.value" (click)="showConfirmPassword = !showConfirmPassword"/>                            </div>                            <p class="error-message" *ngIf="getValidationMessage(\'confirmPassword\')">                                {{ getValidationMessage(\'confirmPassword\') }}                            </p>                        </div>                    </div>                    <div class="form-group-wrapper">                            <label for="checkbox-label" class="checkbox-label">                            <input id="checkbox-label" type="checkbox" formControlName="privacyPolicy" />                            I accept the <a routerLink="/privacy-policy" class="highlight">Privacy policy</a>                        </label>                    </div>                        <div class="btn-wrapper">                        <button class="btn-signup" type="submit" [disabled]="signupform.invalid || isLoading">                            <ng-container *ngIf="!isLoading">Sign Up</ng-container>                            <ng-container *ngIf="isLoading">                                <span class="spinner"></span>                                Signing up...                            </ng-container>                        </button>                    </div>                    <p class="success-message" *ngIf="successMessage">{{ successMessage }}</p>                    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>                </form>            </section>    </div>    <app-footer></app-footer>    </div></div>'
     var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SignupComponent'};
