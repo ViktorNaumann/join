@@ -36,6 +36,7 @@ export interface UserData {
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   private authInitialized = new BehaviorSubject<boolean>(false);

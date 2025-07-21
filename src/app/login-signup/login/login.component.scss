@@ -1,7 +1,7 @@
 @import "./../../../styles.scss";
 
 .login-content {
-    position:relative;
+    position: relative;
     max-width: 1440px;
     margin: 0 auto;
     height: 100dvh;
@@ -125,7 +125,7 @@
     }
 
     @media (max-width: 406px){
-        margin-top: 1rem;
+        margin-top: 2rem;
     }
 
 

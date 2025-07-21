@@ -8,6 +8,7 @@ import { CategoryManager } from './category-manager';
 @Injectable({
   providedIn: 'root'
 })
+
 export class PriorityManager {
   selectedPriority: string = 'medium';
 

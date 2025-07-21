@@ -6,16 +6,14 @@
  * 
  * This component is purely presentational and contains no internal logic.
  */
-
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
-  imports: [
-    RouterModule,
-  ],
+  imports: [ RouterModule ],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss'
 })
+
 export class FooterComponent {}

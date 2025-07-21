@@ -49,6 +49,7 @@ export function notOnlyWhitespace(control: AbstractControl): ValidationErrors | 
 @Injectable({
   providedIn: 'root',
 })
+
 export class ContactService {
   /** Currently selected contact (for viewing or interaction) */
   private selectedContactSubject = new BehaviorSubject<Contact | null>(null);
@@ -139,126 +140,126 @@ export class ContactService {
   }
 
   /**
- * Updates an existing contact in Firestore.
- *
- * @param docId - The Firestore document ID of the contact to update.
- * @param updatedContact - The updated contact data.
- */
-async updateContact(docId: string, updatedContact: Contact): Promise<void> {
-  let docRef = this.getSingleContactsRef(docId);
-  await updateDoc(docRef, this.getCleanJson(updatedContact)).catch((err) => {
-    console.error(err);
-  });
-}
-
-/**
- * Returns a plain JSON object with only the allowed contact fields.
- * This is used to avoid including undefined or extra properties when updating Firestore.
- *
- * @param updatedContact - The contact object to sanitize.
- * @returns A JSON object containing name, email, and phone.
- */
-getCleanJson(updatedContact: Contact): Partial<Contact> {
-  return {
-    name: updatedContact.name,
-    email: updatedContact.email,
-    phone: updatedContact.phone,
-  };
-}
-
-/**
- * Emits a contact to the selected contact observable.
- * Used to show the contact details in the UI.
- *
- * @param contact - The contact to select.
- */
-selectContact(contact: Contact): void {
-  this.selectedContactSubject.next(contact);
-}
-
-/**
- * Clears the currently selected contact.
- */
-clearSelection(): void {
-  this.selectedContactSubject.next(null);
-}
-
-/**
- * Triggers the display of the add contact form.
- */
-showAddForm(): void {
-  this.showFormSubject.next(true);
-}
-
-/**
- * Triggers the display of the edit contact form with a prefilled contact.
- *
- * @param contact - The contact to edit.
- */
-showEditForm(contact: Contact): void {
-  this.editContactSubject.next(contact);
-  this.showFormSubject.next(true);
-}
-
-/**
- * Hides the contact form and clears the edit state.
- */
-hideForm(): void {
-  this.showFormSubject.next(false);
-  this.editContactSubject.next(null);
-}
-
-/**
- * Deletes a contact from Firestore.
- *
- * @param docId - The Firestore document ID of the contact to delete.
- */
-async deleteContact(docId: string): Promise<void> {
-  await deleteDoc(this.getSingleContactsRef(docId)).catch((err) => {
-    console.log(err);
-  });
-}
-
-/**
- * Generates a consistent avatar color for a contact based on their name.
- *
- * @param contactName - The contact’s name used to calculate a hash.
- * @returns A hexadecimal color string from the avatarColors array.
- */
-getContactColor(contactName: string): string {
-  let hash = 0;
-  for (let i = 0; i < contactName.length; i++) {
-    hash += contactName.charCodeAt(i);
+   * Updates an existing contact in Firestore.
+   *
+   * @param docId - The Firestore document ID of the contact to update.
+   * @param updatedContact - The updated contact data.
+   */
+  async updateContact(docId: string, updatedContact: Contact): Promise<void> {
+    let docRef = this.getSingleContactsRef(docId);
+    await updateDoc(docRef, this.getCleanJson(updatedContact)).catch((err) => {
+      console.error(err);
+    });
   }
-  return this.avatarColors[hash % this.avatarColors.length];
-}
 
-/**
- * Extracts the initials from a contact name.
- *
- * @param name - The full name of the contact.
- * @returns A string with one or two uppercase initials, or '?' if the name is invalid.
- */
-getInitials(name?: string): string {
-  if (!name) return '?';
-  const words = name.trim().split(' ');
-  if (words.length === 1) return words[0][0].toUpperCase();
-  return (words[0][0] + words[words.length - 1][0]).toUpperCase();
-}
+  /**
+   * Returns a plain JSON object with only the allowed contact fields.
+   * This is used to avoid including undefined or extra properties when updating Firestore.
+   *
+   * @param updatedContact - The contact object to sanitize.
+   * @returns A JSON object containing name, email, and phone.
+   */
+  getCleanJson(updatedContact: Contact): Partial<Contact> {
+    return {
+      name: updatedContact.name,
+      email: updatedContact.email,
+      phone: updatedContact.phone,
+    };
+  }
 
-/**
- * Fetches a single contact by its Firestore document ID.
- *
- * @param contactId - The Firestore document ID.
- * @returns A promise resolving to the contact object or null if not found.
- */
-async getContactById(contactId: string): Promise<Contact | null> {
-  const contactRef = this.getSingleContactsRef(contactId);
-  return getDoc(contactRef).then(snapshot => {
-    if (snapshot.exists()) {
-      return { id: snapshot.id, ...snapshot.data() } as Contact;
+  /**
+   * Emits a contact to the selected contact observable.
+   * Used to show the contact details in the UI.
+   *
+   * @param contact - The contact to select.
+   */
+  selectContact(contact: Contact): void {
+    this.selectedContactSubject.next(contact);
+  }
+
+  /**
+   * Clears the currently selected contact.
+   */
+  clearSelection(): void {
+    this.selectedContactSubject.next(null);
+  }
+
+  /**
+   * Triggers the display of the add contact form.
+   */
+  showAddForm(): void {
+    this.showFormSubject.next(true);
+  }
+
+  /**
+   * Triggers the display of the edit contact form with a prefilled contact.
+   *
+   * @param contact - The contact to edit.
+   */
+  showEditForm(contact: Contact): void {
+    this.editContactSubject.next(contact);
+    this.showFormSubject.next(true);
+  }
+
+  /**
+   * Hides the contact form and clears the edit state.
+   */
+  hideForm(): void {
+    this.showFormSubject.next(false);
+    this.editContactSubject.next(null);
+  }
+
+  /**
+   * Deletes a contact from Firestore.
+   *
+   * @param docId - The Firestore document ID of the contact to delete.
+   */
+  async deleteContact(docId: string): Promise<void> {
+    await deleteDoc(this.getSingleContactsRef(docId)).catch((err) => {
+      console.log(err);
+    });
+  }
+
+  /**
+   * Generates a consistent avatar color for a contact based on their name.
+   *
+   * @param contactName - The contact’s name used to calculate a hash.
+   * @returns A hexadecimal color string from the avatarColors array.
+   */
+  getContactColor(contactName: string): string {
+    let hash = 0;
+    for (let i = 0; i < contactName.length; i++) {
+      hash += contactName.charCodeAt(i);
     }
-    return null;
-  });
-}
+    return this.avatarColors[hash % this.avatarColors.length];
+  }
+
+  /**
+   * Extracts the initials from a contact name.
+   *
+   * @param name - The full name of the contact.
+   * @returns A string with one or two uppercase initials, or '?' if the name is invalid.
+   */
+  getInitials(name?: string): string {
+    if (!name) return '?';
+    const words = name.trim().split(' ');
+    if (words.length === 1) return words[0][0].toUpperCase();
+    return (words[0][0] + words[words.length - 1][0]).toUpperCase();
+  }
+
+  /**
+   * Fetches a single contact by its Firestore document ID.
+   *
+   * @param contactId - The Firestore document ID.
+   * @returns A promise resolving to the contact object or null if not found.
+   */
+  async getContactById(contactId: string): Promise<Contact | null> {
+    const contactRef = this.getSingleContactsRef(contactId);
+    return getDoc(contactRef).then(snapshot => {
+      if (snapshot.exists()) {
+        return { id: snapshot.id, ...snapshot.data() } as Contact;
+      }
+      return null;
+    });
+  }
 }

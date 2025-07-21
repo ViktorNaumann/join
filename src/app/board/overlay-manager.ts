@@ -10,6 +10,7 @@ import { Task, TaskService } from '../services/task.service';
 @Injectable({
   providedIn: 'root'
 })
+
 export class OverlayManager {
   private animationDirection: 'right' | 'bottom' = 'right';
   private backgroundVisible = false;

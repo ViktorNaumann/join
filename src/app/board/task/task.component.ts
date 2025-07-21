@@ -36,14 +36,13 @@ import { SimpleChanges, OnChanges } from '@angular/core';
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss',
 })
+
 export class TaskComponent {
 
   /**
    * The full list of contacts assigned to the task.
    */
   contactList: Contact[] = [];
-
-  /**
 
   /**
    * The task to be displayed in this component.

@@ -122,11 +122,9 @@ export class SignupComponent implements OnInit {
       this.signupform.markAllAsTouched();
       return;
     }
-
     this.startLoading();
     const { name, email, password } = this.signupform.value;
     const result = await this.authService.signUp(email, password, name);
-
     this.saveNewContact(name, email);
     this.handleRegistrationResult(result);
   }
@@ -188,20 +186,18 @@ export class SignupComponent implements OnInit {
   }
 
   /**
- * Returns a user-friendly validation message for the given form field.
- * Delegates error interpretation to specialized helper functions.
- * 
- * @param field - The name of the form control.
- * @returns A descriptive validation message or empty string.
- */
+   * Returns a user-friendly validation message for the given form field.
+   * Delegates error interpretation to specialized helper functions.
+   * 
+   * @param field - The name of the form control.
+   * @returns A descriptive validation message or empty string.
+   */
   getValidationMessage(field: string): string {
     if (field === 'confirmPassword') {
       return this.getPasswordMismatchMessage();
     }
-
     const control = this.signupform.get(field);
     if (!control || !control.touched || !control.errors) return '';
-
     return this.getFieldErrorMessage(control);
   }
 
