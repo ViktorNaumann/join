@@ -357,13 +357,20 @@ export interface UserData {
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
+
 export class AuthService {
   private currentUserSubject &#x3D; new BehaviorSubject&lt;User | null&gt;(null);
+  private authInitialized &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
 
   /**
    * Observable emitting the current authenticated Firebase user.
    */
   public currentUser$: Observable&lt;User | null&gt; &#x3D; this.currentUserSubject.asObservable();
+  
+  /**
+   * Observable that emits true once Firebase Auth has finished initializing.
+   */
+  public authInitialized$: Observable&lt;boolean&gt; &#x3D; this.authInitialized.asObservable();
 
   /**
    * Initializes the AuthService and subscribes to authentication state changes.
@@ -378,6 +385,9 @@ export class AuthService {
   ) {
     onAuthStateChanged(this.auth, (user) &#x3D;&gt; {
       this.currentUserSubject.next(user);
+      if (!this.authInitialized.value) {
+        this.authInitialized.next(true);
+      }
     });
   }
 

@@ -150,10 +150,22 @@ This includes drag delays, drop handling, auto-scrolling, and task status update
                                 <a href="#getDragDelay" >getDragDelay</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getDropTargetStatus" >getDropTargetStatus</a>
+                            </li>
+                            <li>
                                 <a href="#handleDragMove" >handleDragMove</a>
                             </li>
                             <li>
                                 <a href="#handleDrop" >handleDrop</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#reorderTasks" >reorderTasks</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updateTaskStatus" >updateTaskStatus</a>
                             </li>
                         </ul>
                     </td>
@@ -178,7 +190,7 @@ This includes drag delays, drop handling, auto-scrolling, and task status update
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/board/drag-drop-manager.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/board/drag-drop-manager.ts:13</a></div>
                             </td>
                         </tr>
 
@@ -234,15 +246,15 @@ This includes drag delays, drop handling, auto-scrolling, and task status update
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>changeTaskStatus(taskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, taskList: <a href="../interfaces/Task.html" target="_self">Task[]</a>, reloadCallback: () => void)</code>
+<code>changeTaskStatus(taskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, status: <a href="../interfaces/Task.html" target="_self">Task</a>, taskList: <a href="../interfaces/Task.html" target="_self">Task[]</a>, reloadCallback: () => void)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="102"
-                                    class="link-to-prism">src/app/board/drag-drop-manager.ts:102</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/board/drag-drop-manager.ts:130</a></div>
                         </td>
                     </tr>
 
@@ -286,7 +298,7 @@ This includes drag delays, drop handling, auto-scrolling, and task status update
                                         <tr>
                                                 <td>status</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
                                             </td>
 
                                             <td>
@@ -371,8 +383,8 @@ This includes drag delays, drop handling, auto-scrolling, and task status update
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="21"
-                                    class="link-to-prism">src/app/board/drag-drop-manager.ts:21</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="22"
+                                    class="link-to-prism">src/app/board/drag-drop-manager.ts:22</a></div>
                         </td>
                     </tr>
 
@@ -399,6 +411,85 @@ Prevents accidental drags on small screens.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getDropTargetStatus"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getDropTargetStatus</b></span>
+                        <a href="#getDropTargetStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getDropTargetStatus(containerId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="53"
+                                    class="link-to-prism">src/app/board/drag-drop-manager.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Determines the new task status based on the drop container ID.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>containerId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The ID of the container where the task was dropped.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code> | undefined</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>The corresponding task status, or undefined if not found.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="handleDragMove"></a>
                     <span class="name">
                         <span ><b>handleDragMove</b></span>
@@ -415,8 +506,8 @@ Prevents accidental drags on small screens.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="78"
-                                    class="link-to-prism">src/app/board/drag-drop-manager.ts:78</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/board/drag-drop-manager.ts:106</a></div>
                         </td>
                     </tr>
 
@@ -510,8 +601,8 @@ of the scrollable task section.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="32"
-                                    class="link-to-prism">src/app/board/drag-drop-manager.ts:32</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="33"
+                                    class="link-to-prism">src/app/board/drag-drop-manager.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -585,6 +676,180 @@ Updates the task&#39;s status and reorders task lists accordingly.</p>
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reorderTasks"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>reorderTasks</b></span>
+                        <a href="#reorderTasks"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>reorderTasks(event: <a href="../interfaces/Task.html" target="_self">CdkDragDrop&lt;Task[]&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">src/app/board/drag-drop-manager.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Reorders tasks in the same or across different containers.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Task.html" target="_self" >CdkDragDrop&lt;Task[]&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The CdkDragDrop event object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateTaskStatus"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>updateTaskStatus</b></span>
+                        <a href="#updateTaskStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateTaskStatus(task: <a href="../interfaces/Task.html" target="_self">Task</a>, newStatus: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/board/drag-drop-manager.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Updates the status of a given task and persists the change.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>task</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The task object to update.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>newStatus</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The new status to assign.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
 
     </div>
@@ -602,8 +867,9 @@ import { Task, TaskService } from &#x27;../services/task.service&#x27;;
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
+
 export class DragDropManager {
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService) { }
 
   /**
    * Returns the delay for starting a drag action based on screen width.
@@ -624,21 +890,42 @@ export class DragDropManager {
    */
   handleDrop(event: CdkDragDrop&lt;Task[]&gt;, updateCallback: () &#x3D;&gt; void): void {
     const task &#x3D; event.item.data as Task;
-    let newStatus: Task[&#x27;status&#x27;];
-    
-    if (event.container.id &#x3D;&#x3D;&#x3D; &#x27;todoList&#x27;) {
-      newStatus &#x3D; &#x27;to-do&#x27;;
-    } else if (event.container.id &#x3D;&#x3D;&#x3D; &#x27;inprogressList&#x27;) {
-      newStatus &#x3D; &#x27;in-progress&#x27;;
-    } else if (event.container.id &#x3D;&#x3D;&#x3D; &#x27;awaitfeedbackList&#x27;) {
-      newStatus &#x3D; &#x27;await-feedback&#x27;;
-    } else if (event.container.id &#x3D;&#x3D;&#x3D; &#x27;doneList&#x27;) {
-      newStatus &#x3D; &#x27;done&#x27;;
-    } else {
-      return;
+    const newStatus &#x3D; this.getDropTargetStatus(event.container.id);
+    if (!newStatus) return;
+
+    this.reorderTasks(event);
+
+    if (task.id &amp;&amp; task.status !&#x3D;&#x3D; newStatus) {
+      this.updateTaskStatus(task, newStatus);
     }
 
-    if (event.previousContainer &#x3D;&#x3D;&#x3D; event.container) {
+    updateCallback();
+  }
+
+  /**
+   * Determines the new task status based on the drop container ID.
+   *
+   * @param containerId - The ID of the container where the task was dropped.
+   * @returns The corresponding task status, or undefined if not found.
+   */
+  private getDropTargetStatus(containerId: string): Task[&#x27;status&#x27;] | undefined {
+    const statusMap: Record&lt;string, Task[&#x27;status&#x27;]&gt; &#x3D; {
+      todoList: &#x27;to-do&#x27;,
+      inprogressList: &#x27;in-progress&#x27;,
+      awaitfeedbackList: &#x27;await-feedback&#x27;,
+      doneList: &#x27;done&#x27;,
+    };
+    return statusMap[containerId];
+  }
+
+  /**
+   * Reorders tasks in the same or across different containers.
+   *
+   * @param event - The CdkDragDrop event object.
+   */
+  private reorderTasks(event: CdkDragDrop&lt;Task[]&gt;): void {
+    const sameContainer &#x3D; event.previousContainer &#x3D;&#x3D;&#x3D; event.container;
+    if (sameContainer) {
       moveItemInArray(
         event.container.data,
         event.previousIndex,
@@ -651,14 +938,20 @@ export class DragDropManager {
         event.previousIndex,
         event.currentIndex
       );
-      if (task.id &amp;&amp; task.status !&#x3D;&#x3D; newStatus) {
-        const updatedTask: Task &#x3D; { ...task, status: newStatus };
-        this.taskService.updateTask(task.id, updatedTask).catch((error) &#x3D;&gt; {
-          console.error(&#x27;Error updating task status:&#x27;, error);
-        });
-      }
     }
-    updateCallback();
+  }
+
+  /**
+   * Updates the status of a given task and persists the change.
+   *
+   * @param task - The task object to update.
+   * @param newStatus - The new status to assign.
+   */
+  private updateTaskStatus(task: Task, newStatus: Task[&#x27;status&#x27;]): void {
+    const updatedTask: Task &#x3D; { ...task, status: newStatus };
+    this.taskService.updateTask(task.id!, updatedTask).catch((error) &#x3D;&gt; {
+      console.error(&#x27;Error updating task status:&#x27;, error);
+    });
   }
 
   /**
@@ -670,16 +963,16 @@ export class DragDropManager {
    */
   handleDragMove(event: CdkDragMove, scrollSection: ElementRef&lt;HTMLElement&gt;): void {
     const mouseY &#x3D; event.pointerPosition.y;
+    const section &#x3D; scrollSection?.nativeElement;
+    if (!section) return;
+
+    const { top, bottom } &#x3D; section.getBoundingClientRect();
     const threshold &#x3D; 100;
     const scrollStep &#x3D; 30;
-    const section &#x3D; scrollSection?.nativeElement;
-    
-    if (!section) return;
-    
-    const rect &#x3D; section.getBoundingClientRect();
-    if (mouseY &lt; rect.top + threshold) {
+
+    if (mouseY &lt; top + threshold) {
       section.scrollBy({ top: -scrollStep, behavior: &#x27;auto&#x27; });
-    } else if (rect.bottom - mouseY &lt; threshold) {
+    } else if (bottom - mouseY &lt; threshold) {
       section.scrollBy({ top: scrollStep, behavior: &#x27;auto&#x27; });
     }
   }
@@ -693,18 +986,16 @@ export class DragDropManager {
    * @param reloadCallback - Callback function to reload tasks after update.
    */
   changeTaskStatus(
-    taskId: string, 
-    status: string, 
-    taskList: Task[], 
+    taskId: string,
+    status: Task[&#x27;status&#x27;],
+    taskList: Task[],
     reloadCallback: () &#x3D;&gt; void
   ): void {
     const task &#x3D; taskList.find((t) &#x3D;&gt; t.id &#x3D;&#x3D;&#x3D; taskId);
-    if (task &amp;&amp; task.status !&#x3D;&#x3D; status) {
-      const updatedTask &#x3D; { ...task, status };
-      this.taskService.updateTask(taskId, updatedTask).then(() &#x3D;&gt; {
-        reloadCallback();
-      });
-    }
+    if (!task || task.status &#x3D;&#x3D;&#x3D; status) return;
+
+    const updatedTask &#x3D; { ...task, status };
+    this.taskService.updateTask(taskId, updatedTask).then(reloadCallback);
   }
 }
 </code></pre>

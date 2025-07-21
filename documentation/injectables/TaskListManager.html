@@ -187,7 +187,15 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
+                                <a href="#distributeTasksByStatus" >distributeTasksByStatus</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
                                 <a href="#emptyArrays" >emptyArrays</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#filterTasksBySearchTerm" >filterTasksBySearchTerm</a>
                             </li>
                             <li>
                                 <a href="#getAwaitFeedbackTasks" >getAwaitFeedbackTasks</a>
@@ -218,6 +226,10 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
                                 <a href="#getTaskList" >getTaskList</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getTasksByStatus" >getTasksByStatus</a>
+                            </li>
+                            <li>
                                 <a href="#getTodoTasks" >getTodoTasks</a>
                             </li>
                             <li>
@@ -226,6 +238,10 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
                             </li>
                             <li>
                                 <a href="#loadTasks" >loadTasks</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#sortAllStatusArrays" >sortAllStatusArrays</a>
                             </li>
                             <li>
                                 <a href="#sortTasksByDueDate" >sortTasksByDueDate</a>
@@ -259,7 +275,7 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/board/task-list-manager.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/board/task-list-manager.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -322,8 +338,8 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="229"
-                                    class="link-to-prism">src/app/board/task-list-manager.ts:229</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="252"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:252</a></div>
                         </td>
                     </tr>
 
@@ -337,6 +353,84 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="distributeTasksByStatus"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>distributeTasksByStatus</b></span>
+                        <a href="#distributeTasksByStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>distributeTasksByStatus(tasks: <a href="../interfaces/Task.html" target="_self">Task[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="165"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:165</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Clears all status arrays and distributes tasks into the appropriate lists.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>tasks</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Task.html" target="_self" >Task[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The full list of tasks to distribute.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -363,8 +457,8 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="170"
-                                    class="link-to-prism">src/app/board/task-list-manager.ts:170</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:193</a></div>
                         </td>
                     </tr>
 
@@ -378,6 +472,103 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterTasksBySearchTerm"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>filterTasksBySearchTerm</b></span>
+                        <a href="#filterTasksBySearchTerm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>filterTasksBySearchTerm(tasks: <a href="../interfaces/Task.html" target="_self">Task[]</a>, searchTerm: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Filters a list of tasks by the provided search term (case-insensitive).</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>tasks</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Task.html" target="_self" >Task[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The array of tasks to filter.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>searchTerm</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The term to filter by.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Task.html" target="_self" >Task[]</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Filtered tasks array.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -402,8 +593,8 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="43"
-                                    class="link-to-prism">src/app/board/task-list-manager.ts:43</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="42"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -441,8 +632,8 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="105"
-                                    class="link-to-prism">src/app/board/task-list-manager.ts:105</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:122</a></div>
                         </td>
                     </tr>
 
@@ -518,8 +709,8 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="47"
-                                    class="link-to-prism">src/app/board/task-list-manager.ts:47</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -555,8 +746,8 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="65"
-                                    class="link-to-prism">src/app/board/task-list-manager.ts:65</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:64</a></div>
                         </td>
                     </tr>
 
@@ -650,8 +841,8 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="39"
-                                    class="link-to-prism">src/app/board/task-list-manager.ts:39</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:38</a></div>
                         </td>
                     </tr>
 
@@ -687,8 +878,8 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="54"
-                                    class="link-to-prism">src/app/board/task-list-manager.ts:54</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="53"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -726,8 +917,8 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="209"
-                                    class="link-to-prism">src/app/board/task-list-manager.ts:209</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="232"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:232</a></div>
                         </td>
                     </tr>
 
@@ -803,8 +994,8 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="196"
-                                    class="link-to-prism">src/app/board/task-list-manager.ts:196</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="219"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:219</a></div>
                         </td>
                     </tr>
 
@@ -880,8 +1071,8 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="28"
-                                    class="link-to-prism">src/app/board/task-list-manager.ts:28</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="27"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -895,6 +1086,85 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
                             <b>Returns : </b>        <code><a href="../interfaces/Task.html" target="_self" >Task[]</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTasksByStatus"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getTasksByStatus</b></span>
+                        <a href="#getTasksByStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getTasksByStatus(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:75</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Returns tasks from the internal status arrays based on status key.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Status key.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Task.html" target="_self" >Task[]</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Array of tasks matching the given status.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -919,8 +1189,8 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/app/board/task-list-manager.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="34"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -960,8 +1230,8 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="180"
-                                    class="link-to-prism">src/app/board/task-list-manager.ts:180</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="203"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:203</a></div>
                         </td>
                     </tr>
 
@@ -999,8 +1269,8 @@ This includes loading, filtering, sorting, and managing task lists by status.</p
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="133"
-                                    class="link-to-prism">src/app/board/task-list-manager.ts:133</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:150</a></div>
                         </td>
                     </tr>
 
@@ -1012,13 +1282,54 @@ Also sorts tasks by due date and loads their subtasks.</p>
 </div>
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
                             <div class="io-description">
                                 <p>A function to unsubscribe from the task observable.</p>
 
                             </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sortAllStatusArrays"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>sortAllStatusArrays</b></span>
+                        <a href="#sortAllStatusArrays"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>sortAllStatusArrays()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="182"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:182</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sorts all status-based task arrays by due date.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -1043,8 +1354,8 @@ Also sorts tasks by due date and loads their subtasks.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="91"
-                                    class="link-to-prism">src/app/board/task-list-manager.ts:91</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="108"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:108</a></div>
                         </td>
                     </tr>
 
@@ -1144,8 +1455,8 @@ Also sorts tasks by due date and loads their subtasks.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="123"
-                                    class="link-to-prism">src/app/board/task-list-manager.ts:123</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="140"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:140</a></div>
                         </td>
                     </tr>
 
@@ -1239,8 +1550,8 @@ Also sorts tasks by due date and loads their subtasks.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="219"
-                                    class="link-to-prism">src/app/board/task-list-manager.ts:219</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="242"
+                                    class="link-to-prism">src/app/board/task-list-manager.ts:242</a></div>
                         </td>
                     </tr>
 
@@ -1289,7 +1600,7 @@ Also sorts tasks by due date and loads their subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/board/task-list-manager.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/board/task-list-manager.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -1321,7 +1632,7 @@ Also sorts tasks by due date and loads their subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/board/task-list-manager.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/board/task-list-manager.ts:20</a></div>
                         </td>
                     </tr>
 
@@ -1353,7 +1664,7 @@ Also sorts tasks by due date and loads their subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/board/task-list-manager.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/board/task-list-manager.ts:18</a></div>
                         </td>
                     </tr>
 
@@ -1385,7 +1696,7 @@ Also sorts tasks by due date and loads their subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/board/task-list-manager.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/board/task-list-manager.ts:15</a></div>
                         </td>
                     </tr>
 
@@ -1417,7 +1728,7 @@ Also sorts tasks by due date and loads their subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/board/task-list-manager.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/board/task-list-manager.ts:14</a></div>
                         </td>
                     </tr>
 
@@ -1449,7 +1760,7 @@ Also sorts tasks by due date and loads their subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/board/task-list-manager.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/board/task-list-manager.ts:17</a></div>
                         </td>
                     </tr>
 
@@ -1476,7 +1787,7 @@ Also sorts tasks by due date and loads their subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/board/task-list-manager.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/board/task-list-manager.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -1500,18 +1811,17 @@ import { Subscription } from &#x27;rxjs&#x27;;
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
+
 export class TaskListManager {
   private taskList: Task[] &#x3D; [];
   private subtasksByTaskId: { [taskId: string]: Subtask[] } &#x3D; {};
   private unsubTask!: Subscription;
-  
-  // Task status arrays
   private todo: Task[] &#x3D; [];
   private inprogress: Task[] &#x3D; [];
   private awaitfeedback: Task[] &#x3D; [];
   private done: Task[] &#x3D; [];
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService) { }
 
   /**
    * Gets all tasks
@@ -1553,22 +1863,40 @@ export class TaskListManager {
    * @param searchTerm - Search term to filter by.
    * @returns Filtered list of tasks.
    */
-  getFilteredTasks(status: string, searchTerm: string): Task[] {
-    const statusArrayMap: { [key: string]: Task[] } &#x3D; {
+    getFilteredTasks(status: string, searchTerm: string): Task[] {
+      const tasksForStatus &#x3D; this.getTasksByStatus(status);
+      return this.filterTasksBySearchTerm(tasksForStatus, searchTerm);
+    }
+
+  /**
+   * Returns tasks from the internal status arrays based on status key.
+   *
+   * @param status - Status key.
+   * @returns Array of tasks matching the given status.
+   */
+  private getTasksByStatus(status: string): Task[] {
+    const statusArrayMap: Record&lt;string, Task[]&gt; &#x3D; {
       &#x27;to-do&#x27;: this.todo,
       &#x27;in-progress&#x27;: this.inprogress,
       &#x27;await-feedback&#x27;: this.awaitfeedback,
-      done: this.done,
+      &#x27;done&#x27;: this.done,
     };
-    const tasksForStatus &#x3D; statusArrayMap[status] || [];
-    if (!searchTerm.trim()) {
-      return tasksForStatus;
-    }
-    const searchLower &#x3D; searchTerm.toLowerCase();
-    return tasksForStatus.filter(
-      (task) &#x3D;&gt;
-        task.title.toLowerCase().includes(searchLower) ||
-        task.description?.toLowerCase().includes(searchLower)
+    return statusArrayMap[status] || [];
+  }
+
+  /**
+   * Filters a list of tasks by the provided search term (case-insensitive).
+   *
+   * @param tasks - The array of tasks to filter.
+   * @param searchTerm - The term to filter by.
+   * @returns Filtered tasks array.
+   */
+  private filterTasksBySearchTerm(tasks: Task[], searchTerm: string): Task[] {
+    const trimmed &#x3D; searchTerm.trim().toLowerCase();
+    if (!trimmed) return tasks;
+    return tasks.filter(task &#x3D;&gt;
+      task.title.toLowerCase().includes(trimmed) ||
+      task.description?.toLowerCase().includes(trimmed)
     );
   }
 
@@ -1580,11 +1908,11 @@ export class TaskListManager {
    * @returns Sorted task array.
    */
   sortTasksByDueDate(tasks: Task[], ascending: boolean &#x3D; true): Task[] {
-    return [...tasks].sort((a, b) &#x3D;&gt; {
-      const dateA &#x3D; this.getDateValue(a.date);
-      const dateB &#x3D; this.getDateValue(b.date);
-      return ascending ? dateA - dateB : dateB - dateA;
-    });
+    return [...tasks].sort((a, b) &#x3D;&gt;
+      ascending
+        ? this.getDateValue(a.date) - this.getDateValue(b.date)
+        : this.getDateValue(b.date) - this.getDateValue(a.date)
+    );
   }
 
   /**
@@ -1594,7 +1922,7 @@ export class TaskListManager {
    * @returns Numeric timestamp, or Number.MAX_SAFE_INTEGER if invalid.
    */
   private getDateValue(date: Date | any): number {
-    if (date &amp;&amp; typeof date.toDate &#x3D;&#x3D;&#x3D; &#x27;function&#x27;) {
+    if (date?.toDate instanceof Function) {
       return date.toDate().getTime();
     } else if (date instanceof Date) {
       return date.getTime();
@@ -1621,39 +1949,45 @@ export class TaskListManager {
    *
    * @returns A function to unsubscribe from the task observable.
    */
-  loadTasks(): (() &#x3D;&gt; void) {
-    this.unsubTask &#x3D; this.taskService.getTasks().subscribe((tasks: Task[]) &#x3D;&gt; {
+  loadTasks(): () &#x3D;&gt; void {
+    this.unsubTask &#x3D; this.taskService.getTasks().subscribe((tasks) &#x3D;&gt; {
       this.taskList &#x3D; tasks;
-      this.emptyArrays();
-      for (const task of tasks) {
-        switch (task.status) {
-          case &#x27;to-do&#x27;:
-            this.todo.push(task);
-            break;
-          case &#x27;in-progress&#x27;:
-            this.inprogress.push(task);
-            break;
-          case &#x27;await-feedback&#x27;:
-            this.awaitfeedback.push(task);
-            break;
-          case &#x27;done&#x27;:
-            this.done.push(task);
-            break;
-          default:
-            console.warn(
-              &#x60;Unbekannter Status bei Task ${task.title}:&#x60;,
-              task.status
-            );
-        }
-      }
-      this.todo &#x3D; this.sortTasksByDueDate(this.todo);
-      this.inprogress &#x3D; this.sortTasksByDueDate(this.inprogress);
-      this.awaitfeedback &#x3D; this.sortTasksByDueDate(this.awaitfeedback);
-      this.done &#x3D; this.sortTasksByDueDate(this.done);
+      this.distributeTasksByStatus(tasks);
+      this.sortAllStatusArrays();
       this.loadSubtasks();
     });
     return () &#x3D;&gt; this.unsubTask.unsubscribe();
   }
+
+  /**
+   * Clears all status arrays and distributes tasks into the appropriate lists.
+   *
+   * @param tasks - The full list of tasks to distribute.
+   */
+  private distributeTasksByStatus(tasks: Task[]): void {
+    this.emptyArrays();
+    for (const task of tasks) {
+      switch (task.status) {
+        case &#x27;to-do&#x27;: this.todo.push(task); break;
+        case &#x27;in-progress&#x27;: this.inprogress.push(task); break;
+        case &#x27;await-feedback&#x27;: this.awaitfeedback.push(task); break;
+        case &#x27;done&#x27;: this.done.push(task); break;
+        default:
+          console.warn(&#x60;Unknown status in task ${task.title}:&#x60;, task.status);
+      }
+    }
+  }
+
+  /**
+   * Sorts all status-based task arrays by due date.
+   */
+  private sortAllStatusArrays(): void {
+    this.todo &#x3D; this.sortTasksByDueDate(this.todo);
+    this.inprogress &#x3D; this.sortTasksByDueDate(this.inprogress);
+    this.awaitfeedback &#x3D; this.sortTasksByDueDate(this.awaitfeedback);
+    this.done &#x3D; this.sortTasksByDueDate(this.done);
+  }
+
 
   /**
    * Empties all task lists (to-do, in-progress, await-feedback, done).

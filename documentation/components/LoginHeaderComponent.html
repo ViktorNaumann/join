@@ -254,8 +254,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="69"
-                                    class="link-to-prism">src/app/login-signup/login-header/login-header.component.ts:69</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">src/app/login-signup/login-header/login-header.component.ts:67</a></div>
                         </td>
                     </tr>
 
@@ -294,8 +294,8 @@ Stores a flag in sessionStorage to prevent the animation from repeating.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="61"
-                                    class="link-to-prism">src/app/login-signup/login-header/login-header.component.ts:61</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">src/app/login-signup/login-header/login-header.component.ts:59</a></div>
                         </td>
                     </tr>
 
@@ -343,7 +343,7 @@ Stores a flag in sessionStorage to prevent the animation from repeating.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/login-signup/login-header/login-header.component.ts:56</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/login-signup/login-header/login-header.component.ts:54</a></div>
                         </td>
                     </tr>
 
@@ -381,7 +381,7 @@ Currently unused, but reserved for future enhancements.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/login-signup/login-header/login-header.component.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/login-signup/login-header/login-header.component.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -414,12 +414,9 @@ import {
   animate
 } from &#x27;@angular/animations&#x27;;
 
-
 @Component({
   selector: &#x27;app-login-header&#x27;,
-  imports: [
-    RouterModule,
-  ],
+  imports: [ RouterModule ],
   templateUrl: &#x27;./login-header.component.html&#x27;,
   styleUrl: &#x27;./login-header.component.scss&#x27;,
   animations: [
@@ -431,11 +428,12 @@ import {
         opacity: 1
       })),
       transition(&#x27;start &#x3D;&gt; appear&#x27;, [
-        animate(&#x27;2s 0.4s ease-in-out&#x27;)
+        animate(&#x27;1.1s 0.7s ease-in-out&#x27;)
       ])
     ])
   ]
 })
+
 export class LoginHeaderComponent {
   /**
    * The current state of the logo animation.

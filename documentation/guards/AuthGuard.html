@@ -172,7 +172,7 @@ unless the user is authenticated.</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/services/auth.guard.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/auth.guard.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -262,8 +262,8 @@ unless the user is authenticated.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="30"
-                                    class="link-to-prism">src/app/services/auth.guard.ts:30</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="33"
+                                    class="link-to-prism">src/app/services/auth.guard.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -271,15 +271,16 @@ unless the user is authenticated.</p>
             <tr>
                 <td class="col-md-4">
                         <div class="io-description"><p>Determines whether a route can be activated.
-If the user is not authenticated, redirects to the login page.</p>
+If the user is not authenticated, redirects to the login page.
+Waits for Firebase Auth to initialize before making the decision.</p>
 </div>
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
 
                         </div>
                             <div class="io-description">
-                                <p>True if the user is logged in, otherwise false</p>
+                                <p>Observable<boolean> that resolves to true if user is logged in</p>
 
                             </div>
                 </td>
@@ -294,6 +295,7 @@ If the user is not authenticated, redirects to the login page.</p>
             <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { CanActivate, Router } from &#x27;@angular/router&#x27;;
 import { AuthService } from &#x27;./auth.service&#x27;;
+import { Observable, combineLatest, map, filter, take } from &#x27;rxjs&#x27;;
 
 /**
  * Route guard that prevents access to certain routes
@@ -302,6 +304,7 @@ import { AuthService } from &#x27;./auth.service&#x27;;
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
+
 export class AuthGuard implements CanActivate {
 
   /**
@@ -317,16 +320,26 @@ export class AuthGuard implements CanActivate {
   /**
    * Determines whether a route can be activated.
    * If the user is not authenticated, redirects to the login page.
+   * Waits for Firebase Auth to initialize before making the decision.
    *
-   * @returns True if the user is logged in, otherwise false
+   * @returns Observable&lt;boolean&gt; that resolves to true if user is logged in
    */
-  canActivate(): boolean {
-    if (this.authService.isLoggedIn()) {
-      return true;
-    } else {
-      this.router.navigate([&#x27;/login&#x27;]);
-      return false;
-    }
+  canActivate(): Observable&lt;boolean&gt; {
+    return combineLatest([
+      this.authService.currentUser$,
+      this.authService.authInitialized$
+    ]).pipe(
+      filter(([user, initialized]) &#x3D;&gt; initialized),
+      take(1),
+      map(([user, initialized]) &#x3D;&gt; {
+        if (user) {
+          return true;
+        } else {
+          this.router.navigate([&#x27;/login&#x27;]);
+          return false;
+        }
+      })
+    );
   }
 }
 </code></pre>
