@@ -401,8 +401,8 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   /**
- * Adds a new task with optional subtasks.
- */
+    * Adds a new task with optional subtasks.
+    */
   async addNewTask(): Promise<void> {
     this.ensureDefaultStatus();
     const newTask: Task = this.buildTask(this.defaultStatus);
