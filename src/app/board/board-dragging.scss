@@ -2,6 +2,7 @@
 
 .drop-list {
   width: 300px;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -95,8 +96,6 @@ app-task {
   }
 
   .drop-list {
-    height: 600px;
-    max-height: calc(100vh - 430px);
     width: 220px;
     display: flex;
     flex-direction: column;
@@ -112,8 +111,6 @@ app-task {
   .drop-list {
     width: 100%;
     max-width: 100%;
-    height: 600px;
-    max-height: calc(100vh - 430px);
     gap: 12px;
   }
 }
@@ -131,10 +128,8 @@ app-task {
     width: max-content;
     min-width: 100%;
     max-width: calc(100vw - 40px);
-
     min-height: 200px;
     max-height: 250px;
-    
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap;

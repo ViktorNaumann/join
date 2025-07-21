@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >NavigationHistoryService</li>
+  <li class="breadcrumb-item" >PriorityManager</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,7 +115,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/services/navigation-history.service.ts</code>
+            <code>src/app/add-task/priority-manager.ts</code>
         </p>
 
 
@@ -123,9 +123,8 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>A service to keep track of recent navigation history within the Angular application.</p>
-<p>Stores the last 3 visited URLs (including the current one) and allows navigation
-back to the previous URL.</p>
+                <p>PriorityManager handles all priority-related operations for the AddTaskComponent.
+This includes setting priority management.</p>
 
             </p>
 
@@ -144,8 +143,11 @@ back to the previous URL.</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#history" >history</a>
+                                    <span class="modifier">Public</span>
+                                <a href="#categoryManager" >categoryManager</a>
+                            </li>
+                            <li>
+                                <a href="#selectedPriority" >selectedPriority</a>
                             </li>
                         </ul>
                     </td>
@@ -160,16 +162,11 @@ back to the previous URL.</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#getHistory" >getHistory</a>
+                                <a href="#setPriority" >setPriority</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getPreviousUrl" >getPreviousUrl</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#navigateBack" >navigateBack</a>
+                                <a href="#setPriorityAndCategory" >setPriorityAndCategory</a>
                             </li>
                         </ul>
                     </td>
@@ -189,21 +186,17 @@ back to the previous URL.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(router: Router)</code>
+<code>constructor(categoryManager: <a href="../injectables/CategoryManager.html" target="_self">CategoryManager</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/services/navigation-history.service.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/add-task/priority-manager.ts:13</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Subscribes to Angular Router events and tracks navigation history.</p>
-<p>Keeps the last 3 visited URLs (including the current one), trimming
-the oldest entry when the limit is reached.</p>
-</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -212,27 +205,20 @@ the oldest entry when the limit is reached.</p>
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
-                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>router</td>
+                                                        <td>categoryManager</td>
                                                   
                                                         <td>
-                                                                    <code>Router</code>
+                                                                        <code><a href="../injectables/CategoryManager.html" target="_self" >CategoryManager</a></code>
                                                         </td>
                                                   
                                                     <td>
                                                             No
                                                     </td>
                                                     
-                                                        <td>
-                                                                <ul>
-<li>Angular Router used to listen to navigation events.</li>
-</ul>
-
-                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -252,130 +238,152 @@ the oldest entry when the limit is reached.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getHistory"></a>
+                    <a name="setPriority"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
-                        <span ><b>getHistory</b></span>
-                        <a href="#getHistory"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>setPriority</b></span>
+                        <a href="#setPriority"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getHistory()</code>
+<code>setPriority(priority: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="43"
-                                    class="link-to-prism">src/app/services/navigation-history.service.ts:43</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="23"
+                                    class="link-to-prism">src/app/add-task/priority-manager.ts:23</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Returns a copy of the navigation history.</p>
+                        <div class="io-description"><p>Sets the task priority.</p>
 </div>
 
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>string[]</code>
-
-                        </div>
                             <div class="io-description">
-                                <p>An array of the last visited URLs (maximum of 3).</p>
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>priority</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
 
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The priority level to set (&#39;low&#39;, &#39;medium&#39;, &#39;urgent&#39;).</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getPreviousUrl"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
-                        <span ><b>getPreviousUrl</b></span>
-                        <a href="#getPreviousUrl"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getPreviousUrl()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/app/services/navigation-history.service.ts:52</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Gets the URL visited before the current one.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>string | null</code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>The previous URL, or null if not available.</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="navigateBack"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
-                        <span ><b>navigateBack</b></span>
-                        <a href="#navigateBack"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>navigateBack()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="64"
-                                    class="link-to-prism">src/app/services/navigation-history.service.ts:64</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Navigates back to the previous URL if available.</p>
-<p>If no previous URL is stored, navigates to the root path (<code>&#39;/&#39;</code>).</p>
-</div>
-
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setPriorityAndCategory"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>setPriorityAndCategory</b></span>
+                        <a href="#setPriorityAndCategory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setPriorityAndCategory(task: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="31"
+                                    class="link-to-prism">src/app/add-task/priority-manager.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets the selected priority and category in their respective managers.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>task</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The task object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -390,37 +398,57 @@ the oldest entry when the limit is reached.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="history"></a>
+                    <a name="categoryManager"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>history</b></span>
-                        <a href="#history"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Public</span>
+                        <span ><b>categoryManager</b></span>
+                        <a href="#categoryManager"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>string[]</code>
+                        <i>Type : </i>        <code><a href="../injectables/CategoryManager.html" target="_self" >CategoryManager</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/add-task/priority-manager.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedPriority"></a>
+                    <span class="name">
+                        <span ><b>selectedPriority</b></span>
+                        <a href="#selectedPriority"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>[]</code>
+                        <i>Default value : </i><code>&#x27;medium&#x27;</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/services/navigation-history.service.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/add-task/priority-manager.ts:13</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Internal array holding the last 3 visited URLs</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -431,76 +459,40 @@ the oldest entry when the limit is reached.</p>
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { NavigationEnd, Router } from &#x27;@angular/router&#x27;;
-import { filter } from &#x27;rxjs/operators&#x27;;
+import { CategoryManager } from &#x27;./category-manager&#x27;;
 
 /**
- * A service to keep track of recent navigation history within the Angular application.
- * 
- * Stores the last 3 visited URLs (including the current one) and allows navigation
- * back to the previous URL.
+ * PriorityManager handles all priority-related operations for the AddTaskComponent.
+ * This includes setting priority management.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 
-export class NavigationHistoryService {
-  /** Internal array holding the last 3 visited URLs */
-  private history: string[] &#x3D; [];
+export class PriorityManager {
+  selectedPriority: string &#x3D; &#x27;medium&#x27;;
 
-  /**
-   * Subscribes to Angular Router events and tracks navigation history.
-   * 
-   * Keeps the last 3 visited URLs (including the current one), trimming
-   * the oldest entry when the limit is reached.
-   * 
-   * @param router - Angular Router used to listen to navigation events.
+  constructor(
+    public categoryManager: CategoryManager
+  ) { }
+
+   /**
+   * Sets the task priority.
+   * @param priority - The priority level to set (&#x27;low&#x27;, &#x27;medium&#x27;, &#x27;urgent&#x27;).
    */
-  constructor(private router: Router) {
-    this.router.events
-      .pipe(filter(event &#x3D;&gt; event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) &#x3D;&gt; {
-        if (this.history.length &#x3D;&#x3D;&#x3D; 3) {
-          this.history.shift(); // Remove the oldest URL
-        }
-        this.history.push(event.urlAfterRedirects);
-      });
+  setPriority(priority: string) {
+    this.selectedPriority &#x3D; priority;
+  }
+  /**
+   * Sets the selected priority and category in their respective managers.
+   *
+   * @param task - The task object.
+   */
+  public setPriorityAndCategory(task: any): void {
+    this.selectedPriority &#x3D; task.priority || &#x27;medium&#x27;;
+    this.categoryManager.setSelectedCategory(task.category || &#x27;&#x27;);
   }
 
-  /**
-   * Returns a copy of the navigation history.
-   * 
-   * @returns An array of the last visited URLs (maximum of 3).
-   */
-  public getHistory(): string[] {
-    return [...this.history];
-  }
-
-  /**
-   * Gets the URL visited before the current one.
-   * 
-   * @returns The previous URL, or null if not available.
-   */
-  public getPreviousUrl(): string | null {
-    if (this.history.length &gt; 1) {
-      return this.history[this.history.length - 2];
-    }
-    return null;
-  }
-
-  /**
-   * Navigates back to the previous URL if available.
-   * 
-   * If no previous URL is stored, navigates to the root path (&#x60;&#x27;/&#x27;&#x60;).
-   */
-  public navigateBack(): void {
-    const previousUrl &#x3D; this.getPreviousUrl();
-    if (previousUrl) {
-      this.router.navigateByUrl(previousUrl);
-    } else {
-      this.router.navigateByUrl(&#x27;/&#x27;);
-    }
-  }
 }
 </code></pre>
     </div>
@@ -545,7 +537,7 @@ export class NavigationHistoryService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'NavigationHistoryService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'PriorityManager.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

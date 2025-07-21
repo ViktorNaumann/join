@@ -288,10 +288,11 @@ export interface Category {
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
+
 export class CategoryManager {
+  showCategoryError: boolean &#x3D; false;
   private selectedCategory: string &#x3D; &#x27;&#x27;;
   private showCategoryDropdown: boolean &#x3D; false;
-  
   private categories: Category[] &#x3D; [
     { value: &#x27;technical&#x27;, label: &#x27;Technical Task&#x27;, color: &#x27;#1FD7C1&#x27; },
     { value: &#x27;user story&#x27;, label: &#x27;User Story&#x27;, color: &#x27;#0038FF&#x27; }
@@ -386,6 +387,15 @@ export class CategoryManager {
   clearAll(): void {
     this.selectedCategory &#x3D; &#x27;&#x27;;
     this.showCategoryDropdown &#x3D; false;
+  }
+
+   /**
+   * Handles category selection and clears error state.
+   */
+  onCategorySelect() {
+    if (this.hasSelectedCategory()) {
+      this.showCategoryError &#x3D; false;
+    }
   }
 }
 </code></pre>

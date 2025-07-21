@@ -987,6 +987,7 @@ import { AuthService } from &#x27;../services/auth.service&#x27;;
     ]),
   ],
 })
+
 export class HeaderComponent {
   /**
    * Tracks whether the mobile menu is currently open.
@@ -1105,7 +1106,7 @@ export class HeaderComponent {
         &lt;img class&#x3D;&quot;help-icon&quot; src&#x3D;&quot;assets/img/icons/help.png&quot; alt&#x3D;&quot;&quot; /&gt;
       &lt;/div&gt;
 
-      &lt;div class&#x3D;&quot;user-profile&quot; (click)&#x3D;&quot;toggleMenu($event)&quot;&gt;
+      &lt;div class&#x3D;&quot;user-profile&quot; (click)&#x3D;&quot;toggleMenu($event)&quot; *ngIf&#x3D;&quot;isLoggedIn()&quot;&gt;
         &lt;p&gt;{{ getCurrentUserName().charAt(0).toUpperCase() }}&lt;/p&gt;
         &lt;div #menu class&#x3D;&quot;user-menu-links&quot; *ngIf&#x3D;&quot;menuOpen&quot; @slideInOut&gt;
           &lt;a class&#x3D;&quot;mobile-help-link&quot; routerLink&#x3D;&quot;/help&quot;&gt;Help&lt;/a&gt;
@@ -1146,7 +1147,7 @@ export class HeaderComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><header>  <div class="header-content">    <div class="logo">      <img        class="logo-img"        src="assets/img/logo/logo-mobile.png"        alt="Logo"        routerLink="/"      />    </div>    <div class="headline">      <p class="headline-text">Kanban Project Management Tool</p>    </div>    <div class="icon-section">      <div routerLink="/help">        <img class="help-icon" src="assets/img/icons/help.png" alt="" />      </div>      <div class="user-profile" (click)="toggleMenu($event)">        <p>{{ getCurrentUserName().charAt(0).toUpperCase() }}</p>        <div #menu class="user-menu-links" *ngIf="menuOpen" @slideInOut>          <a class="mobile-help-link" routerLink="/help">Help</a>          <a routerLink="/privacy-policy">Privacy Policy</a>          <a routerLink="/legal-notice">Legal notice</a>          <a (click)="logout()" *ngIf="isLoggedIn()">Log out</a>        </div>      </div>    </div>  </div></header></div>'
+        var COMPONENT_TEMPLATE = '<div><header>  <div class="header-content">    <div class="logo">      <img        class="logo-img"        src="assets/img/logo/logo-mobile.png"        alt="Logo"        routerLink="/"      />    </div>    <div class="headline">      <p class="headline-text">Kanban Project Management Tool</p>    </div>    <div class="icon-section">      <div routerLink="/help">        <img class="help-icon" src="assets/img/icons/help.png" alt="" />      </div>      <div class="user-profile" (click)="toggleMenu($event)" *ngIf="isLoggedIn()">        <p>{{ getCurrentUserName().charAt(0).toUpperCase() }}</p>        <div #menu class="user-menu-links" *ngIf="menuOpen" @slideInOut>          <a class="mobile-help-link" routerLink="/help">Help</a>          <a routerLink="/privacy-policy">Privacy Policy</a>          <a routerLink="/legal-notice">Legal notice</a>          <a (click)="logout()" *ngIf="isLoggedIn()">Log out</a>        </div>      </div>    </div>  </div></header></div>'
     var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HeaderComponent'};

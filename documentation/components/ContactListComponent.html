@@ -252,6 +252,14 @@
                                 <a href="#groupByInitial" >groupByInitial</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#handleContactsError" >handleContactsError</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#handleContactsLoaded" >handleContactsLoaded</a>
+                            </li>
+                            <li>
                                 <a href="#isCurrentUser" >isCurrentUser</a>
                             </li>
                             <li>
@@ -268,6 +276,10 @@
                             </li>
                             <li>
                                 <a href="#onContactSelect" >onContactSelect</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#subscribeToContacts" >subscribeToContacts</a>
                             </li>
                         </ul>
                     </td>
@@ -306,7 +318,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:84</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:110</a></div>
                             </td>
                         </tr>
 
@@ -390,7 +402,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:84</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:110</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -429,8 +441,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="48"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:48</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:74</a></div>
                         </td>
                     </tr>
 
@@ -468,8 +480,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="164"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:164</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="190"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:190</a></div>
                         </td>
                     </tr>
 
@@ -545,8 +557,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="143"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:143</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="169"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:169</a></div>
                         </td>
                     </tr>
 
@@ -606,6 +618,163 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="handleContactsError"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>handleContactsError</b></span>
+                        <a href="#handleContactsError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleContactsError(error: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:67</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles an error that occurred while loading contacts.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>error</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The error object returned from the subscription.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleContactsLoaded"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>handleContactsLoaded</b></span>
+                        <a href="#handleContactsLoaded"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleContactsLoaded(contacts: <a href="../interfaces/Contact.html" target="_self">Contact[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Processes the loaded contacts by grouping them
+and selecting the current user&#39;s contact if present.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>contacts</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The array of contact objects.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="isCurrentUser"></a>
                     <span class="name">
                         <span ><b>isCurrentUser</b></span>
@@ -622,8 +791,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="109"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:109</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="135"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:135</a></div>
                         </td>
                     </tr>
 
@@ -699,8 +868,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="127"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:127</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="153"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:153</a></div>
                         </td>
                     </tr>
 
@@ -776,8 +945,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="99"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:99</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:125</a></div>
                         </td>
                     </tr>
 
@@ -815,16 +984,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="27"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:27</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="29"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:29</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Initializes the component by loading and grouping contacts,
-identifying the current user, and subscribing to contact selection.</p>
+                        <div class="io-description"><p>Initializes the component by loading contacts,
+grouping them by initial, identifying the current user,
+and handling errors and contact selection.</p>
 </div>
 
                         <div class="io-description">
@@ -855,8 +1025,8 @@ identifying the current user, and subscribing to contact selection.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="134"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:134</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="160"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:160</a></div>
                         </td>
                     </tr>
 
@@ -894,8 +1064,8 @@ identifying the current user, and subscribing to contact selection.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="117"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:117</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="143"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:143</a></div>
                         </td>
                     </tr>
 
@@ -950,6 +1120,48 @@ identifying the current user, and subscribing to contact selection.</p>
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscribeToContacts"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>subscribeToContacts</b></span>
+                        <a href="#subscribeToContacts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>subscribeToContacts()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Subscribes to the contact list, groups them by initial letter,
+and selects the current user’s contact if available.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
     <section data-compodoc="block-properties">
     
@@ -976,7 +1188,7 @@ identifying the current user, and subscribing to contact selection.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:92</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:118</a></div>
                         </td>
                     </tr>
 
@@ -1013,7 +1225,7 @@ identifying the current user, and subscribing to contact selection.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:78</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:104</a></div>
                         </td>
                     </tr>
 
@@ -1044,7 +1256,7 @@ identifying the current user, and subscribing to contact selection.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:76</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:102</a></div>
                         </td>
                     </tr>
 
@@ -1081,7 +1293,7 @@ identifying the current user, and subscribing to contact selection.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:71</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:97</a></div>
                         </td>
                     </tr>
 
@@ -1118,7 +1330,7 @@ identifying the current user, and subscribing to contact selection.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:87</a></div>
                         </td>
                     </tr>
 
@@ -1149,7 +1361,7 @@ identifying the current user, and subscribing to contact selection.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:157</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="183" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:183</a></div>
                         </td>
                     </tr>
 
@@ -1186,7 +1398,7 @@ identifying the current user, and subscribing to contact selection.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:66</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:92</a></div>
                         </td>
                     </tr>
 
@@ -1224,7 +1436,7 @@ identifying the current user, and subscribing to contact selection.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:79</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:105</a></div>
                         </td>
                     </tr>
 
@@ -1250,34 +1462,60 @@ import { AuthService } from &#x27;../../services/auth.service&#x27;;
   templateUrl: &#x27;./contact-list.component.html&#x27;,
   styleUrls: [&#x27;./contact-list.component.scss&#x27;]
 })
+
 export class ContactListComponent implements OnInit, OnDestroy {
 
-    /**
-   * Initializes the component by loading and grouping contacts,
-   * identifying the current user, and subscribing to contact selection.
-   */
+  /**
+  * Initializes the component by loading contacts,
+  * grouping them by initial, identifying the current user,
+  * and handling errors and contact selection.
+  */
   ngOnInit(): void {
-    this.contactsSubscription &#x3D; this.contactService.getContacts().subscribe({
-      next: (contacts) &#x3D;&gt; {
-        this.groupedContacts &#x3D; this.groupByInitial(contacts);
-        if (this.currentUserEmail) {
-          const matchedContact &#x3D; contacts.find(c &#x3D;&gt; c.email &#x3D;&#x3D;&#x3D; this.currentUserEmail);
-          if (matchedContact) {
-            this.onContactSelect(matchedContact);
-          }
-        }
-      },
-      error: (error) &#x3D;&gt; {
-        console.error(&#x27;Error loading contacts:&#x27;, error);
-      }
-    });
+    this.subscribeToContacts();
     this.getCurrentUser();
+  }
+
+  /**
+   * Subscribes to the contact list, groups them by initial letter,
+   * and selects the current user’s contact if available.
+   */
+  private subscribeToContacts(): void {
+    this.contactsSubscription &#x3D; this.contactService.getContacts().subscribe({
+      next: (contacts) &#x3D;&gt; this.handleContactsLoaded(contacts),
+      error: (error) &#x3D;&gt; this.handleContactsError(error),
+    });
+  }
+
+  /**
+   * Processes the loaded contacts by grouping them
+   * and selecting the current user&#x27;s contact if present.
+   * 
+   * @param contacts - The array of contact objects.
+   */
+  private handleContactsLoaded(contacts: Contact[]): void {
+    this.groupedContacts &#x3D; this.groupByInitial(contacts);
+
+    if (this.currentUserEmail) {
+      const matchedContact &#x3D; contacts.find(c &#x3D;&gt; c.email &#x3D;&#x3D;&#x3D; this.currentUserEmail);
+      if (matchedContact) {
+        this.onContactSelect(matchedContact);
+      }
+    }
+  }
+
+  /**
+   * Handles an error that occurred while loading contacts.
+   * 
+   * @param error - The error object returned from the subscription.
+   */
+  private handleContactsError(error: any): void {
+    console.error(&#x27;Error loading contacts:&#x27;, error);
   }
 
   /**
    * Identifying the current user to directly select this user in the contact list.
    */
-  getCurrentUser(){
+  getCurrentUser() {
     const user &#x3D; this.authService.getCurrentUser();
     this.currentUser &#x3D; user?.displayName || null;
     this.currentUserEmail &#x3D; user?.email || null;
@@ -1323,7 +1561,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
   constructor(
     public contactService: ContactService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   /**
    * Unsubscribes from all subscriptions to avoid memory leaks.

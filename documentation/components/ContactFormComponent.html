@@ -229,10 +229,27 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#addNewContact" >addNewContact</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#buildContactFromForm" >buildContactFromForm</a>
+                            </li>
+                            <li>
                                 <a href="#clearInputs" >clearInputs</a>
                             </li>
                             <li>
                                 <a href="#deleteContact" >deleteContact</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#finalizeSubmission" >finalizeSubmission</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isEditMode" >isEditMode</a>
                             </li>
                             <li>
                                 <a href="#ngOnDestroy" >ngOnDestroy</a>
@@ -246,6 +263,10 @@
                             <li>
                                     <span class="modifier">Async</span>
                                 <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updateContact" >updateContact</a>
                             </li>
                         </ul>
                     </td>
@@ -287,7 +308,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:53</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:54</a></div>
                             </td>
                         </tr>
 
@@ -371,7 +392,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:32</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:33</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -398,7 +419,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:39</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -422,6 +443,130 @@ Emits the string &#39;closed&#39; as an identifier.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="addNewContact"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>addNewContact</b></span>
+                        <a href="#addNewContact"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>addNewContact(contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="167"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:167</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Adds a new contact using the ContactService and emits it if successful.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>contact</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The new contact data to be added.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="buildContactFromForm"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>buildContactFromForm</b></span>
+                        <a href="#buildContactFromForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>buildContactFromForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="133"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:133</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Builds a trimmed Contact object from form values.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>A Contact object based on form input.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="clearInputs"></a>
                     <span class="name">
                         <span ><b>clearInputs</b></span>
@@ -438,8 +583,8 @@ Emits the string &#39;closed&#39; as an identifier.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="139"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:139</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="185"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:185</a></div>
                         </td>
                     </tr>
 
@@ -477,8 +622,8 @@ Emits the string &#39;closed&#39; as an identifier.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="146"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:146</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="192"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:192</a></div>
                         </td>
                     </tr>
 
@@ -492,6 +637,92 @@ Emits the string &#39;closed&#39; as an identifier.</p>
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="finalizeSubmission"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>finalizeSubmission</b></span>
+                        <a href="#finalizeSubmission"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>finalizeSubmission()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="177"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:177</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Clears form inputs and closes the form after submission.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isEditMode"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>isEditMode</b></span>
+                        <a href="#isEditMode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isEditMode()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:147</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Determines whether the form is in edit mode.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>True if editing an existing contact, false if creating a new one.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -516,8 +747,8 @@ Emits the string &#39;closed&#39; as an identifier.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="93"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:93</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="94"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:94</a></div>
                         </td>
                     </tr>
 
@@ -555,8 +786,8 @@ Emits the string &#39;closed&#39; as an identifier.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="66"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:66</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:67</a></div>
                         </td>
                     </tr>
 
@@ -595,8 +826,8 @@ when editing an existing entry.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="102"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:102</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="103"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:103</a></div>
                         </td>
                     </tr>
 
@@ -636,8 +867,8 @@ when editing an existing entry.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:114</a></div>
                         </td>
                     </tr>
 
@@ -650,9 +881,87 @@ and closes the form.</p>
 </div>
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateContact"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>updateContact</b></span>
+                        <a href="#updateContact"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateContact(contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:156</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Updates an existing contact using the ContactService.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>contact</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact data to be saved.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -682,7 +991,7 @@ and closes the form.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -715,7 +1024,7 @@ and closes the form.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:60</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:61</a></div>
                         </td>
                     </tr>
 
@@ -747,7 +1056,7 @@ and closes the form.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:49</a></div>
                         </td>
                     </tr>
 
@@ -781,7 +1090,7 @@ and closes the form.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:53</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:54</a></div>
                         </td>
                     </tr>
 
@@ -812,7 +1121,7 @@ and closes the form.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:79</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:80</a></div>
                         </td>
                     </tr>
 
@@ -873,6 +1182,7 @@ import { Subscription } from &#x27;rxjs&#x27;;
   templateUrl: &#x27;./contact-form.component.html&#x27;,
   styleUrl: &#x27;./contact-form.component.scss&#x27;,
 })
+
 export class ContactFormComponent implements OnInit, OnDestroy {
 
   /**
@@ -959,27 +1269,72 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * using the ContactService, emits the new contact (if applicable),
    * and closes the form.
    */
-  async onSubmit() {
-    if (this.contactForm.valid) {
-      const { name, email, phone } &#x3D; this.contactForm.value;
-      const contact: Contact &#x3D; {
-        name: name.trim(),
-        email: email.trim(),
-        phone: phone.trim()
-      };
+  async onSubmit(): Promise&lt;void&gt; {
+    if (!this.contactForm.valid) return;
 
-      if (this.contactToEdit?.id) {
-        this.contactService.updateContact(this.contactToEdit.id, contact);
-      } else {
-        const newContact &#x3D; await this.contactService.addContact(contact);
-        if (newContact) {
-          this.addedContact.emit(newContact);
-        }
-      }
+    const contact &#x3D; this.buildContactFromForm();
 
-      this.clearInputs();
-      this.onClose();
+    if (this.isEditMode()) {
+      this.updateContact(contact);
+    } else {
+      await this.addNewContact(contact);
     }
+
+    this.finalizeSubmission();
+  }
+
+  /**
+   * Builds a trimmed Contact object from form values.
+   * 
+   * @returns A Contact object based on form input.
+   */
+  private buildContactFromForm(): Contact {
+    const { name, email, phone } &#x3D; this.contactForm.value;
+    return {
+      name: name.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
+    };
+  }
+
+  /**
+   * Determines whether the form is in edit mode.
+   * 
+   * @returns True if editing an existing contact, false if creating a new one.
+   */
+  private isEditMode(): boolean {
+    return !!this.contactToEdit?.id;
+  }
+
+  /**
+   * Updates an existing contact using the ContactService.
+   * 
+   * @param contact - The contact data to be saved.
+   */
+  private updateContact(contact: Contact): void {
+    if (this.contactToEdit &amp;&amp; this.contactToEdit.id) {
+      this.contactService.updateContact(this.contactToEdit.id, contact);
+    }
+  }
+
+  /**
+   * Adds a new contact using the ContactService and emits it if successful.
+   * 
+   * @param contact - The new contact data to be added.
+   */
+  private async addNewContact(contact: Contact): Promise&lt;void&gt; {
+    const newContact &#x3D; await this.contactService.addContact(contact);
+    if (newContact) {
+      this.addedContact.emit(newContact);
+    }
+  }
+
+  /**
+   * Clears form inputs and closes the form after submission.
+   */
+  private finalizeSubmission(): void {
+    this.clearInputs();
+    this.onClose();
   }
 
   /**

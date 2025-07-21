@@ -142,6 +142,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/OverlayManager.html" data-type="entity-link" >OverlayManager</a>
                                 </li>
                                 <li class="link">
+                                    <a href="injectables/PriorityManager.html" data-type="entity-link" >PriorityManager</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/SubtaskManager.html" data-type="entity-link" >SubtaskManager</a>
                                 </li>
                                 <li class="link">
@@ -212,9 +215,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                         </ul>
                     </li>
-                        <li class="chapter">
-                            <a data-type="chapter-link" href="routes.html"><span class="icon ion-ios-git-branch"></span>Routes</a>
-                        </li>
                     <li class="chapter">
                         <a data-type="chapter-link" href="coverage.html"><span class="icon ion-ios-stats"></span>Documentation coverage</a>
                     </li>
