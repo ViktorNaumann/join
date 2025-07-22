@@ -48,8 +48,8 @@
               placeholder="Enter a title"
               [(ngModel)]="formData.title"
               (input)="onTitleInput()"
-              [class.error]="showTitleError">
-            <div class="error-message" *ngIf="showTitleError">
+              [class.error]="validationErrors.showTitleError">
+            <div class="error-message" *ngIf="validationErrors.showTitleError">
               This field is required
             </div>
           </div>
@@ -70,9 +70,9 @@
               name="dueDate"
               [(ngModel)]="formData.dueDate"
               (change)="onDateSelect()"
-              [class.error]="showDateError"
+              [class.error]="validationErrors.showDateError"
               [min]="getTodayDate()">
-            <div class="error-message" *ngIf="showDateError">
+            <div class="error-message" *ngIf="validationErrors.showDateError">
               This field is required
             </div>
           </div>
