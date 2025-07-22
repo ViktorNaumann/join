@@ -2,14 +2,14 @@
  * HeaderComponent represents the top navigation bar of the application.
  * It includes a responsive mobile menu with slide-in/out animation,
  * handles authentication actions, and adapts its layout based on window size.
- * 
+ *
  * Features:
  * - Responsive behavior: adapts menu layout for mobile and desktop views
  * - Slide animation for menu transitions
  * - Closes the menu when clicking outside
  * - User logout functionality
  * - Displays the current user's name
- * 
+ *
  * Dependencies:
  * - Angular animations for menu transitions
  * - AuthService for managing user authentication
@@ -44,7 +44,6 @@ import { AuthService } from '../services/auth.service';
     ]),
   ],
 })
-
 export class HeaderComponent {
   /**
    * Tracks whether the mobile menu is currently open.
@@ -70,7 +69,7 @@ export class HeaderComponent {
   /**
    * Updates the `isMobile` flag and closes the menu on window resize
    * if the new width corresponds to a desktop view.
-   * 
+   *
    * @param event The resize event from the window.
    */
   @HostListener('window:resize', ['$event'])
@@ -85,7 +84,7 @@ export class HeaderComponent {
   /**
    * Detects clicks outside the menu to automatically close it
    * when it is open and the user clicks elsewhere in the document.
-   * 
+   *
    * @param event The mouse click event.
    */
   @HostListener('document:click', ['$event'])
@@ -102,7 +101,7 @@ export class HeaderComponent {
   /**
    * Toggles the visibility of the mobile menu.
    * Stops propagation to prevent triggering the outside click handler.
-   * 
+   *
    * @param event The click event on the toggle button.
    */
   toggleMenu(event: Event) {
@@ -121,17 +120,26 @@ export class HeaderComponent {
   }
 
   /**
-   * Returns the display name or email of the currently authenticated user.
+   * Returns the initials of the current user (e.g. "JD" for "John Doe").
    * If no user is found, returns a default label.
-   * 
+   *
    * @returns The display name, email, or a fallback string ('User').
    */
-  getCurrentUserName(): string {
+  getCurrentUserInitials(): string {
     const user = this.authService.getCurrentUser();
-    return user?.displayName || user?.email || 'User';
+    const name = user?.displayName || '';
+    if (name) {
+      const parts = name.trim().split(' ');
+      if (parts.length >= 2) {
+        return (parts[0][0] + parts[1][0]).toUpperCase();
+      }
+      return parts[0][0].toUpperCase();
+    }
+    const email = user?.email || '';
+    return email ? email[0].toUpperCase() : 'U';
   }
 
-   /**
+  /**
    * Checks whether the user is currently logged in.
    * @returns True if the user is authenticated, otherwise false
    */

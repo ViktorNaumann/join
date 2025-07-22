@@ -44,15 +44,14 @@ export class AppComponent {
    */
   constructor(
     private navigationService: NavigationHistoryService,
-    private router: Router
-  ) {
+    private router: Router) {
     this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        this.showHeaderAndSidebar = !['/login', '/', '/signup'].includes(
-          event.urlAfterRedirects
-        );
-      });
+    .pipe(filter((event) => event instanceof NavigationEnd))
+    .subscribe((event: NavigationEnd) => {
+      this.showHeaderAndSidebar = !['/login', '/', '/signup'].includes(
+        event.urlAfterRedirects
+      );
+    });
   }
 }
 
