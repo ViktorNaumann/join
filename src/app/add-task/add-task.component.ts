@@ -1,13 +1,15 @@
-import { Component, OnInit, OnDestroy, HostListener, Output, Input, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, Output, Input, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ContactService, Contact } from '../services/contact.service';
 import { TaskService, Task } from '../services/task.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SubtaskManager, Subtask } from './subtask-manager';
+import { SubtaskManager } from './subtask-manager';
 import { ContactManager } from './contact-manager';
 import { CategoryManager } from './category-manager';
 import { PriorityManager } from './priority-manager';
+import { FormValidatorService, FormData, ValidationErrors } from './form-validator.service';
+import { TaskDataService } from './task-data.service';
 
 /**
  * AddTaskComponent provides a comprehensive form for creating and editing tasks.
@@ -38,14 +40,13 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   contacts: Contact[] = [];
   subtaskInputFocused = false;
   isCreatingTask: boolean = false;
-  showTitleError: boolean = false;
-  showDateError: boolean = false;
   showSuccessMessage: boolean = false;
   originalTaskStatus: 'to-do' | 'in-progress' | 'await-feedback' | 'done' = 'to-do';
   isEditingMode: boolean = false;
   editingTaskId: string | undefined;
+  validationErrors: ValidationErrors = { showTitleError: false, showDateError: false };
 
-  formData = {
+  formData: FormData = {
     title: '',
     description: '',
     dueDate: ''
@@ -66,6 +67,8 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     private taskService: TaskService,
     private router: Router,
     private route: ActivatedRoute,
+    private formValidator: FormValidatorService,
+    private taskDataService: TaskDataService,
     public subtaskManager: SubtaskManager,
     public contactManager: ContactManager,
     public categoryManager: CategoryManager,
@@ -102,10 +105,10 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   /**
    * Loads all contacts from the ContactService and then loads any task being edited.
    */
-  loadContacts() {
-    this.contactService.getContacts().subscribe(contacts => {
+  async loadContacts() {
+    this.contactService.getContacts().subscribe(async contacts => {
       this.contacts = contacts;
-      this.loadEditingTask();
+      await this.loadEditingTask();
     });
   }
 
@@ -120,76 +123,25 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Loads a task currently being edited from the TaskService and
-   * populates the form with its data. Clears managers if no task is loaded.
+   * Loads a task currently being edited from the TaskService and populates the form.
    */
-   loadEditingTask(): void {
+  async loadEditingTask(): Promise<void> {
     const editingTask = this.taskService.getEditingTask();
     if (editingTask) {
       this.isEditingMode = true;
       this.editingTaskId = editingTask.id;
-      this.populateFormWithTaskData(editingTask);
+      this.originalTaskStatus = await this.taskDataService.populateFromTask(
+        editingTask, 
+        this.formData, 
+        this.priorityManager, 
+        this.contactManager, 
+        this.subtaskManager, 
+        this.contacts
+      ) as 'to-do' | 'in-progress' | 'await-feedback' | 'done';
       this.taskService.clearEditingTask();
     } else {
       this.clearAllManagers();
     }
-  }
-
-  /**
-   * Populates the form with data from the given task.
-   *
-   * @param task - The task object to use for populating form fields.
-   */
-  async populateFormWithTaskData(task: any): Promise<void> {
-    this.setBasicFormData(task);
-    this.setDueDate(task.date);
-    this.priorityManager.setPriorityAndCategory(task);
-    this.setAssignedContacts(task.assignedTo);
-    if (task.id) {
-      this.subtaskManager.loadAndSetSubtasks(task.id);
-    }
-  }
-
-  /**
-   * Sets basic task information (title, description, status) in the form.
-   *
-   * @param task - The task object.
-   */
-  private setBasicFormData(task: any): void {
-    this.formData.title = task.title || '';
-    this.formData.description = task.description || '';
-    this.originalTaskStatus = task.status || 'to-do';
-  }
-
-  /**
-   * Converts and sets the due date in the form if available.
-   *
-   * @param date - The due date value from the task (can be string, Date, or Firestore Timestamp).
-   */
-  private setDueDate(date: any): void {
-    if (!date) return;
-    let dateValue: Date;
-    if (date.toDate) {
-      dateValue = date.toDate();
-    } else if (date instanceof Date) {
-      dateValue = date;
-    } else {
-      dateValue = new Date(date);
-    }
-    this.formData.dueDate = dateValue.toISOString().split('T')[0];
-  }
-
-  /**
-   * Filters and sets the assigned contacts in the contact manager.
-   *
-   * @param assignedToIds - Array of contact IDs assigned to the task.
-   */
-  private setAssignedContacts(assignedToIds: string[]): void {
-    if (!assignedToIds || assignedToIds.length === 0) return;
-    const selectedContacts = this.contacts
-      .filter(contact => contact.id !== undefined)
-      .filter(contact => assignedToIds.includes(contact.id as string));
-    this.contactManager.setSelectedContacts(selectedContacts);
   }
 
   /**
@@ -234,29 +186,51 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   * Resets the task creation form to its default state.
   */
   clearForm(): void {
-    this.resetFormData();
-    this.resetStateFlags();
-    this.resetManagers();
+    this.formData = { title: '', description: '', dueDate: '' };
+    this.priorityManager.selectedPriority = 'medium';
+    this.isCreatingTask = false;
+    this.isEditingMode = false;
+    this.editingTaskId = undefined;
+    this.originalTaskStatus = 'to-do';
+    this.subtaskManager.originalSubtasks = [];
+    this.showSuccessMessage = false;
+    this.resetValidationErrors();
+    this.contactManager.clearAll();
+    this.categoryManager.clearAll();
+    this.subtaskManager.clearAll();
+  }
+
+  private setCreatingState(state: boolean): void {
+    this.isCreatingTask = state;
   }
 
   /**
    * Handles task creation or editing after form validation.
-   * Emits an event and navigates to the board on success.
-   *
-   * @param event - The form submission event.
    */
   async createTask(event: Event): Promise<void> {
     event.preventDefault();
     this.resetValidationErrors();
-    if (this.formHasErrors()) return;
+    
+    if (this.formValidator.hasFormErrors(this.formData, this.categoryManager)) {
+      this.validationErrors = this.formValidator.validateForm(this.formData, this.categoryManager);
+      return;
+    }
     this.setCreatingState(true);
     try {
       await this.saveTaskWithSuccessFeedback();
     } catch (error) {
-      this.handleTaskSaveError(error);
+      console.error('Error while creating/updating task:', error);
     } finally {
       this.setCreatingState(false);
     }
+  }
+
+  /**
+   * Resets validation error flags.
+   */
+  private resetValidationErrors(): void {
+    this.validationErrors = { showTitleError: false, showDateError: false };
+    this.categoryManager.showCategoryError = false;
   }
 
   /**
@@ -267,122 +241,9 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     this.taskAdded.emit('added');
     this.showSuccessMessage = true;
     setTimeout(() => {
-      this.clearFormAndNavigate();
+      this.clearForm();
+      this.router.navigate(['/board']);
     }, 2000);
-  }
-
-  /**
-   * Clears the form and navigates to the board.
-   */
-  private clearFormAndNavigate(): void {
-    this.clearForm();
-    this.router.navigate(['/board']);
-  }
-
-  /**
-   * Handles errors that occur during task saving.
-   *
-   * @param error - The caught error.
-   */
-  private handleTaskSaveError(error: unknown): void {
-    console.error('Error while creating/updating task:', error);
-  }
-
-  /**
-   * Sets the loading/creating state flag.
-   *
-   * @param state - Whether the task is currently being created.
-   */
-  private setCreatingState(state: boolean): void {
-    this.isCreatingTask = state;
-  }
-
-  /**
-   * Resets the form data fields to empty/default values.
-   */
-  private resetFormData(): void {
-    this.formData = {
-      title: '',
-      description: '',
-      dueDate: ''
-    };
-    this.priorityManager.selectedPriority = 'medium';
-  }
-
-  /**
-   * Resets all form-related UI and logic state flags.
-   */
-  private resetStateFlags(): void {
-    this.isCreatingTask = false;
-    this.isEditingMode = false;
-    this.editingTaskId = undefined;
-    this.originalTaskStatus = 'to-do';
-    this.subtaskManager.originalSubtasks = [];
-    this.showSuccessMessage = false;
-    this.resetValidationErrors();
-  }
-
-  /**
-   * Clears all manager components (contacts, categories, subtasks).
-   */
-  private resetManagers(): void {
-    this.contactManager.clearAll();
-    this.categoryManager.clearAll();
-    this.subtaskManager.clearAll();
-  }
-
-  /**
-   * Resets validation error flags.
-   */
-  private resetValidationErrors(): void {
-    this.showTitleError = false;
-    this.categoryManager.showCategoryError = false;
-    this.showDateError = false;
-  }
-
-  /**
-   * Validates the form fields and sets error flags.
-   *
-   * @returns True if the form has validation errors.
-   */
-  private formHasErrors(): boolean {
-    const titleError = this.validateTitle();
-    const categoryError = this.validateCategory();
-    const dateError = this.validateDueDate();
-    return titleError || categoryError || dateError;
-  }
-
-  /**
-   * Validates the task title and sets the error flag if invalid.
-   *
-   * @returns True if the title is invalid.
-   */
-  private validateTitle(): boolean {
-    const isInvalid = !this.formData.title.trim();
-    this.showTitleError = isInvalid;
-    return isInvalid;
-  }
-
-  /**
-   * Validates the category selection and sets the error flag if none is selected.
-   *
-   * @returns True if no category is selected.
-   */
-  private validateCategory(): boolean {
-    const isInvalid = !this.categoryManager.hasSelectedCategory();
-    this.categoryManager.showCategoryError = isInvalid;
-    return isInvalid;
-  }
-
-  /**
-   * Validates the due date and sets the error flag if missing.
-   *
-   * @returns True if the due date is invalid.
-   */
-  private validateDueDate(): boolean {
-    const isInvalid = !this.formData.dueDate;
-    this.showDateError = isInvalid;
-    return isInvalid;
   }
 
 
@@ -401,8 +262,15 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    * Adds a new task with optional subtasks.
    */
   async addNewTask(): Promise<void> {
-    this.ensureDefaultStatus();
-    const newTask: Task = this.buildTask(this.defaultStatus);
+    if (!this.defaultStatus) this.defaultStatus = 'to-do';
+    
+    const newTask: Task = this.taskDataService.buildTask(
+      this.formData,
+      this.defaultStatus,
+      this.priorityManager,
+      this.contactManager,
+      this.categoryManager
+    );
     const savedTask = await this.taskService.addTask(newTask);
     if (savedTask?.id) { 
       await this.subtaskManager.saveAllSubtasks(savedTask.id, this.subtaskManager.getSubtasks()) 
@@ -414,7 +282,14 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   async updateTask(): Promise<void> {
     if (!this.editingTaskId) return;
-    const updatedTask: Task = this.buildTask(this.originalTaskStatus, this.editingTaskId);
+    const updatedTask: Task = this.taskDataService.buildTask(
+      this.formData,
+      this.originalTaskStatus,
+      this.priorityManager,
+      this.contactManager,
+      this.categoryManager,
+      this.editingTaskId
+    );
     await this.taskService.updateTask(this.editingTaskId, updatedTask);
     const currentSubtasks = this.subtaskManager.getSubtasks();
     const deleted = this.subtaskManager.getDeletedSubtasks(currentSubtasks);
@@ -424,52 +299,11 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Ensures a default task status is set.
-   */
-  private ensureDefaultStatus(): void {
-    if (!this.defaultStatus) {
-      this.defaultStatus = 'to-do';
-    }
-  }
-
-  /**
-   * Constructs a task object from current form values.
-   * 
-   * @param status - The status to assign to the task.
-   * @param id - (Optional) ID of the task (for updates).
-   * @returns A task object ready to be saved.
-   */
-  private buildTask(status: string, id?: string): Task {
-    const uniqueContactIds = this.getUniqueAssignedContactIds();
-    const task: any = {
-      title: this.formData.title.trim(),
-      description: this.formData.description?.trim() || '',
-      date: new Date(this.formData.dueDate),
-      priority: this.priorityManager.selectedPriority as 'low' | 'medium' | 'urgent',
-      status,
-      assignedTo: uniqueContactIds,
-      category: this.categoryManager.getSelectedCategory() as 'technical' | 'user story'
-    };
-    if (id) {
-      task.id = id;
-    }
-    return task as Task;
-  }
-
-  /**
-   * Returns a list of unique contact IDs currently assigned.
-   */
-  private getUniqueAssignedContactIds(): string[] {
-    const contacts = this.contactManager.getSelectedContacts();
-    return [...new Set(contacts.map(c => c.id).filter(id => id !== undefined))] as string[];
-  }
-
-  /**
    * Handles title input changes and clears error state.
    */
   onTitleInput() {
     if (this.formData.title.trim()) {
-      this.showTitleError = false;
+      this.validationErrors.showTitleError = false;
     }
   }
 
@@ -478,17 +312,15 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   onDateSelect() {
     if (this.formData.dueDate) {
-      this.showDateError = false;
+      this.validationErrors.showDateError = false;
     }
   }
 
   /**
    * Returns today's date in ISO format for date input validation.
-   * @returns Today's date in YYYY-MM-DD format.
    */
   getTodayDate(): string {
-    const today = new Date();
-    return today.toISOString().split('T')[0];
+    return this.formValidator.getTodayDate();
   }
 
   /**

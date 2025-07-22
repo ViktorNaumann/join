@@ -32,15 +32,12 @@ interface FirestoreTimestamp {
 export class SummaryComponent implements OnInit {
   taskList: Task[] = [];
   userName: string = '';
-
   greetingState: 'start' | 'moved' = 'start';
   showGreeting = true;
   isMobile = false;
-
   nextDeadlineDate: Date | null = null;
   nextDeadlineCount: number = 0;
   greeting: string = '';
-
   todoCount = 0;
   doneCount = 0;
   inProgressCount = 0;
@@ -121,7 +118,6 @@ export class SummaryComponent implements OnInit {
    */
   ngOnInit() {
     this.isMobile = window.innerWidth < 1000;
-
     this.loadUserGreeting();
     this.loadAndProcessTasks();
   }
@@ -137,7 +133,6 @@ export class SummaryComponent implements OnInit {
         ? userData.displayName
         : 'Nice to see you!';
       this.greeting = this.getGreeting();
-
       const greetingShown = sessionStorage.getItem('greetingShown');
       if (this.isMobile && !greetingShown) {
         this.showAnimatedGreeting();
@@ -188,26 +183,44 @@ export class SummaryComponent implements OnInit {
   }
 
   /**
-   * Determines the next upcoming deadline from the list of tasks.
+   * Filters tasks to only include those with a valid future date and not marked as 'done'.
+   * Parses the date string into a Date object.
    * 
-   * @param tasks - Array of task objects containing dates.
+   * @param tasks - Array of task objects.
+   * @param parseDate - A function that parses a date string into a Date object.
+   * @returns An array of tasks with a valid future date, each including a `dateObj` field.
+   */
+  private getFutureTasksWithDateObj(tasks: Task[], parseDate: (date: string) => Date | null): (Task & { dateObj: Date })[] {
+    const now = new Date();
+    return tasks
+    .filter((t) => t.date && t.status !== 'done')
+    .map((t) => {
+      const dateObj = this.parseDate(t.date!);
+      return { ...t, dateObj };
+    })
+    .filter((t): t is Task & { dateObj: Date } => !!t.dateObj && t.dateObj > now);
+  }
+
+  /**
+   * Returns the earliest date from an array of tasks with valid date objects.
+   * 
+   * @param tasks - Array of tasks containing a `dateObj` property.
+   * @returns The earliest Date object, or null if the array is empty.
+   */
+  private getEarliestDate(tasks: (Task & { dateObj: Date })[]): Date | null {
+    if (tasks.length === 0) return null;
+    tasks.sort((a, b) => a.dateObj.getTime() - b.dateObj.getTime());
+    return tasks[0].dateObj;
+  }
+
+  /**
+   * Determines and sets the next upcoming deadline from the list of tasks.
+   * 
+   * @param tasks - Array of task objects.
    */
   private setNextDeadline(tasks: Task[]): void {
-    const now = new Date();
-    const futureTasks = tasks
-      .filter((t) => t.date && t.status !== 'done')
-      .map((t) => {
-        const dateObj = this.parseDate(t.date);
-        return { ...t, dateObj };
-      })
-      .filter((t) => t.dateObj && t.dateObj > now);
-
-    if (futureTasks.length > 0) {
-      futureTasks.sort((a, b) => a.dateObj!.getTime() - b.dateObj!.getTime());
-      this.nextDeadlineDate = futureTasks[0].dateObj!;
-    } else {
-      this.nextDeadlineDate = null;
-    }
+    const futureTasks = this.getFutureTasksWithDateObj(tasks, this.parseDate.bind(this));
+    this.nextDeadlineDate = this.getEarliestDate(futureTasks);
   }
 
   /**
