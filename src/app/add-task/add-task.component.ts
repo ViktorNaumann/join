@@ -404,7 +404,9 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     this.ensureDefaultStatus();
     const newTask: Task = this.buildTask(this.defaultStatus);
     const savedTask = await this.taskService.addTask(newTask);
-    if (savedTask?.id) { await this.subtaskManager.saveAllSubtasks(savedTask.id, this.subtaskManager.getSubtasks()) }
+    if (savedTask?.id) { 
+      await this.subtaskManager.saveAllSubtasks(savedTask.id, this.subtaskManager.getSubtasks()) 
+    }
   }
 
   /**
@@ -439,8 +441,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   private buildTask(status: string, id?: string): Task {
     const uniqueContactIds = this.getUniqueAssignedContactIds();
-    return {
-      id,
+    const task: any = {
       title: this.formData.title.trim(),
       description: this.formData.description?.trim() || '',
       date: new Date(this.formData.dueDate),
@@ -449,6 +450,10 @@ export class AddTaskComponent implements OnInit, OnDestroy {
       assignedTo: uniqueContactIds,
       category: this.categoryManager.getSelectedCategory() as 'technical' | 'user story'
     };
+    if (id) {
+      task.id = id;
+    }
+    return task as Task;
   }
 
   /**
