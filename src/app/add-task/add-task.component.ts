@@ -215,7 +215,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
       this.validationErrors = this.formValidator.validateForm(this.formData, this.categoryManager);
       return;
     }
-    
     this.setCreatingState(true);
     try {
       await this.saveTaskWithSuccessFeedback();
@@ -272,7 +271,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
       this.contactManager,
       this.categoryManager
     );
-    
     const savedTask = await this.taskService.addTask(newTask);
     if (savedTask?.id) { 
       await this.subtaskManager.saveAllSubtasks(savedTask.id, this.subtaskManager.getSubtasks()) 
@@ -284,7 +282,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   async updateTask(): Promise<void> {
     if (!this.editingTaskId) return;
-    
     const updatedTask: Task = this.taskDataService.buildTask(
       this.formData,
       this.originalTaskStatus,
@@ -293,7 +290,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
       this.categoryManager,
       this.editingTaskId
     );
-    
     await this.taskService.updateTask(this.editingTaskId, updatedTask);
     const currentSubtasks = this.subtaskManager.getSubtasks();
     const deleted = this.subtaskManager.getDeletedSubtasks(currentSubtasks);

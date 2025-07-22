@@ -34,11 +34,9 @@ export class TaskDataService {
     this.setDueDate(task.date, formData);
     priorityManager.setPriorityAndCategory(task);
     this.setAssignedContacts(task.assignedTo, contactManager, contacts);
-    
     if (task.id) {
       subtaskManager.loadAndSetSubtasks(task.id);
     }
-    
     return task.status || 'to-do';
   }
 
@@ -63,7 +61,6 @@ export class TaskDataService {
       assignedTo: uniqueContactIds,
       category: categoryManager.getSelectedCategory() as 'technical' | 'user story'
     };
-    
     if (id) {
       task.id = id;
     }
@@ -77,7 +74,6 @@ export class TaskDataService {
 
   private setDueDate(date: any, formData: FormData): void {
     if (!date) return;
-    
     let dateValue: Date;
     if (date.toDate) {
       dateValue = date.toDate();
@@ -91,13 +87,12 @@ export class TaskDataService {
 
   private setAssignedContacts(assignedToIds: string[], contactManager: ContactManager, contacts: Contact[]): void {
     if (!assignedToIds || assignedToIds.length === 0) return;
-    
     const selectedContacts = contacts
       .filter(contact => contact.id !== undefined)
       .filter(contact => assignedToIds.includes(contact.id as string));
     contactManager.setSelectedContacts(selectedContacts);
   }
-
+  
   private getUniqueAssignedContactIds(contactManager: ContactManager): string[] {
     const contacts = contactManager.getSelectedContacts();
     return [...new Set(contacts.map(c => c.id).filter(id => id !== undefined))] as string[];
