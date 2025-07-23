@@ -13,12 +13,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withHashLocation()),
     provideFirebaseApp(() =>
       initializeApp({
-        projectId: 'join-6125f',
-        appId: '1:703986298510:web:8cb9707daf583f2153a3df',
-        storageBucket: 'join-6125f.firebasestorage.app',
-        apiKey: 'AIzaSyAWyoU260eXmo3445mLTsqCjzRhEG6aq9A',
-        authDomain: 'join-6125f.firebaseapp.com',
-        messagingSenderId: '703986298510',
+        apiKey: "AIzaSyAoaymfzBLQblTmskSpevYAasFojt8FONM",
+        authDomain: "join-6e188.firebaseapp.com",
+        projectId: "join-6e188",
+        storageBucket: "join-6e188.firebasestorage.app",
+        messagingSenderId: "955101950070",
+        appId: "1:955101950070:web:f8ffcc6289ad4545fe6f57"
       })
     ),
     provideFirestore(() => getFirestore()),
